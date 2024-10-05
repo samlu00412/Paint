@@ -30,7 +30,7 @@ namespace Paint {
             if(openFileDialog.ShowDialog() == DialogResult.OK) {
                 pictureBox1.Load(openFileDialog.FileName);
                 SizeImage();
-                Centralize();
+                //Centralize();
             }
         }
         //影像長寬讀取
@@ -51,13 +51,13 @@ namespace Paint {
         private void Enlarge_click(object sender, EventArgs e) {
             pictureBox1.Width = Convert.ToInt32(pictureBox1.Width*1.1);
             pictureBox1.Height = Convert.ToInt32(pictureBox1.Height * 1.1);
-            Centralize();
+            //Centralize();
         }
 
         private void Shrink_click(object sender, EventArgs e) {
             pictureBox1.Width = Convert.ToInt32(pictureBox1.Width / 1.1);
             pictureBox1.Height = Convert.ToInt32(pictureBox1.Height / 1.1);
-            Centralize();
+            //Centralize();
         }
     }
 }
