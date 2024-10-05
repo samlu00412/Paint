@@ -30,6 +30,9 @@
             this.結束ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.檢視ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.放大ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.縮小ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -39,10 +42,11 @@
             this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.檔案ToolStripMenuItem});
+            this.檔案ToolStripMenuItem,
+            this.檢視ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1540, 48);
+            this.menuStrip1.Size = new System.Drawing.Size(1540, 42);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -53,33 +57,34 @@
             this.新增ToolStripMenuItem,
             this.結束ToolStripMenuItem});
             this.檔案ToolStripMenuItem.Name = "檔案ToolStripMenuItem";
-            this.檔案ToolStripMenuItem.Size = new System.Drawing.Size(81, 34);
+            this.檔案ToolStripMenuItem.Size = new System.Drawing.Size(81, 38);
             this.檔案ToolStripMenuItem.Text = "檔案";
             // 
             // 開啟ToolStripMenuItem
             // 
             this.開啟ToolStripMenuItem.Name = "開啟ToolStripMenuItem";
-            this.開啟ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.開啟ToolStripMenuItem.Size = new System.Drawing.Size(241, 44);
             this.開啟ToolStripMenuItem.Text = "開啟圖檔";
             this.開啟ToolStripMenuItem.Click += new System.EventHandler(this.開啟ToolStripMenuItem_Click);
             // 
             // 新增ToolStripMenuItem
             // 
             this.新增ToolStripMenuItem.Name = "新增ToolStripMenuItem";
-            this.新增ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.新增ToolStripMenuItem.Size = new System.Drawing.Size(241, 44);
             this.新增ToolStripMenuItem.Text = "新增畫布";
             // 
             // 結束ToolStripMenuItem
             // 
             this.結束ToolStripMenuItem.Name = "結束ToolStripMenuItem";
-            this.結束ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.結束ToolStripMenuItem.Size = new System.Drawing.Size(241, 44);
             this.結束ToolStripMenuItem.Text = "結束";
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(12, 41);
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 42);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1516, 766);
+            this.pictureBox1.Size = new System.Drawing.Size(1540, 777);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
@@ -88,6 +93,30 @@
             // 
             this.openFileDialog.FileName = "openFileDialog1";
             this.openFileDialog.Filter = "圖片檔(*.jpg, *.png,*.gif,*.jpeg)|*.jpg;*.png;*.gif;*.jpeg";
+            // 
+            // 檢視ToolStripMenuItem
+            // 
+            this.檢視ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.放大ToolStripMenuItem,
+            this.縮小ToolStripMenuItem});
+            this.檢視ToolStripMenuItem.Name = "檢視ToolStripMenuItem";
+            this.檢視ToolStripMenuItem.Size = new System.Drawing.Size(81, 38);
+            this.檢視ToolStripMenuItem.Text = "檢視";
+            this.檢視ToolStripMenuItem.Click += new System.EventHandler(this.檢視ToolStripMenuItem_Click);
+            // 
+            // 放大ToolStripMenuItem
+            // 
+            this.放大ToolStripMenuItem.Name = "放大ToolStripMenuItem";
+            this.放大ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.放大ToolStripMenuItem.Text = "放大";
+            this.放大ToolStripMenuItem.Click += new System.EventHandler(this.Enlarge_click);
+            // 
+            // 縮小ToolStripMenuItem
+            // 
+            this.縮小ToolStripMenuItem.Name = "縮小ToolStripMenuItem";
+            this.縮小ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.縮小ToolStripMenuItem.Text = "縮小";
+            this.縮小ToolStripMenuItem.Click += new System.EventHandler(this.Shrink_click);
             // 
             // Paint
             // 
@@ -118,6 +147,9 @@
         private System.Windows.Forms.ToolStripMenuItem 結束ToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.ToolStripMenuItem 檢視ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 放大ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 縮小ToolStripMenuItem;
     }
 }
 

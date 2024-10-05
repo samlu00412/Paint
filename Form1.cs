@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenCvSharp;
+using OpenCvSharp.Extensions;
 
 
 namespace Paint {
@@ -41,6 +42,22 @@ namespace Paint {
         private void Centralize() {
             pictureBox1.Left = (this.ClientSize.Width - pictureBox1.Width) / 2;
             pictureBox1.Top = (this.ClientSize.Height - pictureBox1.Height) / 2;
+        }
+
+        private void 檢視ToolStripMenuItem_Click(object sender, EventArgs e) {
+
+        }
+
+        private void Enlarge_click(object sender, EventArgs e) {
+            pictureBox1.Width = Convert.ToInt32(pictureBox1.Width*1.1);
+            pictureBox1.Height = Convert.ToInt32(pictureBox1.Height * 1.1);
+            Centralize();
+        }
+
+        private void Shrink_click(object sender, EventArgs e) {
+            pictureBox1.Width = Convert.ToInt32(pictureBox1.Width / 1.1);
+            pictureBox1.Height = Convert.ToInt32(pictureBox1.Height / 1.1);
+            Centralize();
         }
     }
 }

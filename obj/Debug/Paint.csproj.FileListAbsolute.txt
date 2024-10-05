@@ -23,3 +23,9 @@ C:\Users\samlu\source\repos\Paint\obj\Debug\Paint.csproj.Up2Date
 C:\Users\samlu\source\repos\Paint\obj\Debug\Paint.exe
 C:\Users\samlu\source\repos\Paint\obj\Debug\Paint.pdb
 C:\Users\samlu\source\repos\Paint\obj\Debug\Paint.Paint.resources
+C:\Users\samlu\source\repos\Paint\bin\Debug\dll\x86\OpenCvSharpExtern.dll
+C:\Users\samlu\source\repos\Paint\bin\Debug\dll\x86\opencv_videoio_ffmpeg453.dll
+C:\Users\samlu\source\repos\Paint\bin\Debug\dll\x64\OpenCvSharpExtern.dll
+C:\Users\samlu\source\repos\Paint\bin\Debug\dll\x64\opencv_videoio_ffmpeg453_64.dll
+C:\Users\samlu\source\repos\Paint\bin\Debug\OpenCvSharp.Extensions.dll
+C:\Users\samlu\source\repos\Paint\bin\Debug\OpenCvSharp.Extensions.xml
