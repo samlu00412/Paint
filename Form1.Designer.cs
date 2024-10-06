@@ -46,7 +46,7 @@
             this.檢視ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1540, 48);
+            this.menuStrip1.Size = new System.Drawing.Size(1540, 38);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -63,20 +63,21 @@
             // 開啟ToolStripMenuItem
             // 
             this.開啟ToolStripMenuItem.Name = "開啟ToolStripMenuItem";
-            this.開啟ToolStripMenuItem.Size = new System.Drawing.Size(241, 44);
+            this.開啟ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             this.開啟ToolStripMenuItem.Text = "開啟圖檔";
             this.開啟ToolStripMenuItem.Click += new System.EventHandler(this.開啟ToolStripMenuItem_Click);
             // 
             // 新增ToolStripMenuItem
             // 
             this.新增ToolStripMenuItem.Name = "新增ToolStripMenuItem";
-            this.新增ToolStripMenuItem.Size = new System.Drawing.Size(241, 44);
+            this.新增ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             this.新增ToolStripMenuItem.Text = "新增畫布";
+            this.新增ToolStripMenuItem.Click += new System.EventHandler(this.New_canva_click);
             // 
             // 結束ToolStripMenuItem
             // 
             this.結束ToolStripMenuItem.Name = "結束ToolStripMenuItem";
-            this.結束ToolStripMenuItem.Size = new System.Drawing.Size(241, 44);
+            this.結束ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             this.結束ToolStripMenuItem.Text = "結束";
             // 
             // 檢視ToolStripMenuItem
@@ -92,14 +93,14 @@
             // 放大ToolStripMenuItem
             // 
             this.放大ToolStripMenuItem.Name = "放大ToolStripMenuItem";
-            this.放大ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.放大ToolStripMenuItem.Size = new System.Drawing.Size(193, 44);
             this.放大ToolStripMenuItem.Text = "放大";
             this.放大ToolStripMenuItem.Click += new System.EventHandler(this.Enlarge_click);
             // 
             // 縮小ToolStripMenuItem
             // 
             this.縮小ToolStripMenuItem.Name = "縮小ToolStripMenuItem";
-            this.縮小ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.縮小ToolStripMenuItem.Size = new System.Drawing.Size(193, 44);
             this.縮小ToolStripMenuItem.Text = "縮小";
             this.縮小ToolStripMenuItem.Click += new System.EventHandler(this.Shrink_click);
             // 
