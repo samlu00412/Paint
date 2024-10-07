@@ -19,7 +19,7 @@ namespace Paint {
         private OpenCvSharp.Point currentPoint; // 當前鼠標位置
         private Bitmap canvasBitmap;
         private bool isDrawing = false; // 判斷是否正在繪製
-        private string drawMode = "Line"; // 繪製模式
+        private string drawMode = "Free"; // 繪製模式
         public Paint() {
             InitializeComponent();
 
@@ -87,7 +87,7 @@ namespace Paint {
         //detecting mouse moving
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e) {
             if (isDrawing) {
-                if (drawMode == "free") { //除了自由繪製其他皆要預覽
+                if (drawMode == "Free") { //除了自由繪製其他皆要預覽
                     currentPoint.X = e.X;
                     currentPoint.Y = e.Y;
                     DrawFinalShape();
@@ -113,7 +113,9 @@ namespace Paint {
                 currentPoint.Y = e.Y;
                 DrawFinalShape(); // 繪製圖形
                 UpdateCanvas(); // 更新顯示
-                tempCanvas.Dispose();
+                if(tempCanvas != null) {
+                    tempCanvas.Dispose();
+                }
             }
         }
         private void ShowTempCanvas() {
@@ -137,7 +139,7 @@ namespace Paint {
             if (drawMode == "Line") {
                 Cv2.Line(canvas, prevPoint, currentPoint, Scalar.Black, 2);
             }
-            else if(drawMode == "free"){
+            else if(drawMode == "Free"){
                 Cv2.Line(canvas, prevPoint, currentPoint, Scalar.Black, 2);
             }
             else if (drawMode == "Rectangle") {
@@ -154,7 +156,11 @@ namespace Paint {
         }
 
         private void 自由ToolStripMenuItem_Click(object sender, EventArgs e) {
-            drawMode = "free";
+            drawMode = "Free";
+        }
+
+        private void 直線ToolStripMenuItem_Click(object sender, EventArgs e) {
+            drawMode = "Line";
         }
     }
 }

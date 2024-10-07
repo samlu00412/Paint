@@ -97,14 +97,14 @@
             // 放大ToolStripMenuItem
             // 
             this.放大ToolStripMenuItem.Name = "放大ToolStripMenuItem";
-            this.放大ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.放大ToolStripMenuItem.Size = new System.Drawing.Size(193, 44);
             this.放大ToolStripMenuItem.Text = "放大";
             this.放大ToolStripMenuItem.Click += new System.EventHandler(this.Enlarge_click);
             // 
             // 縮小ToolStripMenuItem
             // 
             this.縮小ToolStripMenuItem.Name = "縮小ToolStripMenuItem";
-            this.縮小ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.縮小ToolStripMenuItem.Size = new System.Drawing.Size(193, 44);
             this.縮小ToolStripMenuItem.Text = "縮小";
             this.縮小ToolStripMenuItem.Click += new System.EventHandler(this.Shrink_click);
             // 
@@ -129,6 +129,7 @@
             this.直線ToolStripMenuItem.Name = "直線ToolStripMenuItem";
             this.直線ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             this.直線ToolStripMenuItem.Text = "直線";
+            this.直線ToolStripMenuItem.Click += new System.EventHandler(this.直線ToolStripMenuItem_Click);
             // 
             // pictureBox1
             // 
