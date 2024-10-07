@@ -139,6 +139,7 @@ namespace Paint {
             else if (drawMode == "Rectangle") {
                 Cv2.Rectangle(canvas, prevPoint, currentPoint, Scalar.Black, 2); // 最終繪製黑色矩形
             }
+            
         }
         private void UpdateCanvas() {
             if (pictureBox1.Image != null) {
@@ -157,6 +158,9 @@ namespace Paint {
             drawMode = "Line";
         }
 
+        private void 矩形ToolStripMenuItem_Click(object sender, EventArgs e) {
+            drawMode = "Rectangle";
+        }
         private void 儲存檔案ToolStripMenuItem_Click(object sender, EventArgs e) {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "JPEG Image|*.jpg|PNG Image|*.png";
@@ -191,5 +195,7 @@ namespace Paint {
                 //Centralize();
             }
         }
+
+        
     }
 }
