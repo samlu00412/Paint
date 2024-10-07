@@ -27,6 +27,7 @@
             this.檔案ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.開啟ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.新增ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.儲存檔案ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.結束ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.檢視ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.放大ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,6 +60,7 @@
             this.檔案ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.開啟ToolStripMenuItem,
             this.新增ToolStripMenuItem,
+            this.儲存檔案ToolStripMenuItem,
             this.結束ToolStripMenuItem});
             this.檔案ToolStripMenuItem.Name = "檔案ToolStripMenuItem";
             this.檔案ToolStripMenuItem.Size = new System.Drawing.Size(81, 38);
@@ -78,6 +80,13 @@
             this.新增ToolStripMenuItem.Text = "新增畫布";
             this.新增ToolStripMenuItem.Click += new System.EventHandler(this.New_canva_click);
             // 
+            // 儲存檔案ToolStripMenuItem
+            // 
+            this.儲存檔案ToolStripMenuItem.Name = "儲存檔案ToolStripMenuItem";
+            this.儲存檔案ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.儲存檔案ToolStripMenuItem.Text = "儲存檔案";
+            this.儲存檔案ToolStripMenuItem.Click += new System.EventHandler(this.儲存檔案ToolStripMenuItem_Click);
+            // 
             // 結束ToolStripMenuItem
             // 
             this.結束ToolStripMenuItem.Name = "結束ToolStripMenuItem";
@@ -90,7 +99,7 @@
             this.放大ToolStripMenuItem,
             this.縮小ToolStripMenuItem});
             this.檢視ToolStripMenuItem.Name = "檢視ToolStripMenuItem";
-            this.檢視ToolStripMenuItem.Size = new System.Drawing.Size(81, 38);
+            this.檢視ToolStripMenuItem.Size = new System.Drawing.Size(81, 34);
             this.檢視ToolStripMenuItem.Text = "檢視";
             this.檢視ToolStripMenuItem.Click += new System.EventHandler(this.檢視ToolStripMenuItem_Click);
             // 
@@ -114,20 +123,20 @@
             this.自由ToolStripMenuItem,
             this.直線ToolStripMenuItem});
             this.畫筆ToolStripMenuItem.Name = "畫筆ToolStripMenuItem";
-            this.畫筆ToolStripMenuItem.Size = new System.Drawing.Size(81, 38);
+            this.畫筆ToolStripMenuItem.Size = new System.Drawing.Size(81, 34);
             this.畫筆ToolStripMenuItem.Text = "畫筆";
             // 
             // 自由ToolStripMenuItem
             // 
             this.自由ToolStripMenuItem.Name = "自由ToolStripMenuItem";
-            this.自由ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.自由ToolStripMenuItem.Size = new System.Drawing.Size(193, 44);
             this.自由ToolStripMenuItem.Text = "自由";
             this.自由ToolStripMenuItem.Click += new System.EventHandler(this.自由ToolStripMenuItem_Click);
             // 
             // 直線ToolStripMenuItem
             // 
             this.直線ToolStripMenuItem.Name = "直線ToolStripMenuItem";
-            this.直線ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.直線ToolStripMenuItem.Size = new System.Drawing.Size(193, 44);
             this.直線ToolStripMenuItem.Text = "直線";
             this.直線ToolStripMenuItem.Click += new System.EventHandler(this.直線ToolStripMenuItem_Click);
             // 
@@ -183,6 +192,7 @@
         private System.Windows.Forms.ToolStripMenuItem 畫筆ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 自由ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 直線ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 儲存檔案ToolStripMenuItem;
     }
 }
 

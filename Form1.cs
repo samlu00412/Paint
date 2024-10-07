@@ -33,13 +33,7 @@ namespace Paint {
 
         }
 
-        private void 開啟ToolStripMenuItem_Click(object sender, EventArgs e) {
-            if(openFileDialog.ShowDialog() == DialogResult.OK) {
-                pictureBox1.Load(openFileDialog.FileName);
-                SizeImage();
-                //Centralize();
-            }
-        }
+        
         //影像長寬讀取
         private void SizeImage() {
             pictureBox1.Width = pictureBox1.Image.Width;
@@ -161,6 +155,41 @@ namespace Paint {
 
         private void 直線ToolStripMenuItem_Click(object sender, EventArgs e) {
             drawMode = "Line";
+        }
+
+        private void 儲存檔案ToolStripMenuItem_Click(object sender, EventArgs e) {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "JPEG Image|*.jpg|PNG Image|*.png";
+            saveFileDialog.Title = "Save an Image File";
+            saveFileDialog.FileName = "Untitled"; // 預設文件名
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK) {
+                canvasBitmap = BitmapConverter.ToBitmap(canvas);
+
+                // 獲取選擇的文件類型
+                string extension = System.IO.Path.GetExtension(saveFileDialog.FileName).ToLower();
+                switch (extension) {
+                    case ".jpg":
+                        canvasBitmap.Save(saveFileDialog.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
+                        break;
+                    case ".png":
+                        canvasBitmap.Save(saveFileDialog.FileName, System.Drawing.Imaging.ImageFormat.Png);
+                        break;
+                    default:
+                        MessageBox.Show("Unsupported file format!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                }
+            }
+            if(saveFileDialog != null) {
+                saveFileDialog.Dispose();
+            }
+        }
+        private void 開啟ToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (openFileDialog.ShowDialog() == DialogResult.OK) {
+                pictureBox1.Load(openFileDialog.FileName);
+                SizeImage();
+                //Centralize();
+            }
         }
     }
 }
