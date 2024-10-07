@@ -69,7 +69,7 @@ namespace Paint {
             int width = 1280, height = 720;
             canvas = new Mat(new OpenCvSharp.Size(width, height), MatType.CV_8UC3, Scalar.All(255));
             //tempCanvas = canvas.Clone();
-            canvasBitmap = BitmapConverter.ToBitmap(canvas); // 初始時轉換一次 Bitmap
+            canvasBitmap = BitmapConverter.ToBitmap(canvas); // 初始轉換 Bitmap
             pictureBox1.Image = canvasBitmap; // 顯示初始畫布
             pictureBox1.Width = canvasBitmap.Width;
             pictureBox1.Height = canvasBitmap.Height;
@@ -87,35 +87,46 @@ namespace Paint {
         //detecting mouse moving
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e) {
             if (isDrawing) {
-                currentPoint.X = e.X;
-                currentPoint.Y = e.Y;
-                //tempCanvas = canvas.Clone();
-                DrawFinalShape(); // 繪製預覽圖形
-                //ShowTempCanvas();
-                
-                prevPoint = currentPoint;
-                UpdateCanvas(); // 更新顯示   
-                //tempCanvas.Dispose();
+                if (drawMode == "free") { //除了自由繪製其他皆要預覽
+                    currentPoint.X = e.X;
+                    currentPoint.Y = e.Y;
+                    DrawFinalShape();
+                    prevPoint.X = currentPoint.X;
+                    prevPoint.Y = currentPoint.Y;
+                    UpdateCanvas();
+                }
+                else {
+                    currentPoint.X = e.X;
+                    currentPoint.Y = e.Y;
+                    tempCanvas = canvas.Clone();
+                    DrawPreviewShape();
+                    ShowTempCanvas();
+                    tempCanvas.Dispose();
+                }
             }
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e) {
             if (isDrawing) {
                 isDrawing = false;
-                //currentPoint = new OpenCvSharp.Point(e.X, e.Y); // 最終點
-                //DrawFinalShape(); // 繪製最終圖形到原始畫布上
-                //UpdateCanvas(); // 更新顯示
-                //tempCanvas.Dispose();
+                currentPoint.X = e.X;
+                currentPoint.Y = e.Y;
+                DrawFinalShape(); // 繪製圖形
+                UpdateCanvas(); // 更新顯示
+                tempCanvas.Dispose();
             }
         }
         private void ShowTempCanvas() {
+            if (pictureBox1.Image != null) {
+                pictureBox1.Image.Dispose();
+            }
             Bitmap bitmap = BitmapConverter.ToBitmap(tempCanvas);
             pictureBox1.Image = bitmap;
         }
         //preview
         private void DrawPreviewShape() {
             if (drawMode == "Line") {
-                Cv2.Line(canvas, prevPoint, currentPoint, Scalar.Black, 2);
+                Cv2.Line(tempCanvas, prevPoint, currentPoint, Scalar.Black, 2);
             }
             else if (drawMode == "Rectangle") {
                 Cv2.Rectangle(tempCanvas, prevPoint, currentPoint, Scalar.Black, 2);
@@ -124,9 +135,10 @@ namespace Paint {
         //final
         private void DrawFinalShape() {
             if (drawMode == "Line") {
-                
-                Cv2.Line(canvas, prevPoint, currentPoint, Scalar.Black, 2); // 最終繪製黑色線條
-                
+                Cv2.Line(canvas, prevPoint, currentPoint, Scalar.Black, 2);
+            }
+            else if(drawMode == "free"){
+                Cv2.Line(canvas, prevPoint, currentPoint, Scalar.Black, 2);
             }
             else if (drawMode == "Rectangle") {
                 Cv2.Rectangle(canvas, prevPoint, currentPoint, Scalar.Black, 2); // 最終繪製黑色矩形
@@ -139,6 +151,10 @@ namespace Paint {
             Bitmap bitmap = BitmapConverter.ToBitmap(canvas);
             pictureBox1.Image = bitmap;
             pictureBox1.Refresh();
+        }
+
+        private void 自由ToolStripMenuItem_Click(object sender, EventArgs e) {
+            drawMode = "free";
         }
     }
 }
