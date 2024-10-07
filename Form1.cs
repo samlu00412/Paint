@@ -15,7 +15,6 @@ namespace Paint {
     public partial class Paint : Form {
         private Mat canvas; // 畫布
         private Mat tempCanvas; // 預覽用畫布
-        private OpenCvSharp.Point startPoint; // 起點
         private OpenCvSharp.Point prevPoint;
         private OpenCvSharp.Point currentPoint; // 當前鼠標位置
         private Bitmap canvasBitmap;
@@ -74,7 +73,6 @@ namespace Paint {
             pictureBox1.Image = canvasBitmap; // 顯示初始畫布
             pictureBox1.Width = canvasBitmap.Width;
             pictureBox1.Height = canvasBitmap.Height;
-            UpdateCanvas();
         }
 
         
@@ -82,13 +80,15 @@ namespace Paint {
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e) {
             if (e.Button == MouseButtons.Left) {
                 isDrawing = true;
-                prevPoint = new OpenCvSharp.Point(e.X, e.Y);
+                prevPoint.X = e.X;
+                prevPoint.Y = e.Y;
             }
         }
         //detecting mouse moving
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e) {
             if (isDrawing) {
-                currentPoint = new OpenCvSharp.Point(e.X, e.Y); // 當前點
+                currentPoint.X = e.X;
+                currentPoint.Y = e.Y;
                 //tempCanvas = canvas.Clone();
                 DrawFinalShape(); // 繪製預覽圖形
                 //ShowTempCanvas();
@@ -118,7 +118,7 @@ namespace Paint {
                 Cv2.Line(canvas, prevPoint, currentPoint, Scalar.Black, 2);
             }
             else if (drawMode == "Rectangle") {
-                Cv2.Rectangle(tempCanvas, startPoint, currentPoint, Scalar.Black, 2);
+                Cv2.Rectangle(tempCanvas, prevPoint, currentPoint, Scalar.Black, 2);
             }
         }
         //final
@@ -126,16 +126,19 @@ namespace Paint {
             if (drawMode == "Line") {
                 
                 Cv2.Line(canvas, prevPoint, currentPoint, Scalar.Black, 2); // 最終繪製黑色線條
+                
             }
             else if (drawMode == "Rectangle") {
-                Cv2.Rectangle(canvas, startPoint, currentPoint, Scalar.Black, 2); // 最終繪製黑色矩形
+                Cv2.Rectangle(canvas, prevPoint, currentPoint, Scalar.Black, 2); // 最終繪製黑色矩形
             }
         }
         private void UpdateCanvas() {
-            canvasBitmap = BitmapConverter.ToBitmap(canvas); // 將 Mat 轉換為 Bitmap 並更新顯示
-            pictureBox1.Image = canvasBitmap;
-            pictureBox1.Refresh(); // 刷新顯示
-            //Centralize();
+            if (pictureBox1.Image != null) {
+                pictureBox1.Image.Dispose();
+            }
+            Bitmap bitmap = BitmapConverter.ToBitmap(canvas);
+            pictureBox1.Image = bitmap;
+            pictureBox1.Refresh();
         }
     }
 }
