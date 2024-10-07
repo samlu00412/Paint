@@ -57,27 +57,27 @@
             this.新增ToolStripMenuItem,
             this.結束ToolStripMenuItem});
             this.檔案ToolStripMenuItem.Name = "檔案ToolStripMenuItem";
-            this.檔案ToolStripMenuItem.Size = new System.Drawing.Size(81, 38);
+            this.檔案ToolStripMenuItem.Size = new System.Drawing.Size(81, 34);
             this.檔案ToolStripMenuItem.Text = "檔案";
             // 
             // 開啟ToolStripMenuItem
             // 
             this.開啟ToolStripMenuItem.Name = "開啟ToolStripMenuItem";
-            this.開啟ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.開啟ToolStripMenuItem.Size = new System.Drawing.Size(241, 44);
             this.開啟ToolStripMenuItem.Text = "開啟圖檔";
             this.開啟ToolStripMenuItem.Click += new System.EventHandler(this.開啟ToolStripMenuItem_Click);
             // 
             // 新增ToolStripMenuItem
             // 
             this.新增ToolStripMenuItem.Name = "新增ToolStripMenuItem";
-            this.新增ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.新增ToolStripMenuItem.Size = new System.Drawing.Size(241, 44);
             this.新增ToolStripMenuItem.Text = "新增畫布";
             this.新增ToolStripMenuItem.Click += new System.EventHandler(this.New_canva_click);
             // 
             // 結束ToolStripMenuItem
             // 
             this.結束ToolStripMenuItem.Name = "結束ToolStripMenuItem";
-            this.結束ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.結束ToolStripMenuItem.Size = new System.Drawing.Size(241, 44);
             this.結束ToolStripMenuItem.Text = "結束";
             // 
             // 檢視ToolStripMenuItem
@@ -86,7 +86,7 @@
             this.放大ToolStripMenuItem,
             this.縮小ToolStripMenuItem});
             this.檢視ToolStripMenuItem.Name = "檢視ToolStripMenuItem";
-            this.檢視ToolStripMenuItem.Size = new System.Drawing.Size(81, 38);
+            this.檢視ToolStripMenuItem.Size = new System.Drawing.Size(81, 34);
             this.檢視ToolStripMenuItem.Text = "檢視";
             this.檢視ToolStripMenuItem.Click += new System.EventHandler(this.檢視ToolStripMenuItem_Click);
             // 
@@ -112,6 +112,9 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
+            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
+            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
             // 
             // openFileDialog
             // 
