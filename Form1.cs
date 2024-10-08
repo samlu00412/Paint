@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenCvSharp;
 using OpenCvSharp.Extensions;
+using Point = OpenCvSharp.Point;
 
 
 namespace Paint {
     public partial class Paint : Form {
         private Mat canvas; // 畫布
         private Mat tempCanvas; // 預覽用畫布
+        private OpenCvSharp.Point startpoint;
         private OpenCvSharp.Point prevPoint;
         private OpenCvSharp.Point currentPoint; // 當前鼠標位置
         private Bitmap canvasBitmap;
@@ -59,6 +61,9 @@ namespace Paint {
             pictureBox1.Height = Convert.ToInt32(pictureBox1.Height / 1.1);
         }
 
+        private int CalculateDistance(Point P1,Point P2) {
+            return (int)Math.Sqrt(Math.Pow(P2.X-P1.X,2) + Math.Pow(P2.Y - P1.Y, 2));
+        }
         private void New_canva_click(object sender, EventArgs e) {
             int width = 1280, height = 720;
             canvas = new Mat(new OpenCvSharp.Size(width, height), MatType.CV_8UC3, Scalar.All(255));
@@ -74,6 +79,8 @@ namespace Paint {
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e) {
             if (e.Button == MouseButtons.Left) {
                 isDrawing = true;
+                startpoint.X = e.X;
+                startpoint.Y = e.Y;
                 prevPoint.X = e.X;
                 prevPoint.Y = e.Y;
             }
@@ -127,6 +134,9 @@ namespace Paint {
             else if (drawMode == "Rectangle") {
                 Cv2.Rectangle(tempCanvas, prevPoint, currentPoint, Scalar.Black, 2);
             }
+            else if (drawMode == "Circle") {
+                Cv2.Circle(tempCanvas,startpoint,CalculateDistance(startpoint,currentPoint),Scalar.Black,2);
+            }
         }
         //final
         private void DrawFinalShape() {
@@ -139,7 +149,10 @@ namespace Paint {
             else if (drawMode == "Rectangle") {
                 Cv2.Rectangle(canvas, prevPoint, currentPoint, Scalar.Black, 2); // 最終繪製黑色矩形
             }
-            
+            else if(drawMode == "Circle") {
+                Cv2.Circle(canvas, startpoint, CalculateDistance(startpoint, currentPoint), Scalar.Black, 2);
+            }
+
         }
         private void UpdateCanvas() {
             if (pictureBox1.Image != null) {
@@ -196,6 +209,8 @@ namespace Paint {
             }
         }
 
-        
+        private void 圓ToolStripMenuItem_Click(object sender, EventArgs e) {
+            drawMode = "Circle";
+        }
     }
 }

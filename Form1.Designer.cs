@@ -35,9 +35,10 @@
             this.畫筆ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.自由ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.直線ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.矩形ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.矩形ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.圓ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -123,7 +124,8 @@
             this.畫筆ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.自由ToolStripMenuItem,
             this.直線ToolStripMenuItem,
-            this.矩形ToolStripMenuItem});
+            this.矩形ToolStripMenuItem,
+            this.圓ToolStripMenuItem});
             this.畫筆ToolStripMenuItem.Name = "畫筆ToolStripMenuItem";
             this.畫筆ToolStripMenuItem.Size = new System.Drawing.Size(81, 38);
             this.畫筆ToolStripMenuItem.Text = "畫筆";
@@ -142,6 +144,13 @@
             this.直線ToolStripMenuItem.Text = "直線";
             this.直線ToolStripMenuItem.Click += new System.EventHandler(this.直線ToolStripMenuItem_Click);
             // 
+            // 矩形ToolStripMenuItem
+            // 
+            this.矩形ToolStripMenuItem.Name = "矩形ToolStripMenuItem";
+            this.矩形ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.矩形ToolStripMenuItem.Text = "矩形";
+            this.矩形ToolStripMenuItem.Click += new System.EventHandler(this.矩形ToolStripMenuItem_Click);
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Location = new System.Drawing.Point(0, 42);
@@ -159,12 +168,12 @@
             this.openFileDialog.FileName = "openFileDialog1";
             this.openFileDialog.Filter = "圖片檔(*.jpg, *.png,*.gif,*.jpeg)|*.jpg;*.png;*.gif;*.jpeg";
             // 
-            // 矩形ToolStripMenuItem
+            // 圓ToolStripMenuItem
             // 
-            this.矩形ToolStripMenuItem.Name = "矩形ToolStripMenuItem";
-            this.矩形ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
-            this.矩形ToolStripMenuItem.Text = "矩形";
-            this.矩形ToolStripMenuItem.Click += new System.EventHandler(this.矩形ToolStripMenuItem_Click);
+            this.圓ToolStripMenuItem.Name = "圓ToolStripMenuItem";
+            this.圓ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.圓ToolStripMenuItem.Text = "圓";
+            this.圓ToolStripMenuItem.Click += new System.EventHandler(this.圓ToolStripMenuItem_Click);
             // 
             // Paint
             // 
@@ -203,6 +212,7 @@
         private System.Windows.Forms.ToolStripMenuItem 直線ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 儲存檔案ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 矩形ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 圓ToolStripMenuItem;
     }
 }
 
