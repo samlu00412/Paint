@@ -19,8 +19,9 @@ namespace Paint {
         private OpenCvSharp.Point startpoint;
         private OpenCvSharp.Point prevPoint;
         private OpenCvSharp.Point currentPoint; // 當前鼠標位置
+        private Point prevMouse;
         private Bitmap canvasBitmap;
-        private bool isDrawing = false; // 判斷是否正在繪製
+        private bool isDrawing = false,isDragging = false; // 判斷是否正在繪製
         private string drawMode = "Free"; // 繪製模式
         private Rectangle showAspect;
         public Paint() {
@@ -85,6 +86,10 @@ namespace Paint {
                 startpoint = ConvertToImageCoordinates(e.Location);
                 prevPoint = ConvertToImageCoordinates(e.Location);
             }
+            else if(e.Button == MouseButtons.Right) {
+                isDragging = true;
+                prevMouse = ConvertToImageCoordinates(e.Location);
+            }
         }
         //detecting mouse moving
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e) {
@@ -103,6 +108,13 @@ namespace Paint {
                     tempCanvas.Dispose();
                 }
             }
+            else if (isDragging) {
+                int deltaX = e.X - prevMouse.X;
+                int deltaY = e.Y - prevMouse.Y;
+                pictureBox1.Left += deltaX;
+                pictureBox1.Top += deltaY;
+                prevMouse = ConvertToImageCoordinates(e.Location);
+            }
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e) {
@@ -114,6 +126,9 @@ namespace Paint {
                 if(tempCanvas != null) {
                     tempCanvas.Dispose();
                 }
+            }
+            else if (isDragging) {
+                isDragging = false;
             }
         }
         private void ShowTempCanvas() {
