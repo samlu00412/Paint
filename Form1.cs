@@ -22,6 +22,7 @@ namespace Paint {
         private Bitmap canvasBitmap;
         private bool isDrawing = false; // 判斷是否正在繪製
         private string drawMode = "Free"; // 繪製模式
+        private Rectangle showAspect;
         public Paint() {
             InitializeComponent();
 
@@ -54,11 +55,13 @@ namespace Paint {
         private void Enlarge_click(object sender, EventArgs e) {
             pictureBox1.Width = Convert.ToInt32(pictureBox1.Width*1.1);
             pictureBox1.Height = Convert.ToInt32(pictureBox1.Height * 1.1);
+            showAspect = GetImageRectangleInPictureBox();
         }
 
         private void Shrink_click(object sender, EventArgs e) {
             pictureBox1.Width = Convert.ToInt32(pictureBox1.Width / 1.1);
             pictureBox1.Height = Convert.ToInt32(pictureBox1.Height / 1.1);
+            showAspect = GetImageRectangleInPictureBox();
         }
 
         private int CalculateDistance(Point P1,Point P2) {
@@ -79,26 +82,21 @@ namespace Paint {
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e) {
             if (e.Button == MouseButtons.Left) {
                 isDrawing = true;
-                startpoint.X = e.X;
-                startpoint.Y = e.Y;
-                prevPoint.X = e.X;
-                prevPoint.Y = e.Y;
+                startpoint = ConvertToImageCoordinates(e.Location);
+                prevPoint = ConvertToImageCoordinates(e.Location);
             }
         }
         //detecting mouse moving
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e) {
             if (isDrawing) {
                 if (drawMode == "Free") { //除了自由繪製其他皆要預覽
-                    currentPoint.X = e.X;
-                    currentPoint.Y = e.Y;
+                    currentPoint = ConvertToImageCoordinates(e.Location);
                     DrawFinalShape();
-                    prevPoint.X = currentPoint.X;
-                    prevPoint.Y = currentPoint.Y;
+                    prevPoint = currentPoint;
                     UpdateCanvas();
                 }
                 else {
-                    currentPoint.X = e.X;
-                    currentPoint.Y = e.Y;
+                    currentPoint = ConvertToImageCoordinates(e.Location);
                     tempCanvas = canvas.Clone();
                     DrawPreviewShape();
                     ShowTempCanvas();
@@ -110,8 +108,7 @@ namespace Paint {
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e) {
             if (isDrawing) {
                 isDrawing = false;
-                currentPoint.X = e.X;
-                currentPoint.Y = e.Y;
+                currentPoint = ConvertToImageCoordinates(e.Location);
                 DrawFinalShape(); // 繪製圖形
                 UpdateCanvas(); // 更新顯示
                 if(tempCanvas != null) {
@@ -162,7 +159,50 @@ namespace Paint {
             pictureBox1.Image = bitmap;
             pictureBox1.Refresh();
         }
+        private Rectangle GetImageRectangleInPictureBox() {
+            
+            if (pictureBox1.Image == null)
+                return new Rectangle();
 
+            // 計算圖像縮放後在 PictureBox 中的實際顯示範圍
+            double imageAspect = (double)canvas.Width / canvas.Height;
+            double boxAspect = (double)pictureBox1.Width / pictureBox1.Height;
+
+            int width, height;
+            if (imageAspect > boxAspect) {
+                // 圖像更寬，以寬為基準
+                width = pictureBox1.Width;
+                height = (int)(pictureBox1.Width / imageAspect);
+            }
+            else {
+                // 圖像更高，以高為基準
+                height = pictureBox1.Height;
+                width = (int)(pictureBox1.Height * imageAspect);
+            }
+
+            int x = (pictureBox1.Width - width) / 2;
+            int y = (pictureBox1.Height - height) / 2;
+
+            return new Rectangle(x, y, width, height);
+        }
+
+        private Point ConvertToImageCoordinates(System.Drawing.Point mouseLocation) {
+            // 取得 PictureBox 中顯示圖像的大小
+            var imgRect = GetImageRectangleInPictureBox();
+            // 計算圖像的縮放比例
+            double scaleX = (double)canvas.Width / imgRect.Width;
+            double scaleY = (double)canvas.Height / imgRect.Height;
+
+            // 將滑鼠座標轉換為圖像座標
+            int x = (int)((mouseLocation.X - imgRect.X) * scaleX);
+            int y = (int)((mouseLocation.Y - imgRect.Y) * scaleY);
+
+            // 防止座標超出圖像邊界
+            x = Math.Max(0, Math.Min(canvas.Width - 1, x));
+            y = Math.Max(0, Math.Min(canvas.Height - 1, y));
+
+            return new Point(x, y);
+        }
         private void 自由ToolStripMenuItem_Click(object sender, EventArgs e) {
             drawMode = "Free";
         }
