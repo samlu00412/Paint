@@ -24,6 +24,7 @@ namespace Paint {
         private bool isDrawing = false,isDragging = false; // 判斷是否正在繪製
         private string drawMode = "Free"; // 繪製模式
         private Rectangle showAspect;
+        private Scalar currentColor = new Scalar(0, 0, 0);
         public Paint() {
             InitializeComponent();
 
@@ -141,28 +142,28 @@ namespace Paint {
         //preview
         private void DrawPreviewShape() {
             if (drawMode == "Line") {
-                Cv2.Line(tempCanvas, prevPoint, currentPoint, Scalar.Black, 2);
+                Cv2.Line(tempCanvas, prevPoint, currentPoint, currentColor, 2);
             }
             else if (drawMode == "Rectangle") {
-                Cv2.Rectangle(tempCanvas, prevPoint, currentPoint, Scalar.Black, 2);
+                Cv2.Rectangle(tempCanvas, prevPoint, currentPoint, currentColor, 2);
             }
             else if (drawMode == "Circle") {
-                Cv2.Circle(tempCanvas,startpoint,CalculateDistance(startpoint,currentPoint),Scalar.Black,2);
+                Cv2.Circle(tempCanvas,startpoint,CalculateDistance(startpoint,currentPoint),currentColor,2);
             }
         }
         //final
         private void DrawFinalShape() {
             if (drawMode == "Line") {
-                Cv2.Line(canvas, prevPoint, currentPoint, Scalar.Black, 2);
+                Cv2.Line(canvas, prevPoint, currentPoint, currentColor, 2);
             }
             else if(drawMode == "Free"){
-                Cv2.Line(canvas, prevPoint, currentPoint, Scalar.Black, 2);
+                Cv2.Line(canvas, prevPoint, currentPoint, currentColor, 2);
             }
             else if (drawMode == "Rectangle") {
-                Cv2.Rectangle(canvas, prevPoint, currentPoint, Scalar.Black, 2); // 最終繪製黑色矩形
+                Cv2.Rectangle(canvas, prevPoint, currentPoint, currentColor, 2); // 最終繪製黑色矩形
             }
             else if(drawMode == "Circle") {
-                Cv2.Circle(canvas, startpoint, CalculateDistance(startpoint, currentPoint), Scalar.Black, 2);
+                Cv2.Circle(canvas, startpoint, CalculateDistance(startpoint, currentPoint), currentColor, 2);
             }
 
         }
@@ -261,6 +262,17 @@ namespace Paint {
                 pictureBox1.Load(openFileDialog.FileName);
                 SizeImage();
                 //Centralize();
+            }
+        }
+
+        private void Pallate_Click(object sender, EventArgs e) {
+            ColorDialog colorDialog = new ColorDialog();
+            if (colorDialog.ShowDialog() == DialogResult.OK) {
+                // 取得使用者選擇的顏色
+                Color selectedColor = colorDialog.Color;
+
+                // 將顏色轉換為 OpenCV 的 BGR 格式
+                currentColor = new Scalar(selectedColor.B, selectedColor.G, selectedColor.R); // BGR 格式
             }
         }
 
