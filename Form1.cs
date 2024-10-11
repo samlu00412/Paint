@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using OpenCvSharp;
 using OpenCvSharp.Extensions;
 using Point = OpenCvSharp.Point;
+using Size = OpenCvSharp.Size;
 
 
 namespace Paint {
@@ -150,22 +151,31 @@ namespace Paint {
             else if (drawMode == "Circle") {
                 Cv2.Circle(tempCanvas,startpoint,CalculateDistance(startpoint,currentPoint),currentColor,2);
             }
+            else if (drawMode == "Ellipse") {
+                Size size = new Size(Math.Abs(currentPoint.X - startpoint.X), Math.Abs(currentPoint.Y - startpoint.Y));
+                Cv2.Ellipse(tempCanvas, startpoint, size, 0, 0, 360, currentColor, 2);
+            }
         }
         //final
         private void DrawFinalShape() {
-            if (drawMode == "Line") {
-                Cv2.Line(canvas, prevPoint, currentPoint, currentColor, 2);
+            switch (drawMode) {
+                case "Line":
+                    Cv2.Line(canvas, prevPoint, currentPoint, currentColor, 2);
+                    break;
+                case "Rectangle":
+                    Cv2.Rectangle(canvas, prevPoint, currentPoint, currentColor, 2); // 最終繪製黑色矩形
+                    break;
+                case "Circle":
+                    Cv2.Circle(canvas, startpoint, CalculateDistance(startpoint, currentPoint), currentColor, 2);
+                    break;
+                case "Ellipse":
+                    Size size = new Size(Math.Abs(currentPoint.X - startpoint.X), Math.Abs(currentPoint.Y - startpoint.Y));
+                    Cv2.Ellipse(canvas, startpoint, size, 0, 0, 360, currentColor, 2);
+                    break;
+                default:
+                    Cv2.Line(canvas, prevPoint, currentPoint, currentColor, 2);
+                    break;
             }
-            else if(drawMode == "Free"){
-                Cv2.Line(canvas, prevPoint, currentPoint, currentColor, 2);
-            }
-            else if (drawMode == "Rectangle") {
-                Cv2.Rectangle(canvas, prevPoint, currentPoint, currentColor, 2); // 最終繪製黑色矩形
-            }
-            else if(drawMode == "Circle") {
-                Cv2.Circle(canvas, startpoint, CalculateDistance(startpoint, currentPoint), currentColor, 2);
-            }
-
         }
         private void UpdateCanvas() {
             if (pictureBox1.Image != null) {
@@ -226,7 +236,13 @@ namespace Paint {
         private void 直線ToolStripMenuItem_Click(object sender, EventArgs e) {
             drawMode = "Line";
         }
+        private void 橢圓ToolStripMenuItem_Click(object sender, EventArgs e) {
+            drawMode = "Ellipse";
+        }
 
+        private void 圓ToolStripMenuItem_Click(object sender, EventArgs e) {
+            drawMode = "Circle";
+        }
         private void 矩形ToolStripMenuItem_Click(object sender, EventArgs e) {
             drawMode = "Rectangle";
         }
@@ -276,8 +292,5 @@ namespace Paint {
             }
         }
 
-        private void 圓ToolStripMenuItem_Click(object sender, EventArgs e) {
-            drawMode = "Circle";
-        }
     }
 }
