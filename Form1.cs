@@ -90,6 +90,7 @@ namespace Paint {
             }
             else if(e.Button == MouseButtons.Right) {
                 isDragging = true;
+                startpoint = ConvertToImageCoordinates(e.Location);
                 prevMouse = ConvertToImageCoordinates(e.Location);
             }
         }
@@ -111,10 +112,11 @@ namespace Paint {
                 }
             }
             else if (isDragging) {
-                int deltaX = e.X - prevMouse.X;
-                int deltaY = e.Y - prevMouse.Y;
-                pictureBox1.Left += deltaX;
-                pictureBox1.Top += deltaY;
+                currentPoint = ConvertToImageCoordinates(e.Location);
+                int deltaX = currentPoint.X - startpoint.X;
+                int deltaY = currentPoint.Y - startpoint.Y;
+                pictureBox1.Left = pictureBox1.Location.X + deltaX;
+                pictureBox1.Top = pictureBox1.Location.Y + deltaY;
                 prevMouse = ConvertToImageCoordinates(e.Location);
             }
         }
