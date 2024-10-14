@@ -12,8 +12,8 @@ using OpenCvSharp.Extensions;
 using Point = OpenCvSharp.Point;
 using Size = OpenCvSharp.Size;
 
-
 namespace Paint {
+    
     public partial class Paint : Form {
         private Mat canvas; // 畫布
         private Mat tempCanvas; // 預覽用畫布
@@ -26,6 +26,8 @@ namespace Paint {
         private string drawMode = "Free"; // 繪製模式
         private Rectangle showAspect;
         private Scalar currentColor = new Scalar(0, 0, 0);
+        private Stack<PenMotion> action = new Stack<PenMotion>();
+        private Stack<PenMotion> reaction = new Stack<PenMotion>();
         public Paint() {
             InitializeComponent();
 
@@ -160,23 +162,37 @@ namespace Paint {
         }
         //final
         private void DrawFinalShape() {
+            PenMotion tempAct;
             switch (drawMode) {
                 case "Line":
                     Cv2.Line(canvas, prevPoint, currentPoint, currentColor, 2);
+                    tempAct = new PenMotion("Line", prevPoint, currentPoint, currentColor, 2, 0,new Size(0,0));
+                    action.Push(tempAct);
                     break;
                 case "Rectangle":
                     Cv2.Rectangle(canvas, prevPoint, currentPoint, currentColor, 2); // 最終繪製黑色矩形
+                    tempAct = new PenMotion("Rectangle", prevPoint, currentPoint, currentColor, 2, 0, new Size(0, 0));
+                    action.Push(tempAct);
                     break;
                 case "Circle":
                     Cv2.Circle(canvas, startpoint, CalculateDistance(startpoint, currentPoint), currentColor, 2);
+                    tempAct = new PenMotion("Circle", startpoint, currentPoint, currentColor, 2, CalculateDistance(startpoint, currentPoint), new Size(0, 0));
+                    action.Push(tempAct);
                     break;
                 case "Ellipse":
                     Size size = new Size(Math.Abs(currentPoint.X - startpoint.X), Math.Abs(currentPoint.Y - startpoint.Y));
                     Cv2.Ellipse(canvas, startpoint, size, 0, 0, 360, currentColor, 2);
+                    tempAct = new PenMotion("Ellipse", startpoint, currentPoint, currentColor, 2, CalculateDistance(startpoint, currentPoint), size);
+                    action.Push(tempAct);
                     break;
                 default:
                     Cv2.Line(canvas, prevPoint, currentPoint, currentColor, 2);
+                    tempAct = new PenMotion("Free", prevPoint, currentPoint, currentColor, 2, 0, new Size(0, 0));
+                    action.Push(tempAct);
                     break;
+            }
+            if (reaction.Count != 0) {
+                reaction.Clear();
             }
         }
         private void UpdateCanvas() {
@@ -282,6 +298,46 @@ namespace Paint {
                 //Centralize();
             }
         }
+        private void 結束ToolStripMenuItem_Click(object sender, EventArgs e) {
+            Application.Exit();
+        }
+
+        private void 復原UndoToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (action.Count > 0) {
+                reaction.Push(action.Pop());
+                Redraw();
+                UpdateCanvas(); // 更新顯示
+            }
+        }
+        private void 重做RedoToolStripMenuItem_Click(object sender, EventArgs e) {
+            if(reaction.Count > 0) {
+                action.Push(reaction.Pop());
+                Redraw();
+                UpdateCanvas(); // 更新顯示
+            }
+        }
+        private void Redraw() {
+            canvas.SetTo(Scalar.All(255));
+            foreach (PenMotion act in action) {
+                switch (act.type) {
+                    case "Line":
+                        Cv2.Line(canvas, act.start, act.end, act.pencolor, act.thickness);
+                        break;
+                    case "Rectangle":
+                        Cv2.Rectangle(canvas, act.start, act.end, act.pencolor, act.thickness);
+                        break;
+                    case "Circle":
+                        Cv2.Circle(canvas, act.start, CalculateDistance(act.start, act.end), act.pencolor, act.thickness);
+                        break;
+                    case "Ellipse":
+                        Cv2.Ellipse(canvas, act.start, act.size, 0, 0, 360, act.pencolor, act.thickness);
+                        break;
+                    default:
+                        Cv2.Line(canvas, act.start, act.end, act.pencolor, act.thickness);
+                        break;
+                }
+            }
+        }
 
         private void Pallate_Click(object sender, EventArgs e) {
             ColorDialog colorDialog = new ColorDialog();
@@ -294,5 +350,25 @@ namespace Paint {
             }
         }
 
+    }
+    public class PenMotion {
+        public string type { get; set; }
+        public Point start { get; set; }
+        public Point end { get; set; }
+        public Scalar pencolor { get; set; }
+        public int thickness { get; set; }
+        public int radius { get; set; }
+
+        public Size size { get; set; }
+
+        public PenMotion(string type, Point start, Point end, Scalar pencolor, int thickness, int radius, Size size) {
+            this.type = type;
+            this.start = start;
+            this.end = end;
+            this.pencolor = pencolor;
+            this.thickness = thickness;
+            this.radius = radius;
+            this.size = size;
+        }
     }
 }
