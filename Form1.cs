@@ -175,23 +175,23 @@ namespace Paint {
             switch (drawMode) {
                 case "Line":
                     Cv2.Line(Canvas, prevPoint, currentPoint, currentColor, 2);
-                    tempAct = new PenMotion("Line", prevPoint, currentPoint, currentColor, 2, 0,new Size(0,0));
+                    tempAct = new PenMotion("Line", prevPoint, currentPoint, currentColor, 2, 0,new Size(0,0),null);
                     action.Push(tempAct);
                     break;
                 case "Rectangle":
                     Cv2.Rectangle(Canvas, prevPoint, currentPoint, currentColor, 2); // 最終繪製黑色矩形
-                    tempAct = new PenMotion("Rectangle", prevPoint, currentPoint, currentColor, 2, 0, new Size(0, 0));
+                    tempAct = new PenMotion("Rectangle", prevPoint, currentPoint, currentColor, 2, 0, new Size(0, 0), null);
                     action.Push(tempAct);
                     break;
                 case "Circle":
                     Cv2.Circle(Canvas, startpoint, CalculateDistance(startpoint, currentPoint), currentColor, 2);
-                    tempAct = new PenMotion("Circle", startpoint, currentPoint, currentColor, 2, CalculateDistance(startpoint, currentPoint), new Size(0, 0));
+                    tempAct = new PenMotion("Circle", startpoint, currentPoint, currentColor, 2, CalculateDistance(startpoint, currentPoint), new Size(0, 0), null);
                     action.Push(tempAct);
                     break;
                 case "Ellipse":
                     Size size = new Size(Math.Abs(currentPoint.X - startpoint.X), Math.Abs(currentPoint.Y - startpoint.Y));
                     Cv2.Ellipse(Canvas, startpoint, size, 0, 0, 360, currentColor, 2);
-                    tempAct = new PenMotion("Ellipse", startpoint, currentPoint, currentColor, 2, CalculateDistance(startpoint, currentPoint), size);
+                    tempAct = new PenMotion("Ellipse", startpoint, currentPoint, currentColor, 2, CalculateDistance(startpoint, currentPoint), size, null);
                     action.Push(tempAct);
                     break;
                 case "Triangle":
@@ -201,10 +201,12 @@ namespace Paint {
                     vertex2.Y = startpoint.Y;
                     Point[] TrianglePoint = { startpoint, vertex2, vertex };
                     Cv2.Polylines(Canvas, new[] { TrianglePoint }, true, currentColor, 2);
+                    tempAct = new PenMotion("Triangle", startpoint, currentPoint, currentColor, 2,0, new Size(0,0), TrianglePoint);
+                    action.Push(tempAct);
                     break;
                 default:
                     Cv2.Line(Canvas, prevPoint, currentPoint, currentColor, 2);
-                    tempAct = new PenMotion("Free", prevPoint, currentPoint, currentColor, 2, 0, new Size(0, 0));
+                    tempAct = new PenMotion("Free", prevPoint, currentPoint, currentColor, 2, 0, new Size(0, 0), null);
                     action.Push(tempAct);
                     break;
             }
@@ -336,21 +338,24 @@ namespace Paint {
         private void Redraw() {
             Canvas.SetTo(Scalar.All(255));
             foreach (PenMotion act in action) {
-                switch (act.type) {
+                switch (act.Type) {
                     case "Line":
-                        Cv2.Line(Canvas, act.start, act.end, act.pencolor, act.thickness);
+                        Cv2.Line(Canvas, act.Start, act.End, act.Pencolor, act.Thickness);
                         break;
                     case "Rectangle":
-                        Cv2.Rectangle(Canvas, act.start, act.end, act.pencolor, act.thickness);
+                        Cv2.Rectangle(Canvas, act.Start, act.End, act.Pencolor, act.Thickness);
                         break;
                     case "Circle":
-                        Cv2.Circle(Canvas, act.start, CalculateDistance(act.start, act.end), act.pencolor, act.thickness);
+                        Cv2.Circle(Canvas, act.Start, CalculateDistance(act.Start, act.End), act.Pencolor, act.Thickness);
                         break;
                     case "Ellipse":
-                        Cv2.Ellipse(Canvas, act.start, act.size, 0, 0, 360, act.pencolor, act.thickness);
+                        Cv2.Ellipse(Canvas, act.Start, act.Size, 0, 0, 360, act.Pencolor, act.Thickness);
+                        break;
+                    case "Triangle":
+                        Cv2.Polylines(Canvas,new[] {act.Vertexes},true,act.Pencolor, act.Thickness);
                         break;
                     default:
-                        Cv2.Line(Canvas, act.start, act.end, act.pencolor, act.thickness);
+                        Cv2.Line(Canvas, act.Start, act.End, act.Pencolor, act.Thickness);
                         break;
                 }
             }
@@ -373,23 +378,24 @@ namespace Paint {
 
     }
     public class PenMotion {
-        public string type { get; set; }
-        public Point start { get; set; }
-        public Point end { get; set; }
-        public Scalar pencolor { get; set; }
-        public int thickness { get; set; }
-        public int radius { get; set; }
+        public string Type { get; set; }
+        public Point Start { get; set; }
+        public Point End { get; set; }
+        public Scalar Pencolor { get; set; }
+        public int Thickness { get; set; }
+        public int Radius { get; set; }
+        public Size Size { get; set; }
 
-        public Size size { get; set; }
-
-        public PenMotion(string type, Point start, Point end, Scalar pencolor, int thickness, int radius, Size size) {
-            this.type = type;
-            this.start = start;
-            this.end = end;
-            this.pencolor = pencolor;
-            this.thickness = thickness;
-            this.radius = radius;
-            this.size = size;
+        public Point[] Vertexes { get; set; }
+        public PenMotion(string type, Point start, Point end, Scalar pencolor, int thickness, int radius, Size size, Point[] vertexes) {
+            this.Type = type;
+            this.Start = start;
+            this.End = end;
+            this.Pencolor = pencolor;
+            this.Thickness = thickness;
+            this.Radius = radius;
+            this.Size = size;
+            this.Vertexes = vertexes;
         }
     }
 }
