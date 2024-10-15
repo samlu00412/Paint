@@ -29,6 +29,7 @@ namespace Paint {
         private Scalar currentColor = new Scalar(0, 0, 0);
         private Stack<PenMotion> action = new Stack<PenMotion>();
         private Stack<PenMotion> reaction = new Stack<PenMotion>();
+        
         public Paint() {
             InitializeComponent();
 
@@ -121,6 +122,7 @@ namespace Paint {
                 pictureBox1.Left = pictureBox1.Location.X + deltaX;
                 pictureBox1.Top = pictureBox1.Location.Y + deltaY;
                 prevMouse = ConvertToImageCoordinates(e.Location);
+                pictureBox1.SendToBack();
             }
         }
 
