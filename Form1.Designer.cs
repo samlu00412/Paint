@@ -47,6 +47,7 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.三角形ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -102,7 +103,7 @@
             // 結束ToolStripMenuItem
             // 
             this.結束ToolStripMenuItem.Name = "結束ToolStripMenuItem";
-            this.結束ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.結束ToolStripMenuItem.Size = new System.Drawing.Size(241, 44);
             this.結束ToolStripMenuItem.Text = "結束";
             this.結束ToolStripMenuItem.Click += new System.EventHandler(this.結束ToolStripMenuItem_Click);
             // 
@@ -137,7 +138,8 @@
             this.直線ToolStripMenuItem,
             this.矩形ToolStripMenuItem,
             this.圓ToolStripMenuItem,
-            this.橢圓ToolStripMenuItem});
+            this.橢圓ToolStripMenuItem,
+            this.三角形ToolStripMenuItem});
             this.畫筆ToolStripMenuItem.Name = "畫筆ToolStripMenuItem";
             this.畫筆ToolStripMenuItem.Size = new System.Drawing.Size(81, 38);
             this.畫筆ToolStripMenuItem.Text = "畫筆";
@@ -145,35 +147,35 @@
             // 自由ToolStripMenuItem
             // 
             this.自由ToolStripMenuItem.Name = "自由ToolStripMenuItem";
-            this.自由ToolStripMenuItem.Size = new System.Drawing.Size(193, 44);
+            this.自由ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             this.自由ToolStripMenuItem.Text = "自由";
             this.自由ToolStripMenuItem.Click += new System.EventHandler(this.自由ToolStripMenuItem_Click);
             // 
             // 直線ToolStripMenuItem
             // 
             this.直線ToolStripMenuItem.Name = "直線ToolStripMenuItem";
-            this.直線ToolStripMenuItem.Size = new System.Drawing.Size(193, 44);
+            this.直線ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             this.直線ToolStripMenuItem.Text = "直線";
             this.直線ToolStripMenuItem.Click += new System.EventHandler(this.直線ToolStripMenuItem_Click);
             // 
             // 矩形ToolStripMenuItem
             // 
             this.矩形ToolStripMenuItem.Name = "矩形ToolStripMenuItem";
-            this.矩形ToolStripMenuItem.Size = new System.Drawing.Size(193, 44);
+            this.矩形ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             this.矩形ToolStripMenuItem.Text = "矩形";
             this.矩形ToolStripMenuItem.Click += new System.EventHandler(this.矩形ToolStripMenuItem_Click);
             // 
             // 圓ToolStripMenuItem
             // 
             this.圓ToolStripMenuItem.Name = "圓ToolStripMenuItem";
-            this.圓ToolStripMenuItem.Size = new System.Drawing.Size(193, 44);
+            this.圓ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             this.圓ToolStripMenuItem.Text = "圓";
             this.圓ToolStripMenuItem.Click += new System.EventHandler(this.圓ToolStripMenuItem_Click);
             // 
             // 橢圓ToolStripMenuItem
             // 
             this.橢圓ToolStripMenuItem.Name = "橢圓ToolStripMenuItem";
-            this.橢圓ToolStripMenuItem.Size = new System.Drawing.Size(193, 44);
+            this.橢圓ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             this.橢圓ToolStripMenuItem.Text = "橢圓";
             this.橢圓ToolStripMenuItem.Click += new System.EventHandler(this.橢圓ToolStripMenuItem_Click);
             // 
@@ -189,14 +191,14 @@
             // 復原UndoToolStripMenuItem
             // 
             this.復原UndoToolStripMenuItem.Name = "復原UndoToolStripMenuItem";
-            this.復原UndoToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.復原UndoToolStripMenuItem.Size = new System.Drawing.Size(272, 44);
             this.復原UndoToolStripMenuItem.Text = "復原(Undo)";
             this.復原UndoToolStripMenuItem.Click += new System.EventHandler(this.復原UndoToolStripMenuItem_Click);
             // 
             // 重做RedoToolStripMenuItem
             // 
             this.重做RedoToolStripMenuItem.Name = "重做RedoToolStripMenuItem";
-            this.重做RedoToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.重做RedoToolStripMenuItem.Size = new System.Drawing.Size(272, 44);
             this.重做RedoToolStripMenuItem.Text = "重做(Redo)";
             this.重做RedoToolStripMenuItem.Click += new System.EventHandler(this.重做RedoToolStripMenuItem_Click);
             // 
@@ -237,6 +239,13 @@
             this.toolStripButton1.Size = new System.Drawing.Size(46, 36);
             this.toolStripButton1.Text = "toolStripButton1";
             this.toolStripButton1.Click += new System.EventHandler(this.Pallate_Click);
+            // 
+            // 三角形ToolStripMenuItem
+            // 
+            this.三角形ToolStripMenuItem.Name = "三角形ToolStripMenuItem";
+            this.三角形ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.三角形ToolStripMenuItem.Text = "三角形";
+            this.三角形ToolStripMenuItem.Click += new System.EventHandler(this.三角形ToolStripMenuItem_Click);
             // 
             // Paint
             // 
@@ -286,6 +295,7 @@
         private System.Windows.Forms.ToolStripMenuItem 操作ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 復原UndoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 重做RedoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 三角形ToolStripMenuItem;
     }
 }
 

@@ -15,11 +15,12 @@ using Size = OpenCvSharp.Size;
 namespace Paint {
     
     public partial class Paint : Form {
-        private Mat canvas; // 畫布
+        private Mat Canvas; // 畫布
         private Mat tempCanvas; // 預覽用畫布
         private OpenCvSharp.Point startpoint;
         private OpenCvSharp.Point prevPoint;
         private OpenCvSharp.Point currentPoint; // 當前鼠標位置
+        private Point vertex,vertex2;
         private Point prevMouse;
         private Bitmap canvasBitmap;
         private bool isDrawing = false,isDragging = false; // 判斷是否正在繪製
@@ -74,9 +75,9 @@ namespace Paint {
         }
         private void New_canva_click(object sender, EventArgs e) {
             int width = 1280, height = 720;
-            canvas = new Mat(new OpenCvSharp.Size(width, height), MatType.CV_8UC3, Scalar.All(255));
+            Canvas = new Mat(new OpenCvSharp.Size(width, height), MatType.CV_8UC3, Scalar.All(255));
             //tempCanvas = canvas.Clone();
-            canvasBitmap = BitmapConverter.ToBitmap(canvas); // 初始轉換 Bitmap
+            canvasBitmap = BitmapConverter.ToBitmap(Canvas); // 初始轉換 Bitmap
             pictureBox1.Image = canvasBitmap; // 顯示初始畫布
             pictureBox1.Width = canvasBitmap.Width;
             pictureBox1.Height = canvasBitmap.Height;
@@ -107,7 +108,7 @@ namespace Paint {
                 }
                 else {
                     currentPoint = ConvertToImageCoordinates(e.Location);
-                    tempCanvas = canvas.Clone();
+                    tempCanvas = Canvas.Clone();
                     DrawPreviewShape();
                     ShowTempCanvas();
                     tempCanvas.Dispose();
@@ -153,11 +154,19 @@ namespace Paint {
                 Cv2.Rectangle(tempCanvas, prevPoint, currentPoint, currentColor, 2);
             }
             else if (drawMode == "Circle") {
-                Cv2.Circle(tempCanvas,startpoint,CalculateDistance(startpoint,currentPoint),currentColor,2);
+                Cv2.Circle(tempCanvas, startpoint, CalculateDistance(startpoint, currentPoint), currentColor, 2);
             }
             else if (drawMode == "Ellipse") {
                 Size size = new Size(Math.Abs(currentPoint.X - startpoint.X), Math.Abs(currentPoint.Y - startpoint.Y));
                 Cv2.Ellipse(tempCanvas, startpoint, size, 0, 0, 360, currentColor, 2);
+            }
+            else if (drawMode == "Triangle") {
+                vertex.X = startpoint.X + (currentPoint.X - startpoint.X)/2;//等腰三角形
+                vertex.Y = currentPoint.Y;
+                vertex2.X = currentPoint.X;
+                vertex2.Y = startpoint.Y;
+                Point[] TrianglePoint = { startpoint, vertex2, vertex };
+                Cv2.Polylines(tempCanvas, new[] {TrianglePoint}, true, currentColor, 2);
             }
         }
         //final
@@ -165,28 +174,36 @@ namespace Paint {
             PenMotion tempAct;
             switch (drawMode) {
                 case "Line":
-                    Cv2.Line(canvas, prevPoint, currentPoint, currentColor, 2);
+                    Cv2.Line(Canvas, prevPoint, currentPoint, currentColor, 2);
                     tempAct = new PenMotion("Line", prevPoint, currentPoint, currentColor, 2, 0,new Size(0,0));
                     action.Push(tempAct);
                     break;
                 case "Rectangle":
-                    Cv2.Rectangle(canvas, prevPoint, currentPoint, currentColor, 2); // 最終繪製黑色矩形
+                    Cv2.Rectangle(Canvas, prevPoint, currentPoint, currentColor, 2); // 最終繪製黑色矩形
                     tempAct = new PenMotion("Rectangle", prevPoint, currentPoint, currentColor, 2, 0, new Size(0, 0));
                     action.Push(tempAct);
                     break;
                 case "Circle":
-                    Cv2.Circle(canvas, startpoint, CalculateDistance(startpoint, currentPoint), currentColor, 2);
+                    Cv2.Circle(Canvas, startpoint, CalculateDistance(startpoint, currentPoint), currentColor, 2);
                     tempAct = new PenMotion("Circle", startpoint, currentPoint, currentColor, 2, CalculateDistance(startpoint, currentPoint), new Size(0, 0));
                     action.Push(tempAct);
                     break;
                 case "Ellipse":
                     Size size = new Size(Math.Abs(currentPoint.X - startpoint.X), Math.Abs(currentPoint.Y - startpoint.Y));
-                    Cv2.Ellipse(canvas, startpoint, size, 0, 0, 360, currentColor, 2);
+                    Cv2.Ellipse(Canvas, startpoint, size, 0, 0, 360, currentColor, 2);
                     tempAct = new PenMotion("Ellipse", startpoint, currentPoint, currentColor, 2, CalculateDistance(startpoint, currentPoint), size);
                     action.Push(tempAct);
                     break;
+                case "Triangle":
+                    vertex.X = startpoint.X + (currentPoint.X - startpoint.X) / 2;//等腰三角形
+                    vertex.Y = currentPoint.Y;
+                    vertex2.X = currentPoint.X;
+                    vertex2.Y = startpoint.Y;
+                    Point[] TrianglePoint = { startpoint, vertex2, vertex };
+                    Cv2.Polylines(Canvas, new[] { TrianglePoint }, true, currentColor, 2);
+                    break;
                 default:
-                    Cv2.Line(canvas, prevPoint, currentPoint, currentColor, 2);
+                    Cv2.Line(Canvas, prevPoint, currentPoint, currentColor, 2);
                     tempAct = new PenMotion("Free", prevPoint, currentPoint, currentColor, 2, 0, new Size(0, 0));
                     action.Push(tempAct);
                     break;
@@ -199,7 +216,7 @@ namespace Paint {
             if (pictureBox1.Image != null) {
                 pictureBox1.Image.Dispose();
             }
-            Bitmap bitmap = BitmapConverter.ToBitmap(canvas);
+            Bitmap bitmap = BitmapConverter.ToBitmap(Canvas);
             pictureBox1.Image = bitmap;
             pictureBox1.Refresh();
         }
@@ -209,7 +226,7 @@ namespace Paint {
                 return new Rectangle();
 
             // 計算圖像縮放後在 PictureBox 中的實際顯示範圍
-            double imageAspect = (double)canvas.Width / canvas.Height;
+            double imageAspect = (double)Canvas.Width / Canvas.Height;
             double boxAspect = (double)pictureBox1.Width / pictureBox1.Height;
 
             int width, height;
@@ -234,16 +251,16 @@ namespace Paint {
             // 取得 PictureBox 中顯示圖像的大小
             var imgRect = GetImageRectangleInPictureBox();
             // 計算圖像的縮放比例
-            double scaleX = (double)canvas.Width / imgRect.Width;
-            double scaleY = (double)canvas.Height / imgRect.Height;
+            double scaleX = (double)Canvas.Width / imgRect.Width;
+            double scaleY = (double)Canvas.Height / imgRect.Height;
 
             // 將滑鼠座標轉換為圖像座標
             int x = (int)((mouseLocation.X - imgRect.X) * scaleX);
             int y = (int)((mouseLocation.Y - imgRect.Y) * scaleY);
 
             // 防止座標超出圖像邊界
-            x = Math.Max(0, Math.Min(canvas.Width - 1, x));
-            y = Math.Max(0, Math.Min(canvas.Height - 1, y));
+            x = Math.Max(0, Math.Min(Canvas.Width - 1, x));
+            y = Math.Max(0, Math.Min(Canvas.Height - 1, y));
 
             return new Point(x, y);
         }
@@ -271,7 +288,7 @@ namespace Paint {
             saveFileDialog.FileName = "Untitled"; // 預設文件名
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK) {
-                canvasBitmap = BitmapConverter.ToBitmap(canvas);
+                canvasBitmap = BitmapConverter.ToBitmap(Canvas);
 
                 // 獲取選擇的文件類型
                 string extension = System.IO.Path.GetExtension(saveFileDialog.FileName).ToLower();
@@ -317,26 +334,30 @@ namespace Paint {
             }
         }
         private void Redraw() {
-            canvas.SetTo(Scalar.All(255));
+            Canvas.SetTo(Scalar.All(255));
             foreach (PenMotion act in action) {
                 switch (act.type) {
                     case "Line":
-                        Cv2.Line(canvas, act.start, act.end, act.pencolor, act.thickness);
+                        Cv2.Line(Canvas, act.start, act.end, act.pencolor, act.thickness);
                         break;
                     case "Rectangle":
-                        Cv2.Rectangle(canvas, act.start, act.end, act.pencolor, act.thickness);
+                        Cv2.Rectangle(Canvas, act.start, act.end, act.pencolor, act.thickness);
                         break;
                     case "Circle":
-                        Cv2.Circle(canvas, act.start, CalculateDistance(act.start, act.end), act.pencolor, act.thickness);
+                        Cv2.Circle(Canvas, act.start, CalculateDistance(act.start, act.end), act.pencolor, act.thickness);
                         break;
                     case "Ellipse":
-                        Cv2.Ellipse(canvas, act.start, act.size, 0, 0, 360, act.pencolor, act.thickness);
+                        Cv2.Ellipse(Canvas, act.start, act.size, 0, 0, 360, act.pencolor, act.thickness);
                         break;
                     default:
-                        Cv2.Line(canvas, act.start, act.end, act.pencolor, act.thickness);
+                        Cv2.Line(Canvas, act.start, act.end, act.pencolor, act.thickness);
                         break;
                 }
             }
+        }
+
+        private void 三角形ToolStripMenuItem_Click(object sender, EventArgs e) {
+            drawMode = "Triangle";
         }
 
         private void Pallate_Click(object sender, EventArgs e) {
