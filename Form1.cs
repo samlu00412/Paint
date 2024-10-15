@@ -32,7 +32,8 @@ namespace Paint {
         
         public Paint() {
             InitializeComponent();
-
+            this.KeyPreview = true; // 允許表單偵測按鍵
+            this.KeyDown += new KeyEventHandler(Form1_KeyDown);
         }
 
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e) {
@@ -40,10 +41,20 @@ namespace Paint {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-
+            
         }
 
-        
+        private void Form1_KeyDown(object sender,KeyEventArgs e) {
+            if(e.Control && e.KeyCode == Keys.Z) {
+                復原UndoToolStripMenuItem_Click(sender,e);
+            }
+            else if(e.Control && e.KeyCode == Keys.Y) {
+                重做RedoToolStripMenuItem_Click(sender, e);
+            }
+            else if(e.Control && e.Shift && e.KeyCode == Keys.S) {
+                儲存檔案ToolStripMenuItem_Click(sender,e);
+            }
+        }
         //影像長寬讀取
         private void SizeImage() {
             pictureBox1.Width = pictureBox1.Image.Width;
