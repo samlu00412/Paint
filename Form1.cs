@@ -312,25 +312,10 @@ namespace Paint {
         }
         private void 開啟ToolStripMenuItem_Click(object sender, EventArgs e) {
             if (openFileDialog.ShowDialog() == DialogResult.OK) {
+                Canvas = Cv2.ImRead(openFileDialog.FileName);
                 pictureBox1.Load(openFileDialog.FileName);
                 SizeImage();
-                InitializeCanvas();
             }
-        }
-        private void InitializeCanvas() {
-            // 創建一個與 PictureBox 尺寸相同的白色 Bitmap 畫布
-            Mat transparentCanvas = new Mat(pictureBox1.Height, pictureBox1.Width, MatType.CV_8UC4, new Scalar(0, 0, 0, 0));
-            Bitmap whiteCanvas = BitmapConverter.ToBitmap(transparentCanvas);
-            using (Graphics g = Graphics.FromImage(whiteCanvas)) {
-                // 填充白色背景
-                g.Clear(Color.White);
-            }
-
-            // 設置 PictureBox 的圖像為這個白色畫布
-            pictureBox1.Image = whiteCanvas;
-
-            // 將白色畫布轉換為 Mat，作為 OpenCV 的畫布
-            Canvas = BitmapConverter.ToMat(whiteCanvas);
         }
         private void 結束ToolStripMenuItem_Click(object sender, EventArgs e) {
             Application.Exit();
