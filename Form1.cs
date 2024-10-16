@@ -34,6 +34,7 @@ namespace Paint {
             InitializeComponent();
             this.KeyPreview = true; // 允許表單偵測按鍵
             this.KeyDown += new KeyEventHandler(Form1_KeyDown);
+            this.MouseWheel += new MouseEventHandler(Form1_MouseWheel);
         }
 
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e) {
@@ -43,7 +44,16 @@ namespace Paint {
         private void Form1_Load(object sender, EventArgs e) {
             
         }
-
+        private void Form1_MouseWheel(object sender, MouseEventArgs e) {
+            if (Control.ModifierKeys == Keys.Control) {
+                if (e.Delta > 0) {//up
+                    Enlarge_click(sender, e);
+                }
+                else if (e.Delta < 0) {
+                    Shrink_click(sender, e);
+                }
+            }
+        }
         private void Form1_KeyDown(object sender,KeyEventArgs e) {
             if(e.Control && e.KeyCode == Keys.Z) {
                 復原UndoToolStripMenuItem_Click(sender,e);
