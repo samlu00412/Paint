@@ -45,10 +45,8 @@ namespace Paint {
             if (Control.ModifierKeys == Keys.Control) {
                 if (e.Delta > 0) //up
                     Enlarge_click(sender, e);
-                
                 else if (e.Delta < 0) //down
                     Shrink_click(sender, e);
-                
             }
         }
         private void Form1_KeyDown(object sender,KeyEventArgs e) {
@@ -278,34 +276,25 @@ namespace Paint {
         private void 橢圓ToolStripMenuItem_Click(object sender, EventArgs e) {
             drawMode = "Ellipse";
         }
-
         private void 圓ToolStripMenuItem_Click(object sender, EventArgs e) {
             drawMode = "Circle";
         }
         private void 矩形ToolStripMenuItem_Click(object sender, EventArgs e) {
             drawMode = "Rectangle";
         }
+        private void 三角形ToolStripMenuItem_Click(object sender, EventArgs e) {
+            drawMode = "Triangle";
+        }
+
         private void 儲存檔案ToolStripMenuItem_Click(object sender, EventArgs e) {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "JPEG Image|*.jpg|PNG Image|*.png";
             saveFileDialog.Title = "Save an Image File";
-            saveFileDialog.FileName = "Untitled"; // 預設文件名
+            saveFileDialog.FileName = "Untitled"; 
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK) {
-                canvasBitmap = BitmapConverter.ToBitmap(Canvas);
-                // 獲取選擇的文件類型
-                string extension = System.IO.Path.GetExtension(saveFileDialog.FileName).ToLower();
-                switch (extension) {
-                    case ".jpg":
-                        canvasBitmap.Save(saveFileDialog.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
-                        break;
-                    case ".png":
-                        canvasBitmap.Save(saveFileDialog.FileName, System.Drawing.Imaging.ImageFormat.Png);
-                        break;
-                    default:
-                        MessageBox.Show("Unsupported file format!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                }
+                string filePath = saveFileDialog.FileName;//System.IO.Path.GetExtension(saveFileDialog.FileName).ToLower();
+                Cv2.ImWrite(filePath, Canvas);
             }
             if(saveFileDialog != null) 
                 saveFileDialog.Dispose();
@@ -368,11 +357,6 @@ namespace Paint {
         private void toolStripButton3_Click(object sender, EventArgs e) {
             重做RedoToolStripMenuItem_Click(sender, e);
         }
-
-        private void 三角形ToolStripMenuItem_Click(object sender, EventArgs e) {
-            drawMode = "Triangle";
-        }
-
         private void Pallate_Click(object sender, EventArgs e) {
             ColorDialog colorDialog = new ColorDialog();
             if (colorDialog.ShowDialog() == DialogResult.OK) {
