@@ -12,6 +12,7 @@ namespace Paint {
     
     public partial class Paint : Form {
         private Mat Canvas; // 畫布
+        private Mat initCanvas;
         private Mat tempCanvas; // 預覽用畫布
         private Point startpoint;
         private Point prevPoint;
@@ -84,7 +85,8 @@ namespace Paint {
         }
         private void New_canva_click(object sender, EventArgs e) {
             int width = 1280, height = 720;
-            Canvas = new Mat(new OpenCvSharp.Size(width, height), MatType.CV_8UC3, Scalar.All(255));
+            Canvas = new Mat(new Size(width, height), MatType.CV_8UC3, Scalar.All(255));
+            initCanvas = Canvas.Clone();
             canvasBitmap = BitmapConverter.ToBitmap(Canvas);
             pictureBox1.Image = canvasBitmap;
             pictureBox1.Width = canvasBitmap.Width;
@@ -302,6 +304,7 @@ namespace Paint {
         private void 開啟ToolStripMenuItem_Click(object sender, EventArgs e) {
             if (openFileDialog.ShowDialog() == DialogResult.OK) {
                 Canvas = Cv2.ImRead(openFileDialog.FileName);
+                initCanvas = Canvas.Clone();
                 pictureBox1.Load(openFileDialog.FileName);
                 SizeImage();
             }
@@ -325,7 +328,7 @@ namespace Paint {
             }
         }
         private void Redraw() {
-            Canvas.SetTo(Scalar.All(255));
+            initCanvas.CopyTo(Canvas);
             foreach (PenMotion act in action) {
                 switch (act.Type) {
                     case "Line":
