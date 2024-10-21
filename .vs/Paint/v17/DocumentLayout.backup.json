@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\samlu\\source\\repos\\Paint\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\lightness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:lightness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\lightness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:lightness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|c:\\users\\samlu\\source\\repos\\paint\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\penmotion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:penmotion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,32 +34,45 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "PenMotion.cs",
-              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\PenMotion.cs",
-              "RelativeDocumentMoniker": "PenMotion.cs",
-              "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\PenMotion.cs",
-              "RelativeToolTip": "PenMotion.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAA0wCIAAAAIAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "lightness.cs",
+              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\lightness.cs",
+              "RelativeDocumentMoniker": "lightness.cs",
+              "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\lightness.cs",
+              "RelativeToolTip": "lightness.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-20T10:44:07.975Z"
+              "WhenOpened": "2024-10-21T11:27:54.927Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "lightness.cs [\u8A2D\u8A08]",
+              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\lightness.cs",
+              "RelativeDocumentMoniker": "lightness.cs",
+              "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\lightness.cs [\u8A2D\u8A08]",
+              "RelativeToolTip": "lightness.cs [\u8A2D\u8A08]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T11:27:50.741Z",
+              "EditorCaption": " [\u8A2D\u8A08]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Form1.cs",
               "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAAGMBAAAAAAAAAAAAAHUBAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAGsBAAAAAAAAAAAQwHcBAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-15T10:26:25.003Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Form1.cs [\u8A2D\u8A08]",
               "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
