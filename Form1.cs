@@ -5,23 +5,23 @@ using System.Drawing;
 using System.Windows.Forms;
 using OpenCvSharp;
 using OpenCvSharp.Extensions;
-using Point = OpenCvSharp.Point;
+//using Point = OpenCvSharp.Point;
 using Size = OpenCvSharp.Size;
 using Pen;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Runtime.ConstrainedExecution;
-
+using OpenCvSharp.Dnn;
 namespace Paint {
     
     public partial class Paint : Form {
         private Mat canvas; 
         private Mat initCanvas;
         private Mat tempCanvas = new Mat(); 
-        private Point startpoint;
-        private Point prevPoint;
-        private Point currentPoint; 
-        private Point vertex,vertex2;
-        private Point prevMouse;
+        private OpenCvSharp.Point startpoint;
+        private OpenCvSharp.Point prevPoint;
+        private OpenCvSharp.Point currentPoint; 
+        private OpenCvSharp.Point vertex,vertex2;
+        private OpenCvSharp.Point prevMouse;
         private Bitmap canvasBitmap;
         private bool isDrawing = false,isDragging = false; 
         private string drawMode = "Free"; 
@@ -97,7 +97,7 @@ namespace Paint {
             showAspect = GetImageRectangleInPictureBox();
         }
 
-        private int CalculateDistance(Point P1,Point P2) {
+        private int CalculateDistance(OpenCvSharp.Point P1, OpenCvSharp.Point P2) {
             return (int)Math.Sqrt(Math.Pow(P2.X-P1.X,2) + Math.Pow(P2.Y - P1.Y, 2));
         }
         private void New_canva_click(object sender, EventArgs e) {
@@ -119,8 +119,8 @@ namespace Paint {
             }
             else if(e.Button == MouseButtons.Right) {
                 isDragging = true;
-                startpoint = ConvertToImageCoordinates(e.Location);
-                prevMouse = ConvertToImageCoordinates(e.Location);
+                dragStartPoint.X = System.Windows.Forms.Cursor.Position.X;
+                dragStartPoint.Y = System.Windows.Forms.Cursor.Position.Y;
             }
         }
         //detecting mouse moving
@@ -149,13 +149,13 @@ namespace Paint {
                 }
             }
             else if (isDragging) {
-                currentPoint = ConvertToImageCoordinates(e.Location);
-                int deltaX = currentPoint.X - startpoint.X;
-                int deltaY = currentPoint.Y - startpoint.Y;
-                pictureBox1.Left = pictureBox1.Location.X + deltaX;
-                pictureBox1.Top = pictureBox1.Location.Y + deltaY;
-                prevMouse = ConvertToImageCoordinates(e.Location);
-                pictureBox1.SendToBack();
+                pictureBox1.Location = new System.Drawing.Point
+                (
+                    pictureBox1.Location.X + System.Windows.Forms.Cursor.Position.X - dragStartPoint.X,
+                    pictureBox1.Location.Y + System.Windows.Forms.Cursor.Position.Y - dragStartPoint.Y
+                );
+                dragStartPoint.X = System.Windows.Forms.Cursor.Position.X;
+                dragStartPoint.Y = System.Windows.Forms.Cursor.Position.Y;
             }
         }
 
@@ -201,7 +201,7 @@ namespace Paint {
                 vertex.Y = currentPoint.Y;
                 vertex2.X = currentPoint.X;
                 vertex2.Y = startpoint.Y;
-                Point[] TrianglePoint = { startpoint, vertex2, vertex };
+                OpenCvSharp.Point[] TrianglePoint = { startpoint, vertex2, vertex };
                 Cv2.Polylines(tempCanvas, new[] {TrianglePoint}, true, currentColor, penThickness);
             }
         }
@@ -235,7 +235,7 @@ namespace Paint {
                     vertex.Y = currentPoint.Y;
                     vertex2.X = currentPoint.X;
                     vertex2.Y = startpoint.Y;
-                    Point[] TrianglePoint = { startpoint, vertex2, vertex };
+                    OpenCvSharp.Point[] TrianglePoint = { startpoint, vertex2, vertex };
                     Cv2.Polylines(canvas, new[] { TrianglePoint }, true, currentColor, penThickness);
                     tempAct = new PenMotion("Triangle", startpoint, currentPoint, currentColor, penThickness,0, new Size(0,0), TrianglePoint);
                     action.Push(tempAct);
@@ -282,7 +282,7 @@ namespace Paint {
             return new Rectangle(x, y, width, height);
         }
 
-        private Point ConvertToImageCoordinates(System.Drawing.Point mouseLocation) {
+        private OpenCvSharp.Point ConvertToImageCoordinates(System.Drawing.Point mouseLocation) {
             var imgRect = GetImageRectangleInPictureBox();
             double scaleX = (double)canvas.Width / imgRect.Width;
             double scaleY = (double)canvas.Height / imgRect.Height;
@@ -295,7 +295,7 @@ namespace Paint {
             x = Math.Max(0, Math.Min(canvas.Width - 1, x));
             y = Math.Max(0, Math.Min(canvas.Height - 1, y));
 
-            return new Point(x, y);
+            return new OpenCvSharp.Point(x, y);
         }
         private void 自由ToolStripMenuItem_Click(object sender, EventArgs e) {
             drawMode = "Free";
@@ -400,6 +400,8 @@ namespace Paint {
                 currentColor = new Scalar(selectedColor.B, selectedColor.G, selectedColor.R); // BGR 格式
             }
         }
+        OpenCvSharp.Point dragStartPoint;
+
     }
     
 }
