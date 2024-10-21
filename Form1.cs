@@ -8,6 +8,8 @@ using OpenCvSharp.Extensions;
 using Point = OpenCvSharp.Point;
 using Size = OpenCvSharp.Size;
 using Pen;
+using System.Windows.Forms.DataVisualization.Charting;
+using System.Runtime.ConstrainedExecution;
 
 namespace Paint {
     
@@ -29,14 +31,29 @@ namespace Paint {
         private int penThickness = 2;
         private Stack<PenMotion> action = new Stack<PenMotion>();
         private Stack<PenMotion> reaction = new Stack<PenMotion>();
-        
         public Paint() {
             InitializeComponent();
 
             this.KeyPreview = true; // 允許表單偵測按鍵
             this.KeyDown += new KeyEventHandler(Form1_KeyDown);
             this.MouseWheel += new MouseEventHandler(Form1_MouseWheel);
+            chart1.Series.Clear();
+            chart1.ChartAreas.Clear();
+            ChartArea chartArea = new ChartArea();
+            chart1.ChartAreas.Add(chartArea);
+            Series series = new Series
+            {
+                Name = "亮度",
+                Color = System.Drawing.Color.Blue,
+                ChartType = SeriesChartType.Column // 使用柱狀圖
+            };
+            series.Points.Add(50);
+            chart1.Series.Add(series);
 
+            // 設置 Y 軸範圍
+            chart1.ChartAreas[0].AxisY.Minimum = 0;
+            chart1.ChartAreas[0].AxisY.Maximum = 255;
+            
             PenMotion penMotion = new PenMotion(this);
         }
 
@@ -109,6 +126,14 @@ namespace Paint {
         }
         //detecting mouse moving
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e) {
+
+            if (canvas != null)
+                if (e.X >= 0 && e.X < canvas.Cols && e.Y >= 0 && e.Y < canvas.Rows)
+                {
+                    double value = canvas.Get<byte>(e.Y, e.X);
+                    chart1.Series[0].Points[0].SetValueY(value);
+                    chart1.Refresh();
+                }
             if (isDrawing) {
                 if (drawMode == "Free") { //除了自由繪製其他皆要預覽
                     currentPoint = ConvertToImageCoordinates(e.Location);
@@ -121,7 +146,7 @@ namespace Paint {
                     tempCanvas = canvas.Clone();
                     DrawPreviewShape();
                     ShowTempCanvas();
-                    tempCanvas.Dispose();
+                    //tempCanvas.Dispose();
                 }
             }
             else if (isDragging) {
@@ -141,8 +166,11 @@ namespace Paint {
                 currentPoint = ConvertToImageCoordinates(e.Location);
                 DrawFinalShape(); // 繪製圖形
                 UpdateCanvas(); // 更新顯示
-                if(tempCanvas != null) 
-                    tempCanvas.Dispose();
+                if(tempCanvas != null)
+                {
+                    //tempCanvas.Dispose();
+                }
+
             }
             else if (isDragging) 
                 isDragging = false;
