@@ -127,12 +127,13 @@ namespace Paint {
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e) {
 
             if (canvas != null)
-                if (e.X >= 0 && e.X < canvas.Cols && e.Y >= 0 && e.Y < canvas.Rows)
-                {
-                    double value = canvas.Get<byte>(e.Y, e.X);
-                    chart1.Series[0].Points[0].SetValueY(value);
-                    chart1.Refresh();
-                }
+            {
+                OpenCvSharp.Point cur = ConvertToImageCoordinates(e.Location);
+                double value = canvas.Get<byte>(cur.Y, cur.X);
+                chart1.Series[0].Points[0].SetValueY(value);
+                chart1.Refresh();
+
+            }
             if (isDrawing) {
                 if (drawMode == "Free") { //除了自由繪製其他皆要預覽
                     currentPoint = ConvertToImageCoordinates(e.Location);
