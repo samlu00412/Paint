@@ -362,6 +362,10 @@ namespace Paint {
             UpdateCanvas();
         }
 
+        private void 亮度對比度ToolStripMenuItem_Click(object sender, EventArgs e) {
+            
+        }
+
         private void toolStripButton3_Click(object sender, EventArgs e) {
             重做RedoToolStripMenuItem_Click(sender, e);
         }

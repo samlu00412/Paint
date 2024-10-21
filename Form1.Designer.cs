@@ -46,6 +46,7 @@
             this.調整ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.強度轉換ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.空間濾波ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.轉換成灰階ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -53,7 +54,7 @@
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.轉換成灰階ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.亮度對比度ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -227,6 +228,8 @@
             // 
             // 強度轉換ToolStripMenuItem
             // 
+            this.強度轉換ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.亮度對比度ToolStripMenuItem});
             this.強度轉換ToolStripMenuItem.Name = "強度轉換ToolStripMenuItem";
             this.強度轉換ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             this.強度轉換ToolStripMenuItem.Text = "強度轉換";
@@ -236,6 +239,13 @@
             this.空間濾波ToolStripMenuItem.Name = "空間濾波ToolStripMenuItem";
             this.空間濾波ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             this.空間濾波ToolStripMenuItem.Text = "空間濾波";
+            // 
+            // 轉換成灰階ToolStripMenuItem
+            // 
+            this.轉換成灰階ToolStripMenuItem.Name = "轉換成灰階ToolStripMenuItem";
+            this.轉換成灰階ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.轉換成灰階ToolStripMenuItem.Text = "轉換成灰階";
+            this.轉換成灰階ToolStripMenuItem.Click += new System.EventHandler(this.轉換成灰階ToolStripMenuItem_Click);
             // 
             // pictureBox1
             // 
@@ -297,12 +307,12 @@
             this.toolStripButton3.Text = "toolStripButton3";
             this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
             // 
-            // 轉換成灰階ToolStripMenuItem
+            // 亮度對比度ToolStripMenuItem
             // 
-            this.轉換成灰階ToolStripMenuItem.Name = "轉換成灰階ToolStripMenuItem";
-            this.轉換成灰階ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
-            this.轉換成灰階ToolStripMenuItem.Text = "轉換成灰階";
-            this.轉換成灰階ToolStripMenuItem.Click += new System.EventHandler(this.轉換成灰階ToolStripMenuItem_Click);
+            this.亮度對比度ToolStripMenuItem.Name = "亮度對比度ToolStripMenuItem";
+            this.亮度對比度ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.亮度對比度ToolStripMenuItem.Text = "亮度/對比度";
+            this.亮度對比度ToolStripMenuItem.Click += new System.EventHandler(this.亮度對比度ToolStripMenuItem_Click);
             // 
             // Paint
             // 
@@ -359,6 +369,7 @@
         private System.Windows.Forms.ToolStripMenuItem 強度轉換ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 空間濾波ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 轉換成灰階ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 亮度對比度ToolStripMenuItem;
     }
 }
 
