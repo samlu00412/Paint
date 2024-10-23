@@ -16,6 +16,7 @@ namespace Paint {
     public partial class Paint : Form {
         private Mat canvas; 
         private Mat initCanvas;
+        private Mat grayCanvas = new Mat();
         private Mat tempCanvas = new Mat(); 
         private OpenCvSharp.Point startpoint;
         private OpenCvSharp.Point prevPoint;
@@ -23,13 +24,15 @@ namespace Paint {
         private OpenCvSharp.Point vertex,vertex2;
         private OpenCvSharp.Point prevMouse;
         private Bitmap canvasBitmap;
-        private bool isDrawing = false,isDragging = false; 
+        private bool isDrawing = false,isDragging = false,isGrey = false; 
         private string drawMode = "Free"; 
         private Rectangle showAspect;
         private Scalar currentColor = new Scalar(0, 0, 0);
         private int penThickness = 2;
         private Stack<PenMotion> action = new Stack<PenMotion>();
         private Stack<PenMotion> reaction = new Stack<PenMotion>();
+        private Size init_kernal = new Size(1, 1);
+        private double init_sigma = 1.0;
         public Paint() {
             InitializeComponent();
 
@@ -334,6 +337,7 @@ namespace Paint {
             if (openFileDialog.ShowDialog() == DialogResult.OK) {
                 canvas = Cv2.ImRead(openFileDialog.FileName);
                 initCanvas = canvas.Clone();
+                Cv2.CvtColor(initCanvas, grayCanvas, ColorConversionCodes.BGR2GRAY);
                 pictureBox1.Load(openFileDialog.FileName);
                 SizeImage();
             }
@@ -357,7 +361,10 @@ namespace Paint {
             }
         }
         private void Redraw() {
-            initCanvas.CopyTo(canvas);
+            if (isGrey)
+                grayCanvas.CopyTo(canvas);
+            else
+                initCanvas.CopyTo(canvas);
             foreach (PenMotion act in action) {
                 switch (act.Type) {
                     case "Line":
@@ -388,6 +395,32 @@ namespace Paint {
 
         private void 轉換成灰階ToolStripMenuItem_Click(object sender, EventArgs e) {
             Cv2.CvtColor(canvas,canvas,ColorConversionCodes.BGR2GRAY);
+            isGrey = true;
+            UpdateCanvas();
+        }
+
+        private void 高斯模糊ToolStripMenuItem_Click(object sender, EventArgs e) {
+            Gauss blurform = new Gauss(init_kernal,init_sigma);
+            if (blurform.ShowDialog() == DialogResult.OK) {
+                Cv2.GaussianBlur(canvas, canvas, blurform.Kernal, blurform.Sigma);
+                UpdateCanvas();
+            }
+            blurform.Dispose();
+        }
+
+        private void 亮度對比度ToolStripMenuItem_Click(object sender, EventArgs e) {
+            lightness Trackbarform = new lightness();
+            //double alpha = 1, beta = 0;
+            //Scalar meanScalar = Cv2.Mean(canvas);
+            //double brightness = meanScalar.Val0;//灰度平均=亮度
+            
+            //Cv2.MeanStdDev(canvas, out meanScalar, out Scalar stddevScalar);
+            //double contrast = stddevScalar.Val0;//標準差視為對比度
+
+            if (Trackbarform.ShowDialog() == DialogResult.OK) {
+                canvas.ConvertTo(canvas, MatType.CV_8UC1, Trackbarform.TrackBarValue1, Trackbarform.TrackBarValue2);
+            }
+            //canvas.ConvertTo(canvas, MatType.CV_8UC1, alpha, beta);
             UpdateCanvas();
         }
 
