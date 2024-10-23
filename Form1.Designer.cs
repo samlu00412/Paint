@@ -24,9 +24,9 @@
         /// </summary>
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Paint));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.檔案ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.開啟ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,6 +59,7 @@
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.高斯模糊ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -78,7 +79,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(6, 3, 0, 3);
-            this.menuStrip1.Size = new System.Drawing.Size(1540, 40);
+            this.menuStrip1.Size = new System.Drawing.Size(1540, 44);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -229,7 +230,7 @@
             this.空間濾波ToolStripMenuItem,
             this.轉換成灰階ToolStripMenuItem});
             this.調整ToolStripMenuItem.Name = "調整ToolStripMenuItem";
-            this.調整ToolStripMenuItem.Size = new System.Drawing.Size(81, 34);
+            this.調整ToolStripMenuItem.Size = new System.Drawing.Size(81, 38);
             this.調整ToolStripMenuItem.Text = "調整";
             // 
             // 強度轉換ToolStripMenuItem
@@ -249,6 +250,8 @@
             // 
             // 空間濾波ToolStripMenuItem
             // 
+            this.空間濾波ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.高斯模糊ToolStripMenuItem});
             this.空間濾波ToolStripMenuItem.Name = "空間濾波ToolStripMenuItem";
             this.空間濾波ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             this.空間濾波ToolStripMenuItem.Text = "空間濾波";
@@ -284,7 +287,7 @@
             this.toolStripButton1,
             this.toolStripButton2,
             this.toolStripButton3});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 40);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 44);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 1, 0);
             this.toolStrip1.Size = new System.Drawing.Size(1540, 42);
@@ -323,20 +326,27 @@
             // 
             // chart1
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart1.Legends.Add(legend2);
             this.chart1.Location = new System.Drawing.Point(1212, 623);
-            this.chart1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chart1.Margin = new System.Windows.Forms.Padding(4);
             this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chart1.Series.Add(series2);
             this.chart1.Size = new System.Drawing.Size(328, 196);
             this.chart1.TabIndex = 3;
             this.chart1.Text = "chart1";
+            // 
+            // 高斯模糊ToolStripMenuItem
+            // 
+            this.高斯模糊ToolStripMenuItem.Name = "高斯模糊ToolStripMenuItem";
+            this.高斯模糊ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.高斯模糊ToolStripMenuItem.Text = "高斯模糊";
+            this.高斯模糊ToolStripMenuItem.Click += new System.EventHandler(this.高斯模糊ToolStripMenuItem_Click);
             // 
             // Paint
             // 
@@ -397,6 +407,7 @@
         private System.Windows.Forms.ToolStripMenuItem 轉換成灰階ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 亮度對比度ToolStripMenuItem;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.ToolStripMenuItem 高斯模糊ToolStripMenuItem;
     }
 }
 

@@ -19,7 +19,6 @@ namespace Paint {
             InitializeComponent();
             trackBar1.Scroll += new EventHandler(trackBar1_Scroll);
             trackBar2.Scroll += new EventHandler(trackBar2_Scroll);
-
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e) {
@@ -49,6 +48,9 @@ namespace Paint {
             TrackBarValue2 = trackBar2.Value;
         }
 
-        
+        private void button2_Click(object sender, EventArgs e) {
+            DialogResult = DialogResult.Cancel;
+            Close();
+        }
     }
 }

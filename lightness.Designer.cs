@@ -31,6 +31,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.bri_label = new System.Windows.Forms.Label();
             this.con_label = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
             this.SuspendLayout();
@@ -41,7 +42,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(502, 351);
+            this.button1.Location = new System.Drawing.Point(620, 352);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(131, 51);
             this.button1.TabIndex = 0;
@@ -86,7 +87,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label2.Location = new System.Drawing.Point(18, 62);
+            this.label2.Location = new System.Drawing.Point(18, 70);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(110, 32);
             this.label2.TabIndex = 4;
@@ -108,11 +109,22 @@
             this.con_label.Size = new System.Drawing.Size(0, 24);
             this.con_label.TabIndex = 6;
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(483, 352);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(131, 51);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "取消";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // lightness
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.con_label);
             this.Controls.Add(this.bri_label);
             this.Controls.Add(this.label2);
@@ -140,5 +152,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label bri_label;
         private System.Windows.Forms.Label con_label;
+        private System.Windows.Forms.Button button2;
     }
 }

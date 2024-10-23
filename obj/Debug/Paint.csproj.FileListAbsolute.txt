@@ -61,3 +61,4 @@ C:\Users\USER\source\repos\Paint\obj\Debug\Paint.csproj.Up2Date
 C:\Users\USER\source\repos\Paint\obj\Debug\Paint.exe
 C:\Users\USER\source\repos\Paint\obj\Debug\Paint.pdb
 C:\Users\samlu\source\repos\Paint\obj\Debug\Paint.lightness.resources
+C:\Users\samlu\source\repos\Paint\obj\Debug\Paint.Gauss.resources
