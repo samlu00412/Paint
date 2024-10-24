@@ -13,8 +13,8 @@ using Paint;
 namespace Paint {
     public partial class lightness : Form {
         private const int scaleFactor = 100; // 放大倍數，這樣可以達到兩位小數的精度
-        public double TrackBarValue1 { get; private set; }
-        public double TrackBarValue2 { get; private set; }
+        public double TrackBarValue1 { get; private set; } = 1.0;
+        public double TrackBarValue2 { get; private set; } = 0;
         public lightness() {
             InitializeComponent();
             trackBar1.Scroll += new EventHandler(trackBar1_Scroll);
