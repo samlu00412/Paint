@@ -352,61 +352,78 @@ namespace Paint {
             lightness trackbarForm = new lightness();
             if (trackbarForm.ShowDialog() == DialogResult.OK)
             {
-                double alpha = trackbarForm.TrackBarValue1; // 對比度，可以為負
-                int beta = (int)trackbarForm.TrackBarValue2;     // 亮度
+                double alpha = trackbarForm.TrackBarValue1; // 對比度
+                int beta = (int)trackbarForm.TrackBarValue2; // 亮度
+                bool isNegative = (trackbarForm.TrackBarValue1<0); // 檢查是否需要負片效果
 
-                // 確保 beta 在合理範圍內
-                //beta = Math.Max(0, Math.Min(beta, 100));
-
-                // 手動調整對比度和亮度
-                canvas = AdjustContrastAndBrightness(canvas, alpha, beta);
-                Console.WriteLine(alpha.ToString()+" "+beta);
+                // 調整對比度和亮度
+                if (!isNegative)
+                    canvas = AdjustContrastAndBrightness(canvas, alpha, beta);
+                else
+                    canvas = AdjustNegativeContrast(canvas, alpha, beta);
+                Console.WriteLine($"Alpha: {alpha}, Beta: {beta}, IsNegative: {isNegative}");
             }
             UpdateCanvas();
+        }
+        private OpenCvSharpMat AdjustNegativeContrast(OpenCvSharpMat image, double alpha, int beta)
+        {
+            OpenCvSharpMat newImage = new OpenCvSharpMat(image.Size(), image.Type());
+
+            for (int y = 0; y < image.Rows; y++)
+            {
+                for (int x = 0; x < image.Cols; x++)
+                {
+                    Vec3b color = image.At<Vec3b>(y, x);
+                    Vec3b newColor = new Vec3b();
+
+                    for (int c = 0; c < 3; c++)
+                    {
+                        // 反轉像素值並調整對比度
+                        double pixel = 255 - color[c];
+                        pixel = Math.Abs(alpha) * pixel + beta;
+                        // 裁剪到0-255範圍
+                        newColor[c] = (byte)(pixel < 0 ? 0 : (pixel > 255 ? 255 : pixel));
+                    }
+
+                    newImage.Set(y, x, newColor);
+                }
+            }
+
+            return newImage;
         }
 
         private OpenCvSharpMat AdjustContrastAndBrightness(OpenCvSharpMat image, double alpha, int beta)
         {
             OpenCvSharpMat newImage = new OpenCvSharpMat(image.Size(), image.Type());
-            Double min=0;
+
             for (int y = 0; y < image.Rows; y++)
             {
                 for (int x = 0; x < image.Cols; x++)
                 {
                     Vec3b color = image.At<Vec3b>(y, x);
+                    Vec3b newColor = new Vec3b();
+
                     for (int c = 0; c < 3; c++)
                     {
-                        min = Math.Min(min, color[c] * alpha + beta);
+                        // 調整對比度和亮度
+                        double newValue = color[c] * alpha + beta;
+                        // 裁剪到 0-255 範圍
+                        newColor[c] = (byte)(newValue < 0 ? 0 : (newValue > 255 ? 255 : newValue));
                     }
-                }
-            }
-            min = Math.Abs(min);
-            Console.WriteLine(min);
-            for (int y = 0; y < image.Rows; y++)
-            {
-                for (int x = 0; x < image.Cols; x++)
-                {
-                    Vec3b color = image.At<Vec3b>(y, x);
-                    for (int c = 0; c < 3; c++)
-                    {
-                        newImage.At<Vec3b>(y, x)[c] = Clip(color[c] * alpha + beta + min);
-                    }
+
+                    newImage.Set(y, x, newColor);
                 }
             }
             return newImage;
         }
 
-        private byte Clip(double value)
-        {
-            return (byte)(value < 0 ? 0 : (value > 255 ? 255 : value));
-        }
 
         private void 伽瑪ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Gamma trackbarForm = new Gamma(this);
             if (trackbarForm.ShowDialog() == DialogResult.OK)
             {
-                double gamma = trackbarForm.trackBar1.Value/100.0; // 對比度，可以為負
+                double gamma = trackbarForm.trackBar1.Value/100.0; 
 
                 canvas = 伽瑪轉換(canvas, gamma);
 
@@ -415,24 +432,33 @@ namespace Paint {
         }
         private OpenCvSharpMat 伽瑪轉換(OpenCvSharpMat image, double gamma)
         {
-
             OpenCvSharpMat newImage = new OpenCvSharpMat(image.Size(), image.Type());
+
+
             for (int y = 0; y < image.Rows; y++)
             {
                 for (int x = 0; x < image.Cols; x++)
                 {
                     Vec3b color = image.At<Vec3b>(y, x);
+                    Vec3b newColor = new Vec3b();
+
                     for (int c = 0; c < 3; c++)
                     {
+                        // 將像素值標準化到 [0, 1] 範圍
                         double pixel = color[c] / 255.0;
-                        if(pixel >1.0)
-                            Console.WriteLine("owo");
-                        newImage.At<Vec3b>(y, x)[c] = Clip(Math.Pow(pixel,gamma) * 255.0);
+                        // 進行伽瑪校正
+                        pixel = Math.Pow(pixel, gamma);
+                        // 將結果轉換回 [0, 255] 範圍並裁剪
+                        newColor[c] = (byte)(pixel * 255.0 > 255 ? 255 : (pixel * 255.0 < 0 ? 0 : pixel * 255.0));
                     }
+
+                    newImage.Set(y, x, newColor);
                 }
             }
+
             return newImage;
         }
+
         private void Pallate_Click(object sender, EventArgs e) {
             ColorDialog colorDialog = new ColorDialog();
             if (colorDialog.ShowDialog() == DialogResult.OK) {
