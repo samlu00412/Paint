@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Paint;
-
+using OpenCvSharp;
+using OpenCvSharp.Extensions;
 namespace Paint {
     public partial class lightness : Form {
         private const int scaleFactor = 100; // 放大倍數，這樣可以達到兩位小數的精度

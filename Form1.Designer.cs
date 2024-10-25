@@ -1,5 +1,7 @@
-﻿namespace Paint {
-    partial class Paint {
+﻿namespace Paint
+{
+    partial class Paint
+    {
         /// <summary>
         /// 設計工具所需的變數。
         /// </summary>
@@ -9,8 +11,10 @@
         /// 清除任何使用中的資源。
         /// </summary>
         /// <param name="disposing">如果應該處置受控資源則為 true，否則為 false。</param>
-        protected override void Dispose(bool disposing) {
-            if (disposing && (components != null)) {
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -22,11 +26,9 @@
         /// 此為設計工具支援所需的方法 - 請勿使用程式碼編輯器修改
         /// 這個方法的內容。
         /// </summary>
-        private void InitializeComponent() {
+        private void InitializeComponent()
+        {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Paint));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.檔案ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.開啟ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,11 +61,10 @@
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.伽瑪ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -79,7 +80,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1066, 31);
+            this.menuStrip1.Size = new System.Drawing.Size(1066, 32);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -91,7 +92,7 @@
             this.儲存檔案ToolStripMenuItem,
             this.結束ToolStripMenuItem});
             this.檔案ToolStripMenuItem.Name = "檔案ToolStripMenuItem";
-            this.檔案ToolStripMenuItem.Size = new System.Drawing.Size(62, 28);
+            this.檔案ToolStripMenuItem.Size = new System.Drawing.Size(62, 32);
             this.檔案ToolStripMenuItem.Text = "檔案";
             // 
             // 開啟ToolStripMenuItem
@@ -128,7 +129,7 @@
             this.放大ToolStripMenuItem,
             this.縮小ToolStripMenuItem});
             this.檢視ToolStripMenuItem.Name = "檢視ToolStripMenuItem";
-            this.檢視ToolStripMenuItem.Size = new System.Drawing.Size(62, 28);
+            this.檢視ToolStripMenuItem.Size = new System.Drawing.Size(62, 32);
             this.檢視ToolStripMenuItem.Text = "檢視";
             // 
             // 放大ToolStripMenuItem
@@ -155,7 +156,7 @@
             this.橢圓ToolStripMenuItem,
             this.三角形ToolStripMenuItem});
             this.畫筆ToolStripMenuItem.Name = "畫筆ToolStripMenuItem";
-            this.畫筆ToolStripMenuItem.Size = new System.Drawing.Size(62, 28);
+            this.畫筆ToolStripMenuItem.Size = new System.Drawing.Size(62, 32);
             this.畫筆ToolStripMenuItem.Text = "畫筆";
             // 
             // 自由ToolStripMenuItem
@@ -206,7 +207,7 @@
             this.復原UndoToolStripMenuItem,
             this.重做RedoToolStripMenuItem});
             this.操作ToolStripMenuItem.Name = "操作ToolStripMenuItem";
-            this.操作ToolStripMenuItem.Size = new System.Drawing.Size(62, 28);
+            this.操作ToolStripMenuItem.Size = new System.Drawing.Size(62, 32);
             this.操作ToolStripMenuItem.Text = "操作";
             // 
             // 復原UndoToolStripMenuItem
@@ -236,9 +237,10 @@
             // 強度轉換ToolStripMenuItem
             // 
             this.強度轉換ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.亮度對比度ToolStripMenuItem});
+            this.亮度對比度ToolStripMenuItem,
+            this.伽瑪ToolStripMenuItem});
             this.強度轉換ToolStripMenuItem.Name = "強度轉換ToolStripMenuItem";
-            this.強度轉換ToolStripMenuItem.Size = new System.Drawing.Size(200, 34);
+            this.強度轉換ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.強度轉換ToolStripMenuItem.Text = "強度轉換";
             // 
             // 亮度對比度ToolStripMenuItem
@@ -295,7 +297,7 @@
             this.toolStripButton1,
             this.toolStripButton2,
             this.toolStripButton3});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 31);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 32);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 1, 0);
             this.toolStrip1.Size = new System.Drawing.Size(1066, 41);
@@ -332,22 +334,12 @@
             this.toolStripButton3.Text = "toolStripButton3";
             this.toolStripButton3.Click += new System.EventHandler(this.重做RedoToolStripMenuItem_Click);
             // 
-            // chart1
+            // 伽瑪ToolStripMenuItem
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chart1.Legends.Add(legend3);
-            this.chart1.Location = new System.Drawing.Point(839, 467);
-            this.chart1.Name = "chart1";
-            series3.ChartArea = "ChartArea1";
-            series3.Enabled = false;
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chart1.Series.Add(series3);
-            this.chart1.Size = new System.Drawing.Size(227, 147);
-            this.chart1.TabIndex = 3;
-            this.chart1.Text = "chart1";
+            this.伽瑪ToolStripMenuItem.Name = "伽瑪ToolStripMenuItem";
+            this.伽瑪ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.伽瑪ToolStripMenuItem.Text = "伽瑪";
+            this.伽瑪ToolStripMenuItem.Click += new System.EventHandler(this.伽瑪ToolStripMenuItem_Click);
             // 
             // Paint
             // 
@@ -356,7 +348,6 @@
             this.ClientSize = new System.Drawing.Size(1066, 614);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.chart1);
             this.Controls.Add(this.pictureBox1);
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -369,7 +360,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -408,8 +398,8 @@
         private System.Windows.Forms.ToolStripMenuItem 空間濾波ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 轉換成灰階ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 亮度對比度ToolStripMenuItem;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.ToolStripMenuItem 高斯模糊ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 伽瑪ToolStripMenuItem;
     }
 }
 
