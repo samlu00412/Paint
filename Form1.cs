@@ -17,6 +17,8 @@ using Emgu.CV.Structure;
 using Emgu.CV.UI;
 using EmguCVMat = Emgu.CV.Mat;
 using OpenCvSharpMat = OpenCvSharp.Mat;
+using Paint;
+
 namespace Paint {
     
     public partial class Paint : Form 
@@ -433,6 +435,14 @@ namespace Paint {
             }
             return newImage;
         }
+
+        private void 低通濾波ToolStripMenuItem_Click(object sender, EventArgs e) {
+            Low_pass LP_filter = new Low_pass(this);
+            if (LP_filter.ShowDialog() == DialogResult.OK) 
+                UpdateCanvas();
+            LP_filter.Dispose();
+        }
+
         private void Pallate_Click(object sender, EventArgs e) {
             ColorDialog colorDialog = new ColorDialog();
             if (colorDialog.ShowDialog() == DialogResult.OK) {
