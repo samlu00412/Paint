@@ -466,6 +466,46 @@ namespace Paint {
                 currentColor = new Scalar(selectedColor.B, selectedColor.G, selectedColor.R); // BGR 格式
             }
         }
+
+        private void log變換ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            log trackbarForm = new log(this);
+            if (trackbarForm.ShowDialog() == DialogResult.OK)
+            {
+                double c = 255.0 / Math.Log(1 + trackbarForm.trackBar1.Value) ;
+                canvas = Log變換(canvas, c);
+
+            }
+            UpdateCanvas();
+        }
+
+        private OpenCvSharpMat Log變換(OpenCvSharpMat image,double c)
+        {
+            OpenCvSharpMat newImage = new OpenCvSharpMat(image.Size(), image.Type());
+
+            for (int y = 0; y < image.Rows; y++)
+            {
+                for (int x = 0; x < image.Cols; x++)
+                {
+                    Vec3b color = image.At<Vec3b>(y, x);
+                    Vec3b newColor = new Vec3b();
+
+                    for (int cIdx = 0; cIdx < 3; cIdx++)
+                    {
+                        // 進行對數變換並標準化
+                        double pixel = color[cIdx];
+                        double logPixel = c * Math.Log(1 + pixel);
+
+                        // 裁剪到0-255範圍
+                        newColor[cIdx] = (byte)(logPixel > 255 ? 255 : (logPixel < 0 ? 0 : logPixel));
+                    }
+
+                    newImage.Set(y, x, newColor);
+                }
+            }
+
+            return newImage;
+        }
     }
     
 }

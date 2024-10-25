@@ -80,3 +80,4 @@ C:\Users\USER\source\repos\Paint\bin\Debug\System.Text.Encodings.Web.xml
 C:\Users\USER\source\repos\Paint\bin\Debug\System.Text.Json.xml
 C:\Users\USER\source\repos\Paint\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\USER\source\repos\Paint\obj\Debug\Paint.Gamma.resources
+C:\Users\USER\source\repos\Paint\obj\Debug\Paint.log.resources
