@@ -272,9 +272,8 @@ namespace Paint {
 
         private void 儲存檔案ToolStripMenuItem_Click(object sender, EventArgs e) {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "JPEG Image|*.jpg|PNG Image|*.png";
+            saveFileDialog.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif|Png Image|*.png";
             saveFileDialog.Title = "Save an Image File";
-            saveFileDialog.FileName = "Untitled"; 
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK) {
                 string filePath = saveFileDialog.FileName;//System.IO.Path.GetExtension(saveFileDialog.FileName).ToLower();
@@ -284,6 +283,8 @@ namespace Paint {
                 saveFileDialog.Dispose();
         }
         private void 開啟ToolStripMenuItem_Click(object sender, EventArgs e) {
+            openFileDialog.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif|Png Image|*.png";
+            openFileDialog.Title = "打開圖片";
             if (openFileDialog.ShowDialog() == DialogResult.OK) {
                 canvas = Cv2.ImRead(openFileDialog.FileName);
                 pictureBox1.Load(openFileDialog.FileName);
