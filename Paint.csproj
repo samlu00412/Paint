@@ -118,6 +118,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="反log.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="反log.Designer.cs">
+      <DependentUpon>反log.cs</DependentUpon>
+    </Compile>
     <Compile Include="log.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -154,6 +160,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="反log.resx">
+      <DependentUpon>反log.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gamma.resx">
       <DependentUpon>Gamma.cs</DependentUpon>

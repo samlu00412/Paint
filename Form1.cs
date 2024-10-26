@@ -479,6 +479,18 @@ namespace Paint {
             UpdateCanvas();
         }
 
+        private void 反logToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            反log trackbarForm = new 反log(this);
+            if (trackbarForm.ShowDialog() == DialogResult.OK)
+            {
+                double c = trackbarForm.trackBar1.Value/10.0;
+                canvas = 反Log變換(canvas, c);
+
+            }
+            UpdateCanvas();
+        }
+
         private OpenCvSharpMat Log變換(OpenCvSharpMat image,double c)
         {
             OpenCvSharpMat newImage = new OpenCvSharpMat(image.Size(), image.Type());
@@ -506,6 +518,37 @@ namespace Paint {
 
             return newImage;
         }
+        private OpenCvSharpMat 反Log變換(OpenCvSharpMat image, double c)
+        {
+            OpenCvSharpMat newImage = new OpenCvSharpMat(image.Size(), image.Type());
+
+            // 進行反對數變換
+            for (int y = 0; y < image.Rows; y++)
+            {
+                for (int x = 0; x < image.Cols; x++)
+                {
+                    Vec3b color = image.At<Vec3b>(y, x);
+                    Vec3b newColor = new Vec3b();
+
+                    for (int cIdx = 0; cIdx < 3; cIdx++)
+                    {
+                        // 取得輸入像素值
+                        double pixel = color[cIdx];
+
+                        // 進行反對數變換
+                        double invLogPixel = Math.Exp(pixel / c) - 1;
+
+                        // 裁剪到0-255範圍
+                        newColor[cIdx] = (byte)(invLogPixel > 255 ? 255 : (invLogPixel < 0 ? 0 : invLogPixel));
+                    }
+
+                    newImage.Set(y, x, newColor);
+                }
+            }
+
+            return newImage;
+        }
+
     }
-    
+
 }
