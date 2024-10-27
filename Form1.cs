@@ -350,7 +350,7 @@ namespace Paint {
         }
         private void 亮度對比度ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            lightness trackbarForm = new lightness();
+            lightness trackbarForm = new lightness(this);
             if (trackbarForm.ShowDialog() == DialogResult.OK)
             {
                 double alpha = trackbarForm.TrackBarValue1; // 對比度
