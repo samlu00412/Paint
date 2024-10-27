@@ -25,6 +25,7 @@ namespace Paint {
             tempCanvas = mainform.canvas.Clone();
             tempCanvas = tempCanvas.Resize(new OpenCvSharp.Size(tempCanvas.Width / previewScale, tempCanvas.Height / previewScale));
             Kernal_bar.Scroll += Kernal_change_scroll;
+            Preview_box.BringToFront();
             UpdatePictureBox(tempCanvas);
         }
 

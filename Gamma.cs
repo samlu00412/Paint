@@ -60,8 +60,7 @@ namespace Paint
         private void UpdatePictureBox(Mat image)
         {
             // 更新 PictureBox，避免資源洩漏
-            if (pictureBox1.Image != null)
-            {
+            if (pictureBox1.Image != null){
                 pictureBox1.Image.Dispose();
             }
 

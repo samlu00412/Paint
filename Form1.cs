@@ -443,6 +443,13 @@ namespace Paint {
             LP_filter.Dispose();
         }
 
+        private void 高通濾波ToolStripMenuItem_Click(object sender, EventArgs e) {
+            High_pass HP_filter = new High_pass(this);
+            if(HP_filter.ShowDialog() == DialogResult.OK)
+                UpdateCanvas();
+            HP_filter.Dispose();
+        }
+
         private void Pallate_Click(object sender, EventArgs e) {
             ColorDialog colorDialog = new ColorDialog();
             if (colorDialog.ShowDialog() == DialogResult.OK) {

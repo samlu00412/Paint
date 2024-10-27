@@ -97,3 +97,4 @@ C:\Users\samlu\source\repos\Paint\bin\Debug\System.Text.Json.xml
 C:\Users\samlu\source\repos\Paint\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\samlu\source\repos\Paint\obj\Debug\Paint.Gamma.resources
 C:\Users\samlu\source\repos\Paint\obj\Debug\Paint.Low_pass.resources
+C:\Users\samlu\source\repos\Paint\obj\Debug\Paint.High_pass.resources

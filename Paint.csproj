@@ -124,6 +124,12 @@
     <Compile Include="Gamma.Designer.cs">
       <DependentUpon>Gamma.cs</DependentUpon>
     </Compile>
+    <Compile Include="High_pass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="High_pass.Designer.cs">
+      <DependentUpon>High_pass.cs</DependentUpon>
+    </Compile>
     <Compile Include="Low_pass.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,6 +166,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Gauss.resx">
       <DependentUpon>Gauss.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="High_pass.resx">
+      <DependentUpon>High_pass.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="lightness.resx">
       <DependentUpon>lightness.cs</DependentUpon>

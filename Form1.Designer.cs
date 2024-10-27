@@ -54,6 +54,8 @@
             this.伽瑪ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.空間濾波ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.高斯模糊ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.低通濾波ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.高通濾波ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.轉換成灰階ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
@@ -62,8 +64,6 @@
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.低通濾波ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.高通濾波ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -248,14 +248,14 @@
             // 亮度對比度ToolStripMenuItem
             // 
             this.亮度對比度ToolStripMenuItem.Name = "亮度對比度ToolStripMenuItem";
-            this.亮度對比度ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.亮度對比度ToolStripMenuItem.Size = new System.Drawing.Size(275, 44);
             this.亮度對比度ToolStripMenuItem.Text = "亮度/對比度";
             this.亮度對比度ToolStripMenuItem.Click += new System.EventHandler(this.亮度對比度ToolStripMenuItem_Click);
             // 
             // 伽瑪ToolStripMenuItem
             // 
             this.伽瑪ToolStripMenuItem.Name = "伽瑪ToolStripMenuItem";
-            this.伽瑪ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.伽瑪ToolStripMenuItem.Size = new System.Drawing.Size(275, 44);
             this.伽瑪ToolStripMenuItem.Text = "伽瑪";
             this.伽瑪ToolStripMenuItem.Click += new System.EventHandler(this.伽瑪ToolStripMenuItem_Click);
             // 
@@ -275,6 +275,20 @@
             this.高斯模糊ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             this.高斯模糊ToolStripMenuItem.Text = "高斯模糊";
             this.高斯模糊ToolStripMenuItem.Click += new System.EventHandler(this.高斯模糊ToolStripMenuItem_Click);
+            // 
+            // 低通濾波ToolStripMenuItem
+            // 
+            this.低通濾波ToolStripMenuItem.Name = "低通濾波ToolStripMenuItem";
+            this.低通濾波ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.低通濾波ToolStripMenuItem.Text = "低通濾波";
+            this.低通濾波ToolStripMenuItem.Click += new System.EventHandler(this.低通濾波ToolStripMenuItem_Click);
+            // 
+            // 高通濾波ToolStripMenuItem
+            // 
+            this.高通濾波ToolStripMenuItem.Name = "高通濾波ToolStripMenuItem";
+            this.高通濾波ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.高通濾波ToolStripMenuItem.Text = "高通濾波";
+            this.高通濾波ToolStripMenuItem.Click += new System.EventHandler(this.高通濾波ToolStripMenuItem_Click);
             // 
             // 轉換成灰階ToolStripMenuItem
             // 
@@ -343,19 +357,6 @@
             this.toolStripButton3.Size = new System.Drawing.Size(46, 36);
             this.toolStripButton3.Text = "toolStripButton3";
             this.toolStripButton3.Click += new System.EventHandler(this.重做RedoToolStripMenuItem_Click);
-            // 
-            // 低通濾波ToolStripMenuItem
-            // 
-            this.低通濾波ToolStripMenuItem.Name = "低通濾波ToolStripMenuItem";
-            this.低通濾波ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
-            this.低通濾波ToolStripMenuItem.Text = "低通濾波";
-            this.低通濾波ToolStripMenuItem.Click += new System.EventHandler(this.低通濾波ToolStripMenuItem_Click);
-            // 
-            // 高通濾波ToolStripMenuItem
-            // 
-            this.高通濾波ToolStripMenuItem.Name = "高通濾波ToolStripMenuItem";
-            this.高通濾波ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
-            this.高通濾波ToolStripMenuItem.Text = "高通濾波";
             // 
             // Paint
             // 
