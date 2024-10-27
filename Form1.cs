@@ -461,8 +461,6 @@ namespace Paint {
 
             return newImage;
         }
-
-<<<<<<< HEAD
         private void 低通濾波ToolStripMenuItem_Click(object sender, EventArgs e) {
             Low_pass LP_filter = new Low_pass(this);
             if (LP_filter.ShowDialog() == DialogResult.OK) 
@@ -476,9 +474,6 @@ namespace Paint {
                 UpdateCanvas();
             HP_filter.Dispose();
         }
-
-=======
->>>>>>> develop
         private void Pallate_Click(object sender, EventArgs e) {
             ColorDialog colorDialog = new ColorDialog();
             if (colorDialog.ShowDialog() == DialogResult.OK) {
