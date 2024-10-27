@@ -11,60 +11,49 @@ using Pen;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Runtime.ConstrainedExecution;
 using OpenCvSharp.Dnn;
+using Emgu.CV;
+using Emgu.CV.CvEnum;
+using Emgu.CV.Structure;
+using Emgu.CV.UI;
+using EmguCVMat = Emgu.CV.Mat;
+using OpenCvSharpMat = OpenCvSharp.Mat;
+using Paint;
+
 namespace Paint {
     
-    public partial class Paint : Form {
-        private Mat canvas; 
-        private Mat initCanvas;
-        private Mat grayCanvas = new Mat();
-        private Mat tempCanvas = new Mat(); 
+    public partial class Paint : Form 
+    {
+        public OpenCvSharpMat canvas;
+        public OpenCvSharpMat tempCanvas = new OpenCvSharpMat(); 
+        private OpenCvSharpMat chart = new OpenCvSharpMat();
         private OpenCvSharp.Point startpoint;
         private OpenCvSharp.Point prevPoint;
         private OpenCvSharp.Point currentPoint; 
-        private OpenCvSharp.Point vertex,vertex2;
-        private OpenCvSharp.Point prevMouse;
+
         private Bitmap canvasBitmap;
-        private bool isDrawing = false,isDragging = false,isGrey = false; 
+        private bool isDrawing = false,isGray = false; 
         private string drawMode = "Free"; 
         private Rectangle showAspect;
         private Scalar currentColor = new Scalar(0, 0, 0);
         private int penThickness = 2;
+
         private Stack<PenMotion> action = new Stack<PenMotion>();
         private Stack<PenMotion> reaction = new Stack<PenMotion>();
+
         private Size init_kernal = new Size(1, 1);
         private double init_sigma = 1.0;
-        public Paint() {
+        public Paint() 
+        {
             InitializeComponent();
 
             this.KeyPreview = true; // 允許表單偵測按鍵
             this.KeyDown += new KeyEventHandler(Form1_KeyDown);
             this.MouseWheel += new MouseEventHandler(Form1_MouseWheel);
-            chart1.Series.Clear();
-            chart1.ChartAreas.Clear();
-            ChartArea chartArea = new ChartArea();
-            chart1.ChartAreas.Add(chartArea);
-            Series series = new Series
-            {
-                Name = "亮度",
-                Color = System.Drawing.Color.Blue,
-                ChartType = SeriesChartType.Column // 使用柱狀圖
-            };
-            series.Points.Add(50);
-            chart1.Series.Add(series);
-
-            // 設置 Y 軸範圍
-            chart1.ChartAreas[0].AxisY.Minimum = 0;
-            chart1.ChartAreas[0].AxisY.Maximum = 255;
-            
             PenMotion penMotion = new PenMotion(this);
         }
 
-        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e) {
-
-        }
-
         private void Form1_Load(object sender, EventArgs e) {
-            
+
         }
         private void Form1_MouseWheel(object sender, MouseEventArgs e) {
             if (Control.ModifierKeys == Keys.Control) {
@@ -79,15 +68,9 @@ namespace Paint {
                 復原UndoToolStripMenuItem_Click(sender,e);
             else if(e.Control && e.KeyCode == Keys.Y) 
                 重做RedoToolStripMenuItem_Click(sender, e);
-            else if(e.Control && e.Shift && e.KeyCode == Keys.S) 
+            else if(e.Control && e.KeyCode == Keys.S) 
                 儲存檔案ToolStripMenuItem_Click(sender,e);
         }
-        //影像長寬讀取
-        private void SizeImage() {
-            pictureBox1.Width = pictureBox1.Image.Width;
-            pictureBox1.Height = pictureBox1.Image.Height;
-        }
-
         private void Enlarge_click(object sender, EventArgs e) {
             pictureBox1.Width = Convert.ToInt32(pictureBox1.Width*1.1);
             pictureBox1.Height = Convert.ToInt32(pictureBox1.Height * 1.1);
@@ -105,15 +88,12 @@ namespace Paint {
         }
         private void New_canva_click(object sender, EventArgs e) {
             int width = 1280, height = 720;
-            canvas = new Mat(new Size(width, height), MatType.CV_8UC3, Scalar.All(255));
-            initCanvas = canvas.Clone();
-            canvasBitmap = BitmapConverter.ToBitmap(canvas);
-            pictureBox1.Image = canvasBitmap;
-            pictureBox1.Width = canvasBitmap.Width;
-            pictureBox1.Height = canvasBitmap.Height;
+            canvas = new OpenCvSharpMat(new Size(width, height), MatType.CV_8UC3, Scalar.All(255));
+            BitmapConverter.ToBitmap(canvas);
+            pictureBox1.Image = BitmapConverter.ToBitmap(canvas);
+            pictureBox1.Width = width;
+            pictureBox1.Height = height;
         }
-
-        //detecting mouse click
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e) {
             if (e.Button == MouseButtons.Left) {
                 isDrawing = true;
@@ -121,23 +101,14 @@ namespace Paint {
                 prevPoint = ConvertToImageCoordinates(e.Location);
             }
             else if(e.Button == MouseButtons.Right) {
-                isDragging = true;
-                dragStartPoint.X = System.Windows.Forms.Cursor.Position.X;
-                dragStartPoint.Y = System.Windows.Forms.Cursor.Position.Y;
+                isDrawing = true;
+                startpoint.X = System.Windows.Forms.Cursor.Position.X;
+                startpoint.Y = System.Windows.Forms.Cursor.Position.Y;
             }
         }
         //detecting mouse moving
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e) {
-
-            if (canvas != null)
-            {
-                OpenCvSharp.Point cur = ConvertToImageCoordinates(e.Location);
-                double value = canvas.Get<byte>(cur.Y, cur.X);
-                chart1.Series[0].Points[0].SetValueY(value);
-                chart1.Refresh();
-
-            }
-            if (isDrawing) {
+            if (isDrawing && e.Button == MouseButtons.Left) {
                 if (drawMode == "Free") { //除了自由繪製其他皆要預覽
                     currentPoint = ConvertToImageCoordinates(e.Location);
                     DrawFinalShape();
@@ -152,38 +123,32 @@ namespace Paint {
                     //tempCanvas.Dispose();
                 }
             }
-            else if (isDragging) {
+            else if (isDrawing && e.Button == MouseButtons.Right) {
                 pictureBox1.Location = new System.Drawing.Point
                 (
-                    pictureBox1.Location.X + System.Windows.Forms.Cursor.Position.X - dragStartPoint.X,
-                    pictureBox1.Location.Y + System.Windows.Forms.Cursor.Position.Y - dragStartPoint.Y
+                    pictureBox1.Location.X + System.Windows.Forms.Cursor.Position.X - startpoint.X,
+                    pictureBox1.Location.Y + System.Windows.Forms.Cursor.Position.Y - startpoint.Y
                 );
-                dragStartPoint.X = System.Windows.Forms.Cursor.Position.X;
-                dragStartPoint.Y = System.Windows.Forms.Cursor.Position.Y;
+                startpoint.X = System.Windows.Forms.Cursor.Position.X;
+                startpoint.Y = System.Windows.Forms.Cursor.Position.Y;
             }
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e) {
-            if (isDrawing) {
+            if (isDrawing && e.Button == MouseButtons.Left) {
                 isDrawing = false;
                 currentPoint = ConvertToImageCoordinates(e.Location);
                 DrawFinalShape(); // 繪製圖形
                 UpdateCanvas(); // 更新顯示
-                if(tempCanvas != null)
-                {
-                    //tempCanvas.Dispose();
-                }
-
             }
-            else if (isDragging) 
-                isDragging = false;
+            else if (isDrawing && e.Button == MouseButtons.Right )
+                isDrawing = false;
         }
         private void ShowTempCanvas() {
-            if (pictureBox1.Image != null) 
+            if (pictureBox1.Image != null)
                 pictureBox1.Image.Dispose();
 
-            Bitmap bitmap = BitmapConverter.ToBitmap(tempCanvas);
-            pictureBox1.Image = bitmap;
+            pictureBox1.Image = BitmapConverter.ToBitmap(tempCanvas);
         }
         //preview
         private void DrawPreviewShape() {
@@ -201,6 +166,8 @@ namespace Paint {
                 Cv2.Ellipse(tempCanvas, startpoint, size, 0, 0, 360, currentColor, penThickness);
             }
             else if (drawMode == "Triangle") {
+                OpenCvSharp.Point vertex;
+                OpenCvSharp.Point vertex2;
                 vertex.X = startpoint.X + (currentPoint.X - startpoint.X)/2;//等腰三角形
                 vertex.Y = currentPoint.Y;
                 vertex2.X = currentPoint.X;
@@ -216,25 +183,23 @@ namespace Paint {
                 case "Line":
                     Cv2.Line(canvas, prevPoint, currentPoint, currentColor, penThickness);
                     tempAct = new PenMotion("Line", prevPoint, currentPoint, currentColor, penThickness, 0,new Size(0,0),null);
-                    action.Push(tempAct);
                     break;
                 case "Rectangle":
                     Cv2.Rectangle(canvas, prevPoint, currentPoint, currentColor, penThickness); // 最終繪製黑色矩形
                     tempAct = new PenMotion("Rectangle", prevPoint, currentPoint, currentColor, penThickness, 0, new Size(0, 0), null);
-                    action.Push(tempAct);
                     break;
                 case "Circle":
                     Cv2.Circle(canvas, startpoint, CalculateDistance(startpoint, currentPoint), currentColor, penThickness);
                     tempAct = new PenMotion("Circle", startpoint, currentPoint, currentColor, penThickness, CalculateDistance(startpoint, currentPoint), new Size(0, 0), null);
-                    action.Push(tempAct);
                     break;
                 case "Ellipse":
                     Size size = new Size(Math.Abs(currentPoint.X - startpoint.X), Math.Abs(currentPoint.Y - startpoint.Y));
                     Cv2.Ellipse(canvas, startpoint, size, 0, 0, 360, currentColor, penThickness);
                     tempAct = new PenMotion("Ellipse", startpoint, currentPoint, currentColor, penThickness, CalculateDistance(startpoint, currentPoint), size, null);
-                    action.Push(tempAct);
                     break;
                 case "Triangle":
+                    OpenCvSharp.Point vertex;
+                    OpenCvSharp.Point vertex2;
                     vertex.X = startpoint.X + (currentPoint.X - startpoint.X) / 2;//等腰三角形
                     vertex.Y = currentPoint.Y;
                     vertex2.X = currentPoint.X;
@@ -242,29 +207,23 @@ namespace Paint {
                     OpenCvSharp.Point[] TrianglePoint = { startpoint, vertex2, vertex };
                     Cv2.Polylines(canvas, new[] { TrianglePoint }, true, currentColor, penThickness);
                     tempAct = new PenMotion("Triangle", startpoint, currentPoint, currentColor, penThickness,0, new Size(0,0), TrianglePoint);
-                    action.Push(tempAct);
                     break;
                 default:
                     Cv2.Line(canvas, prevPoint, currentPoint, currentColor, penThickness);
                     tempAct = new PenMotion("Free", prevPoint, currentPoint, currentColor, penThickness, 0, new Size(0, 0), null);
-                    action.Push(tempAct);
                     break; 
             }
-            if (reaction.Count != 0) {
-                reaction.Clear();
-            }
+            action.Push(tempAct);
+            //清空下一步
+            reaction.Clear();
         }
         private void UpdateCanvas() {
             if (pictureBox1.Image != null) {
                 pictureBox1.Image.Dispose();
             }
-            Bitmap bitmap = BitmapConverter.ToBitmap(canvas);
-            pictureBox1.Image = bitmap;
-            pictureBox1.Refresh();
+            pictureBox1.Image = BitmapConverter.ToBitmap(canvas);
         }
         private Rectangle GetImageRectangleInPictureBox() {
-            if (pictureBox1.Image == null)
-                return new Rectangle();
             // 計算圖像縮放後在 PictureBox 中的實際顯示範圍
             double imageAspect = (double)canvas.Width / canvas.Height;
             double boxAspect = (double)pictureBox1.Width / pictureBox1.Height;
@@ -301,23 +260,16 @@ namespace Paint {
 
             return new OpenCvSharp.Point(x, y);
         }
-        private void 自由ToolStripMenuItem_Click(object sender, EventArgs e) {
-            drawMode = "Free";
-        }
-        private void 直線ToolStripMenuItem_Click(object sender, EventArgs e) {
-            drawMode = "Line";
-        }
-        private void 橢圓ToolStripMenuItem_Click(object sender, EventArgs e) {
-            drawMode = "Ellipse";
-        }
-        private void 圓ToolStripMenuItem_Click(object sender, EventArgs e) {
-            drawMode = "Circle";
-        }
-        private void 矩形ToolStripMenuItem_Click(object sender, EventArgs e) {
-            drawMode = "Rectangle";
-        }
-        private void 三角形ToolStripMenuItem_Click(object sender, EventArgs e) {
-            drawMode = "Triangle";
+
+        private readonly Dictionary<String, String> TypeToMode = new Dictionary<String, String>
+        { 
+            {"自由","Free"},{"直線","Line"},{"橢圓","Ellipse" },{"圓","Circle"},
+            {"矩形","Rectangle"},{"三角形","Triangle"}
+        };
+        private void ToolStripMenuItem_Click(object sender, EventArgs e) {
+            ToolStripMenuItem temp = (ToolStripMenuItem)sender;
+            Console.WriteLine(temp.Text);
+            drawMode = TypeToMode[temp.Text];
         }
 
         private void 儲存檔案ToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -336,10 +288,7 @@ namespace Paint {
         private void 開啟ToolStripMenuItem_Click(object sender, EventArgs e) {
             if (openFileDialog.ShowDialog() == DialogResult.OK) {
                 canvas = Cv2.ImRead(openFileDialog.FileName);
-                initCanvas = canvas.Clone();
-                Cv2.CvtColor(initCanvas, grayCanvas, ColorConversionCodes.BGR2GRAY);
                 pictureBox1.Load(openFileDialog.FileName);
-                SizeImage();
             }
         }
         private void 結束ToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -361,10 +310,6 @@ namespace Paint {
             }
         }
         private void Redraw() {
-            if (isGrey)
-                grayCanvas.CopyTo(canvas);
-            else
-                initCanvas.CopyTo(canvas);
             foreach (PenMotion act in action) {
                 switch (act.Type) {
                     case "Line":
@@ -389,13 +334,11 @@ namespace Paint {
             }
         }
 
-        private void toolStripButton2_Click(object sender, EventArgs e) {
-            復原UndoToolStripMenuItem_Click(sender, e);
-        }
 
         private void 轉換成灰階ToolStripMenuItem_Click(object sender, EventArgs e) {
-            Cv2.CvtColor(canvas,canvas,ColorConversionCodes.BGR2GRAY);
-            isGrey = true;
+            if(canvas.Channels()!=1)
+                Cv2.CvtColor(canvas,canvas,ColorConversionCodes.BGR2GRAY);
+            isGray = true;
             UpdateCanvas();
         }
 
@@ -405,28 +348,108 @@ namespace Paint {
                 Cv2.GaussianBlur(canvas, canvas, blurform.Kernal, blurform.Sigma);
                 UpdateCanvas();
             }
-            blurform.Dispose();
         }
+        private void 亮度對比度ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lightness trackbarForm = new lightness();
+            if (trackbarForm.ShowDialog() == DialogResult.OK)
+            {
+                double alpha = trackbarForm.TrackBarValue1; // 對比度，可以為負
+                int beta = (int)trackbarForm.TrackBarValue2;     // 亮度
 
-        private void 亮度對比度ToolStripMenuItem_Click(object sender, EventArgs e) {
-            lightness Trackbarform = new lightness();
-            //double alpha = 1, beta = 0;
-            //Scalar meanScalar = Cv2.Mean(canvas);
-            //double brightness = meanScalar.Val0;//灰度平均=亮度
-            
-            //Cv2.MeanStdDev(canvas, out meanScalar, out Scalar stddevScalar);
-            //double contrast = stddevScalar.Val0;//標準差視為對比度
+                // 確保 beta 在合理範圍內
+                //beta = Math.Max(0, Math.Min(beta, 100));
 
-            if (Trackbarform.ShowDialog() == DialogResult.OK) {
-                canvas.ConvertTo(canvas, MatType.CV_8UC1, Trackbarform.TrackBarValue1, Trackbarform.TrackBarValue2);
+                // 手動調整對比度和亮度
+                canvas = AdjustContrastAndBrightness(canvas, alpha, beta);
+                Console.WriteLine(alpha.ToString()+" "+beta);
             }
-            //canvas.ConvertTo(canvas, MatType.CV_8UC1, alpha, beta);
             UpdateCanvas();
         }
 
-        private void toolStripButton3_Click(object sender, EventArgs e) {
-            重做RedoToolStripMenuItem_Click(sender, e);
+        private OpenCvSharpMat AdjustContrastAndBrightness(OpenCvSharpMat image, double alpha, int beta)
+        {
+            OpenCvSharpMat newImage = new OpenCvSharpMat(image.Size(), image.Type());
+            Double min=0;
+            for (int y = 0; y < image.Rows; y++)
+            {
+                for (int x = 0; x < image.Cols; x++)
+                {
+                    Vec3b color = image.At<Vec3b>(y, x);
+                    for (int c = 0; c < 3; c++)
+                    {
+                        min = Math.Min(min, color[c] * alpha + beta);
+                    }
+                }
+            }
+            min = Math.Abs(min);
+            Console.WriteLine(min);
+            for (int y = 0; y < image.Rows; y++)
+            {
+                for (int x = 0; x < image.Cols; x++)
+                {
+                    Vec3b color = image.At<Vec3b>(y, x);
+                    for (int c = 0; c < 3; c++)
+                    {
+                        newImage.At<Vec3b>(y, x)[c] = Clip(color[c] * alpha + beta + min);
+                    }
+                }
+            }
+            return newImage;
         }
+
+        private byte Clip(double value)
+        {
+            return (byte)(value < 0 ? 0 : (value > 255 ? 255 : value));
+        }
+
+        private void 伽瑪ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Gamma trackbarForm = new Gamma(this);
+            if (trackbarForm.ShowDialog() == DialogResult.OK)
+            {
+                double gamma = trackbarForm.trackBar1.Value/100.0; // 對比度，可以為負
+
+                canvas = 伽瑪轉換(canvas, gamma);
+
+            }
+            UpdateCanvas();
+        }
+        private OpenCvSharpMat 伽瑪轉換(OpenCvSharpMat image, double gamma)
+        {
+
+            OpenCvSharpMat newImage = new OpenCvSharpMat(image.Size(), image.Type());
+            for (int y = 0; y < image.Rows; y++)
+            {
+                for (int x = 0; x < image.Cols; x++)
+                {
+                    Vec3b color = image.At<Vec3b>(y, x);
+                    for (int c = 0; c < 3; c++)
+                    {
+                        double pixel = color[c] / 255.0;
+                        if(pixel >1.0)
+                            Console.WriteLine("owo");
+                        newImage.At<Vec3b>(y, x)[c] = Clip(Math.Pow(pixel,gamma) * 255.0);
+                    }
+                }
+            }
+            return newImage;
+        }
+
+        private void 低通濾波ToolStripMenuItem_Click(object sender, EventArgs e) {
+            Low_pass LP_filter = new Low_pass(this);
+            if (LP_filter.ShowDialog() == DialogResult.OK) 
+                UpdateCanvas();
+            LP_filter.Dispose();
+        }
+
+        private void 高通濾波ToolStripMenuItem_Click(object sender, EventArgs e) {
+            High_pass HP_filter = new High_pass(this);
+            if(HP_filter.ShowDialog() == DialogResult.OK)
+                UpdateCanvas();
+            HP_filter.Dispose();
+        }
+
         private void Pallate_Click(object sender, EventArgs e) {
             ColorDialog colorDialog = new ColorDialog();
             if (colorDialog.ShowDialog() == DialogResult.OK) {
@@ -434,8 +457,6 @@ namespace Paint {
                 currentColor = new Scalar(selectedColor.B, selectedColor.G, selectedColor.R); // BGR 格式
             }
         }
-        OpenCvSharp.Point dragStartPoint;
-
     }
     
 }

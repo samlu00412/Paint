@@ -1,5 +1,7 @@
-﻿namespace Paint {
-    partial class Paint {
+﻿namespace Paint
+{
+    partial class Paint
+    {
         /// <summary>
         /// 設計工具所需的變數。
         /// </summary>
@@ -9,8 +11,10 @@
         /// 清除任何使用中的資源。
         /// </summary>
         /// <param name="disposing">如果應該處置受控資源則為 true，否則為 false。</param>
-        protected override void Dispose(bool disposing) {
-            if (disposing && (components != null)) {
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -22,11 +26,9 @@
         /// 此為設計工具支援所需的方法 - 請勿使用程式碼編輯器修改
         /// 這個方法的內容。
         /// </summary>
-        private void InitializeComponent() {
+        private void InitializeComponent()
+        {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Paint));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.檔案ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.開啟ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,7 +51,11 @@
             this.調整ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.強度轉換ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.亮度對比度ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.伽瑪ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.空間濾波ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.高斯模糊ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.低通濾波ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.高通濾波ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.轉換成灰階ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
@@ -58,12 +64,9 @@
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.高斯模糊ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -91,7 +94,7 @@
             this.儲存檔案ToolStripMenuItem,
             this.結束ToolStripMenuItem});
             this.檔案ToolStripMenuItem.Name = "檔案ToolStripMenuItem";
-            this.檔案ToolStripMenuItem.Size = new System.Drawing.Size(81, 34);
+            this.檔案ToolStripMenuItem.Size = new System.Drawing.Size(81, 38);
             this.檔案ToolStripMenuItem.Text = "檔案";
             // 
             // 開啟ToolStripMenuItem
@@ -128,7 +131,7 @@
             this.放大ToolStripMenuItem,
             this.縮小ToolStripMenuItem});
             this.檢視ToolStripMenuItem.Name = "檢視ToolStripMenuItem";
-            this.檢視ToolStripMenuItem.Size = new System.Drawing.Size(81, 34);
+            this.檢視ToolStripMenuItem.Size = new System.Drawing.Size(81, 38);
             this.檢視ToolStripMenuItem.Text = "檢視";
             // 
             // 放大ToolStripMenuItem
@@ -155,7 +158,7 @@
             this.橢圓ToolStripMenuItem,
             this.三角形ToolStripMenuItem});
             this.畫筆ToolStripMenuItem.Name = "畫筆ToolStripMenuItem";
-            this.畫筆ToolStripMenuItem.Size = new System.Drawing.Size(81, 34);
+            this.畫筆ToolStripMenuItem.Size = new System.Drawing.Size(81, 38);
             this.畫筆ToolStripMenuItem.Text = "畫筆";
             // 
             // 自由ToolStripMenuItem
@@ -163,42 +166,42 @@
             this.自由ToolStripMenuItem.Name = "自由ToolStripMenuItem";
             this.自由ToolStripMenuItem.Size = new System.Drawing.Size(217, 44);
             this.自由ToolStripMenuItem.Text = "自由";
-            this.自由ToolStripMenuItem.Click += new System.EventHandler(this.自由ToolStripMenuItem_Click);
+            this.自由ToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
             // 
             // 直線ToolStripMenuItem
             // 
             this.直線ToolStripMenuItem.Name = "直線ToolStripMenuItem";
             this.直線ToolStripMenuItem.Size = new System.Drawing.Size(217, 44);
             this.直線ToolStripMenuItem.Text = "直線";
-            this.直線ToolStripMenuItem.Click += new System.EventHandler(this.直線ToolStripMenuItem_Click);
+            this.直線ToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
             // 
             // 矩形ToolStripMenuItem
             // 
             this.矩形ToolStripMenuItem.Name = "矩形ToolStripMenuItem";
             this.矩形ToolStripMenuItem.Size = new System.Drawing.Size(217, 44);
             this.矩形ToolStripMenuItem.Text = "矩形";
-            this.矩形ToolStripMenuItem.Click += new System.EventHandler(this.矩形ToolStripMenuItem_Click);
+            this.矩形ToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
             // 
             // 圓ToolStripMenuItem
             // 
             this.圓ToolStripMenuItem.Name = "圓ToolStripMenuItem";
             this.圓ToolStripMenuItem.Size = new System.Drawing.Size(217, 44);
             this.圓ToolStripMenuItem.Text = "圓";
-            this.圓ToolStripMenuItem.Click += new System.EventHandler(this.圓ToolStripMenuItem_Click);
+            this.圓ToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
             // 
             // 橢圓ToolStripMenuItem
             // 
             this.橢圓ToolStripMenuItem.Name = "橢圓ToolStripMenuItem";
             this.橢圓ToolStripMenuItem.Size = new System.Drawing.Size(217, 44);
             this.橢圓ToolStripMenuItem.Text = "橢圓";
-            this.橢圓ToolStripMenuItem.Click += new System.EventHandler(this.橢圓ToolStripMenuItem_Click);
+            this.橢圓ToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
             // 
             // 三角形ToolStripMenuItem
             // 
             this.三角形ToolStripMenuItem.Name = "三角形ToolStripMenuItem";
             this.三角形ToolStripMenuItem.Size = new System.Drawing.Size(217, 44);
             this.三角形ToolStripMenuItem.Text = "三角形";
-            this.三角形ToolStripMenuItem.Click += new System.EventHandler(this.三角形ToolStripMenuItem_Click);
+            this.三角形ToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
             // 
             // 操作ToolStripMenuItem
             // 
@@ -206,7 +209,7 @@
             this.復原UndoToolStripMenuItem,
             this.重做RedoToolStripMenuItem});
             this.操作ToolStripMenuItem.Name = "操作ToolStripMenuItem";
-            this.操作ToolStripMenuItem.Size = new System.Drawing.Size(81, 34);
+            this.操作ToolStripMenuItem.Size = new System.Drawing.Size(81, 38);
             this.操作ToolStripMenuItem.Text = "操作";
             // 
             // 復原UndoToolStripMenuItem
@@ -236,7 +239,8 @@
             // 強度轉換ToolStripMenuItem
             // 
             this.強度轉換ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.亮度對比度ToolStripMenuItem});
+            this.亮度對比度ToolStripMenuItem,
+            this.伽瑪ToolStripMenuItem});
             this.強度轉換ToolStripMenuItem.Name = "強度轉換ToolStripMenuItem";
             this.強度轉換ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             this.強度轉換ToolStripMenuItem.Text = "強度轉換";
@@ -248,13 +252,43 @@
             this.亮度對比度ToolStripMenuItem.Text = "亮度/對比度";
             this.亮度對比度ToolStripMenuItem.Click += new System.EventHandler(this.亮度對比度ToolStripMenuItem_Click);
             // 
+            // 伽瑪ToolStripMenuItem
+            // 
+            this.伽瑪ToolStripMenuItem.Name = "伽瑪ToolStripMenuItem";
+            this.伽瑪ToolStripMenuItem.Size = new System.Drawing.Size(275, 44);
+            this.伽瑪ToolStripMenuItem.Text = "伽瑪";
+            this.伽瑪ToolStripMenuItem.Click += new System.EventHandler(this.伽瑪ToolStripMenuItem_Click);
+            // 
             // 空間濾波ToolStripMenuItem
             // 
             this.空間濾波ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.高斯模糊ToolStripMenuItem});
+            this.高斯模糊ToolStripMenuItem,
+            this.低通濾波ToolStripMenuItem,
+            this.高通濾波ToolStripMenuItem});
             this.空間濾波ToolStripMenuItem.Name = "空間濾波ToolStripMenuItem";
             this.空間濾波ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             this.空間濾波ToolStripMenuItem.Text = "空間濾波";
+            // 
+            // 高斯模糊ToolStripMenuItem
+            // 
+            this.高斯模糊ToolStripMenuItem.Name = "高斯模糊ToolStripMenuItem";
+            this.高斯模糊ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.高斯模糊ToolStripMenuItem.Text = "高斯模糊";
+            this.高斯模糊ToolStripMenuItem.Click += new System.EventHandler(this.高斯模糊ToolStripMenuItem_Click);
+            // 
+            // 低通濾波ToolStripMenuItem
+            // 
+            this.低通濾波ToolStripMenuItem.Name = "低通濾波ToolStripMenuItem";
+            this.低通濾波ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.低通濾波ToolStripMenuItem.Text = "低通濾波";
+            this.低通濾波ToolStripMenuItem.Click += new System.EventHandler(this.低通濾波ToolStripMenuItem_Click);
+            // 
+            // 高通濾波ToolStripMenuItem
+            // 
+            this.高通濾波ToolStripMenuItem.Name = "高通濾波ToolStripMenuItem";
+            this.高通濾波ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.高通濾波ToolStripMenuItem.Text = "高通濾波";
+            this.高通濾波ToolStripMenuItem.Click += new System.EventHandler(this.高通濾波ToolStripMenuItem_Click);
             // 
             // 轉換成灰階ToolStripMenuItem
             // 
@@ -312,7 +346,7 @@
             this.toolStripButton2.Name = "toolStripButton2";
             this.toolStripButton2.Size = new System.Drawing.Size(46, 36);
             this.toolStripButton2.Text = "toolStripButton2";
-            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
+            this.toolStripButton2.Click += new System.EventHandler(this.復原UndoToolStripMenuItem_Click);
             // 
             // toolStripButton3
             // 
@@ -322,41 +356,16 @@
             this.toolStripButton3.Name = "toolStripButton3";
             this.toolStripButton3.Size = new System.Drawing.Size(46, 36);
             this.toolStripButton3.Text = "toolStripButton3";
-            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
-            // 
-            // chart1
-            // 
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
-            this.chart1.Location = new System.Drawing.Point(1212, 623);
-            this.chart1.Margin = new System.Windows.Forms.Padding(4);
-            this.chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chart1.Series.Add(series2);
-            this.chart1.Size = new System.Drawing.Size(328, 196);
-            this.chart1.TabIndex = 3;
-            this.chart1.Text = "chart1";
-            // 
-            // 高斯模糊ToolStripMenuItem
-            // 
-            this.高斯模糊ToolStripMenuItem.Name = "高斯模糊ToolStripMenuItem";
-            this.高斯模糊ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
-            this.高斯模糊ToolStripMenuItem.Text = "高斯模糊";
-            this.高斯模糊ToolStripMenuItem.Click += new System.EventHandler(this.高斯模糊ToolStripMenuItem_Click);
+            this.toolStripButton3.Click += new System.EventHandler(this.重做RedoToolStripMenuItem_Click);
             // 
             // Paint
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1540, 819);
-            this.Controls.Add(this.chart1);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.pictureBox1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Paint";
             this.Text = "Paint";
@@ -367,7 +376,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -406,8 +414,10 @@
         private System.Windows.Forms.ToolStripMenuItem 空間濾波ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 轉換成灰階ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 亮度對比度ToolStripMenuItem;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.ToolStripMenuItem 高斯模糊ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 伽瑪ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 低通濾波ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 高通濾波ToolStripMenuItem;
     }
 }
 
