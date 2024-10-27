@@ -13,11 +13,13 @@ using OpenCvSharp;
 using OpenCvSharp.Extensions;
 namespace Paint {
     public partial class lightness : Form {
+        Paint mainform;
         private const int scaleFactor = 100; // 放大倍數，這樣可以達到兩位小數的精度
         public double TrackBarValue1 { get; private set; } = 1.0;
         public double TrackBarValue2 { get; private set; } = 0;
-        public lightness() {
+        public lightness(Paint _mainform) {
             InitializeComponent();
+            mainform = _mainform;
             trackBar1.Scroll += new EventHandler(trackBar1_Scroll);
             trackBar2.Scroll += new EventHandler(trackBar2_Scroll);
         }
@@ -27,7 +29,7 @@ namespace Paint {
         }
 
         private void lightness_Load(object sender, EventArgs e) {
-
+            
         }
 
         private void button1_Click(object sender, EventArgs e) {

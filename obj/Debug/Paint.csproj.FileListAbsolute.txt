@@ -80,6 +80,7 @@ C:\Users\USER\source\repos\Paint\bin\Debug\System.Text.Encodings.Web.xml
 C:\Users\USER\source\repos\Paint\bin\Debug\System.Text.Json.xml
 C:\Users\USER\source\repos\Paint\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\USER\source\repos\Paint\obj\Debug\Paint.Gamma.resources
+<<<<<<< HEAD
 C:\Users\samlu\source\repos\Paint\bin\Debug\Emgu.CV.Bitmap.dll
 C:\Users\samlu\source\repos\Paint\bin\Debug\Emgu.CV.dll
 C:\Users\samlu\source\repos\Paint\bin\Debug\Emgu.CV.Platform.NetFramework.dll
@@ -100,3 +101,7 @@ C:\Users\samlu\source\repos\Paint\obj\Debug\Paint.Low_pass.resources
 C:\Users\samlu\source\repos\Paint\obj\Debug\Paint.High_pass.resources
 C:\Users\USER\source\repos\Paint\obj\Debug\Paint.High_pass.resources
 C:\Users\USER\source\repos\Paint\obj\Debug\Paint.Low_pass.resources
+=======
+C:\Users\USER\source\repos\Paint\obj\Debug\Paint.log.resources
+C:\Users\USER\source\repos\Paint\obj\Debug\Paint.反log.resources
+>>>>>>> develop

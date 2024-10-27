@@ -274,9 +274,8 @@ namespace Paint {
 
         private void 儲存檔案ToolStripMenuItem_Click(object sender, EventArgs e) {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "JPEG Image|*.jpg|PNG Image|*.png";
+            saveFileDialog.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif|Png Image|*.png";
             saveFileDialog.Title = "Save an Image File";
-            saveFileDialog.FileName = "Untitled"; 
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK) {
                 string filePath = saveFileDialog.FileName;//System.IO.Path.GetExtension(saveFileDialog.FileName).ToLower();
@@ -286,6 +285,8 @@ namespace Paint {
                 saveFileDialog.Dispose();
         }
         private void 開啟ToolStripMenuItem_Click(object sender, EventArgs e) {
+            openFileDialog.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif|Png Image|*.png";
+            openFileDialog.Title = "打開圖片";
             if (openFileDialog.ShowDialog() == DialogResult.OK) {
                 canvas = Cv2.ImRead(openFileDialog.FileName);
                 pictureBox1.Load(openFileDialog.FileName);
@@ -351,64 +352,81 @@ namespace Paint {
         }
         private void 亮度對比度ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            lightness trackbarForm = new lightness();
+            lightness trackbarForm = new lightness(this);
             if (trackbarForm.ShowDialog() == DialogResult.OK)
             {
-                double alpha = trackbarForm.TrackBarValue1; // 對比度，可以為負
-                int beta = (int)trackbarForm.TrackBarValue2;     // 亮度
+                double alpha = trackbarForm.TrackBarValue1; // 對比度
+                int beta = (int)trackbarForm.TrackBarValue2; // 亮度
+                bool isNegative = (trackbarForm.TrackBarValue1<0); // 檢查是否需要負片效果
 
-                // 確保 beta 在合理範圍內
-                //beta = Math.Max(0, Math.Min(beta, 100));
-
-                // 手動調整對比度和亮度
-                canvas = AdjustContrastAndBrightness(canvas, alpha, beta);
-                Console.WriteLine(alpha.ToString()+" "+beta);
+                // 調整對比度和亮度
+                if (!isNegative)
+                    canvas = AdjustContrastAndBrightness(canvas, alpha, beta);
+                else
+                    canvas = AdjustNegativeContrast(canvas, alpha, beta);
+                Console.WriteLine($"Alpha: {alpha}, Beta: {beta}, IsNegative: {isNegative}");
             }
             UpdateCanvas();
+        }
+        private OpenCvSharpMat AdjustNegativeContrast(OpenCvSharpMat image, double alpha, int beta)
+        {
+            OpenCvSharpMat newImage = new OpenCvSharpMat(image.Size(), image.Type());
+
+            for (int y = 0; y < image.Rows; y++)
+            {
+                for (int x = 0; x < image.Cols; x++)
+                {
+                    Vec3b color = image.At<Vec3b>(y, x);
+                    Vec3b newColor = new Vec3b();
+
+                    for (int c = 0; c < 3; c++)
+                    {
+                        // 反轉像素值並調整對比度
+                        double pixel = 255 - color[c];
+                        pixel = Math.Abs(alpha) * pixel + beta;
+                        // 裁剪到0-255範圍
+                        newColor[c] = (byte)(pixel < 0 ? 0 : (pixel > 255 ? 255 : pixel));
+                    }
+
+                    newImage.Set(y, x, newColor);
+                }
+            }
+
+            return newImage;
         }
 
         private OpenCvSharpMat AdjustContrastAndBrightness(OpenCvSharpMat image, double alpha, int beta)
         {
             OpenCvSharpMat newImage = new OpenCvSharpMat(image.Size(), image.Type());
-            Double min=0;
+
             for (int y = 0; y < image.Rows; y++)
             {
                 for (int x = 0; x < image.Cols; x++)
                 {
                     Vec3b color = image.At<Vec3b>(y, x);
+                    Vec3b newColor = new Vec3b();
+
                     for (int c = 0; c < 3; c++)
                     {
-                        min = Math.Min(min, color[c] * alpha + beta);
+                        // 調整對比度和亮度
+                        double newValue = color[c] * alpha + beta;
+                        // 裁剪到 0-255 範圍
+                        newColor[c] = (byte)(newValue < 0 ? 0 : (newValue > 255 ? 255 : newValue));
                     }
-                }
-            }
-            min = Math.Abs(min);
-            Console.WriteLine(min);
-            for (int y = 0; y < image.Rows; y++)
-            {
-                for (int x = 0; x < image.Cols; x++)
-                {
-                    Vec3b color = image.At<Vec3b>(y, x);
-                    for (int c = 0; c < 3; c++)
-                    {
-                        newImage.At<Vec3b>(y, x)[c] = Clip(color[c] * alpha + beta + min);
-                    }
+
+                    newImage.Set(y, x, newColor);
                 }
             }
             return newImage;
         }
 
-        private byte Clip(double value)
-        {
-            return (byte)(value < 0 ? 0 : (value > 255 ? 255 : value));
-        }
 
         private void 伽瑪ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Gamma trackbarForm = new Gamma(this);
             if (trackbarForm.ShowDialog() == DialogResult.OK)
             {
-                double gamma = trackbarForm.trackBar1.Value/100.0; // 對比度，可以為負
+                double gamma = trackbarForm.trackBar1.Value/100.0; 
 
                 canvas = 伽瑪轉換(canvas, gamma);
 
@@ -417,25 +435,34 @@ namespace Paint {
         }
         private OpenCvSharpMat 伽瑪轉換(OpenCvSharpMat image, double gamma)
         {
-
             OpenCvSharpMat newImage = new OpenCvSharpMat(image.Size(), image.Type());
+
+
             for (int y = 0; y < image.Rows; y++)
             {
                 for (int x = 0; x < image.Cols; x++)
                 {
                     Vec3b color = image.At<Vec3b>(y, x);
+                    Vec3b newColor = new Vec3b();
+
                     for (int c = 0; c < 3; c++)
                     {
+                        // 將像素值標準化到 [0, 1] 範圍
                         double pixel = color[c] / 255.0;
-                        if(pixel >1.0)
-                            Console.WriteLine("owo");
-                        newImage.At<Vec3b>(y, x)[c] = Clip(Math.Pow(pixel,gamma) * 255.0);
+                        // 進行伽瑪校正
+                        pixel = Math.Pow(pixel, gamma);
+                        // 將結果轉換回 [0, 255] 範圍並裁剪
+                        newColor[c] = (byte)(pixel * 255.0 > 255 ? 255 : (pixel * 255.0 < 0 ? 0 : pixel * 255.0));
                     }
+
+                    newImage.Set(y, x, newColor);
                 }
             }
+
             return newImage;
         }
 
+<<<<<<< HEAD
         private void 低通濾波ToolStripMenuItem_Click(object sender, EventArgs e) {
             Low_pass LP_filter = new Low_pass(this);
             if (LP_filter.ShowDialog() == DialogResult.OK) 
@@ -450,6 +477,8 @@ namespace Paint {
             HP_filter.Dispose();
         }
 
+=======
+>>>>>>> develop
         private void Pallate_Click(object sender, EventArgs e) {
             ColorDialog colorDialog = new ColorDialog();
             if (colorDialog.ShowDialog() == DialogResult.OK) {
@@ -457,6 +486,89 @@ namespace Paint {
                 currentColor = new Scalar(selectedColor.B, selectedColor.G, selectedColor.R); // BGR 格式
             }
         }
+
+        private void log變換ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            log trackbarForm = new log(this);
+            if (trackbarForm.ShowDialog() == DialogResult.OK)
+            {
+                double c = 255.0 / Math.Log(1 + trackbarForm.trackBar1.Value) ;
+                canvas = Log變換(canvas, c);
+
+            }
+            UpdateCanvas();
+        }
+
+        private void 反logToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            反log trackbarForm = new 反log(this);
+            if (trackbarForm.ShowDialog() == DialogResult.OK)
+            {
+                double c = trackbarForm.trackBar1.Value/10.0;
+                canvas = 反Log變換(canvas, c);
+
+            }
+            UpdateCanvas();
+        }
+
+        private OpenCvSharpMat Log變換(OpenCvSharpMat image,double c)
+        {
+            OpenCvSharpMat newImage = new OpenCvSharpMat(image.Size(), image.Type());
+
+            for (int y = 0; y < image.Rows; y++)
+            {
+                for (int x = 0; x < image.Cols; x++)
+                {
+                    Vec3b color = image.At<Vec3b>(y, x);
+                    Vec3b newColor = new Vec3b();
+
+                    for (int cIdx = 0; cIdx < 3; cIdx++)
+                    {
+                        // 進行對數變換並標準化
+                        double pixel = color[cIdx];
+                        double logPixel = c * Math.Log(1 + pixel);
+
+                        // 裁剪到0-255範圍
+                        newColor[cIdx] = (byte)(logPixel > 255 ? 255 : (logPixel < 0 ? 0 : logPixel));
+                    }
+
+                    newImage.Set(y, x, newColor);
+                }
+            }
+
+            return newImage;
+        }
+        private OpenCvSharpMat 反Log變換(OpenCvSharpMat image, double c)
+        {
+            OpenCvSharpMat newImage = new OpenCvSharpMat(image.Size(), image.Type());
+
+            // 進行反對數變換
+            for (int y = 0; y < image.Rows; y++)
+            {
+                for (int x = 0; x < image.Cols; x++)
+                {
+                    Vec3b color = image.At<Vec3b>(y, x);
+                    Vec3b newColor = new Vec3b();
+
+                    for (int cIdx = 0; cIdx < 3; cIdx++)
+                    {
+                        // 取得輸入像素值
+                        double pixel = color[cIdx];
+
+                        // 進行反對數變換
+                        double invLogPixel = Math.Exp(pixel / c) - 1;
+
+                        // 裁剪到0-255範圍
+                        newColor[cIdx] = (byte)(invLogPixel > 255 ? 255 : (invLogPixel < 0 ? 0 : invLogPixel));
+                    }
+
+                    newImage.Set(y, x, newColor);
+                }
+            }
+
+            return newImage;
+        }
+
     }
-    
+
 }
