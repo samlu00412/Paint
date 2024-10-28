@@ -419,8 +419,6 @@ namespace Paint {
             }
             return newImage;
         }
-
-
         private void 伽瑪ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Gamma trackbarForm = new Gamma(this);
@@ -563,6 +561,98 @@ namespace Paint {
 
             return newImage;
         }
+        private void btnShowHistogram_Click(object sender, EventArgs e)
+        {
+            // 計算亮度直方圖
+            int[] histogram = CalculateBrightnessHistogram(canvas);
+
+            // 繪製直方圖
+            DrawBrightnessHistogram(histogram);
+        }
+        private int[] CalculateBrightnessHistogram(OpenCvSharpMat image)
+        {
+            // 將圖像轉換為灰度圖像
+            OpenCvSharpMat grayImage = new OpenCvSharpMat();
+            if (!isGray)
+            {
+                Cv2.CvtColor(image, grayImage, ColorConversionCodes.BGR2GRAY);
+            }
+            else
+            {
+                grayImage = image;
+            }
+
+            // 初始化直方圖數組
+            int[] histogram = new int[256];
+
+            // 遍歷灰度圖像，計算每個亮度級別的像素數量
+            for (int y = 0; y < grayImage.Rows; y++)
+            {
+                for (int x = 0; x < grayImage.Cols; x++)
+                {
+                    byte pixelValue = grayImage.At<byte>(y, x);
+                    histogram[pixelValue]++;
+                }
+            }
+
+            return histogram;
+        }
+        private void DrawBrightnessHistogram(int[] histogram)
+        {
+            // 初始化 Chart 控件
+            Chart histogramChart = new Chart
+            {
+                Dock = DockStyle.Fill,
+                BackColor = Color.White
+            };
+
+            // 設置 ChartArea
+            ChartArea chartArea = new ChartArea
+            {
+                Name = "ChartArea",
+                AxisX =
+        {
+            Title = "Brightness",
+            Minimum = 0, // 調整X軸起點，留出空間
+            Maximum = 255,
+            Interval = 50 // 設置X軸標籤的間隔
+        },
+                AxisY =
+        {
+            Title = "Frequency",
+            Minimum = 0,
+            IntervalAutoMode = IntervalAutoMode.VariableCount // 自動調整Y軸刻度
+        }
+            };
+            histogramChart.ChartAreas.Add(chartArea);
+
+            // 添加數據系列
+            Series series = new Series
+            {
+                Name = "Brightness",
+                ChartType = SeriesChartType.Column,
+                Color = Color.Gray
+            };
+
+            // 將直方圖數據添加到系列中
+            for (int i = 0; i < histogram.Length; i++)
+            {
+                series.Points.AddXY(i, histogram[i]);
+            }
+
+            histogramChart.Series.Add(series);
+
+            // 將 Chart 控件添加到表單中
+            Form histogramForm = new Form
+            {
+                Text = "Brightness Histogram",
+                Width = 800,
+                Height = 600
+            };
+            histogramForm.Controls.Add(histogramChart);
+            histogramForm.Show();
+        }
+
 
     }
 
