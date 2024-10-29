@@ -5,8 +5,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using OpenCvSharp;
 using OpenCvSharp.Extensions;
-//using Point = OpenCvSharp.Point;
-using Size = OpenCvSharp.Size;
+using OpenCvSize = OpenCvSharp.Size;
 using Pen;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Runtime.ConstrainedExecution;
@@ -40,7 +39,7 @@ namespace Paint {
         private Stack<PenMotion> action = new Stack<PenMotion>();
         private Stack<PenMotion> reaction = new Stack<PenMotion>();
 
-        private Size init_kernal = new Size(1, 1);
+        private OpenCvSize init_kernal = new OpenCvSize(1, 1);
         private double init_sigma = 1.0;
         public Paint() 
         {
@@ -88,7 +87,7 @@ namespace Paint {
         }
         private void New_canva_click(object sender, EventArgs e) {
             int width = 1280, height = 720;
-            canvas = new OpenCvSharpMat(new Size(width, height), MatType.CV_8UC3, Scalar.All(255));
+            canvas = new OpenCvSharpMat(new OpenCvSize(width, height), MatType.CV_8UC3, Scalar.All(255));
             BitmapConverter.ToBitmap(canvas);
             pictureBox1.Image = BitmapConverter.ToBitmap(canvas);
             pictureBox1.Width = width;
@@ -162,7 +161,7 @@ namespace Paint {
                 Cv2.Circle(tempCanvas, startpoint, CalculateDistance(startpoint, currentPoint), currentColor, penThickness);
             }
             else if (drawMode == "Ellipse") {
-                Size size = new Size(Math.Abs(currentPoint.X - startpoint.X), Math.Abs(currentPoint.Y - startpoint.Y));
+                OpenCvSize size = new OpenCvSize(Math.Abs(currentPoint.X - startpoint.X), Math.Abs(currentPoint.Y - startpoint.Y));
                 Cv2.Ellipse(tempCanvas, startpoint, size, 0, 0, 360, currentColor, penThickness);
             }
             else if (drawMode == "Triangle") {
@@ -182,18 +181,18 @@ namespace Paint {
             switch (drawMode) {
                 case "Line":
                     Cv2.Line(canvas, prevPoint, currentPoint, currentColor, penThickness);
-                    tempAct = new PenMotion("Line", prevPoint, currentPoint, currentColor, penThickness, 0,new Size(0,0),null);
+                    tempAct = new PenMotion("Line", prevPoint, currentPoint, currentColor, penThickness, 0,new OpenCvSize(0,0),null);
                     break;
                 case "Rectangle":
                     Cv2.Rectangle(canvas, prevPoint, currentPoint, currentColor, penThickness); // 最終繪製黑色矩形
-                    tempAct = new PenMotion("Rectangle", prevPoint, currentPoint, currentColor, penThickness, 0, new Size(0, 0), null);
+                    tempAct = new PenMotion("Rectangle", prevPoint, currentPoint, currentColor, penThickness, 0, new OpenCvSize(0, 0), null);
                     break;
                 case "Circle":
                     Cv2.Circle(canvas, startpoint, CalculateDistance(startpoint, currentPoint), currentColor, penThickness);
-                    tempAct = new PenMotion("Circle", startpoint, currentPoint, currentColor, penThickness, CalculateDistance(startpoint, currentPoint), new Size(0, 0), null);
+                    tempAct = new PenMotion("Circle", startpoint, currentPoint, currentColor, penThickness, CalculateDistance(startpoint, currentPoint), new OpenCvSize(0, 0), null);
                     break;
                 case "Ellipse":
-                    Size size = new Size(Math.Abs(currentPoint.X - startpoint.X), Math.Abs(currentPoint.Y - startpoint.Y));
+                    OpenCvSize size = new OpenCvSize(Math.Abs(currentPoint.X - startpoint.X), Math.Abs(currentPoint.Y - startpoint.Y));
                     Cv2.Ellipse(canvas, startpoint, size, 0, 0, 360, currentColor, penThickness);
                     tempAct = new PenMotion("Ellipse", startpoint, currentPoint, currentColor, penThickness, CalculateDistance(startpoint, currentPoint), size, null);
                     break;
@@ -206,11 +205,11 @@ namespace Paint {
                     vertex2.Y = startpoint.Y;
                     OpenCvSharp.Point[] TrianglePoint = { startpoint, vertex2, vertex };
                     Cv2.Polylines(canvas, new[] { TrianglePoint }, true, currentColor, penThickness);
-                    tempAct = new PenMotion("Triangle", startpoint, currentPoint, currentColor, penThickness,0, new Size(0,0), TrianglePoint);
+                    tempAct = new PenMotion("Triangle", startpoint, currentPoint, currentColor, penThickness,0, new OpenCvSize(0,0), TrianglePoint);
                     break;
                 default:
                     Cv2.Line(canvas, prevPoint, currentPoint, currentColor, penThickness);
-                    tempAct = new PenMotion("Free", prevPoint, currentPoint, currentColor, penThickness, 0, new Size(0, 0), null);
+                    tempAct = new PenMotion("Free", prevPoint, currentPoint, currentColor, penThickness, 0, new OpenCvSize(0, 0), null);
                     break; 
             }
             action.Push(tempAct);

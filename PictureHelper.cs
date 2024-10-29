@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using OpenCvSharp;
 using OpenCvSharp.Extensions;
-using Size = OpenCvSharp.Size;
+using OpenCvSize = OpenCvSharp.Size;
 using Pen;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Runtime.ConstrainedExecution;
