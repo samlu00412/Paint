@@ -343,11 +343,10 @@ namespace Paint {
         }
 
         private void 高斯模糊ToolStripMenuItem_Click(object sender, EventArgs e) {
-            Gauss blurform = new Gauss(init_kernal,init_sigma);
-            if (blurform.ShowDialog() == DialogResult.OK) {
-                Cv2.GaussianBlur(canvas, canvas, blurform.Kernal, blurform.Sigma);
+            Gauss blurform = new Gauss(init_kernal,init_sigma,this);
+            if (blurform.ShowDialog() == DialogResult.OK) 
                 UpdateCanvas();
-            }
+            blurform.Dispose();
         }
         private void 亮度對比度ToolStripMenuItem_Click(object sender, EventArgs e)
         {
