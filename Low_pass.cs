@@ -37,7 +37,7 @@ namespace Paint {
 
         private void Confirm_btn_Click(object sender, EventArgs e) {
             DialogResult= DialogResult.OK;
-            Cv2.MedianBlur(__mainform.canvas, __mainform.canvas, Ksize);
+            __mainform.canvas = ManualMedianBlur(__mainform.canvas, Ksize);
             tempCanvas.Dispose();
             Close();
         }
@@ -52,7 +52,7 @@ namespace Paint {
             Ksize = Int32.Parse(Kersize.Text);
         }
         private async Task UpdatePreviewAsync(int kernal) {  
-            await Task.Run(() => Cv2.MedianBlur(__mainform.canvas,tempCanvas,kernal));          
+            await Task.Run(() => Cv2.MedianBlur(__mainform.canvas, tempCanvas, kernal));
             UpdatePictureBox(tempCanvas);
         }
         private void UpdatePictureBox(Mat image) {
@@ -63,6 +63,45 @@ namespace Paint {
 
         private void Low_pass_Load(object sender, EventArgs e) {
 
+        }
+
+        private int clamp(int num, int min, int max) {
+            if (num < min) return min;
+            else if (num > max) return max;
+            return num;
+        }
+        private Mat ManualMedianBlur(Mat src, int ksize) {
+            if (ksize % 2 == 0 || ksize < 1)
+                throw new ArgumentException("Kernel size must be an odd number and greater than 1.");
+
+            int rows = src.Rows;
+            int cols = src.Cols;
+
+            // 創建輸出圖像
+            Mat result = new Mat(rows, cols, src.Type());
+            int radius = ksize / 2; 
+
+            // 遍歷每個像素
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    List<byte> window = new List<byte>();
+
+                    // 獲取窗口內的像素值
+                    for (int ki = -radius; ki <= radius; ki++) {
+                        for (int kj = -radius; kj <= radius; kj++) {
+                            int y = clamp(i + ki, 0, rows - 1);
+                            int x = clamp(j + kj, 0, cols - 1); 
+                            window.Add(src.At<byte>(y, x));
+                        }
+                    }
+                    window.Sort();
+                    byte median = window[window.Count / 2];
+
+                    // 設定中值為當前像素的新值
+                    result.Set(i, j, median);
+                }
+            }
+            return result;
         }
     }
 }

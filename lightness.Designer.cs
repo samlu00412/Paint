@@ -1,4 +1,6 @@
-﻿namespace Paint {
+﻿using System.Windows.Forms;
+
+namespace Paint {
     partial class lightness {
         /// <summary>
         /// Required designer variable.
@@ -44,7 +46,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(30, 264);
+            this.button1.Location = new System.Drawing.Point(302, 371);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(91, 38);
@@ -64,7 +66,6 @@
             this.trackBar1.TabIndex = 1;
             this.trackBar1.Value = 100;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
-            this.trackBar1.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
             // 
             // trackBar2
             // 
@@ -75,8 +76,7 @@
             this.trackBar2.Name = "trackBar2";
             this.trackBar2.Size = new System.Drawing.Size(345, 69);
             this.trackBar2.TabIndex = 2;
-            this.trackBar2.Scroll += new System.EventHandler(this.trackBar2_Scroll);
-            this.trackBar2.ValueChanged += new System.EventHandler(this.trackBar2_ValueChanged);
+            this.trackBar2.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // label1
             // 
@@ -106,8 +106,9 @@
             this.bri_label.Location = new System.Drawing.Point(452, 52);
             this.bri_label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.bri_label.Name = "bri_label";
-            this.bri_label.Size = new System.Drawing.Size(0, 18);
+            this.bri_label.Size = new System.Drawing.Size(36, 18);
             this.bri_label.TabIndex = 5;
+            this.bri_label.Text = "owo";
             // 
             // con_label
             // 
@@ -115,12 +116,13 @@
             this.con_label.Location = new System.Drawing.Point(452, 149);
             this.con_label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.con_label.Name = "con_label";
-            this.con_label.Size = new System.Drawing.Size(0, 18);
+            this.con_label.Size = new System.Drawing.Size(36, 18);
             this.con_label.TabIndex = 6;
+            this.con_label.Text = "owo";
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(125, 264);
+            this.button2.Location = new System.Drawing.Point(397, 371);
             this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(91, 38);
@@ -131,9 +133,9 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(460, 22);
+            this.pictureBox1.Location = new System.Drawing.Point(553, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(344, 279);
+            this.pictureBox1.Size = new System.Drawing.Size(544, 417);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 8;
             this.pictureBox1.TabStop = false;
@@ -142,7 +144,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(818, 338);
+            this.ClientSize = new System.Drawing.Size(1109, 451);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.con_label);
@@ -168,8 +170,8 @@
 
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TrackBar trackBar1;
-        private System.Windows.Forms.TrackBar trackBar2;
+        public System.Windows.Forms.TrackBar trackBar1;
+        public System.Windows.Forms.TrackBar trackBar2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label bri_label;

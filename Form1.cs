@@ -17,6 +17,8 @@ using Emgu.CV.UI;
 using EmguCVMat = Emgu.CV.Mat;
 using OpenCvSharpMat = OpenCvSharp.Mat;
 using Paint;
+using System.Threading.Tasks;
+using System.Numerics;
 
 namespace Paint {
     
@@ -358,9 +360,9 @@ namespace Paint {
             lightness trackbarForm = new lightness(this);
             if (trackbarForm.ShowDialog() == DialogResult.OK)
             {
-                double alpha = trackbarForm.TrackBarValue1; // 對比度
-                int beta = (int)trackbarForm.TrackBarValue2; // 亮度
-                bool isNegative = (trackbarForm.TrackBarValue1<0); // 檢查是否需要負片效果
+                double alpha = trackbarForm.trackBar1.Value/100.0; // 對比度
+                int beta = (int)trackbarForm.trackBar2.Value; // 亮度
+                bool isNegative = (alpha < 0); // 檢查是否需要負片效果
 
                 // 調整對比度和亮度
                 if (!isNegative)
@@ -655,6 +657,297 @@ namespace Paint {
             };
             histogramForm.Controls.Add(histogramChart);
             histogramForm.Show();
+        }
+        private OpenCvSharpMat ManualDFT(OpenCvSharpMat image)
+        {
+            // 將影像轉換為灰階影像
+            OpenCvSharpMat grayImage = new OpenCvSharpMat();
+            if (image.Channels() != 1)
+                Cv2.CvtColor(image, grayImage, ColorConversionCodes.BGR2GRAY);
+            else
+                grayImage = image.Clone();
+
+            int width = grayImage.Width;
+            int height = grayImage.Height;
+
+            // 初始化頻率域的實部和虛部
+            double[,] realPart = new double[height, width];
+            double[,] imagPart = new double[height, width];
+
+            // 建立角度查找表
+            double[,] cosTableX = new double[height, height];
+            double[,] sinTableX = new double[height, height];
+            double[,] cosTableY = new double[width, width];
+            double[,] sinTableY = new double[width, width];
+
+            // 計算 X 方向的查找表
+            for (int x = 0; x < height; x++)
+            {
+                for (int u = 0; u < height; u++)
+                {
+                    double normalizedX = (double)x / height;
+                    double angleU = -2.0 * Math.PI * normalizedX * u;
+                    cosTableX[u, x] = Math.Cos(angleU);
+                    sinTableX[u, x] = Math.Sin(angleU);
+                }
+            }
+
+            // 計算 Y 方向的查找表
+            for (int y = 0; y < width; y++)
+            {
+                for (int v = 0; v < width; v++)
+                {
+                    double normalizedY = (double)y / width;
+                    double angleV = -2.0 * Math.PI * normalizedY * v;
+                    cosTableY[v, y] = Math.Cos(angleV);
+                    sinTableY[v, y] = Math.Sin(angleV);
+                }
+            }
+
+            // 手動計算 2D DFT
+            Parallel.For(0, height, u =>
+            {
+                for (int v = 0; v < width; v++)
+                {
+                    double realSum = 0.0;
+                    double imagSum = 0.0;
+
+                    for (int x = 0; x < height; x++)
+                    {
+                        for (int y = 0; y < width; y++)
+                        {
+                            double pixel = grayImage.At<byte>(x, y);
+                            double cosValue = cosTableX[u, x] * cosTableY[v, y];
+                            double sinValue = sinTableX[u, x] * sinTableY[v, y];
+
+                            realSum += pixel * cosValue;
+                            imagSum += pixel * sinValue;
+                        }
+                    }
+
+                    realPart[u, v] = realSum;
+                    imagPart[u, v] = imagSum;
+                }
+            });
+
+            // 計算幅度並對數縮放
+            OpenCvSharpMat magnitudeImage = new OpenCvSharpMat(height, width, MatType.CV_64F);
+            for (int u = 0; u < height; u++)
+            {
+                for (int v = 0; v < width; v++)
+                {
+                    double magnitude = Math.Sqrt(realPart[u, v] * realPart[u, v] + imagPart[u, v] * imagPart[u, v]);
+                    magnitudeImage.Set(u, v, Math.Log(1 + magnitude)); // 對數縮放
+                }
+            }
+
+            // 將低頻部分移動到頻譜圖中心
+            ShiftDFT(magnitudeImage);
+
+            // 正規化幅度影像，便於顯示
+            Cv2.Normalize(magnitudeImage, magnitudeImage, 0, 255, NormTypes.MinMax);
+            magnitudeImage.ConvertTo(magnitudeImage, MatType.CV_8U);
+
+            return magnitudeImage;
+        }
+
+
+
+        private async void 手動傅立葉變換ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // 禁用選單或按鈕，避免重複執行
+            ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
+            if (menuItem != null) menuItem.Enabled = false;
+
+            try
+            {
+                // 使用非同步任務執行傅立葉變換
+                OpenCvSharpMat magnitudeImage = await Task.Run(() => ManualDFT(canvas));
+                ShowImageWithCustomSize("Manual Fourier Transform Spectrum", magnitudeImage, 800, 600);
+        
+                Cv2.WaitKey(0); // 保持視窗開啟
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"錯誤: {ex.Message}", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                // 恢復選單或按鈕狀態
+                if (menuItem != null) menuItem.Enabled = true;
+            }
+        }
+
+        // 將頻譜圖的低頻部分移動到中心
+        private void ShiftDFT(OpenCvSharpMat magImage)
+        {
+            int cx = magImage.Cols / 2;
+            int cy = magImage.Rows / 2;
+
+            OpenCvSharpMat q0 = new OpenCvSharpMat(magImage, new Rect(0, 0, cx, cy));   // Top-Left
+            OpenCvSharpMat q1 = new OpenCvSharpMat(magImage, new Rect(cx, 0, cx, cy));  // Top-Right
+            OpenCvSharpMat q2 = new OpenCvSharpMat(magImage, new Rect(0, cy, cx, cy));  // Bottom-Left
+            OpenCvSharpMat q3 = new OpenCvSharpMat(magImage, new Rect(cx, cy, cx, cy)); // Bottom-Right
+
+            OpenCvSharpMat tmp = new OpenCvSharpMat();
+            q0.CopyTo(tmp);
+            q3.CopyTo(q0);
+            tmp.CopyTo(q3);
+
+            q1.CopyTo(tmp);
+            q2.CopyTo(q1);
+            tmp.CopyTo(q2);
+        }
+        private void ShowImageWithCustomSize(string windowName, OpenCvSharpMat image, int width, int height)
+        {
+            // 創建一個可調整大小的視窗
+            Cv2.NamedWindow(windowName, OpenCvSharp.WindowFlags.Normal);
+
+            // 設置視窗大小
+            Cv2.ResizeWindow(windowName, width, height);
+
+            // 顯示圖像
+            Cv2.ImShow(windowName, image);
+        }
+        private OpenCvSharpMat FFTDFT(OpenCvSharpMat image)
+        {
+            // 將影像轉換為灰階影像
+            OpenCvSharpMat grayImage = new OpenCvSharpMat();
+            if (image.Channels() != 1)
+                Cv2.CvtColor(image, grayImage, ColorConversionCodes.BGR2GRAY);
+            else
+                grayImage = image.Clone();
+
+            // 擴展影像大小以適配 DFT 的計算（最佳大小）
+            int optimalRows = Cv2.GetOptimalDFTSize(grayImage.Rows);
+            int optimalCols = Cv2.GetOptimalDFTSize(grayImage.Cols);
+            Cv2.CopyMakeBorder(grayImage, grayImage, 0, optimalRows - grayImage.Rows, 0, optimalCols - grayImage.Cols, BorderTypes.Constant, Scalar.All(0));
+
+            // 建立複數影像平面（實部 + 虛部）
+            OpenCvSharpMat[] planes = { new OpenCvSharpMat(grayImage.Size(), MatType.CV_32F), new OpenCvSharpMat(grayImage.Size(), MatType.CV_32F) };
+            grayImage.ConvertTo(planes[0], MatType.CV_32F); // 實部為影像本身
+            planes[1].SetTo(Scalar.All(0)); // 虛部為零
+            OpenCvSharpMat complexImage = new OpenCvSharpMat();
+            Cv2.Merge(planes, complexImage);
+
+            // 進行 DFT 轉換
+            Cv2.Dft(complexImage, complexImage, DftFlags.ComplexOutput);
+
+            // 分離頻譜的實部和虛部
+            Cv2.Split(complexImage, out planes);
+
+            // 計算幅度：sqrt(re^2 + im^2)
+            OpenCvSharpMat magnitudeImage = new OpenCvSharpMat();
+            Cv2.Magnitude(planes[0], planes[1], magnitudeImage);
+
+            // 對數縮放處理（Log Scale）
+            magnitudeImage += Scalar.All(1); // 避免對數的零點
+            Cv2.Log(magnitudeImage, magnitudeImage);
+
+            // 移動頻譜圖中心
+            ShiftDFT(magnitudeImage);
+
+            // 將結果正規化到 0-255 範圍以便顯示
+            Cv2.Normalize(magnitudeImage, magnitudeImage, 0, 255, NormTypes.MinMax);
+            magnitudeImage.ConvertTo(magnitudeImage, MatType.CV_8U);
+
+            return magnitudeImage;
+        }
+        private void 使用FFT傅立葉變換ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenCvSharpMat magnitudeImage = FFTDFT(canvas);
+            ShowImageWithCustomSize("FFT Fourier Transform Spectrum", magnitudeImage, 800, 600);
+            Cv2.WaitKey(0); // 保持視窗開啟
+        }
+        private Complex[,] FFT2D(double[,] input)
+        {
+            int rows = input.GetLength(0);
+            int cols = input.GetLength(1);
+
+            // 將輸入轉換為複數矩陣
+            Complex[,] complexInput = new Complex[rows, cols];
+            for (int i = 0; i < rows; i++)
+                for (int j = 0; j < cols; j++)
+                    complexInput[i, j] = new Complex(input[i, j], 0);
+
+            // 對每一行進行 FFT
+            for (int i = 0; i < rows; i++)
+            {
+                Complex[] row = new Complex[cols];
+                for (int j = 0; j < cols; j++)
+                    row[j] = complexInput[i, j];
+
+                Complex[] fftRow = FFTProcessor.FFT(row);
+                for (int j = 0; j < cols; j++)
+                    complexInput[i, j] = fftRow[j];
+            }
+
+            // 對每一列進行 FFT
+            for (int j = 0; j < cols; j++)
+            {
+                Complex[] col = new Complex[rows];
+                for (int i = 0; i < rows; i++)
+                    col[i] = complexInput[i, j];
+
+                Complex[] fftCol = FFTProcessor.FFT(col);
+                for (int i = 0; i < rows; i++)
+                    complexInput[i, j] = fftCol[i];
+            }
+
+            return complexInput;
+        }
+        private OpenCvSharpMat VisualizeFFT(Complex[,] fftResult)
+        {
+            int rows = fftResult.GetLength(0);
+            int cols = fftResult.GetLength(1);
+
+            OpenCvSharpMat magnitudeImage = new OpenCvSharpMat(rows, cols, MatType.CV_64F);
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    double magnitude = Complex.Abs(fftResult[i, j]);
+                    magnitudeImage.Set(i, j, Math.Log(1 + magnitude)); // 對數縮放
+                }
+            }
+
+            // 移動低頻到中心
+            ShiftDFT(magnitudeImage);
+
+            // 正規化到 0-255
+            Cv2.Normalize(magnitudeImage, magnitudeImage, 0, 255, NormTypes.MinMax);
+            magnitudeImage.ConvertTo(magnitudeImage, MatType.CV_8U);
+
+            return magnitudeImage;
+        }
+        private OpenCvSharpMat ManualFFT(OpenCvSharpMat image)
+        {
+            // 轉換為灰階影像
+            OpenCvSharpMat grayImage = new OpenCvSharpMat();
+            if (image.Channels() != 1)
+                Cv2.CvtColor(image, grayImage, ColorConversionCodes.BGR2GRAY);
+            else
+                grayImage = image.Clone();
+
+            // 轉換為雙精度陣列
+            int rows = grayImage.Rows;
+            int cols = grayImage.Cols;
+            double[,] input = new double[rows, cols];
+            for (int i = 0; i < rows; i++)
+                for (int j = 0; j < cols; j++)
+                    input[i, j] = grayImage.At<byte>(i, j);
+
+            // 計算 2D FFT
+            Complex[,] fftResult = FFT2D(input);
+
+            // 可視化頻譜圖
+            return VisualizeFFT(fftResult);
+        }
+        private void 自己實現FFTToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenCvSharpMat magnitudeImage = ManualFFT(canvas);
+            Cv2.ImShow("Manual FFT Spectrum", magnitudeImage);
+            Cv2.WaitKey(0); // 保持視窗
         }
 
 
