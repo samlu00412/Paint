@@ -118,6 +118,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
     <Compile Include="反log.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -190,7 +191,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Low_pass.resx">
       <DependentUpon>Low_pass.cs</DependentUpon>
-	</EmbeddedResource>
+    </EmbeddedResource>
     <EmbeddedResource Include="log.resx">
       <DependentUpon>log.cs</DependentUpon>
     </EmbeddedResource>

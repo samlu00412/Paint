@@ -69,6 +69,7 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.傅立葉ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fFTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fFTbymyselfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -246,7 +247,8 @@
             this.空間濾波ToolStripMenuItem,
             this.轉換成灰階ToolStripMenuItem,
             this.傅立葉ToolStripMenuItem,
-            this.fFTToolStripMenuItem});
+            this.fFTToolStripMenuItem,
+            this.fFTbymyselfToolStripMenuItem});
             this.調整ToolStripMenuItem.Name = "調整ToolStripMenuItem";
             this.調整ToolStripMenuItem.Size = new System.Drawing.Size(62, 28);
             this.調整ToolStripMenuItem.Text = "調整";
@@ -404,6 +406,13 @@
             this.fFTToolStripMenuItem.Text = "FFT";
             this.fFTToolStripMenuItem.Click += new System.EventHandler(this.使用FFT傅立葉變換ToolStripMenuItem_Click);
             // 
+            // fFTbymyselfToolStripMenuItem
+            // 
+            this.fFTbymyselfToolStripMenuItem.Name = "fFTbymyselfToolStripMenuItem";
+            this.fFTbymyselfToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.fFTbymyselfToolStripMenuItem.Text = "FFTbymyself";
+            this.fFTbymyselfToolStripMenuItem.Click += new System.EventHandler(this.使用FFT傅立葉變換ToolStripMenuItem_Click);
+            // 
             // Paint
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -470,6 +479,7 @@
         private System.Windows.Forms.ToolStripMenuItem 繪製亮度直方圖ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 傅立葉ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fFTToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fFTbymyselfToolStripMenuItem;
     }
 }
 

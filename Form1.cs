@@ -18,6 +18,7 @@ using EmguCVMat = Emgu.CV.Mat;
 using OpenCvSharpMat = OpenCvSharp.Mat;
 using Paint;
 using System.Threading.Tasks;
+using System.Numerics;
 
 namespace Paint {
     
@@ -852,6 +853,96 @@ namespace Paint {
             OpenCvSharpMat magnitudeImage = FFTDFT(canvas);
             ShowImageWithCustomSize("FFT Fourier Transform Spectrum", magnitudeImage, 800, 600);
             Cv2.WaitKey(0); // 保持視窗開啟
+        }
+        private Complex[,] FFT2D(double[,] input)
+        {
+            int rows = input.GetLength(0);
+            int cols = input.GetLength(1);
+
+            // 將輸入轉換為複數矩陣
+            Complex[,] complexInput = new Complex[rows, cols];
+            for (int i = 0; i < rows; i++)
+                for (int j = 0; j < cols; j++)
+                    complexInput[i, j] = new Complex(input[i, j], 0);
+
+            // 對每一行進行 FFT
+            for (int i = 0; i < rows; i++)
+            {
+                Complex[] row = new Complex[cols];
+                for (int j = 0; j < cols; j++)
+                    row[j] = complexInput[i, j];
+
+                Complex[] fftRow = FFTProcessor.FFT(row);
+                for (int j = 0; j < cols; j++)
+                    complexInput[i, j] = fftRow[j];
+            }
+
+            // 對每一列進行 FFT
+            for (int j = 0; j < cols; j++)
+            {
+                Complex[] col = new Complex[rows];
+                for (int i = 0; i < rows; i++)
+                    col[i] = complexInput[i, j];
+
+                Complex[] fftCol = FFTProcessor.FFT(col);
+                for (int i = 0; i < rows; i++)
+                    complexInput[i, j] = fftCol[i];
+            }
+
+            return complexInput;
+        }
+        private OpenCvSharpMat VisualizeFFT(Complex[,] fftResult)
+        {
+            int rows = fftResult.GetLength(0);
+            int cols = fftResult.GetLength(1);
+
+            OpenCvSharpMat magnitudeImage = new OpenCvSharpMat(rows, cols, MatType.CV_64F);
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    double magnitude = Complex.Abs(fftResult[i, j]);
+                    magnitudeImage.Set(i, j, Math.Log(1 + magnitude)); // 對數縮放
+                }
+            }
+
+            // 移動低頻到中心
+            ShiftDFT(magnitudeImage);
+
+            // 正規化到 0-255
+            Cv2.Normalize(magnitudeImage, magnitudeImage, 0, 255, NormTypes.MinMax);
+            magnitudeImage.ConvertTo(magnitudeImage, MatType.CV_8U);
+
+            return magnitudeImage;
+        }
+        private OpenCvSharpMat ManualFFT(OpenCvSharpMat image)
+        {
+            // 轉換為灰階影像
+            OpenCvSharpMat grayImage = new OpenCvSharpMat();
+            if (image.Channels() != 1)
+                Cv2.CvtColor(image, grayImage, ColorConversionCodes.BGR2GRAY);
+            else
+                grayImage = image.Clone();
+
+            // 轉換為雙精度陣列
+            int rows = grayImage.Rows;
+            int cols = grayImage.Cols;
+            double[,] input = new double[rows, cols];
+            for (int i = 0; i < rows; i++)
+                for (int j = 0; j < cols; j++)
+                    input[i, j] = grayImage.At<byte>(i, j);
+
+            // 計算 2D FFT
+            Complex[,] fftResult = FFT2D(input);
+
+            // 可視化頻譜圖
+            return VisualizeFFT(fftResult);
+        }
+        private void 自己實現FFTToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenCvSharpMat magnitudeImage = ManualFFT(canvas);
+            Cv2.ImShow("Manual FFT Spectrum", magnitudeImage);
+            Cv2.WaitKey(0); // 保持視窗
         }
 
 
