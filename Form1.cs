@@ -757,10 +757,10 @@ namespace Paint {
             try
             {
                 // 使用非同步任務執行傅立葉變換
-                OpenCvSharpMat magnitudeImage = await Task.Run(() => ManualDFT(canvas));
-                ShowImageWithCustomSize("Manual Fourier Transform Spectrum", magnitudeImage, 800, 600);
-        
-                Cv2.WaitKey(0); // 保持視窗開啟
+                canvas = await Task.Run(() => ManualDFT(canvas));
+                //ShowImageWithCustomSize("Manual Fourier Transform Spectrum", magnitudeImage, 800, 600);
+                UpdateCanvas();
+                //Cv2.WaitKey(0); // 保持視窗開啟
             }
             catch (Exception ex)
             {
@@ -850,9 +850,10 @@ namespace Paint {
         }
         private void 使用FFT傅立葉變換ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenCvSharpMat magnitudeImage = FFTDFT(canvas);
-            ShowImageWithCustomSize("FFT Fourier Transform Spectrum", magnitudeImage, 800, 600);
-            Cv2.WaitKey(0); // 保持視窗開啟
+            canvas = FFTDFT(canvas);
+            UpdateCanvas();
+            //ShowImageWithCustomSize("FFT Fourier Transform Spectrum", canvas, 800, 600);
+            //Cv2.WaitKey(0); // 保持視窗開啟
         }
         private Complex[,] FFT2D(double[,] input)
         {
@@ -940,12 +941,358 @@ namespace Paint {
         }
         private void 自己實現FFTToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenCvSharpMat magnitudeImage = ManualFFT(canvas);
-            Cv2.ImShow("Manual FFT Spectrum", magnitudeImage);
-            Cv2.WaitKey(0); // 保持視窗
+            canvas = ManualFFT(canvas);
+            UpdateCanvas();
+            //Cv2.ImShow("Manual FFT Spectrum", magnitudeImage);
+            //Cv2.WaitKey(0); // 保持視窗
+        }
+        public static Complex[] IFFT(Complex[] input)
+        {
+            int originalLength = input.Length;
+
+            // 如果長度不是 2 的次方，填充到最近的 2 的次方
+            int paddedLength = (int)Math.Pow(2, Math.Ceiling(Math.Log(originalLength, 2)));
+            Complex[] paddedInput = new Complex[paddedLength];
+
+            // 填充原始數據
+            for (int i = 0; i < originalLength; i++)
+                paddedInput[i] = input[i];
+
+            // 計算 IFFT
+            int n = paddedInput.Length;
+            Complex[] conjugated = new Complex[n];
+            for (int i = 0; i < n; i++)
+                conjugated[i] = Complex.Conjugate(paddedInput[i]);
+
+            Complex[] fftResult = FFTProcessor.FFT(conjugated);
+
+            Complex[] result = new Complex[n];
+            for (int i = 0; i < n; i++)
+                result[i] = Complex.Conjugate(fftResult[i]) / n;
+
+            // 裁剪回原始長度
+            Complex[] croppedResult = new Complex[originalLength];
+            for (int i = 0; i < originalLength; i++)
+                croppedResult[i] = result[i];
+
+            return croppedResult;
+        }
+
+        private Complex[,] IFFT2D(Complex[,] input)
+        {
+            int originalRows = input.GetLength(0);
+            int originalCols = input.GetLength(1);
+
+            // 計算最近的 2 的次方
+            int paddedRows = (int)Math.Pow(2, Math.Ceiling(Math.Log(originalRows, 2)));
+            int paddedCols = (int)Math.Pow(2, Math.Ceiling(Math.Log(originalCols, 2)));
+
+            // 填充到最近的 2 的次方
+            Complex[,] paddedInput = new Complex[paddedRows, paddedCols];
+            for (int i = 0; i < originalRows; i++)
+                for (int j = 0; j < originalCols; j++)
+                    paddedInput[i, j] = input[i, j];
+
+            // 對每一行進行 IFFT
+            for (int i = 0; i < paddedRows; i++)
+            {
+                Complex[] row = new Complex[paddedCols];
+                for (int j = 0; j < paddedCols; j++)
+                    row[j] = paddedInput[i, j];
+
+                Complex[] ifftRow = IFFT(row);
+                for (int j = 0; j < paddedCols; j++)
+                    paddedInput[i, j] = ifftRow[j];
+            }
+
+            // 對每一列進行 IFFT
+            for (int j = 0; j < paddedCols; j++)
+            {
+                Complex[] col = new Complex[paddedRows];
+                for (int i = 0; i < paddedRows; i++)
+                    col[i] = paddedInput[i, j];
+
+                Complex[] ifftCol = IFFT(col);
+                for (int i = 0; i < paddedRows; i++)
+                    paddedInput[i, j] = ifftCol[i];
+            }
+
+            // 裁剪回原始大小
+            Complex[,] croppedResult = new Complex[originalRows, originalCols];
+            for (int i = 0; i < originalRows; i++)
+                for (int j = 0; j < originalCols; j++)
+                    croppedResult[i, j] = paddedInput[i, j];
+
+            return croppedResult;
+        }
+
+        private OpenCvSharpMat ReconstructImageFromFFT(Complex[,] ifftResult)
+        {
+            int rows = ifftResult.GetLength(0);
+            int cols = ifftResult.GetLength(1);
+
+            OpenCvSharpMat reconstructedImage = new OpenCvSharpMat(rows, cols, MatType.CV_8U);
+            double min = double.MaxValue, max = double.MinValue;
+
+            // 提取實部並找到最小值和最大值
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    double value = ifftResult[i, j].Real;
+                    min = Math.Min(min, value);
+                    max = Math.Max(max, value);
+                }
+            }
+
+            // 防止全黑問題
+            if (min == max)
+            {
+                min = 0;
+                max = 1;
+            }
+
+            // 映射實部值到 [0, 255]
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    double value = ifftResult[i, j].Real;
+                    byte pixelValue = (byte)((value - min) / (max - min) * 255);
+                    reconstructedImage.Set(i, j, pixelValue);
+                }
+            }
+
+            return reconstructedImage;
         }
 
 
+        private OpenCvSharpMat RestoreImageFromFFT(Complex[,] fftResult)
+        {
+            // 執行逆 FFT
+            Complex[,] ifftResult = IFFT2D(fftResult);
+
+            // 還原影像
+            return ReconstructImageFromFFT(ifftResult);
+        }
+        private void FFT還原ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Step 1: 將 canvas 轉換為複數矩陣
+                int rows = canvas.Rows;
+                int cols = canvas.Cols;
+
+                Complex[,] fftResult = new Complex[rows, cols];
+                for (int i = 0; i < rows; i++)
+                {
+                    for (int j = 0; j < cols; j++)
+                    {
+                        Vec2f complexValue = canvas.At<Vec2f>(i, j); // 假設 canvas 是複數影像 (兩通道)
+                        fftResult[i, j] = new Complex(complexValue.Item0, complexValue.Item1);
+                    }
+                }
+
+                // Step 2: 執行逆 FFT
+                OpenCvSharpMat restoredImage = RestoreImageFromFFT(fftResult);
+
+                // Step 3: 更新 canvas 並顯示還原影像
+                canvas = restoredImage;
+                UpdateCanvas();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"還原過程出現錯誤：{ex.Message}", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void FFT還原2ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // 確保 canvas 是兩通道浮點影像 (CV_32FC2)
+                if (canvas.Empty() || canvas.Channels() != 2 || canvas.Type() != MatType.CV_32FC2)
+                {
+                    OpenCvSharpMat realPart = canvas.Clone();
+                    OpenCvSharpMat imaginaryPart = OpenCvSharpMat.Zeros(canvas.Size(), MatType.CV_32F); // 虛部為零
+
+                    // 確保實部和虛部的深度一致
+                    if (realPart.Depth() != MatType.CV_32F || imaginaryPart.Depth() != MatType.CV_32F)
+                    {
+                        realPart.ConvertTo(realPart, MatType.CV_32F);
+                        imaginaryPart.ConvertTo(imaginaryPart, MatType.CV_32F);
+                    }
+
+                    // 合併成雙通道
+                    OpenCvSharpMat mergedCanvas = new OpenCvSharpMat();
+                    Cv2.Merge(new[] { realPart, imaginaryPart }, mergedCanvas);
+                    canvas = mergedCanvas;
+                }
+
+                // Step 1: 執行逆傅立葉變換
+                OpenCvSharpMat restoredImage = PerformIFFT(canvas);
+
+                // Step 2: 更新 canvas 並顯示還原影像
+                canvas = restoredImage.Clone();
+                UpdateCanvas();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"還原過程出現錯誤：{ex.Message}", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private OpenCvSharpMat PerformIFFT(OpenCvSharpMat complexImage)
+        {
+            OpenCvSharpMat inverseTransform = new OpenCvSharpMat();
+
+            // 確保 complexImage 是雙通道浮點矩陣
+            if (complexImage.Channels() != 2 || complexImage.Type() != MatType.CV_32FC2)
+                throw new ArgumentException("Input image must be a two-channel floating-point matrix (CV_32FC2).");
+
+            // 執行逆傅立葉變換
+            Cv2.Dft(complexImage, inverseTransform, DftFlags.Inverse | DftFlags.RealOutput);
+
+            // 檢查數據範圍
+            double min, max;
+            Cv2.MinMaxLoc(inverseTransform, out min, out max);
+            Console.WriteLine($"Inverse Transform Min: {min}, Max: {max}");
+
+            // 如果範圍過小，可能意味著輸入的頻譜不正確
+            if (max - min < 1e-6)
+                throw new Exception("Invalid frequency spectrum. The result may be too small or invalid.");
+
+            // 正規化到 [0, 255] 範圍
+            Cv2.Normalize(inverseTransform, inverseTransform, 0, 255, NormTypes.MinMax);
+            inverseTransform.ConvertTo(inverseTransform, MatType.CV_8U);
+
+            return inverseTransform;
+        }
+
+        private void 放棄toolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Step 1: 确保 canvas 是灰阶图像
+                if (canvas.Channels() != 1)
+                    Cv2.CvtColor(canvas, canvas, ColorConversionCodes.BGR2GRAY);
+
+                // Step 2: 填充到最近的 2 的幂次方大小
+                OpenCvSharpMat paddedImage = PadToPowerOfTwo(canvas);
+
+                // Step 3: 计算 FFT
+                Complex[,] fftResult = Compute2DFFT(paddedImage);
+
+                // Step 4: 可视化 FFT 频谱
+                OpenCvSharpMat spectrum = VisualizeFFT2(fftResult);
+                Cv2.ImShow("FFT Spectrum", spectrum);
+
+                // Step 5: 执行逆 FFT
+                Complex[,] ifftResult = IFFT2D(fftResult);
+
+                // Step 6: 重建图像
+                OpenCvSharpMat restoredImage = ReconstructImageFromFFT2(ifftResult, canvas.Rows, canvas.Cols);
+                Cv2.ImShow("Restored Image", restoredImage);
+
+                // 更新 canvas
+                canvas = restoredImage;
+                UpdateCanvas();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"还原过程出错：{ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // 填充影像到 2 的幂次方大小
+        private OpenCvSharpMat PadToPowerOfTwo(OpenCvSharpMat image)
+        {
+            int paddedRows = (int)Math.Pow(2, Math.Ceiling(Math.Log(image.Rows, 2)));
+            int paddedCols = (int)Math.Pow(2, Math.Ceiling(Math.Log(image.Cols, 2)));
+
+            OpenCvSharpMat paddedImage = new OpenCvSharpMat();
+            Cv2.CopyMakeBorder(image, paddedImage, 0, paddedRows - image.Rows, 0, paddedCols - image.Cols, BorderTypes.Constant, Scalar.All(0));
+
+            return paddedImage;
+        }
+
+        // 裁剪影像到原始大小
+        private OpenCvSharpMat CropToOriginalSize(OpenCvSharpMat image, int originalRows, int originalCols)
+        {
+            return new OpenCvSharpMat(image, new Rect(0, 0, originalCols, originalRows));
+        }
+
+        // 执行 2D FFT
+        private Complex[,] Compute2DFFT(OpenCvSharpMat image)
+        {
+            int rows = image.Rows;
+            int cols = image.Cols;
+
+            // 转换为双精度数组
+            double[,] input = new double[rows, cols];
+            for (int i = 0; i < rows; i++)
+                for (int j = 0; j < cols; j++)
+                    input[i, j] = image.At<byte>(i, j);
+
+            // 计算 2D FFT
+            return FFT2D(input);
+        }
+
+        // 2D FFT 的可视化
+        private OpenCvSharpMat VisualizeFFT2(Complex[,] fftResult)
+        {
+            int rows = fftResult.GetLength(0);
+            int cols = fftResult.GetLength(1);
+
+            OpenCvSharpMat magnitudeImage = new OpenCvSharpMat(rows, cols, MatType.CV_64F);
+            for (int i = 0; i < rows; i++)
+                for (int j = 0; j < cols; j++)
+                    magnitudeImage.Set(i, j, Math.Log(1 + Complex.Abs(fftResult[i, j])));
+
+            // 将低频部分移动到中心
+            ShiftDFT(magnitudeImage);
+
+            // 标准化到 0-255
+            Cv2.Normalize(magnitudeImage, magnitudeImage, 0, 255, NormTypes.MinMax);
+            magnitudeImage.ConvertTo(magnitudeImage, MatType.CV_8U);
+
+            return magnitudeImage;
+        }
+
+        // 逆傅立叶变换并重建图像
+        private OpenCvSharpMat ReconstructImageFromFFT2(Complex[,] ifftResult, int originalRows, int originalCols)
+        {
+            int rows = ifftResult.GetLength(0);
+            int cols = ifftResult.GetLength(1);
+
+            OpenCvSharpMat reconstructedImage = new OpenCvSharpMat(rows, cols, MatType.CV_64F);
+
+            // 提取实部并映射到 [0, 255]
+            double min = double.MaxValue, max = double.MinValue;
+            for (int i = 0; i < rows; i++)
+                for (int j = 0; j < cols; j++)
+                {
+                    double value = ifftResult[i, j].Real;
+                    min = Math.Min(min, value);
+                    max = Math.Max(max, value);
+                }
+
+            // 防止全黑问题
+            if (Math.Abs(max - min) < 1e-6) { min = 0; max = 1; }
+
+            for (int i = 0; i < rows; i++)
+                for (int j = 0; j < cols; j++)
+                {
+                    double value = ifftResult[i, j].Real;
+                    double pixelValue = (value - min) / (max - min) * 255;
+                    reconstructedImage.Set(i, j, pixelValue);
+                }
+
+            // 裁剪回原始大小
+            reconstructedImage = CropToOriginalSize(reconstructedImage, originalRows, originalCols);
+            reconstructedImage.ConvertTo(reconstructedImage, MatType.CV_8U);
+
+            return reconstructedImage;
+        }
     }
 
 }
