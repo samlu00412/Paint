@@ -60,5 +60,9 @@ namespace Paint {
                 Preview_box.Image.Dispose();
             Preview_box.Image = BitmapConverter.ToBitmap(image);
         }
+
+        private void Low_pass_Load(object sender, EventArgs e) {
+
+        }
     }
 }
