@@ -48,6 +48,7 @@
             this.操作ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.復原UndoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.重做RedoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.繪製亮度直方圖ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.調整ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.強度轉換ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.亮度對比度ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,7 +67,8 @@
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.繪製亮度直方圖ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.傅立葉ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fFTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -230,12 +232,21 @@
             this.重做RedoToolStripMenuItem.Text = "重做(Redo)";
             this.重做RedoToolStripMenuItem.Click += new System.EventHandler(this.重做RedoToolStripMenuItem_Click);
             // 
+            // 繪製亮度直方圖ToolStripMenuItem
+            // 
+            this.繪製亮度直方圖ToolStripMenuItem.Name = "繪製亮度直方圖ToolStripMenuItem";
+            this.繪製亮度直方圖ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.繪製亮度直方圖ToolStripMenuItem.Text = "繪製亮度直方圖";
+            this.繪製亮度直方圖ToolStripMenuItem.Click += new System.EventHandler(this.btnShowHistogram_Click);
+            // 
             // 調整ToolStripMenuItem
             // 
             this.調整ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.強度轉換ToolStripMenuItem,
             this.空間濾波ToolStripMenuItem,
-            this.轉換成灰階ToolStripMenuItem});
+            this.轉換成灰階ToolStripMenuItem,
+            this.傅立葉ToolStripMenuItem,
+            this.fFTToolStripMenuItem});
             this.調整ToolStripMenuItem.Name = "調整ToolStripMenuItem";
             this.調整ToolStripMenuItem.Size = new System.Drawing.Size(62, 28);
             this.調整ToolStripMenuItem.Text = "調整";
@@ -254,28 +265,28 @@
             // 亮度對比度ToolStripMenuItem
             // 
             this.亮度對比度ToolStripMenuItem.Name = "亮度對比度ToolStripMenuItem";
-            this.亮度對比度ToolStripMenuItem.Size = new System.Drawing.Size(208, 34);
+            this.亮度對比度ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.亮度對比度ToolStripMenuItem.Text = "亮度/對比度";
             this.亮度對比度ToolStripMenuItem.Click += new System.EventHandler(this.亮度對比度ToolStripMenuItem_Click);
             // 
             // 伽瑪ToolStripMenuItem
             // 
             this.伽瑪ToolStripMenuItem.Name = "伽瑪ToolStripMenuItem";
-            this.伽瑪ToolStripMenuItem.Size = new System.Drawing.Size(208, 34);
+            this.伽瑪ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.伽瑪ToolStripMenuItem.Text = "伽瑪";
             this.伽瑪ToolStripMenuItem.Click += new System.EventHandler(this.伽瑪ToolStripMenuItem_Click);
             // 
             // log變換ToolStripMenuItem
             // 
             this.log變換ToolStripMenuItem.Name = "log變換ToolStripMenuItem";
-            this.log變換ToolStripMenuItem.Size = new System.Drawing.Size(208, 34);
+            this.log變換ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.log變換ToolStripMenuItem.Text = "log變換";
             this.log變換ToolStripMenuItem.Click += new System.EventHandler(this.log變換ToolStripMenuItem_Click);
             // 
             // 反logToolStripMenuItem
             // 
             this.反logToolStripMenuItem.Name = "反logToolStripMenuItem";
-            this.反logToolStripMenuItem.Size = new System.Drawing.Size(208, 34);
+            this.反logToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.反logToolStripMenuItem.Text = "反log";
             this.反logToolStripMenuItem.Click += new System.EventHandler(this.反logToolStripMenuItem_Click);
             // 
@@ -320,7 +331,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Location = new System.Drawing.Point(0, 62);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(1066, 552);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -379,12 +390,19 @@
             this.toolStripButton3.Text = "toolStripButton3";
             this.toolStripButton3.Click += new System.EventHandler(this.重做RedoToolStripMenuItem_Click);
             // 
-            // 繪製亮度直方圖ToolStripMenuItem
+            // 傅立葉ToolStripMenuItem
             // 
-            this.繪製亮度直方圖ToolStripMenuItem.Name = "繪製亮度直方圖ToolStripMenuItem";
-            this.繪製亮度直方圖ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.繪製亮度直方圖ToolStripMenuItem.Text = "繪製亮度直方圖";
-            this.繪製亮度直方圖ToolStripMenuItem.Click += new System.EventHandler(this.btnShowHistogram_Click);
+            this.傅立葉ToolStripMenuItem.Name = "傅立葉ToolStripMenuItem";
+            this.傅立葉ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.傅立葉ToolStripMenuItem.Text = "傅立葉";
+            this.傅立葉ToolStripMenuItem.Click += new System.EventHandler(this.手動傅立葉變換ToolStripMenuItem_Click);
+            // 
+            // fFTToolStripMenuItem
+            // 
+            this.fFTToolStripMenuItem.Name = "fFTToolStripMenuItem";
+            this.fFTToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.fFTToolStripMenuItem.Text = "FFT";
+            this.fFTToolStripMenuItem.Click += new System.EventHandler(this.使用FFT傅立葉變換ToolStripMenuItem_Click);
             // 
             // Paint
             // 
@@ -395,7 +413,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.pictureBox1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Paint";
             this.Text = "Paint";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -450,6 +468,8 @@
         private System.Windows.Forms.ToolStripMenuItem log變換ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 反logToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 繪製亮度直方圖ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 傅立葉ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fFTToolStripMenuItem;
     }
 }
 
