@@ -146,6 +146,7 @@
             this.Controls.Add(this.Sigma_bar);
             this.Name = "Gauss";
             this.Text = "Gauss";
+            this.Load += new System.EventHandler(this.Gauss_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Sigma_bar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Kernal_bar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Preview_box)).EndInit();

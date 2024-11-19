@@ -855,7 +855,8 @@ namespace Paint {
         }
         private void 使用FFT傅立葉變換ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            canvas = FFTDFT(canvas);
+            //canvas = FFTDFT(canvas);
+            canvas = ManualFFT(canvas);
             UpdateCanvas();
             //ShowImageWithCustomSize("FFT Fourier Transform Spectrum", canvas, 800, 600);
             //Cv2.WaitKey(0); // 保持視窗開啟
