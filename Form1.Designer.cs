@@ -61,10 +61,6 @@
             this.高通濾波ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.轉換成灰階ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.傅立葉ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fFTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fFTbymyselfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.逆FFTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.逆FFTOpcvToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.放棄ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
@@ -73,6 +69,7 @@
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.iFFTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -250,11 +247,8 @@
             this.空間濾波ToolStripMenuItem,
             this.轉換成灰階ToolStripMenuItem,
             this.傅立葉ToolStripMenuItem,
-            this.fFTToolStripMenuItem,
-            this.fFTbymyselfToolStripMenuItem,
-            this.逆FFTToolStripMenuItem,
-            this.逆FFTOpcvToolStripMenuItem,
-            this.放棄ToolStripMenuItem});
+            this.放棄ToolStripMenuItem,
+            this.iFFTToolStripMenuItem});
             this.調整ToolStripMenuItem.Name = "調整ToolStripMenuItem";
             this.調整ToolStripMenuItem.Size = new System.Drawing.Size(62, 28);
             this.調整ToolStripMenuItem.Text = "調整";
@@ -341,41 +335,12 @@
             this.傅立葉ToolStripMenuItem.Name = "傅立葉ToolStripMenuItem";
             this.傅立葉ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.傅立葉ToolStripMenuItem.Text = "傅立葉";
-            this.傅立葉ToolStripMenuItem.Click += new System.EventHandler(this.手動傅立葉變換ToolStripMenuItem_Click);
-            // 
-            // fFTToolStripMenuItem
-            // 
-            this.fFTToolStripMenuItem.Name = "fFTToolStripMenuItem";
-            this.fFTToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.fFTToolStripMenuItem.Text = "FFT";
-            this.fFTToolStripMenuItem.Click += new System.EventHandler(this.使用FFT傅立葉變換ToolStripMenuItem_Click);
-            // 
-            // fFTbymyselfToolStripMenuItem
-            // 
-            this.fFTbymyselfToolStripMenuItem.Name = "fFTbymyselfToolStripMenuItem";
-            this.fFTbymyselfToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.fFTbymyselfToolStripMenuItem.Text = "FFTbymyself";
-            this.fFTbymyselfToolStripMenuItem.Click += new System.EventHandler(this.使用FFT傅立葉變換ToolStripMenuItem_Click);
-            // 
-            // 逆FFTToolStripMenuItem
-            // 
-            this.逆FFTToolStripMenuItem.Name = "逆FFTToolStripMenuItem";
-            this.逆FFTToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.逆FFTToolStripMenuItem.Text = "逆FFT";
-            this.逆FFTToolStripMenuItem.Click += new System.EventHandler(this.FFT還原ToolStripMenuItem_Click);
-            // 
-            // 逆FFTOpcvToolStripMenuItem
-            // 
-            this.逆FFTOpcvToolStripMenuItem.Name = "逆FFTOpcvToolStripMenuItem";
-            this.逆FFTOpcvToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.逆FFTOpcvToolStripMenuItem.Text = "逆FFT opcv";
-            this.逆FFTOpcvToolStripMenuItem.Click += new System.EventHandler(this.FFT還原2ToolStripMenuItem_Click);
             // 
             // 放棄ToolStripMenuItem
             // 
             this.放棄ToolStripMenuItem.Name = "放棄ToolStripMenuItem";
             this.放棄ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.放棄ToolStripMenuItem.Text = "放棄";
+            this.放棄ToolStripMenuItem.Text = "使用FFT";
             this.放棄ToolStripMenuItem.Click += new System.EventHandler(this.放棄toolStripMenuItem_Click);
             // 
             // pictureBox1
@@ -439,6 +404,13 @@
             this.toolStripButton3.Size = new System.Drawing.Size(36, 36);
             this.toolStripButton3.Text = "toolStripButton3";
             this.toolStripButton3.Click += new System.EventHandler(this.重做RedoToolStripMenuItem_Click);
+            // 
+            // iFFTToolStripMenuItem
+            // 
+            this.iFFTToolStripMenuItem.Name = "iFFTToolStripMenuItem";
+            this.iFFTToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.iFFTToolStripMenuItem.Text = "IFFT";
+            this.iFFTToolStripMenuItem.Click += new System.EventHandler(this.iFFTToolStripMenuItem_Click);
             // 
             // Paint
             // 
@@ -505,11 +477,8 @@
         private System.Windows.Forms.ToolStripMenuItem 反logToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 繪製亮度直方圖ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 傅立葉ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fFTToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fFTbymyselfToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 逆FFTToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 逆FFTOpcvToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 放棄ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem iFFTToolStripMenuItem;
     }
 }
 

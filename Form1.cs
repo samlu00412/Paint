@@ -222,7 +222,10 @@ namespace Paint {
             if (pictureBox1.Image != null) {
                 pictureBox1.Image.Dispose();
             }
-            pictureBox1.Image = BitmapConverter.ToBitmap(canvas);
+            if (canvas.Type() != MatType.CV_32FC2)
+                pictureBox1.Image = BitmapConverter.ToBitmap(canvas);
+            else
+                pictureBox1.Image = ConvertCV32FC2ToBitmap();
         }
         private Rectangle GetImageRectangleInPictureBox() {
             // 計算圖像縮放後在 PictureBox 中的實際顯示範圍
@@ -653,126 +656,6 @@ namespace Paint {
             histogramForm.Controls.Add(histogramChart);
             histogramForm.Show();
         }
-        private OpenCvSharpMat ManualDFT(OpenCvSharpMat image)
-        {
-            // 將影像轉換為灰階影像
-            OpenCvSharpMat grayImage = new OpenCvSharpMat();
-            if (image.Channels() != 1)
-                Cv2.CvtColor(image, grayImage, ColorConversionCodes.BGR2GRAY);
-            else
-                grayImage = image.Clone();
-
-            int width = grayImage.Width;
-            int height = grayImage.Height;
-
-            // 初始化頻率域的實部和虛部
-            double[,] realPart = new double[height, width];
-            double[,] imagPart = new double[height, width];
-
-            // 建立角度查找表
-            double[,] cosTableX = new double[height, height];
-            double[,] sinTableX = new double[height, height];
-            double[,] cosTableY = new double[width, width];
-            double[,] sinTableY = new double[width, width];
-
-            // 計算 X 方向的查找表
-            for (int x = 0; x < height; x++)
-            {
-                for (int u = 0; u < height; u++)
-                {
-                    double normalizedX = (double)x / height;
-                    double angleU = -2.0 * Math.PI * normalizedX * u;
-                    cosTableX[u, x] = Math.Cos(angleU);
-                    sinTableX[u, x] = Math.Sin(angleU);
-                }
-            }
-
-            // 計算 Y 方向的查找表
-            for (int y = 0; y < width; y++)
-            {
-                for (int v = 0; v < width; v++)
-                {
-                    double normalizedY = (double)y / width;
-                    double angleV = -2.0 * Math.PI * normalizedY * v;
-                    cosTableY[v, y] = Math.Cos(angleV);
-                    sinTableY[v, y] = Math.Sin(angleV);
-                }
-            }
-
-            // 手動計算 2D DFT
-            Parallel.For(0, height, u =>
-            {
-                for (int v = 0; v < width; v++)
-                {
-                    double realSum = 0.0;
-                    double imagSum = 0.0;
-
-                    for (int x = 0; x < height; x++)
-                    {
-                        for (int y = 0; y < width; y++)
-                        {
-                            double pixel = grayImage.At<byte>(x, y);
-                            double cosValue = cosTableX[u, x] * cosTableY[v, y];
-                            double sinValue = sinTableX[u, x] * sinTableY[v, y];
-
-                            realSum += pixel * cosValue;
-                            imagSum += pixel * sinValue;
-                        }
-                    }
-
-                    realPart[u, v] = realSum;
-                    imagPart[u, v] = imagSum;
-                }
-            });
-
-            // 計算幅度並對數縮放
-            OpenCvSharpMat magnitudeImage = new OpenCvSharpMat(height, width, MatType.CV_64F);
-            for (int u = 0; u < height; u++)
-            {
-                for (int v = 0; v < width; v++)
-                {
-                    double magnitude = Math.Sqrt(realPart[u, v] * realPart[u, v] + imagPart[u, v] * imagPart[u, v]);
-                    magnitudeImage.Set(u, v, Math.Log(1 + magnitude)); // 對數縮放
-                }
-            }
-
-            // 將低頻部分移動到頻譜圖中心
-            ShiftDFT(magnitudeImage);
-
-            // 正規化幅度影像，便於顯示
-            Cv2.Normalize(magnitudeImage, magnitudeImage, 0, 255, NormTypes.MinMax);
-            magnitudeImage.ConvertTo(magnitudeImage, MatType.CV_8U);
-
-            return magnitudeImage;
-        }
-
-
-
-        private async void 手動傅立葉變換ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            // 禁用選單或按鈕，避免重複執行
-            ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
-            if (menuItem != null) menuItem.Enabled = false;
-
-            try
-            {
-                // 使用非同步任務執行傅立葉變換
-                canvas = await Task.Run(() => ManualDFT(canvas));
-                //ShowImageWithCustomSize("Manual Fourier Transform Spectrum", magnitudeImage, 800, 600);
-                UpdateCanvas();
-                //Cv2.WaitKey(0); // 保持視窗開啟
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"錯誤: {ex.Message}", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                // 恢復選單或按鈕狀態
-                if (menuItem != null) menuItem.Enabled = true;
-            }
-        }
-
         // 將頻譜圖的低頻部分移動到中心
         private void ShiftDFT(OpenCvSharpMat magImage)
         {
@@ -783,7 +666,7 @@ namespace Paint {
             OpenCvSharpMat q1 = new OpenCvSharpMat(magImage, new Rect(cx, 0, cx, cy));  // Top-Right
             OpenCvSharpMat q2 = new OpenCvSharpMat(magImage, new Rect(0, cy, cx, cy));  // Bottom-Left
             OpenCvSharpMat q3 = new OpenCvSharpMat(magImage, new Rect(cx, cy, cx, cy)); // Bottom-Right
-
+            Console.WriteLine(q0.Type().ToString());
             OpenCvSharpMat tmp = new OpenCvSharpMat();
             q0.CopyTo(tmp);
             q3.CopyTo(q0);
@@ -803,57 +686,6 @@ namespace Paint {
 
             // 顯示圖像
             Cv2.ImShow(windowName, image);
-        }
-        private OpenCvSharpMat FFTDFT(OpenCvSharpMat image)
-        {
-            // 將影像轉換為灰階影像
-            OpenCvSharpMat grayImage = new OpenCvSharpMat();
-            if (image.Channels() != 1)
-                Cv2.CvtColor(image, grayImage, ColorConversionCodes.BGR2GRAY);
-            else
-                grayImage = image.Clone();
-
-            // 擴展影像大小以適配 DFT 的計算（最佳大小）
-            int optimalRows = Cv2.GetOptimalDFTSize(grayImage.Rows);
-            int optimalCols = Cv2.GetOptimalDFTSize(grayImage.Cols);
-            Cv2.CopyMakeBorder(grayImage, grayImage, 0, optimalRows - grayImage.Rows, 0, optimalCols - grayImage.Cols, BorderTypes.Constant, Scalar.All(0));
-
-            // 建立複數影像平面（實部 + 虛部）
-            OpenCvSharpMat[] planes = { new OpenCvSharpMat(grayImage.Size(), MatType.CV_32F), new OpenCvSharpMat(grayImage.Size(), MatType.CV_32F) };
-            grayImage.ConvertTo(planes[0], MatType.CV_32F); // 實部為影像本身
-            planes[1].SetTo(Scalar.All(0)); // 虛部為零
-            OpenCvSharpMat complexImage = new OpenCvSharpMat();
-            Cv2.Merge(planes, complexImage);
-
-            // 進行 DFT 轉換
-            Cv2.Dft(complexImage, complexImage, DftFlags.ComplexOutput);
-
-            // 分離頻譜的實部和虛部
-            Cv2.Split(complexImage, out planes);
-
-            // 計算幅度：sqrt(re^2 + im^2)
-            OpenCvSharpMat magnitudeImage = new OpenCvSharpMat();
-            Cv2.Magnitude(planes[0], planes[1], magnitudeImage);
-
-            // 對數縮放處理（Log Scale）
-            magnitudeImage += Scalar.All(1); // 避免對數的零點
-            Cv2.Log(magnitudeImage, magnitudeImage);
-
-            // 移動頻譜圖中心
-            ShiftDFT(magnitudeImage);
-
-            // 將結果正規化到 0-255 範圍以便顯示
-            Cv2.Normalize(magnitudeImage, magnitudeImage, 0, 255, NormTypes.MinMax);
-            magnitudeImage.ConvertTo(magnitudeImage, MatType.CV_8U);
-
-            return magnitudeImage;
-        }
-        private void 使用FFT傅立葉變換ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            canvas = FFTDFT(canvas);
-            UpdateCanvas();
-            //ShowImageWithCustomSize("FFT Fourier Transform Spectrum", canvas, 800, 600);
-            //Cv2.WaitKey(0); // 保持視窗開啟
         }
         private Complex[,] FFT2D(double[,] input)
         {
@@ -915,36 +747,6 @@ namespace Paint {
             magnitudeImage.ConvertTo(magnitudeImage, MatType.CV_8U);
 
             return magnitudeImage;
-        }
-        private OpenCvSharpMat ManualFFT(OpenCvSharpMat image)
-        {
-            // 轉換為灰階影像
-            OpenCvSharpMat grayImage = new OpenCvSharpMat();
-            if (image.Channels() != 1)
-                Cv2.CvtColor(image, grayImage, ColorConversionCodes.BGR2GRAY);
-            else
-                grayImage = image.Clone();
-
-            // 轉換為雙精度陣列
-            int rows = grayImage.Rows;
-            int cols = grayImage.Cols;
-            double[,] input = new double[rows, cols];
-            for (int i = 0; i < rows; i++)
-                for (int j = 0; j < cols; j++)
-                    input[i, j] = grayImage.At<byte>(i, j);
-
-            // 計算 2D FFT
-            Complex[,] fftResult = FFT2D(input);
-
-            // 可視化頻譜圖
-            return VisualizeFFT(fftResult);
-        }
-        private void 自己實現FFTToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            canvas = ManualFFT(canvas);
-            UpdateCanvas();
-            //Cv2.ImShow("Manual FFT Spectrum", magnitudeImage);
-            //Cv2.WaitKey(0); // 保持視窗
         }
         public static Complex[] IFFT(Complex[] input)
         {
@@ -1026,148 +828,6 @@ namespace Paint {
             return croppedResult;
         }
 
-        private OpenCvSharpMat ReconstructImageFromFFT(Complex[,] ifftResult)
-        {
-            int rows = ifftResult.GetLength(0);
-            int cols = ifftResult.GetLength(1);
-
-            OpenCvSharpMat reconstructedImage = new OpenCvSharpMat(rows, cols, MatType.CV_8U);
-            double min = double.MaxValue, max = double.MinValue;
-
-            // 提取實部並找到最小值和最大值
-            for (int i = 0; i < rows; i++)
-            {
-                for (int j = 0; j < cols; j++)
-                {
-                    double value = ifftResult[i, j].Real;
-                    min = Math.Min(min, value);
-                    max = Math.Max(max, value);
-                }
-            }
-
-            // 防止全黑問題
-            if (min == max)
-            {
-                min = 0;
-                max = 1;
-            }
-
-            // 映射實部值到 [0, 255]
-            for (int i = 0; i < rows; i++)
-            {
-                for (int j = 0; j < cols; j++)
-                {
-                    double value = ifftResult[i, j].Real;
-                    byte pixelValue = (byte)((value - min) / (max - min) * 255);
-                    reconstructedImage.Set(i, j, pixelValue);
-                }
-            }
-
-            return reconstructedImage;
-        }
-
-
-        private OpenCvSharpMat RestoreImageFromFFT(Complex[,] fftResult)
-        {
-            // 執行逆 FFT
-            Complex[,] ifftResult = IFFT2D(fftResult);
-
-            // 還原影像
-            return ReconstructImageFromFFT(ifftResult);
-        }
-        private void FFT還原ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Step 1: 將 canvas 轉換為複數矩陣
-                int rows = canvas.Rows;
-                int cols = canvas.Cols;
-
-                Complex[,] fftResult = new Complex[rows, cols];
-                for (int i = 0; i < rows; i++)
-                {
-                    for (int j = 0; j < cols; j++)
-                    {
-                        Vec2f complexValue = canvas.At<Vec2f>(i, j); // 假設 canvas 是複數影像 (兩通道)
-                        fftResult[i, j] = new Complex(complexValue.Item0, complexValue.Item1);
-                    }
-                }
-
-                // Step 2: 執行逆 FFT
-                OpenCvSharpMat restoredImage = RestoreImageFromFFT(fftResult);
-
-                // Step 3: 更新 canvas 並顯示還原影像
-                canvas = restoredImage;
-                UpdateCanvas();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"還原過程出現錯誤：{ex.Message}", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        private void FFT還原2ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // 確保 canvas 是兩通道浮點影像 (CV_32FC2)
-                if (canvas.Empty() || canvas.Channels() != 2 || canvas.Type() != MatType.CV_32FC2)
-                {
-                    OpenCvSharpMat realPart = canvas.Clone();
-                    OpenCvSharpMat imaginaryPart = OpenCvSharpMat.Zeros(canvas.Size(), MatType.CV_32F); // 虛部為零
-
-                    // 確保實部和虛部的深度一致
-                    if (realPart.Depth() != MatType.CV_32F || imaginaryPart.Depth() != MatType.CV_32F)
-                    {
-                        realPart.ConvertTo(realPart, MatType.CV_32F);
-                        imaginaryPart.ConvertTo(imaginaryPart, MatType.CV_32F);
-                    }
-
-                    // 合併成雙通道
-                    OpenCvSharpMat mergedCanvas = new OpenCvSharpMat();
-                    Cv2.Merge(new[] { realPart, imaginaryPart }, mergedCanvas);
-                    canvas = mergedCanvas;
-                }
-
-                // Step 1: 執行逆傅立葉變換
-                OpenCvSharpMat restoredImage = PerformIFFT(canvas);
-
-                // Step 2: 更新 canvas 並顯示還原影像
-                canvas = restoredImage.Clone();
-                UpdateCanvas();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"還原過程出現錯誤：{ex.Message}", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private OpenCvSharpMat PerformIFFT(OpenCvSharpMat complexImage)
-        {
-            OpenCvSharpMat inverseTransform = new OpenCvSharpMat();
-
-            // 確保 complexImage 是雙通道浮點矩陣
-            if (complexImage.Channels() != 2 || complexImage.Type() != MatType.CV_32FC2)
-                throw new ArgumentException("Input image must be a two-channel floating-point matrix (CV_32FC2).");
-
-            // 執行逆傅立葉變換
-            Cv2.Dft(complexImage, inverseTransform, DftFlags.Inverse | DftFlags.RealOutput);
-
-            // 檢查數據範圍
-            double min, max;
-            Cv2.MinMaxLoc(inverseTransform, out min, out max);
-            Console.WriteLine($"Inverse Transform Min: {min}, Max: {max}");
-
-            // 如果範圍過小，可能意味著輸入的頻譜不正確
-            if (max - min < 1e-6)
-                throw new Exception("Invalid frequency spectrum. The result may be too small or invalid.");
-
-            // 正規化到 [0, 255] 範圍
-            Cv2.Normalize(inverseTransform, inverseTransform, 0, 255, NormTypes.MinMax);
-            inverseTransform.ConvertTo(inverseTransform, MatType.CV_8U);
-
-            return inverseTransform;
-        }
-
         private void 放棄toolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -1182,26 +842,40 @@ namespace Paint {
                 // Step 3: 计算 FFT
                 Complex[,] fftResult = Compute2DFFT(paddedImage);
 
+                
+                canvas = ComplexArrayToMat(fftResult);
+                ShiftDFT(canvas);
+                UpdateCanvas();
+                return;
+                
+                /*
                 // Step 4: 可视化 FFT 频谱
                 OpenCvSharpMat spectrum = VisualizeFFT2(fftResult);
-                Cv2.ImShow("FFT Spectrum", spectrum);
+
+                // 使用比例缩放显示频谱
+                ShowImageWithProportionalScaling("FFT Spectrum", spectrum, 800, 800);
 
                 // Step 5: 执行逆 FFT
                 Complex[,] ifftResult = IFFT2D(fftResult);
 
                 // Step 6: 重建图像
                 OpenCvSharpMat restoredImage = ReconstructImageFromFFT2(ifftResult, canvas.Rows, canvas.Cols);
-                Cv2.ImShow("Restored Image", restoredImage);
+
+                // 使用比例缩放显示还原图像
+                ShowImageWithProportionalScaling("Restored Image", restoredImage, 800, 800);
 
                 // 更新 canvas
                 canvas = restoredImage;
                 UpdateCanvas();
+                */
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"还原过程出错：{ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
 
         // 填充影像到 2 的幂次方大小
         private OpenCvSharpMat PadToPowerOfTwo(OpenCvSharpMat image)
@@ -1292,6 +966,125 @@ namespace Paint {
             reconstructedImage.ConvertTo(reconstructedImage, MatType.CV_8U);
 
             return reconstructedImage;
+        }
+        private void ShowImageWithProportionalScaling(string windowName, OpenCvSharpMat image, int maxWidth, int maxHeight)
+        {
+            // 获取图像的原始尺寸
+            int originalWidth = image.Width;
+            int originalHeight = image.Height;
+
+            // 按比例计算窗口尺寸
+            double aspectRatio = (double)originalWidth / originalHeight;
+            int windowWidth = maxWidth;
+            int windowHeight = maxHeight;
+
+            if (aspectRatio > 1)
+            {
+                // 宽度限制
+                windowHeight = (int)(maxWidth / aspectRatio);
+            }
+            else
+            {
+                // 高度限制
+                windowWidth = (int)(maxHeight * aspectRatio);
+            }
+
+            // 创建可调整大小的窗口并设置尺寸
+            Cv2.NamedWindow(windowName, OpenCvSharp.WindowFlags.Normal);
+            Cv2.ResizeWindow(windowName, windowWidth, windowHeight);
+
+            // 显示图像
+            Cv2.ImShow(windowName, image);
+        }
+        private OpenCvSharpMat ComplexArrayToMat(Complex[,] complexArray)
+        {
+            int rows = complexArray.GetLength(0);
+            int cols = complexArray.GetLength(1);
+
+            // 创建两通道 Mat，分别存储实部和虚部
+            OpenCvSharpMat mat = new OpenCvSharpMat(rows, cols, MatType.CV_32FC2);
+
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    Vec2f value = new Vec2f((float)complexArray[i, j].Real, (float)complexArray[i, j].Imaginary);
+                    mat.Set(i, j, value);
+                }
+            }
+
+            return mat;
+        }
+        private Complex[,] MatToComplexArray(OpenCvSharpMat mat)
+        {
+            int rows = mat.Rows;
+            int cols = mat.Cols;
+
+            Complex[,] complexArray = new Complex[rows, cols];
+
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    Vec2f value = mat.At<Vec2f>(i, j);
+                    complexArray[i, j] = new Complex(value.Item0, value.Item1); // 实部和虚部
+                }
+            }
+
+            return complexArray;
+        }
+
+        private void iFFTToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShiftDFT(canvas);
+            Complex[,] fftResult = MatToComplexArray(canvas);
+             // Step 5: 执行逆 FFT
+             Complex[,] ifftResult = IFFT2D(fftResult);
+
+            // Step 6: 重建图像
+            OpenCvSharpMat restoredImage = ReconstructImageFromFFT2(ifftResult, canvas.Rows, canvas.Cols);
+
+            // 使用比例缩放显示还原图像
+            ShowImageWithProportionalScaling("Restored Image", restoredImage, 800, 800);
+            
+            // 更新 canvas
+            canvas = restoredImage;
+            
+            UpdateCanvas();
+        }
+
+        public Bitmap ConvertCV32FC2ToBitmap()
+        {
+            if (canvas.Type() != MatType.CV_32FC2)
+                throw new ArgumentException("Input Mat must be of type CV_32FC2.");
+
+            // Step 1: Split into real and imaginary parts
+            OpenCvSharpMat[] channels = Cv2.Split(canvas);
+
+            // Step 2: Compute magnitude
+            OpenCvSharpMat magnitude = new OpenCvSharpMat();
+            Cv2.Magnitude(channels[0], channels[1], magnitude);
+
+            // Step 3: Apply logarithmic scaling
+            OpenCvSharpMat logMagnitude = new OpenCvSharpMat();
+            Cv2.Log(magnitude + 1, logMagnitude); // Avoid log(0)
+
+            // Step 4: Normalize to [0, 255]
+            OpenCvSharpMat normalizedMagnitude = new OpenCvSharpMat();
+            Cv2.Normalize(logMagnitude, normalizedMagnitude, 0, 255, NormTypes.MinMax);
+            normalizedMagnitude.ConvertTo(normalizedMagnitude, MatType.CV_8U);
+
+            // Step 5: Convert to Bitmap
+            Bitmap bitmap = BitmapConverter.ToBitmap(normalizedMagnitude);
+
+            // Release temporary Mats
+            foreach (var mat in channels)
+                mat.Dispose();
+            magnitude.Dispose();
+            logMagnitude.Dispose();
+            normalizedMagnitude.Dispose();
+
+            return bitmap;
         }
     }
 
