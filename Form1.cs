@@ -94,6 +94,7 @@ namespace Paint {
             pictureBox1.Image = BitmapConverter.ToBitmap(canvas);
             pictureBox1.Width = width;
             pictureBox1.Height = height;
+            tempCanvas = canvas.Clone();
         }
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e) {
             if (e.Button == MouseButtons.Left) {
@@ -118,7 +119,6 @@ namespace Paint {
                 }
                 else {
                     currentPoint = ConvertToImageCoordinates(e.Location);
-                    tempCanvas = canvas.Clone();
                     DrawPreviewShape();
                     ShowTempCanvas();
                     //tempCanvas.Dispose();
@@ -176,6 +176,10 @@ namespace Paint {
                 OpenCvSharp.Point[] TrianglePoint = { startpoint, vertex2, vertex };
                 Cv2.Polylines(tempCanvas, new[] {TrianglePoint}, true, currentColor, penThickness);
             }
+            else {
+                Cv2.Line(tempCanvas,prevPoint,currentPoint, currentColor, penThickness);
+                prevPoint = currentPoint;
+            }
         }
         //final
         private void DrawFinalShape() {
@@ -183,20 +187,20 @@ namespace Paint {
             switch (drawMode) {
                 case "Line":
                     Cv2.Line(canvas, prevPoint, currentPoint, currentColor, penThickness);
-                    tempAct = new PenMotion("Line", prevPoint, currentPoint, currentColor, penThickness, 0,new OpenCvSize(0,0),null);
+                    tempAct = new PenMotion("Line", prevPoint, currentPoint, currentColor, penThickness, 0,new OpenCvSize(0,0),null,canvas);
                     break;
                 case "Rectangle":
                     Cv2.Rectangle(canvas, prevPoint, currentPoint, currentColor, penThickness); // 最終繪製黑色矩形
-                    tempAct = new PenMotion("Rectangle", prevPoint, currentPoint, currentColor, penThickness, 0, new OpenCvSize(0, 0), null);
+                    tempAct = new PenMotion("Rectangle", prevPoint, currentPoint, currentColor, penThickness, 0, new OpenCvSize(0, 0), null,canvas);
                     break;
                 case "Circle":
                     Cv2.Circle(canvas, startpoint, CalculateDistance(startpoint, currentPoint), currentColor, penThickness);
-                    tempAct = new PenMotion("Circle", startpoint, currentPoint, currentColor, penThickness, CalculateDistance(startpoint, currentPoint), new OpenCvSize(0, 0), null);
+                    tempAct = new PenMotion("Circle", startpoint, currentPoint, currentColor, penThickness, CalculateDistance(startpoint, currentPoint), new OpenCvSize(0, 0), null,canvas);
                     break;
                 case "Ellipse":
                     OpenCvSize size = new OpenCvSize(Math.Abs(currentPoint.X - startpoint.X), Math.Abs(currentPoint.Y - startpoint.Y));
                     Cv2.Ellipse(canvas, startpoint, size, 0, 0, 360, currentColor, penThickness);
-                    tempAct = new PenMotion("Ellipse", startpoint, currentPoint, currentColor, penThickness, CalculateDistance(startpoint, currentPoint), size, null);
+                    tempAct = new PenMotion("Ellipse", startpoint, currentPoint, currentColor, penThickness, CalculateDistance(startpoint, currentPoint), size, null,canvas);
                     break;
                 case "Triangle":
                     OpenCvSharp.Point vertex;
@@ -207,11 +211,11 @@ namespace Paint {
                     vertex2.Y = startpoint.Y;
                     OpenCvSharp.Point[] TrianglePoint = { startpoint, vertex2, vertex };
                     Cv2.Polylines(canvas, new[] { TrianglePoint }, true, currentColor, penThickness);
-                    tempAct = new PenMotion("Triangle", startpoint, currentPoint, currentColor, penThickness,0, new OpenCvSize(0,0), TrianglePoint);
+                    tempAct = new PenMotion("Triangle", startpoint, currentPoint, currentColor, penThickness,0, new OpenCvSize(0,0), TrianglePoint,canvas);
                     break;
                 default:
                     Cv2.Line(canvas, prevPoint, currentPoint, currentColor, penThickness);
-                    tempAct = new PenMotion("Free", prevPoint, currentPoint, currentColor, penThickness, 0, new OpenCvSize(0, 0), null);
+                    tempAct = new PenMotion("Free", prevPoint, currentPoint, currentColor, penThickness, 0, new OpenCvSize(0, 0), null, canvas);
                     break; 
             }
             action.Push(tempAct);
@@ -294,6 +298,7 @@ namespace Paint {
             if (openFileDialog.ShowDialog() == DialogResult.OK) {
                 canvas = Cv2.ImRead(openFileDialog.FileName);
                 pictureBox1.Load(openFileDialog.FileName);
+                tempCanvas = canvas.Clone();
             }
         }
         private void 結束ToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -348,11 +353,10 @@ namespace Paint {
         }
 
         private void 高斯模糊ToolStripMenuItem_Click(object sender, EventArgs e) {
-            Gauss blurform = new Gauss(init_kernal,init_sigma);
-            if (blurform.ShowDialog() == DialogResult.OK) {
-                Cv2.GaussianBlur(canvas, canvas, blurform.Kernal, blurform.Sigma);
+            Gauss blurform = new Gauss(init_kernal,init_sigma,this);
+            if (blurform.ShowDialog() == DialogResult.OK) 
                 UpdateCanvas();
-            }
+            blurform.Dispose();
         }
         private void 亮度對比度ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -474,6 +478,7 @@ namespace Paint {
             High_pass HP_filter = new High_pass(this);
             if(HP_filter.ShowDialog() == DialogResult.OK)
                 UpdateCanvas();
+            
             HP_filter.Dispose();
         }
         private void Pallate_Click(object sender, EventArgs e) {

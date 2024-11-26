@@ -101,6 +101,7 @@
             this.Controls.Add(this.Preview_box);
             this.Name = "Low_pass";
             this.Text = "Low_pass";
+            this.Load += new System.EventHandler(this.Low_pass_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Preview_box)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Kernal_bar)).EndInit();
             this.ResumeLayout(false);

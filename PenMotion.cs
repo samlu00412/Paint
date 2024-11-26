@@ -19,7 +19,8 @@ namespace Pen {
         public int Radius { get; set; }
         public Size Size { get; set; }
         public Point[] Vertexes { get; set; }
-        public PenMotion(string type, Point start, Point end, Scalar pencolor, int thickness, int radius, Size size, Point[] vertexes) {
+        public Mat Canva { get; set; }
+        public PenMotion(string type, Point start, Point end, Scalar pencolor, int thickness, int radius, Size size, Point[] vertexes,Mat canva) {
             Type = type;
             Start = start;
             End = end;
@@ -28,6 +29,7 @@ namespace Pen {
             Radius = radius;
             Size = size;
             Vertexes = vertexes;
+            Canva = canva;
         }
         public PenMotion(Paint.Paint FormInstance) {
             formins = FormInstance;
