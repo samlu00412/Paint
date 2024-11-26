@@ -70,6 +70,7 @@
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.放棄ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -88,7 +89,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(6, 3, 0, 3);
-            this.menuStrip1.Size = new System.Drawing.Size(1540, 44);
+            this.menuStrip1.Size = new System.Drawing.Size(1540, 48);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -248,9 +249,10 @@
             this.轉換成灰階ToolStripMenuItem,
             this.傅立葉ToolStripMenuItem,
             this.fFTToolStripMenuItem,
-            this.fFTbymyselfToolStripMenuItem});
+            this.fFTbymyselfToolStripMenuItem,
+            this.放棄ToolStripMenuItem});
             this.調整ToolStripMenuItem.Name = "調整ToolStripMenuItem";
-            this.調整ToolStripMenuItem.Size = new System.Drawing.Size(81, 38);
+            this.調整ToolStripMenuItem.Size = new System.Drawing.Size(81, 42);
             this.調整ToolStripMenuItem.Text = "調整";
             // 
             // 強度轉換ToolStripMenuItem
@@ -375,10 +377,10 @@
             this.toolStripButton1,
             this.toolStripButton2,
             this.toolStripButton3});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 44);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 48);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 1, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(1540, 42);
+            this.toolStrip1.Size = new System.Drawing.Size(1540, 50);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -388,7 +390,7 @@
             this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(46, 36);
+            this.toolStripButton1.Size = new System.Drawing.Size(46, 44);
             this.toolStripButton1.Text = "toolStripButton1";
             this.toolStripButton1.Click += new System.EventHandler(this.Pallate_Click);
             // 
@@ -411,6 +413,13 @@
             this.toolStripButton3.Size = new System.Drawing.Size(46, 36);
             this.toolStripButton3.Text = "toolStripButton3";
             this.toolStripButton3.Click += new System.EventHandler(this.重做RedoToolStripMenuItem_Click);
+            // 
+            // 放棄ToolStripMenuItem
+            // 
+            this.放棄ToolStripMenuItem.Name = "放棄ToolStripMenuItem";
+            this.放棄ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.放棄ToolStripMenuItem.Text = "放棄";
+            this.放棄ToolStripMenuItem.Click += new System.EventHandler(this.放棄toolStripMenuItem_Click);
             // 
             // Paint
             // 
@@ -478,6 +487,7 @@
         private System.Windows.Forms.ToolStripMenuItem 傅立葉ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fFTToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fFTbymyselfToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 放棄ToolStripMenuItem;
     }
 }
 
