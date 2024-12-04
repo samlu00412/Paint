@@ -60,8 +60,8 @@
             this.低通濾波ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.高通濾波ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.轉換成灰階ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.傅立葉ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.放棄ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.iFFTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -69,7 +69,6 @@
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.iFFTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -246,7 +245,6 @@
             this.強度轉換ToolStripMenuItem,
             this.空間濾波ToolStripMenuItem,
             this.轉換成灰階ToolStripMenuItem,
-            this.傅立葉ToolStripMenuItem,
             this.放棄ToolStripMenuItem,
             this.iFFTToolStripMenuItem});
             this.調整ToolStripMenuItem.Name = "調整ToolStripMenuItem";
@@ -330,18 +328,19 @@
             this.轉換成灰階ToolStripMenuItem.Text = "轉換成灰階";
             this.轉換成灰階ToolStripMenuItem.Click += new System.EventHandler(this.轉換成灰階ToolStripMenuItem_Click);
             // 
-            // 傅立葉ToolStripMenuItem
-            // 
-            this.傅立葉ToolStripMenuItem.Name = "傅立葉ToolStripMenuItem";
-            this.傅立葉ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
-            this.傅立葉ToolStripMenuItem.Text = "傅立葉";
-            // 
             // 放棄ToolStripMenuItem
             // 
             this.放棄ToolStripMenuItem.Name = "放棄ToolStripMenuItem";
-            this.放棄ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.放棄ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             this.放棄ToolStripMenuItem.Text = "使用FFT";
             this.放棄ToolStripMenuItem.Click += new System.EventHandler(this.放棄toolStripMenuItem_Click);
+            // 
+            // iFFTToolStripMenuItem
+            // 
+            this.iFFTToolStripMenuItem.Name = "iFFTToolStripMenuItem";
+            this.iFFTToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.iFFTToolStripMenuItem.Text = "IFFT";
+            this.iFFTToolStripMenuItem.Click += new System.EventHandler(this.iFFTToolStripMenuItem_Click);
             // 
             // pictureBox1
             // 
@@ -403,13 +402,6 @@
             this.toolStripButton3.Size = new System.Drawing.Size(46, 36);
             this.toolStripButton3.Text = "toolStripButton3";
             this.toolStripButton3.Click += new System.EventHandler(this.重做RedoToolStripMenuItem_Click);
-            // 
-            // iFFTToolStripMenuItem
-            // 
-            this.iFFTToolStripMenuItem.Name = "iFFTToolStripMenuItem";
-            this.iFFTToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.iFFTToolStripMenuItem.Text = "IFFT";
-            this.iFFTToolStripMenuItem.Click += new System.EventHandler(this.iFFTToolStripMenuItem_Click);
             // 
             // Paint
             // 
@@ -474,7 +466,6 @@
         private System.Windows.Forms.ToolStripMenuItem log變換ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 反logToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 繪製亮度直方圖ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 傅立葉ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 放棄ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem iFFTToolStripMenuItem;
     }

@@ -1,8 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\USER\\source\\repos\\Paint\\",
+  "WorkspaceRootPath": "C:\\Users\\samlu\\source\\repos\\Paint\\",
   "Documents": [
     {
+<<<<<<< HEAD
       "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -53,6 +54,14 @@
     {
       "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\lightness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:lightness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+=======
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|c:\\users\\samlu\\source\\repos\\paint\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+>>>>>>> ea8ec674ddaab1108fff570d5179a057cd3945af
     }
   ],
   "DocumentGroupContainers": [
@@ -62,6 +71,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
+<<<<<<< HEAD
           "SelectedChildIndex": 0,
           "Children": [
             {
@@ -77,6 +87,13 @@
               "WhenOpened": "2024-10-27T09:12:45.334Z",
               "IsPinned": true,
               "EditorCaption": ""
+=======
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+>>>>>>> ea8ec674ddaab1108fff570d5179a057cd3945af
             },
             {
               "$type": "Bookmark",
@@ -92,6 +109,7 @@
             },
             {
               "$type": "Document",
+<<<<<<< HEAD
               "DocumentIndex": 4,
               "Title": "Class1.cs",
               "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Class1.cs",
@@ -101,10 +119,22 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAABfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-18T06:11:15.734Z",
+=======
+              "DocumentIndex": 0,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\Form1.cs",
+              "RelativeToolTip": "Form1.cs",
+              "ViewState": "AgIAAG0DAAAAAAAAAADwv3MDAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-30T05:52:58.656Z",
+>>>>>>> ea8ec674ddaab1108fff570d5179a057cd3945af
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+<<<<<<< HEAD
               "DocumentIndex": 5,
               "Title": "Gauss.cs [\u8A2D\u8A08]",
               "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Gauss.cs",
@@ -157,14 +187,22 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
+=======
+              "DocumentIndex": 1,
+>>>>>>> ea8ec674ddaab1108fff570d5179a057cd3945af
               "Title": "Form1.cs [\u8A2D\u8A08]",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Form1.cs",
+              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
+<<<<<<< HEAD
               "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Form1.cs [\u8A2D\u8A08]",
+=======
+              "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\Form1.cs [\u8A2D\u8A08]",
+>>>>>>> ea8ec674ddaab1108fff570d5179a057cd3945af
               "RelativeToolTip": "Form1.cs [\u8A2D\u8A08]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-27T09:12:44.241Z",
               "EditorCaption": " [\u8A2D\u8A08]"
+<<<<<<< HEAD
             },
             {
               "$type": "Document",
@@ -242,6 +280,8 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-28T13:47:31.226Z",
               "EditorCaption": ""
+=======
+>>>>>>> ea8ec674ddaab1108fff570d5179a057cd3945af
             }
           ]
         }
