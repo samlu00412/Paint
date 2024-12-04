@@ -138,8 +138,10 @@ namespace Paint {
         private void ShowTempCanvas() {
             if (pictureBox1.Image != null)
                 pictureBox1.Image.Dispose();
-
-            pictureBox1.Image = BitmapConverter.ToBitmap(tempCanvas);
+            if (tempCanvas.Type() != MatType.CV_32FC2)
+                pictureBox1.Image = BitmapConverter.ToBitmap(tempCanvas);
+            else
+                pictureBox1.Image = ConvertCV32FC2ToBitmap(tempCanvas);
         }
         //preview
         private void DrawPreviewShape() {
@@ -184,8 +186,10 @@ namespace Paint {
             if (pictureBox1.Image != null) {
                 pictureBox1.Image.Dispose();
             }
-                //canvas.CopyTo(tempCanvas);
+            if (canvas.Type() != MatType.CV_32FC2)
                 pictureBox1.Image = BitmapConverter.ToBitmap(canvas);
+            else
+                pictureBox1.Image = ConvertCV32FC2ToBitmap(canvas);
         }
         private Rectangle GetImageRectangleInPictureBox() {
             // 計算圖像縮放後在 PictureBox 中的實際顯示範圍
@@ -234,10 +238,10 @@ namespace Paint {
             Undo.Push(new Storage(canvas.Clone()));
         }
         private void AdjustmentCanvas() {
-            canvas.CopyTo(tempCanvas);
             SaveCurrentState();
             Redo.Clear();
             UpdateCanvas();
+            canvas.CopyTo(tempCanvas);
         }
         private void ToolStripMenuItem_Click(object sender, EventArgs e) {
             ToolStripMenuItem temp = (ToolStripMenuItem)sender;
@@ -731,9 +735,7 @@ namespace Paint {
                 Complex[,] fftResult = Compute2DFFT(paddedImage);
 
                 canvas = ComplexArrayToMat(fftResult);
-                compress_channel(canvas);
                 ShiftDFT(canvas);
-                canvas.ConvertTo(canvas, MatType.CV_8UC1);
                 AdjustmentCanvas();
                 return;
 
@@ -744,7 +746,11 @@ namespace Paint {
         }
         private void compress_channel(Mat image) {
             Mat[] channel = Cv2.Split(image);
+            Cv2.ImShow("channel0", channel[0]);
+            Cv2.ImShow("channel1",channel[1]);
             Cv2.Magnitude(channel[0], channel[1], image);
+            channel[0].Dispose();
+            channel[1].Dispose();
         }
 
         // 填充影像到 2 的幂次方大小
@@ -870,10 +876,7 @@ namespace Paint {
 
         private void iFFTToolStripMenuItem_Click(object sender, EventArgs e) {
             ShiftDFT(canvas);
-            canvas.ConvertTo(canvas, MatType.CV_32F);
-            Mat zeroChannel = new Mat(canvas.Size(), MatType.CV_32F, Scalar.All(0));
-            Cv2.Merge(new Mat[] {canvas,zeroChannel},canvas);
-
+            
             Complex[,] fftResult = MatToComplexArray(canvas);
             // Step 5: 逆 FFT
 
@@ -881,7 +884,7 @@ namespace Paint {
 
             // Step 6: 重建image
             OpenCvSharpMat restoredImage = ReconstructImageFromFFT2(ifftResult, canvas.Rows, canvas.Cols);
-
+            
             // 使用比例缩放顯示還原image
             ShowImageWithProportionalScaling("Restored Image", restoredImage, 800, 800);
 
@@ -890,12 +893,12 @@ namespace Paint {
             AdjustmentCanvas();
         }
 
-        public Bitmap ConvertCV32FC2ToBitmap() {
-            if (canvas.Type() != MatType.CV_32FC2)
+        public Bitmap ConvertCV32FC2ToBitmap(OpenCvSharp.Mat image) {
+            if (image.Type() != MatType.CV_32FC2)
                 throw new ArgumentException("Input Mat must be of type CV_32FC2.");
 
             // Step 1: Split into real and imaginary parts
-            OpenCvSharpMat[] channels = Cv2.Split(canvas);
+            OpenCvSharpMat[] channels = Cv2.Split(image);
 
             // Step 2: Compute magnitude
             OpenCvSharpMat magnitude = new OpenCvSharpMat();
