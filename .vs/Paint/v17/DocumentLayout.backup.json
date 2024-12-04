@@ -1,13 +1,16 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\samlu\\source\\repos\\Paint\\",
+  "WorkspaceRootPath": "C:\\Users\\USER\\source\\repos\\Paint\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\low_pass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:low_pass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-<<<<<<< HEAD
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|c:\\users\\user\\source\\repos\\paint\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
@@ -17,27 +20,11 @@
     },
     {
       "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-=======
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\high_pass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:high_pass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\gauss.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:gauss.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|c:\\users\\samlu\\source\\repos\\paint\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
->>>>>>> b1a4ad9e903c1869b09f54680736b4b41a96fcb3
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\gauss.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\gauss.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:gauss.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-<<<<<<< HEAD
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\high_pass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -54,18 +41,18 @@
     {
       "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\picturehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:picturehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-=======
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\high_pass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:high_pass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
->>>>>>> b1a4ad9e903c1869b09f54680736b4b41a96fcb3
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\\u53CDlog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:\u53CDlog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\lightness.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:lightness.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\lightness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:lightness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -75,7 +62,6 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-<<<<<<< HEAD
           "SelectedChildIndex": 0,
           "Children": [
             {
@@ -86,18 +72,11 @@
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAAEMDAAAAAAAAAAAAAE4DAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAAPsDAAAAAAAAAAAhwP0DAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-27T09:12:45.334Z",
               "IsPinned": true,
               "EditorCaption": ""
-=======
-          "SelectedChildIndex": 8,
-          "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
->>>>>>> b1a4ad9e903c1869b09f54680736b4b41a96fcb3
             },
             {
               "$type": "Bookmark",
@@ -113,54 +92,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-<<<<<<< HEAD
-              "Title": ".gitignore",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\.gitignore",
-              "RelativeDocumentMoniker": ".gitignore",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\.gitignore",
-              "RelativeToolTip": ".gitignore",
-              "ViewState": "AgIAAEABAAAAAAAAAAAAAEMBAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-11-18T10:20:04.132Z",
-=======
-              "Title": "Gauss.cs",
-              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\Gauss.cs",
-              "RelativeDocumentMoniker": "Gauss.cs",
-              "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\Gauss.cs",
-              "RelativeToolTip": "Gauss.cs",
-              "ViewState": "AgIAAG8AAAAAAAAAAAArwH4AAABAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-19T08:27:23.32Z",
->>>>>>> b1a4ad9e903c1869b09f54680736b4b41a96fcb3
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-<<<<<<< HEAD
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Class1.cs",
               "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Class1.cs",
               "RelativeDocumentMoniker": "Class1.cs",
               "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Class1.cs",
               "RelativeToolTip": "Class1.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAABfAAAAAAAAAA==",
-=======
-              "DocumentIndex": 4,
-              "Title": "Gauss.cs [\u8A2D\u8A08]",
-              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\Gauss.cs",
-              "RelativeDocumentMoniker": "Gauss.cs",
-              "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\Gauss.cs [\u8A2D\u8A08]",
-              "RelativeToolTip": "Gauss.cs [\u8A2D\u8A08]",
->>>>>>> b1a4ad9e903c1869b09f54680736b4b41a96fcb3
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-19T08:27:21.859Z",
-              "EditorCaption": " [\u8A2D\u8A08]"
+              "WhenOpened": "2024-11-18T06:11:15.734Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-<<<<<<< HEAD
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Gauss.cs [\u8A2D\u8A08]",
               "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Gauss.cs",
               "RelativeDocumentMoniker": "Gauss.cs",
@@ -168,34 +113,10 @@
               "RelativeToolTip": "Gauss.cs [\u8A2D\u8A08]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-29T14:02:11.532Z",
-=======
-              "DocumentIndex": 1,
-              "Title": "High_pass.cs",
-              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\High_pass.cs",
-              "RelativeDocumentMoniker": "High_pass.cs",
-              "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\High_pass.cs",
-              "RelativeToolTip": "High_pass.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAiwCgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-19T08:26:51.182Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "High_pass.cs [\u8A2D\u8A08]",
-              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\High_pass.cs",
-              "RelativeDocumentMoniker": "High_pass.cs",
-              "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\High_pass.cs [\u8A2D\u8A08]",
-              "RelativeToolTip": "High_pass.cs [\u8A2D\u8A08]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-19T08:26:47.557Z",
->>>>>>> b1a4ad9e903c1869b09f54680736b4b41a96fcb3
               "EditorCaption": " [\u8A2D\u8A08]"
             },
             {
               "$type": "Document",
-<<<<<<< HEAD
               "DocumentIndex": 10,
               "Title": "\u53CDlog.cs",
               "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\\u53CDlog.cs",
@@ -204,7 +125,8 @@
               "RelativeToolTip": "\u53CDlog.cs",
               "ViewState": "AgIAADQAAAAAAAAAAAAUwDwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-29T10:49:29.549Z"
+              "WhenOpened": "2024-10-29T10:49:29.549Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -216,7 +138,8 @@
               "RelativeToolTip": "lightness.Designer.cs",
               "ViewState": "AgIAABEAAAAAAAAAAABRwKgAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-29T10:37:29.992Z"
+              "WhenOpened": "2024-10-29T10:37:29.992Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -226,75 +149,47 @@
               "RelativeDocumentMoniker": "lightness.cs",
               "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\lightness.cs",
               "RelativeToolTip": "lightness.cs",
-              "ViewState": "AgIAAEMAAAAAAAAAAAA7wE0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAkwE0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-29T10:27:29.833Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-=======
-              "DocumentIndex": 0,
-              "Title": "Low_pass.cs",
-              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\Low_pass.cs",
-              "RelativeDocumentMoniker": "Low_pass.cs",
-              "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\Low_pass.cs",
-              "RelativeToolTip": "Low_pass.cs",
-              "ViewState": "AgIAAFAAAAAAAAAAAAAqwF0AAAA7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-08T10:20:09.264Z",
+              "WhenOpened": "2024-10-29T10:27:29.833Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Class1.cs",
-              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\Class1.cs",
-              "RelativeDocumentMoniker": "Class1.cs",
-              "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\Class1.cs",
-              "RelativeToolTip": "Class1.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAvwBgAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T06:52:16.315Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Form1.cs",
-              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\Form1.cs",
-              "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\Form1.cs",
-              "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAAFEDAAAAAAAAAAAqwF8DAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-27T09:12:45.334Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
->>>>>>> b1a4ad9e903c1869b09f54680736b4b41a96fcb3
+              "DocumentIndex": 2,
               "Title": "Form1.cs [\u8A2D\u8A08]",
-              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\Form1.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\Form1.cs [\u8A2D\u8A08]",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Form1.cs [\u8A2D\u8A08]",
               "RelativeToolTip": "Form1.cs [\u8A2D\u8A08]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-<<<<<<< HEAD
               "WhenOpened": "2024-10-27T09:12:44.241Z",
               "EditorCaption": " [\u8A2D\u8A08]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "Form1.Designer.cs",
               "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Form1.Designer.cs",
               "RelativeDocumentMoniker": "Form1.Designer.cs",
               "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Form1.Designer.cs",
               "RelativeToolTip": "Form1.Designer.cs",
-              "ViewState": "AgIAAFIBAAAAAAAAAAAawFIBAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAAI4BAAAAAAAAAAAjwJsBAABoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-18T10:20:06.988Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\.gitignore",
+              "RelativeDocumentMoniker": ".gitignore",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\.gitignore",
+              "RelativeToolTip": ".gitignore",
+              "ViewState": "AgIAAD0BAAAAAAAAAIBJwEMBAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-11-18T10:20:04.132Z",
               "EditorCaption": ""
             },
             {
@@ -305,7 +200,7 @@
               "RelativeDocumentMoniker": "Gauss.cs",
               "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Gauss.cs",
               "RelativeToolTip": "Gauss.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADQAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-29T14:02:20.665Z",
               "EditorCaption": ""
@@ -345,10 +240,8 @@
               "RelativeToolTip": "PictureHelper.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-28T13:47:31.226Z"
-=======
-              "WhenOpened": "2024-10-27T09:12:44.241Z"
->>>>>>> b1a4ad9e903c1869b09f54680736b4b41a96fcb3
+              "WhenOpened": "2024-10-28T13:47:31.226Z",
+              "EditorCaption": ""
             }
           ]
         }

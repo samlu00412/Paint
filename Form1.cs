@@ -847,32 +847,12 @@ namespace Paint {
                 // Step 3: 计算 FFT
                 Complex[,] fftResult = Compute2DFFT(paddedImage);
 
-                
+                realrows = canvas.Rows;
+                realcols = canvas.Cols;
                 canvas = ComplexArrayToMat(fftResult);
                 ShiftDFT(canvas);
                 UpdateCanvas();
                 return;
-                
-                /*
-                // Step 4: 可视化 FFT 频谱
-                OpenCvSharpMat spectrum = VisualizeFFT2(fftResult);
-
-                // 使用比例缩放显示频谱
-                ShowImageWithProportionalScaling("FFT Spectrum", spectrum, 800, 800);
-
-                // Step 5: 执行逆 FFT
-                Complex[,] ifftResult = IFFT2D(fftResult);
-
-                // Step 6: 重建图像
-                OpenCvSharpMat restoredImage = ReconstructImageFromFFT2(ifftResult, canvas.Rows, canvas.Cols);
-
-                // 使用比例缩放显示还原图像
-                ShowImageWithProportionalScaling("Restored Image", restoredImage, 800, 800);
-
-                // 更新 canvas
-                canvas = restoredImage;
-                UpdateCanvas();
-                */
             }
             catch (Exception ex)
             {
@@ -1038,6 +1018,7 @@ namespace Paint {
 
             return complexArray;
         }
+        int realrows,realcols;
 
         private void iFFTToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1047,10 +1028,10 @@ namespace Paint {
              Complex[,] ifftResult = IFFT2D(fftResult);
 
             // Step 6: 重建图像
-            OpenCvSharpMat restoredImage = ReconstructImageFromFFT2(ifftResult, canvas.Rows, canvas.Cols);
+            OpenCvSharpMat restoredImage = ReconstructImageFromFFT2(ifftResult, realrows, realcols);
 
             // 使用比例缩放显示还原图像
-            ShowImageWithProportionalScaling("Restored Image", restoredImage, 800, 800);
+            //ShowImageWithProportionalScaling("Restored Image", restoredImage, 800, 800);
             
             // 更新 canvas
             canvas = restoredImage;
