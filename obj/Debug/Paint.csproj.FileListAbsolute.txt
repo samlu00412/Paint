@@ -37,6 +37,7 @@ C:\Users\samlu\source\repos\Paint\bin\Debug\System.Text.Json.xml
 C:\Users\samlu\source\repos\Paint\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\samlu\source\repos\Paint\bin\Debug\System.ValueTuple.xml
 C:\Users\samlu\source\repos\Paint\obj\Debug\Paint.csproj.AssemblyReference.cache
+C:\Users\samlu\source\repos\Paint\obj\Debug\Paint.binarization.resources
 C:\Users\samlu\source\repos\Paint\obj\Debug\Paint.Paint.resources
 C:\Users\samlu\source\repos\Paint\obj\Debug\Paint.反log.resources
 C:\Users\samlu\source\repos\Paint\obj\Debug\Paint.Gamma.resources

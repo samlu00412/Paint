@@ -876,6 +876,18 @@ namespace Paint {
         }
         int realrows,realcols;
 
+        private void 型態click(object sender, EventArgs e) {
+
+        }
+
+        private void 二值化click(object sender, EventArgs e) {
+            binarization binary = new binarization(this);
+            if(binary.ShowDialog() == DialogResult.OK) 
+                AdjustmentCanvas();
+            
+            binary.Dispose();
+        }
+
         private void iFFTToolStripMenuItem_Click(object sender, EventArgs e) {
             ShiftDFT(canvas);
             

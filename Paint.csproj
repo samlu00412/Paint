@@ -118,6 +118,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="binarization.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="binarization.Designer.cs">
+      <DependentUpon>binarization.cs</DependentUpon>
+    </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="反log.cs">
       <SubType>Form</SubType>
@@ -171,6 +177,9 @@
     <Compile Include="PenMotion.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="binarization.resx">
+      <DependentUpon>binarization.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
