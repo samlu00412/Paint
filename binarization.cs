@@ -29,7 +29,6 @@ namespace Paint {
             InitializeComponent();
             __mainform = mainform;
             tempCanvas = mainform.canvas.Clone();
-            threLabel.Text = " ";
             tempCanvas = tempCanvas.Resize(new OpenCvSharp.Size(tempCanvas.Width / previewScale, tempCanvas.Height / previewScale));
             threBar.Scroll += new EventHandler(BarScroll);
             select_mode_Box.TextChanged += new EventHandler(change_mode);

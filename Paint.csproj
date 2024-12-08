@@ -125,6 +125,12 @@
       <DependentUpon>binarization.cs</DependentUpon>
     </Compile>
     <Compile Include="Class1.cs" />
+    <Compile Include="morphology.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="morphology.Designer.cs">
+      <DependentUpon>morphology.cs</DependentUpon>
+    </Compile>
     <Compile Include="反log.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -182,6 +188,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="morphology.resx">
+      <DependentUpon>morphology.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="反log.resx">
       <DependentUpon>反log.cs</DependentUpon>

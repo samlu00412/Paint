@@ -877,7 +877,10 @@ namespace Paint {
         int realrows,realcols;
 
         private void 型態click(object sender, EventArgs e) {
-
+            morphology morph = new morphology(this);
+            if (morph.ShowDialog() == DialogResult.OK)
+                AdjustmentCanvas();
+            morph.Dispose();
         }
 
         private void 二值化click(object sender, EventArgs e) {
