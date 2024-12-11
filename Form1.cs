@@ -15,6 +15,8 @@ using Paint;
 using System.Threading.Tasks;
 using System.Numerics;
 using System.Windows.Forms.VisualStyles;
+using System.Web.UI.WebControls;
+using Emgu.CV.Structure;
 
 
 namespace Paint {
@@ -875,6 +877,86 @@ namespace Paint {
             return complexArray;
         }
         int realrows,realcols;
+
+        private void colortransformToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string menuText = ((ToolStripMenuItem)sender).Text;
+            Console.WriteLine(menuText);
+            if(menuText == "BGR to Grayscale")
+            {
+                Mat tempMat = new Mat();
+                Cv2.CvtColor(canvas, tempMat, ColorConversionCodes.BGR2GRAY);
+                canvas = tempMat;
+            }
+            else if(menuText == "Grayscale to BGR")
+            {
+                Mat tempMat = new Mat();
+                Cv2.CvtColor(canvas, tempMat, ColorConversionCodes.GRAY2BGR);
+                canvas = tempMat;
+            }
+            else if(menuText == "BGR to HSV")
+            {
+                Mat tempMat = new Mat();
+                Cv2.CvtColor(canvas, tempMat, ColorConversionCodes.BGR2HSV);
+                canvas = tempMat;
+            }
+            else if(menuText == "HSV to BGR")
+            {
+                Mat tempMat = new Mat();
+                Cv2.CvtColor(canvas, tempMat, ColorConversionCodes.HSV2BGR);
+                canvas = tempMat;
+            }
+            else if(menuText == "BGR to Lab")
+            {
+                Mat tempMat = new Mat();
+                Cv2.CvtColor(canvas, tempMat, ColorConversionCodes.BGR2Lab);
+                canvas = tempMat;
+            }
+            else if(menuText == "Lab to BGR")
+            {
+                Mat tempMat = new Mat();
+                Cv2.CvtColor(canvas, tempMat, ColorConversionCodes.Lab2BGR);
+                canvas = tempMat;
+            }
+            else if(menuText == "BGR to YUV")
+            {
+                Mat tempMat = new Mat();
+                Cv2.CvtColor(canvas, tempMat, ColorConversionCodes.BGR2YUV);
+                canvas = tempMat;
+            }
+            else if(menuText == "YUV to BGR")
+            {
+                Mat tempMat = new Mat();
+                Cv2.CvtColor(canvas, tempMat, ColorConversionCodes.YUV2BGR);
+                canvas = tempMat;
+            }
+            else if(menuText == "BGR to RGB")
+            {
+                Mat tempMat = new Mat();
+                Cv2.CvtColor(canvas, tempMat, ColorConversionCodes.BGR2RGB);
+                canvas = tempMat;
+            }
+            else if(menuText == "RGB to BGR")
+            {
+                Mat tempMat = new Mat();
+                Cv2.CvtColor(canvas, tempMat, ColorConversionCodes.RGB2BGR);
+                canvas = tempMat;
+            }
+            else if(menuText == "BGR to RGBA")
+            {
+                Mat tempMat = new Mat();
+                Cv2.CvtColor(canvas, tempMat, ColorConversionCodes.BGR2RGBA);
+                canvas = tempMat;
+            }
+            else if(menuText == "RGBA to BGR")
+            {
+                Mat tempMat = new Mat();
+                Cv2.CvtColor(canvas, tempMat, ColorConversionCodes.RGBA2BGR);
+                canvas = tempMat;
+            }
+            UpdateCanvas();
+        }
+
 
         private void iFFTToolStripMenuItem_Click(object sender, EventArgs e) {
             ShiftDFT(canvas);
