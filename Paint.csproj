@@ -125,6 +125,12 @@
       <DependentUpon>binarization.cs</DependentUpon>
     </Compile>
     <Compile Include="Class1.cs" />
+    <Compile Include="contour.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="contour.Designer.cs">
+      <DependentUpon>contour.cs</DependentUpon>
+    </Compile>
     <Compile Include="morphology.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -185,6 +191,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="binarization.resx">
       <DependentUpon>binarization.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="contour.resx">
+      <DependentUpon>contour.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

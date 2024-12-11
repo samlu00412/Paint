@@ -15,6 +15,7 @@ using Paint;
 using System.Threading.Tasks;
 using System.Numerics;
 using System.Windows.Forms.VisualStyles;
+using System.Security.Cryptography;
 
 
 namespace Paint {
@@ -28,7 +29,7 @@ namespace Paint {
         private OpenCvSharp.Point currentPoint;
 
         private Bitmap canvasBitmap;
-        private bool isDrawing = false, isGray = false;
+        private bool isDrawing = false, isGrey = false;
         private string drawMode = "Free";
         private Rectangle showAspect;
         private Scalar currentColor = new Scalar(0, 0, 0);
@@ -298,7 +299,7 @@ namespace Paint {
         private void 轉換成灰階ToolStripMenuItem_Click(object sender, EventArgs e) {
             if (canvas.Channels() != 1)
                 Cv2.CvtColor(canvas, canvas, ColorConversionCodes.BGR2GRAY);
-            isGray = true;
+            isGrey = true;
             AdjustmentCanvas();
         }
 
@@ -496,7 +497,7 @@ namespace Paint {
         private int[] CalculateBrightnessHistogram(OpenCvSharpMat image) {
             // 將圖像轉換為灰度圖像
             OpenCvSharpMat grayImage = new OpenCvSharpMat();
-            if (!isGray) {
+            if (!isGrey) {
                 Cv2.CvtColor(image, grayImage, ColorConversionCodes.BGR2GRAY);
             }
             else {
@@ -626,27 +627,7 @@ namespace Paint {
 
             return complexInput;
         }
-        //private OpenCvSharpMat VisualizeFFT(Complex[,] fftResult) {
-        //    int rows = fftResult.GetLength(0);
-        //    int cols = fftResult.GetLength(1);
-
-        //    OpenCvSharpMat magnitudeImage = new OpenCvSharpMat(rows, cols, MatType.CV_64F);
-        //    for (int i = 0; i < rows; i++) {
-        //        for (int j = 0; j < cols; j++) {
-        //            double magnitude = Complex.Abs(fftResult[i, j]);
-        //            magnitudeImage.Set(i, j, Math.Log(1 + magnitude)); // 對數縮放
-        //        }
-        //    }
-
-        //    // 移動低頻到中心
-        //    ShiftDFT(magnitudeImage);
-
-        //    // 正規化到 0-255
-        //    Cv2.Normalize(magnitudeImage, magnitudeImage, 0, 255, NormTypes.MinMax);
-        //    magnitudeImage.ConvertTo(magnitudeImage, MatType.CV_8U);
-
-        //    return magnitudeImage;
-        //}
+       
         public static Complex[] IFFT(Complex[] input) {
             int originalLength = input.Length;
 
@@ -745,14 +726,6 @@ namespace Paint {
                 MessageBox.Show($"還原過程出錯：{ex.Message}", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void compress_channel(Mat image) {
-            Mat[] channel = Cv2.Split(image);
-            Cv2.ImShow("channel0", channel[0]);
-            Cv2.ImShow("channel1",channel[1]);
-            Cv2.Magnitude(channel[0], channel[1], image);
-            channel[0].Dispose();
-            channel[1].Dispose();
-        }
 
         // 填充影像到 2 的幂次方大小
         private OpenCvSharpMat PadToPowerOfTwo(OpenCvSharpMat image) {
@@ -761,7 +734,6 @@ namespace Paint {
 
             OpenCvSharpMat paddedImage = new OpenCvSharpMat();
             Cv2.CopyMakeBorder(image, paddedImage, 0, paddedRows - image.Rows, 0, paddedCols - image.Cols, BorderTypes.Constant, Scalar.All(0));
-            //Cv2.CopyMakeBorder(image, paddedImage, (paddedRows - image.Rows) / 2, (paddedRows - image.Rows) / 2, (paddedCols - image.Cols) / 2, (paddedCols - image.Cols) / 2, BorderTypes.Constant, Scalar.All(0));
             return paddedImage;
         }
 
@@ -884,11 +856,26 @@ namespace Paint {
         }
 
         private void 二值化click(object sender, EventArgs e) {
+            if (!isGrey) {
+                MessageBox.Show("The picture must be grey.");
+                return;
+            }
             binarization binary = new binarization(this);
             if(binary.ShowDialog() == DialogResult.OK) 
                 AdjustmentCanvas();
-            
             binary.Dispose();
+        }
+
+        private void draw_contour_click(object sender, EventArgs e) {
+            if (!isGrey) {
+                MessageBox.Show("The picture must be grey.");
+                return;
+            }
+            contour con = new contour(this);
+            if(con.ShowDialog() == DialogResult.OK) {
+                AdjustmentCanvas();
+            }
+            con.Dispose();
         }
 
         private void iFFTToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -939,7 +926,7 @@ namespace Paint {
             magnitude.Dispose();
             logMagnitude.Dispose();
             normalizedMagnitude.Dispose();
-
+            
             return bitmap;
         }
     }
