@@ -62,7 +62,7 @@ namespace Paint {
 
         private void confirm_click(object sender, EventArgs e) {
             DialogResult = DialogResult.OK;
-            Cv2.Threshold(tempCanvas,__mainform.canvas,thresholdVal,255,type);
+            Cv2.Threshold(__mainform.canvas,__mainform.canvas,thresholdVal,255,type);
             Close();
         }
 

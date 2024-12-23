@@ -373,6 +373,7 @@ namespace Paint {
                 double gamma = trackbarForm.trackBar1.Value / 100.0;
                 canvas = 伽瑪轉換(canvas, gamma);
             }
+            trackbarForm.Dispose();
             AdjustmentCanvas();
         }
         private OpenCvSharpMat 伽瑪轉換(OpenCvSharpMat image, double gamma) {
@@ -418,6 +419,7 @@ namespace Paint {
                 Color selectedColor = colorDialog.Color;
                 currentColor = new Scalar(selectedColor.B, selectedColor.G, selectedColor.R); // BGR 格式
             }
+            colorDialog.Dispose();
         }
 
         private void log變換ToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -426,6 +428,7 @@ namespace Paint {
                 double c = 255.0 / Math.Log(1 + trackbarForm.trackBar1.Value);
                 canvas = Log變換(canvas, c);
             }
+            trackbarForm.Dispose();
             AdjustmentCanvas();
         }
 
@@ -435,6 +438,7 @@ namespace Paint {
                 double c = trackbarForm.trackBar1.Value / 10.0;
                 canvas = 反Log變換(canvas, c);
             }
+            trackbarForm.Dispose();
             AdjustmentCanvas();
         }
 
@@ -582,6 +586,12 @@ namespace Paint {
             q1.CopyTo(tmp);
             q2.CopyTo(q1);
             tmp.CopyTo(q2);
+
+            q0.Dispose();
+            q1.Dispose();
+            q2.Dispose();
+            q3.Dispose();
+            tmp.Dispose();
         }
         private void ShowImageWithCustomSize(string windowName, OpenCvSharpMat image, int width, int height) {
             // 創建一個可調整大小的視窗

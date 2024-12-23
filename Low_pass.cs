@@ -1,4 +1,5 @@
-﻿using OpenCvSharp;
+﻿using Emgu.CV.Ocl;
+using OpenCvSharp;
 using OpenCvSharp.Extensions;
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,8 @@ namespace Paint {
 
         private void Confirm_btn_Click(object sender, EventArgs e) {
             DialogResult= DialogResult.OK;
-            __mainform.canvas = ManualMedianBlur(__mainform.canvas, Ksize);
+            Cv2.MedianBlur(__mainform.canvas,__mainform.canvas, Ksize);
+            //__mainform.canvas = ManualMedianBlur(__mainform.canvas, Ksize);
             tempCanvas.Dispose();
             Close();
         }

@@ -71,8 +71,8 @@ namespace Paint {
 
         private void Confirm_Click(object sender, EventArgs e) {
             DialogResult = DialogResult.OK;
-            __mainform.canvas = ManualGaussianBlur(__mainform.canvas, MakeKernal(KS,Sigma));
-            //Cv2.GaussianBlur(__mainform.canvas, __mainform.canvas, Kernal, Sigma);
+            //__mainform.canvas = ManualGaussianBlur(__mainform.canvas, MakeKernal(KS,Sigma));
+            Cv2.GaussianBlur(__mainform.canvas, __mainform.canvas, Kernal, Sigma);
             Close();
         }
 
