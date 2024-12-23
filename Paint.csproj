@@ -119,7 +119,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="binarization.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="binarization.Designer.cs">
+      <DependentUpon>binarization.cs</DependentUpon>
+    </Compile>
     <Compile Include="Class1.cs" />
+    <Compile Include="contour.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="contour.Designer.cs">
+      <DependentUpon>contour.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FindContour.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include=".Designer.cs">
+      <DependentUpon>FindContour.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RGB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RGB.Designer.cs">
+      <DependentUpon>RGB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="morphology.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="morphology.Designer.cs">
+      <DependentUpon>morphology.cs</DependentUpon>
+    </Compile>
     <Compile Include="反log.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -172,8 +203,23 @@
     <Compile Include="PenMotion.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="binarization.resx">
+      <DependentUpon>binarization.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="contour.resx">
+      <DependentUpon>contour.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FindContour.resx">
+      <DependentUpon>FindContour.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RGB.resx">
+      <DependentUpon>RGB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="morphology.resx">
+      <DependentUpon>morphology.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="反log.resx">
       <DependentUpon>反log.cs</DependentUpon>

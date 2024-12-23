@@ -15,8 +15,7 @@ using Paint;
 using System.Threading.Tasks;
 using System.Numerics;
 using System.Windows.Forms.VisualStyles;
-using System.Web.UI.WebControls;
-using Emgu.CV.Structure;
+using System.Security.Cryptography;
 
 
 namespace Paint {
@@ -30,7 +29,7 @@ namespace Paint {
         private OpenCvSharp.Point currentPoint;
 
         private Bitmap canvasBitmap;
-        private bool isDrawing = false, isGray = false;
+        private bool isDrawing = false, isGrey = false;
         private string drawMode = "Free";
         private Rectangle showAspect;
         private Scalar currentColor = new Scalar(0, 0, 0);
@@ -141,8 +140,24 @@ namespace Paint {
             if (pictureBox1.Image != null)
                 pictureBox1.Image.Dispose();
             if (tempCanvas.Type() != MatType.CV_32FC2)
-                pictureBox1.Image = BitmapConverter.ToBitmap(tempCanvas);
+            {
+                double ratioX = (double)pictureBox1.ClientSize.Width / canvas.Width;
+                double ratioY = (double)pictureBox1.ClientSize.Height / canvas.Height;
+                double scale = Math.Min(ratioX, ratioY); // 选择较小的比例适配 PictureBox
+
+                int newWidth = (int)(tempCanvas.Width * scale);
+                int newHeight = (int)(tempCanvas.Height * scale);
+
+                // 使用最近邻插值缩放图片
+                Mat resizedImage = new Mat();
+                Cv2.Resize(tempCanvas, resizedImage, new OpenCvSharp.Size(newWidth, newHeight), 0, 0, InterpolationFlags.Nearest);
+
+                // 更新到 PictureBox
+                pictureBox1.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(resizedImage);
+            }
+                
             else
+
                 pictureBox1.Image = ConvertCV32FC2ToBitmap(tempCanvas);
         }
         //preview
@@ -184,15 +199,65 @@ namespace Paint {
             Redo.Clear();
             //清空下一步
         }
-        private void UpdateCanvas() {
-            if (pictureBox1.Image != null) {
-                pictureBox1.Image.Dispose();
+        private void UpdatePictureBoxImage()
+        {
+            
+            if (pictureBox1.Image != null)
+            {
+                // 獲取 PictureBox 的顯示區域尺寸
+                int targetWidth = pictureBox1.ClientSize.Width;
+                int targetHeight = pictureBox1.ClientSize.Height;
+
+                // 讀取原始圖片並放大
+                Mat src = OpenCvSharp.Extensions.BitmapConverter.ToMat((Bitmap)pictureBox1.Image);
+                Mat dst = new Mat();
+                Cv2.Resize(src, dst, new OpenCvSharp.Size(targetWidth, targetHeight), 0, 0, InterpolationFlags.Nearest);
+
+                // 更新圖片
+                pictureBox1.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(dst);
             }
-            if (canvas.Type() != MatType.CV_32FC2)
-                pictureBox1.Image = BitmapConverter.ToBitmap(canvas);
-            else
-                pictureBox1.Image = ConvertCV32FC2ToBitmap(canvas);
         }
+        private void UpdateCanvas()
+{
+            if (canvas.Type() == MatType.CV_32FC2)
+            {
+                if (pictureBox1.Image != null)
+                {
+                    pictureBox1.Image.Dispose(); // 释放旧的 Bitmap 资源
+                    pictureBox1.Image = null;    // 清空引用，防止内存泄漏
+                }
+                pictureBox1.Image = ConvertCV32FC2ToBitmap(canvas);
+                return;
+            }
+                
+
+    // 计算缩放比例，保持原始比例
+    double ratioX = (double)pictureBox1.Width / canvas.Width;
+    double ratioY = (double)pictureBox1.Height / canvas.Height;
+    double scale = Math.Min(ratioX, ratioY);
+
+    int newWidth = (int)(canvas.Width * scale);
+    int newHeight = (int)(canvas.Height * scale);
+
+            // 使用最近邻插值缩放图片
+     OpenCvSharpMat resizedImage = new Mat();
+    Cv2.Resize(canvas, resizedImage, new OpenCvSharp.Size(newWidth, newHeight), 0, 0, InterpolationFlags.Nearest);
+
+    
+        if (pictureBox1.Image != null)
+        {
+            pictureBox1.Image.Dispose(); // 释放旧的 Bitmap 资源
+            pictureBox1.Image = null;    // 清空引用，防止内存泄漏
+        }
+
+        pictureBox1.Image = BitmapConverter.ToBitmap(resizedImage);
+
+    // 更新 PictureBox 显示
+   
+
+    // 释放临时 Mat
+    resizedImage.Dispose();
+}
         private Rectangle GetImageRectangleInPictureBox() {
             // 計算圖像縮放後在 PictureBox 中的實際顯示範圍
             double imageAspect = (double)canvas.Width / canvas.Height;
@@ -268,7 +333,7 @@ namespace Paint {
             openFileDialog.Title = "打開圖片";
             if (openFileDialog.ShowDialog() == DialogResult.OK) {
                 canvas = Cv2.ImRead(openFileDialog.FileName);
-                pictureBox1.Load(openFileDialog.FileName);
+                UpdateCanvas();
                 tempCanvas = canvas.Clone();
                 SaveCurrentState();
             }
@@ -300,7 +365,7 @@ namespace Paint {
         private void 轉換成灰階ToolStripMenuItem_Click(object sender, EventArgs e) {
             if (canvas.Channels() != 1)
                 Cv2.CvtColor(canvas, canvas, ColorConversionCodes.BGR2GRAY);
-            isGray = true;
+            isGrey = true;
             AdjustmentCanvas();
         }
 
@@ -498,7 +563,7 @@ namespace Paint {
         private int[] CalculateBrightnessHistogram(OpenCvSharpMat image) {
             // 將圖像轉換為灰度圖像
             OpenCvSharpMat grayImage = new OpenCvSharpMat();
-            if (!isGray) {
+            if (!isGrey) {
                 Cv2.CvtColor(image, grayImage, ColorConversionCodes.BGR2GRAY);
             }
             else {
@@ -628,27 +693,7 @@ namespace Paint {
 
             return complexInput;
         }
-        //private OpenCvSharpMat VisualizeFFT(Complex[,] fftResult) {
-        //    int rows = fftResult.GetLength(0);
-        //    int cols = fftResult.GetLength(1);
-
-        //    OpenCvSharpMat magnitudeImage = new OpenCvSharpMat(rows, cols, MatType.CV_64F);
-        //    for (int i = 0; i < rows; i++) {
-        //        for (int j = 0; j < cols; j++) {
-        //            double magnitude = Complex.Abs(fftResult[i, j]);
-        //            magnitudeImage.Set(i, j, Math.Log(1 + magnitude)); // 對數縮放
-        //        }
-        //    }
-
-        //    // 移動低頻到中心
-        //    ShiftDFT(magnitudeImage);
-
-        //    // 正規化到 0-255
-        //    Cv2.Normalize(magnitudeImage, magnitudeImage, 0, 255, NormTypes.MinMax);
-        //    magnitudeImage.ConvertTo(magnitudeImage, MatType.CV_8U);
-
-        //    return magnitudeImage;
-        //}
+       
         public static Complex[] IFFT(Complex[] input) {
             int originalLength = input.Length;
 
@@ -747,14 +792,6 @@ namespace Paint {
                 MessageBox.Show($"還原過程出錯：{ex.Message}", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void compress_channel(Mat image) {
-            Mat[] channel = Cv2.Split(image);
-            Cv2.ImShow("channel0", channel[0]);
-            Cv2.ImShow("channel1",channel[1]);
-            Cv2.Magnitude(channel[0], channel[1], image);
-            channel[0].Dispose();
-            channel[1].Dispose();
-        }
 
         // 填充影像到 2 的幂次方大小
         private OpenCvSharpMat PadToPowerOfTwo(OpenCvSharpMat image) {
@@ -763,9 +800,10 @@ namespace Paint {
 
             OpenCvSharpMat paddedImage = new OpenCvSharpMat();
             Cv2.CopyMakeBorder(image, paddedImage, 0, paddedRows - image.Rows, 0, paddedCols - image.Cols, BorderTypes.Constant, Scalar.All(0));
-            //Cv2.CopyMakeBorder(image, paddedImage, (paddedRows - image.Rows) / 2, (paddedRows - image.Rows) / 2, (paddedCols - image.Cols) / 2, (paddedCols - image.Cols) / 2, BorderTypes.Constant, Scalar.All(0));
             return paddedImage;
         }
+
+
 
         // 裁剪影像到原始大小
         private OpenCvSharpMat CropToOriginalSize(OpenCvSharpMat image, int originalRows, int originalCols) {
@@ -957,6 +995,54 @@ namespace Paint {
             UpdateCanvas();
         }
 
+        private void 型態click(object sender, EventArgs e) {
+            morphology morph = new morphology(this);
+            if (morph.ShowDialog() == DialogResult.OK)
+                AdjustmentCanvas();
+            morph.Dispose();
+        }
+
+
+
+
+        private void 二值化click(object sender, EventArgs e) {
+            if (!isGrey) {
+                MessageBox.Show("The picture must be grey.");
+                return;
+            }
+            binarization binary = new binarization(this);
+            if(binary.ShowDialog() == DialogResult.OK) 
+                AdjustmentCanvas();
+            binary.Dispose();
+        }
+
+        private void draw_contour_click(object sender, EventArgs e) {
+            if (!isGrey) {
+                MessageBox.Show("The picture must be grey.");
+                return;
+            }
+            contour con = new contour(this);
+            if(con.ShowDialog() == DialogResult.OK) {
+                AdjustmentCanvas();
+            }
+            con.Dispose();
+        }
+
+        private void rGBToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RGBtrans blurform = new RGBtrans(this);
+            if (blurform.ShowDialog() == DialogResult.OK)
+                AdjustmentCanvas();
+        }
+
+        private void findContoursToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FindContour findContour = new FindContour(this);
+            if(findContour.ShowDialog() == DialogResult.OK)
+            {
+                AdjustmentCanvas();
+            }
+        }
 
         private void iFFTToolStripMenuItem_Click(object sender, EventArgs e) {
             ShiftDFT(canvas);
@@ -1006,7 +1092,7 @@ namespace Paint {
             magnitude.Dispose();
             logMagnitude.Dispose();
             normalizedMagnitude.Dispose();
-
+            
             return bitmap;
         }
     }

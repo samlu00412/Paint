@@ -20,7 +20,7 @@ namespace Paint
             trackBar1.TickFrequency = 100;
         }
 
-        private void Gamma_Load(object sender, EventArgs e)
+        public void Gamma_Load(object sender, EventArgs e)
         {
             originalImage = _mainForm.canvas.Clone();
             previewImage = originalImage.Resize(new OpenCvSharp.Size(originalImage.Width / previewScale, originalImage.Height / previewScale));
