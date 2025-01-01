@@ -44,14 +44,13 @@
             this.Sigma_bar.Name = "Sigma_bar";
             this.Sigma_bar.Size = new System.Drawing.Size(499, 90);
             this.Sigma_bar.TabIndex = 2;
-            this.Sigma_bar.Value = 100;
             this.Sigma_bar.Scroll += new System.EventHandler(this.Sigma_bar_Scroll);
             this.Sigma_bar.ValueChanged += new System.EventHandler(this.Sigma_bar_ValueChanged);
             // 
             // Kernal_bar
             // 
             this.Kernal_bar.Location = new System.Drawing.Point(116, 26);
-            this.Kernal_bar.Maximum = 14;
+            this.Kernal_bar.Maximum = 52;
             this.Kernal_bar.Minimum = 3;
             this.Kernal_bar.Name = "Kernal_bar";
             this.Kernal_bar.Size = new System.Drawing.Size(499, 90);

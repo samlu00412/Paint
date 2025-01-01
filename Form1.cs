@@ -140,8 +140,24 @@ namespace Paint {
             if (pictureBox1.Image != null)
                 pictureBox1.Image.Dispose();
             if (tempCanvas.Type() != MatType.CV_32FC2)
-                pictureBox1.Image = BitmapConverter.ToBitmap(tempCanvas);
+            {
+                double ratioX = (double)pictureBox1.ClientSize.Width / canvas.Width;
+                double ratioY = (double)pictureBox1.ClientSize.Height / canvas.Height;
+                double scale = Math.Min(ratioX, ratioY); // 选择较小的比例适配 PictureBox
+
+                int newWidth = (int)(tempCanvas.Width * scale);
+                int newHeight = (int)(tempCanvas.Height * scale);
+
+                // 使用最近邻插值缩放图片
+                Mat resizedImage = new Mat();
+                Cv2.Resize(tempCanvas, resizedImage, new OpenCvSharp.Size(newWidth, newHeight), 0, 0, InterpolationFlags.Nearest);
+
+                // 更新到 PictureBox
+                pictureBox1.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(resizedImage);
+            }
+                
             else
+
                 pictureBox1.Image = ConvertCV32FC2ToBitmap(tempCanvas);
         }
         //preview
@@ -183,15 +199,65 @@ namespace Paint {
             Redo.Clear();
             //清空下一步
         }
-        private void UpdateCanvas() {
-            if (pictureBox1.Image != null) {
-                pictureBox1.Image.Dispose();
+        private void UpdatePictureBoxImage()
+        {
+            
+            if (pictureBox1.Image != null)
+            {
+                // 獲取 PictureBox 的顯示區域尺寸
+                int targetWidth = pictureBox1.ClientSize.Width;
+                int targetHeight = pictureBox1.ClientSize.Height;
+
+                // 讀取原始圖片並放大
+                Mat src = OpenCvSharp.Extensions.BitmapConverter.ToMat((Bitmap)pictureBox1.Image);
+                Mat dst = new Mat();
+                Cv2.Resize(src, dst, new OpenCvSharp.Size(targetWidth, targetHeight), 0, 0, InterpolationFlags.Nearest);
+
+                // 更新圖片
+                pictureBox1.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(dst);
             }
-            if (canvas.Type() != MatType.CV_32FC2)
-                pictureBox1.Image = BitmapConverter.ToBitmap(canvas);
-            else
-                pictureBox1.Image = ConvertCV32FC2ToBitmap(canvas);
         }
+        private void UpdateCanvas()
+{
+            if (canvas.Type() == MatType.CV_32FC2)
+            {
+                if (pictureBox1.Image != null)
+                {
+                    pictureBox1.Image.Dispose(); // 释放旧的 Bitmap 资源
+                    pictureBox1.Image = null;    // 清空引用，防止内存泄漏
+                }
+                pictureBox1.Image = ConvertCV32FC2ToBitmap(canvas);
+                return;
+            }
+                
+
+    // 计算缩放比例，保持原始比例
+    double ratioX = (double)pictureBox1.Width / canvas.Width;
+    double ratioY = (double)pictureBox1.Height / canvas.Height;
+    double scale = Math.Min(ratioX, ratioY);
+
+    int newWidth = (int)(canvas.Width * scale);
+    int newHeight = (int)(canvas.Height * scale);
+
+            // 使用最近邻插值缩放图片
+     OpenCvSharpMat resizedImage = new Mat();
+    Cv2.Resize(canvas, resizedImage, new OpenCvSharp.Size(newWidth, newHeight), 0, 0, InterpolationFlags.Nearest);
+
+    
+        if (pictureBox1.Image != null)
+        {
+            pictureBox1.Image.Dispose(); // 释放旧的 Bitmap 资源
+            pictureBox1.Image = null;    // 清空引用，防止内存泄漏
+        }
+
+        pictureBox1.Image = BitmapConverter.ToBitmap(resizedImage);
+
+    // 更新 PictureBox 显示
+   
+
+    // 释放临时 Mat
+    resizedImage.Dispose();
+}
         private Rectangle GetImageRectangleInPictureBox() {
             // 計算圖像縮放後在 PictureBox 中的實際顯示範圍
             double imageAspect = (double)canvas.Width / canvas.Height;
@@ -257,6 +323,8 @@ namespace Paint {
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK) {
                 string filePath = saveFileDialog.FileName;//System.IO.Path.GetExtension(saveFileDialog.FileName).ToLower();
+                //if (canvas.Channels() == 2)
+                //    Cv2.ImWrite(filePath, ConvertCV32FC2ToBitmap(canvas));
                 Cv2.ImWrite(filePath, canvas);
             }
             if (saveFileDialog != null)
@@ -267,7 +335,7 @@ namespace Paint {
             openFileDialog.Title = "打開圖片";
             if (openFileDialog.ShowDialog() == DialogResult.OK) {
                 canvas = Cv2.ImRead(openFileDialog.FileName);
-                pictureBox1.Load(openFileDialog.FileName);
+                UpdateCanvas();
                 tempCanvas = canvas.Clone();
                 SaveCurrentState();
             }
@@ -747,6 +815,8 @@ namespace Paint {
             return paddedImage;
         }
 
+
+
         // 裁剪影像到原始大小
         private OpenCvSharpMat CropToOriginalSize(OpenCvSharpMat image, int originalRows, int originalCols) {
             return new OpenCvSharpMat(image, new Rect(0, 0, originalCols, originalRows));
@@ -858,12 +928,94 @@ namespace Paint {
         }
         int realrows,realcols;
 
+        private void colortransformToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string menuText = ((ToolStripMenuItem)sender).Text;
+            Console.WriteLine(menuText);
+            if(menuText == "BGR to Grayscale")
+            {
+                Mat tempMat = new Mat();
+                Cv2.CvtColor(canvas, tempMat, ColorConversionCodes.BGR2GRAY);
+                canvas = tempMat;
+            }
+            else if(menuText == "Grayscale to BGR")
+            {
+                Mat tempMat = new Mat();
+                Cv2.CvtColor(canvas, tempMat, ColorConversionCodes.GRAY2BGR);
+                canvas = tempMat;
+            }
+            else if(menuText == "BGR to HSV")
+            {
+                Mat tempMat = new Mat();
+                Cv2.CvtColor(canvas, tempMat, ColorConversionCodes.BGR2HSV);
+                canvas = tempMat;
+            }
+            else if(menuText == "HSV to BGR")
+            {
+                Mat tempMat = new Mat();
+                Cv2.CvtColor(canvas, tempMat, ColorConversionCodes.HSV2BGR);
+                canvas = tempMat;
+            }
+            else if(menuText == "BGR to Lab")
+            {
+                Mat tempMat = new Mat();
+                Cv2.CvtColor(canvas, tempMat, ColorConversionCodes.BGR2Lab);
+                canvas = tempMat;
+            }
+            else if(menuText == "Lab to BGR")
+            {
+                Mat tempMat = new Mat();
+                Cv2.CvtColor(canvas, tempMat, ColorConversionCodes.Lab2BGR);
+                canvas = tempMat;
+            }
+            else if(menuText == "BGR to YUV")
+            {
+                Mat tempMat = new Mat();
+                Cv2.CvtColor(canvas, tempMat, ColorConversionCodes.BGR2YUV);
+                canvas = tempMat;
+            }
+            else if(menuText == "YUV to BGR")
+            {
+                Mat tempMat = new Mat();
+                Cv2.CvtColor(canvas, tempMat, ColorConversionCodes.YUV2BGR);
+                canvas = tempMat;
+            }
+            else if(menuText == "BGR to RGB")
+            {
+                Mat tempMat = new Mat();
+                Cv2.CvtColor(canvas, tempMat, ColorConversionCodes.BGR2RGB);
+                canvas = tempMat;
+            }
+            else if(menuText == "RGB to BGR")
+            {
+                Mat tempMat = new Mat();
+                Cv2.CvtColor(canvas, tempMat, ColorConversionCodes.RGB2BGR);
+                canvas = tempMat;
+            }
+            else if(menuText == "BGR to RGBA")
+            {
+                Mat tempMat = new Mat();
+                Cv2.CvtColor(canvas, tempMat, ColorConversionCodes.BGR2RGBA);
+                canvas = tempMat;
+            }
+            else if(menuText == "RGBA to BGR")
+            {
+                Mat tempMat = new Mat();
+                Cv2.CvtColor(canvas, tempMat, ColorConversionCodes.RGBA2BGR);
+                canvas = tempMat;
+            }
+            UpdateCanvas();
+        }
+
         private void 型態click(object sender, EventArgs e) {
             morphology morph = new morphology(this);
             if (morph.ShowDialog() == DialogResult.OK)
                 AdjustmentCanvas();
             morph.Dispose();
         }
+
+
+
 
         private void 二值化click(object sender, EventArgs e) {
             if (!isGrey) {
@@ -886,6 +1038,36 @@ namespace Paint {
                 AdjustmentCanvas();
             }
             con.Dispose();
+        }
+
+        private void rGBToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RGBtrans blurform = new RGBtrans(this);
+            if (blurform.ShowDialog() == DialogResult.OK)
+                AdjustmentCanvas();
+        }
+
+        private void findContoursToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FindContour findContour = new FindContour(this);
+            if(canvas.Channels() != 1) {
+                MessageBox.Show("The image must be grey");
+                return;
+            }
+            if(findContour.ShowDialog() == DialogResult.OK)
+                AdjustmentCanvas();
+            findContour.Dispose();
+        }
+
+        private void cLAHEToolStripMenuItem_Click(object sender, EventArgs e) {
+            CLAHE cLAHE = new CLAHE(this);
+            if (canvas.Channels() != 1) {
+                MessageBox.Show("Image must be grey.");
+                return;
+            }
+            if (cLAHE.ShowDialog() == DialogResult.OK)
+                AdjustmentCanvas();
+            cLAHE.Dispose();
         }
 
         private void iFFTToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -926,7 +1108,7 @@ namespace Paint {
             OpenCvSharpMat normalizedMagnitude = new OpenCvSharpMat();
             Cv2.Normalize(logMagnitude, normalizedMagnitude, 0, 255, NormTypes.MinMax);
             normalizedMagnitude.ConvertTo(normalizedMagnitude, MatType.CV_8U);
-
+            
             // Step 5: Convert to Bitmap
             Bitmap bitmap = BitmapConverter.ToBitmap(normalizedMagnitude);
 

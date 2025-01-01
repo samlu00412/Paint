@@ -63,6 +63,7 @@
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Drawing.Common.8.0.1\lib\net462\System.Drawing.Common.dll</HintPath>
     </Reference>
@@ -124,12 +125,31 @@
     <Compile Include="binarization.Designer.cs">
       <DependentUpon>binarization.cs</DependentUpon>
     </Compile>
+    <Compile Include="CLAHE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CLAHE.Designer.cs">
+      <DependentUpon>CLAHE.cs</DependentUpon>
+    </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="contour.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="contour.Designer.cs">
       <DependentUpon>contour.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FindContour.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include=".Designer.cs">
+      <DependentUpon>FindContour.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RGB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RGB.Designer.cs">
+      <DependentUpon>RGB.cs</DependentUpon>
     </Compile>
     <Compile Include="morphology.cs">
       <SubType>Form</SubType>
@@ -192,11 +212,20 @@
     <EmbeddedResource Include="binarization.resx">
       <DependentUpon>binarization.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CLAHE.resx">
+      <DependentUpon>CLAHE.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="contour.resx">
       <DependentUpon>contour.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FindContour.resx">
+      <DependentUpon>FindContour.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RGB.resx">
+      <DependentUpon>RGB.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="morphology.resx">
       <DependentUpon>morphology.cs</DependentUpon>
