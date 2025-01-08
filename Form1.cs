@@ -154,6 +154,7 @@ namespace Paint {
 
                 // 更新到 PictureBox
                 pictureBox1.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(resizedImage);
+                resizedImage.Dispose();
             }
                 
             else
@@ -240,7 +241,7 @@ namespace Paint {
     int newHeight = (int)(canvas.Height * scale);
 
             // 使用最近邻插值缩放图片
-     OpenCvSharpMat resizedImage = new Mat();
+    OpenCvSharpMat resizedImage = new Mat();
     Cv2.Resize(canvas, resizedImage, new OpenCvSharp.Size(newWidth, newHeight), 0, 0, InterpolationFlags.Nearest);
 
     

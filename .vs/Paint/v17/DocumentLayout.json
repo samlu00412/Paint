@@ -7,7 +7,7 @@
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|c:\\users\\samlu\\source\\repos\\paint\\clahe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\clahe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:clahe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -15,7 +15,7 @@
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:high_pass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|c:\\users\\samlu\\source\\repos\\paint\\clahe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\clahe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:clahe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
@@ -70,8 +70,7 @@
               "RelativeToolTip": "CLAHE.cs",
               "ViewState": "AgIAABwAAAAAAAAAAAAEwC0AAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-01T07:36:25.432Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-01T07:36:25.432Z"
             },
             {
               "$type": "Document",
@@ -83,8 +82,7 @@
               "RelativeToolTip": "High_pass.cs",
               "ViewState": "AgIAABYAAAAAAAAAAAAwwBEAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-18T06:48:30.988Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-18T06:48:30.988Z"
             },
             {
               "$type": "Document",
@@ -95,8 +93,7 @@
               "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\CLAHE.cs [\u8A2D\u8A08]",
               "RelativeToolTip": "CLAHE.cs [\u8A2D\u8A08]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-01T07:31:44.172Z",
-              "EditorCaption": " [\u8A2D\u8A08]"
+              "WhenOpened": "2025-01-01T07:31:44.172Z"
             },
             {
               "$type": "Document",
@@ -107,8 +104,7 @@
               "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\High_pass.cs [\u8A2D\u8A08]",
               "RelativeToolTip": "High_pass.cs [\u8A2D\u8A08]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-18T06:48:12.866Z",
-              "EditorCaption": " [\u8A2D\u8A08]"
+              "WhenOpened": "2024-12-18T06:48:12.866Z"
             },
             {
               "$type": "Document",
@@ -120,8 +116,7 @@
               "RelativeToolTip": "log.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAowAsAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-17T07:53:00.147Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-17T07:53:00.147Z"
             },
             {
               "$type": "Document",
@@ -132,8 +127,7 @@
               "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\log.cs [\u8A2D\u8A08]",
               "RelativeToolTip": "log.cs [\u8A2D\u8A08]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-17T07:52:57.295Z",
-              "EditorCaption": " [\u8A2D\u8A08]"
+              "WhenOpened": "2024-12-17T07:52:57.295Z"
             },
             {
               "$type": "Document",
@@ -143,7 +137,7 @@
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAAFoBAAAAAAAAAABAwHMBAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAABgBAAAAAAAAAAAAABQBAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-07T12:37:50.616Z",
               "EditorCaption": ""
@@ -157,8 +151,7 @@
               "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\Form1.cs [\u8A2D\u8A08]",
               "RelativeToolTip": "Form1.cs [\u8A2D\u8A08]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-07T12:37:50.694Z",
-              "EditorCaption": " [\u8A2D\u8A08]"
+              "WhenOpened": "2024-12-07T12:37:50.694Z"
             }
           ]
         }
