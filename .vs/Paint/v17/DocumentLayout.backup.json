@@ -7,32 +7,16 @@
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\clahe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:clahe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\high_pass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:high_pass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\clahe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:clahe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\high_pass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:high_pass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\log.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:log.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\log.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:log.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -62,72 +46,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CLAHE.cs",
-              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\CLAHE.cs",
-              "RelativeDocumentMoniker": "CLAHE.cs",
-              "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\CLAHE.cs",
-              "RelativeToolTip": "CLAHE.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAEwC0AAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-01T07:36:25.432Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
               "Title": "High_pass.cs",
               "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\High_pass.cs",
               "RelativeDocumentMoniker": "High_pass.cs",
               "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\High_pass.cs",
               "RelativeToolTip": "High_pass.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAwwBEAAAArAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-18T06:48:30.988Z"
+              "WhenOpened": "2025-02-23T08:03:18.749Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "CLAHE.cs [\u8A2D\u8A08]",
-              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\CLAHE.cs",
-              "RelativeDocumentMoniker": "CLAHE.cs",
-              "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\CLAHE.cs [\u8A2D\u8A08]",
-              "RelativeToolTip": "CLAHE.cs [\u8A2D\u8A08]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-01T07:31:44.172Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
               "Title": "High_pass.cs [\u8A2D\u8A08]",
               "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\High_pass.cs",
               "RelativeDocumentMoniker": "High_pass.cs",
               "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\High_pass.cs [\u8A2D\u8A08]",
               "RelativeToolTip": "High_pass.cs [\u8A2D\u8A08]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-18T06:48:12.866Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "log.cs",
-              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\log.cs",
-              "RelativeDocumentMoniker": "log.cs",
-              "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\log.cs",
-              "RelativeToolTip": "log.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAowAsAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-17T07:53:00.147Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "log.cs [\u8A2D\u8A08]",
-              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\log.cs",
-              "RelativeDocumentMoniker": "log.cs",
-              "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\log.cs [\u8A2D\u8A08]",
-              "RelativeToolTip": "log.cs [\u8A2D\u8A08]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-17T07:52:57.295Z"
+              "WhenOpened": "2025-02-23T08:03:04.49Z"
             },
             {
               "$type": "Document",
@@ -137,14 +75,14 @@
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\Form1.cs*",
               "RelativeToolTip": "Form1.cs*",
-              "ViewState": "AgIAAIMAAAAAAAAAAAAwwJcAAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAAIIAAAAAAAAAAAAtwK8AAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-07T12:37:50.616Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "Form1.cs [\u8A2D\u8A08]",
               "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
