@@ -45,7 +45,6 @@ namespace Paint {
 
         public Paint() {
             InitializeComponent();
-
             this.KeyPreview = true; // 允許表單偵測按鍵
             this.KeyDown += new KeyEventHandler(Form1_KeyDown);
             this.MouseWheel += new MouseEventHandler(Form1_MouseWheel);
@@ -53,7 +52,7 @@ namespace Paint {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-
+            thicknessLabel.Text = $"Pen thickness: {penThickness}";
         }
         private void Form1_MouseWheel(object sender, MouseEventArgs e) {
             if (Control.ModifierKeys == Keys.Control) {
@@ -220,34 +219,36 @@ namespace Paint {
         }
 
         private void UpdateCanvas(){
-        if (canvas.Type() == MatType.CV_32FC2){
-            if (pictureBox1.Image != null){
+            if (canvas.Type() == MatType.CV_32FC2){
+                if (pictureBox1.Image != null){
+                    pictureBox1.Image.Dispose(); // 释放旧的 Bitmap 资源
+                    pictureBox1.Image = null;    // 清空引用，防止内存泄漏
+                }
+                pictureBox1.Image = ConvertCV32FC2ToBitmap(canvas);
+                return;
+            }
+                    
+            double ratioX = (double)pictureBox1.Width / canvas.Width;
+            double ratioY = (double)pictureBox1.Height / canvas.Height;
+            double scale = Math.Min(ratioX, ratioY);
+
+            int newWidth = (int)(canvas.Width * scale);
+            int newHeight = (int)(canvas.Height * scale);
+
+            OpenCvSharpMat resizedImage = new Mat();
+            Cv2.Resize(canvas, resizedImage, new OpenCvSharp.Size(newWidth, newHeight), 0, 0, InterpolationFlags.Nearest);
+
+    
+            if (pictureBox1.Image != null)
+            {
                 pictureBox1.Image.Dispose(); // 释放旧的 Bitmap 资源
                 pictureBox1.Image = null;    // 清空引用，防止内存泄漏
             }
-            pictureBox1.Image = ConvertCV32FC2ToBitmap(canvas);
-            return;
-        }
-                
-        double ratioX = (double)pictureBox1.Width / canvas.Width;
-        double ratioY = (double)pictureBox1.Height / canvas.Height;
-        double scale = Math.Min(ratioX, ratioY);
 
-        int newWidth = (int)(canvas.Width * scale);
-        int newHeight = (int)(canvas.Height * scale);
-
-        OpenCvSharpMat resizedImage = new Mat();
-        Cv2.Resize(canvas, resizedImage, new OpenCvSharp.Size(newWidth, newHeight), 0, 0, InterpolationFlags.Nearest);
-
-    
-        if (pictureBox1.Image != null)
-        {
-            pictureBox1.Image.Dispose(); // 释放旧的 Bitmap 资源
-            pictureBox1.Image = null;    // 清空引用，防止内存泄漏
-        }
-
-        pictureBox1.Image = BitmapConverter.ToBitmap(resizedImage);
-        resizedImage.Dispose();
+            pictureBox1.Image = BitmapConverter.ToBitmap(resizedImage);
+            resizedImage.Dispose();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
         private Rectangle GetImageRectangleInPictureBox() {
             // 計算圖像縮放後在 PictureBox 中的實際顯示範圍
@@ -794,6 +795,8 @@ namespace Paint {
                 AdjustmentCanvas();
                 paddedImage.Dispose();
                 paddedImage = null;
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
                 return;
             }
             catch (Exception ex) {
@@ -1063,6 +1066,11 @@ namespace Paint {
             if (cLAHE.ShowDialog() == DialogResult.OK)
                 AdjustmentCanvas();
             cLAHE.Dispose();
+        }
+
+        private void change_thickness(object sender, EventArgs e) {
+            penThickness = thicknessBar.Value;
+            thicknessLabel.Text = $"Pen thickness: {penThickness}";
         }
 
         private void iFFTToolStripMenuItem_Click(object sender, EventArgs e) {
