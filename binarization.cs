@@ -1,4 +1,5 @@
-﻿using OpenCvSharp;
+﻿using Emgu.CV.Structure;
+using OpenCvSharp;
 using OpenCvSharp.Extensions;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace Paint {
         private double thresholdVal = 0.0;
         private Paint __mainform;
         private Mat tempCanvas;
+        private bool check = false;
         private const int previewScale = 2;
         private ThresholdTypes type = ThresholdTypes.Binary;
         private readonly Dictionary<string, ThresholdTypes> mode = new Dictionary<string, ThresholdTypes> {
@@ -46,14 +48,25 @@ namespace Paint {
             await UpdatePreviewAsync(thresholdVal);
         }
         private async Task UpdatePreviewAsync(double thre) {
+            
             await Task.Run(() => Cv2.Threshold(__mainform.canvas,tempCanvas,thre,255,type));
             UpdatePictureBox(tempCanvas);
         }
         private void UpdatePictureBox(Mat image) {
-            if (previewBox.Image != null)
+            if (previewBox.Image != null) {
                 previewBox.Image.Dispose();
+                previewBox.Image = null;
+            }
+            if(image.Type() == MatType.CV_32FC2) {
+
+            }
+            else {
             previewBox.Image = BitmapConverter.ToBitmap(image);
+            }
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
+        
 
         private void cancel_click(object sender, EventArgs e) {
             DialogResult = DialogResult.Cancel;
@@ -62,10 +75,13 @@ namespace Paint {
 
         private void confirm_click(object sender, EventArgs e) {
             DialogResult = DialogResult.OK;
+            
             Cv2.Threshold(__mainform.canvas,__mainform.canvas,thresholdVal,255,type);
             Close();
         }
 
-        
+        private void ignore_cross(object sender, EventArgs e) {
+            check = !check;
+        }
     }
 }

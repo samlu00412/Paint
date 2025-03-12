@@ -46,10 +46,10 @@ namespace Paint {
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(302, 371);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Location = new System.Drawing.Point(201, 247);
+            this.button1.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(91, 38);
+            this.button1.Size = new System.Drawing.Size(61, 25);
             this.button1.TabIndex = 0;
             this.button1.Text = "確定";
             this.button1.UseVisualStyleBackColor = true;
@@ -57,24 +57,24 @@ namespace Paint {
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(93, 46);
-            this.trackBar1.Margin = new System.Windows.Forms.Padding(2);
-            this.trackBar1.Maximum = 200;
-            this.trackBar1.Minimum = -200;
+            this.trackBar1.Location = new System.Drawing.Point(62, 31);
+            this.trackBar1.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.trackBar1.Maximum = 300;
+            this.trackBar1.Minimum = -300;
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(345, 69);
+            this.trackBar1.Size = new System.Drawing.Size(230, 45);
             this.trackBar1.TabIndex = 1;
             this.trackBar1.Value = 100;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // trackBar2
             // 
-            this.trackBar2.Location = new System.Drawing.Point(93, 139);
-            this.trackBar2.Margin = new System.Windows.Forms.Padding(2);
+            this.trackBar2.Location = new System.Drawing.Point(62, 93);
+            this.trackBar2.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.trackBar2.Maximum = 100;
             this.trackBar2.Minimum = -100;
             this.trackBar2.Name = "trackBar2";
-            this.trackBar2.Size = new System.Drawing.Size(345, 69);
+            this.trackBar2.Size = new System.Drawing.Size(230, 45);
             this.trackBar2.TabIndex = 2;
             this.trackBar2.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
@@ -82,10 +82,10 @@ namespace Paint {
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(26, 149);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(17, 99);
+            this.label1.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 24);
+            this.label1.Size = new System.Drawing.Size(39, 16);
             this.label1.TabIndex = 3;
             this.label1.Text = "亮度";
             // 
@@ -93,39 +93,39 @@ namespace Paint {
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label2.Location = new System.Drawing.Point(12, 52);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(8, 35);
+            this.label2.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(82, 24);
+            this.label2.Size = new System.Drawing.Size(55, 16);
             this.label2.TabIndex = 4;
             this.label2.Text = "對比度";
             // 
             // bri_label
             // 
             this.bri_label.AutoSize = true;
-            this.bri_label.Location = new System.Drawing.Point(452, 52);
-            this.bri_label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.bri_label.Location = new System.Drawing.Point(301, 35);
+            this.bri_label.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.bri_label.Name = "bri_label";
-            this.bri_label.Size = new System.Drawing.Size(36, 18);
+            this.bri_label.Size = new System.Drawing.Size(25, 12);
             this.bri_label.TabIndex = 5;
             this.bri_label.Text = "owo";
             // 
             // con_label
             // 
             this.con_label.AutoSize = true;
-            this.con_label.Location = new System.Drawing.Point(452, 149);
-            this.con_label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.con_label.Location = new System.Drawing.Point(301, 99);
+            this.con_label.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.con_label.Name = "con_label";
-            this.con_label.Size = new System.Drawing.Size(36, 18);
+            this.con_label.Size = new System.Drawing.Size(25, 12);
             this.con_label.TabIndex = 6;
             this.con_label.Text = "owo";
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(397, 371);
-            this.button2.Margin = new System.Windows.Forms.Padding(2);
+            this.button2.Location = new System.Drawing.Point(265, 247);
+            this.button2.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(91, 38);
+            this.button2.Size = new System.Drawing.Size(61, 25);
             this.button2.TabIndex = 7;
             this.button2.Text = "取消";
             this.button2.UseVisualStyleBackColor = true;
@@ -133,18 +133,19 @@ namespace Paint {
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(553, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(369, 8);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(544, 417);
+            this.pictureBox1.Size = new System.Drawing.Size(363, 278);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 8;
             this.pictureBox1.TabStop = false;
             // 
             // lightness
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1109, 451);
+            this.ClientSize = new System.Drawing.Size(739, 301);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.con_label);
@@ -154,7 +155,7 @@ namespace Paint {
             this.Controls.Add(this.trackBar2);
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.button1);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.Name = "lightness";
             this.Text = "lightness";
             this.Load += new System.EventHandler(this.lightness_Load);

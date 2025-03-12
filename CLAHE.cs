@@ -15,11 +15,21 @@ namespace Paint {
         private double limit_val = 2.0;
         private Paint __mainform;
         private Mat tempCanvas;
+        private Mat lab = new Mat();
+        private Mat[] labchannels;
+        private Mat lchannel = new Mat();
+        private Mat lclahe = new Mat();
         private const int previewScale = 2;
 
         public CLAHE(Paint mainform) {
             InitializeComponent();
             __mainform = mainform;
+            if (__mainform.canvas.Channels() != 1) {
+                Cv2.CvtColor(__mainform.canvas, lab, ColorConversionCodes.BGR2Lab);
+                labchannels = Cv2.Split(lab);
+                lchannel = labchannels[0];
+                labchannels[0].CopyTo(lclahe);
+            }
             tempCanvas = mainform.canvas.Clone();
             tempCanvas = tempCanvas.Resize(new OpenCvSharp.Size(tempCanvas.Width / previewScale, tempCanvas.Height / previewScale));
             Limit_bar.Scroll += LimitBarScroll;
@@ -48,13 +58,28 @@ namespace Paint {
         }
         private async Task UpdatePreviewAsync(double Limit) {
             var clahe = Cv2.CreateCLAHE(clipLimit: Limit, tileGridSize: new OpenCvSharp.Size(8, 8));
-            await Task.Run(() => clahe.Apply(__mainform.canvas,tempCanvas));
+            if(__mainform.canvas.Channels() == 1)
+                await Task.Run(() => clahe.Apply(__mainform.canvas,tempCanvas));
+            else {
+                if (lclahe != null) {
+                    lclahe.Dispose();
+                    lclahe = null;
+                }
+                await Task.Run(() => clahe.Apply(lchannel, lclahe));
+            }
             UpdatePictureBox(tempCanvas);
             clahe.Dispose();
         }
         private void UpdatePictureBox(Mat image) {
             if (Preview_box.Image != null)
                 Preview_box.Image.Dispose();
+            if(__mainform.canvas.Channels() != 1) {
+                labchannels[0] = lclahe;
+                Cv2.Merge(labchannels, lab);
+                tempCanvas.Dispose();
+                tempCanvas = null;
+                tempCanvas = lab.Clone();
+            }
             Preview_box.Image = BitmapConverter.ToBitmap(image);
         }
     }

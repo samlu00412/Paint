@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using OpenCvSharp;
@@ -8,14 +7,8 @@ using OpenCvSharp.Extensions;
 using OpenCvSize = OpenCvSharp.Size;
 using Pen;
 using System.Windows.Forms.DataVisualization.Charting;
-using System.Runtime.ConstrainedExecution;
-using OpenCvSharp.Dnn;
 using OpenCvSharpMat = OpenCvSharp.Mat;
-using Paint;
-using System.Threading.Tasks;
 using System.Numerics;
-using System.Windows.Forms.VisualStyles;
-using System.Security.Cryptography;
 
 
 namespace Paint {
@@ -118,7 +111,7 @@ namespace Paint {
                         tempCanvas.Dispose();
                         tempCanvas = null;
                     }
-                    canvas.CopyTo(tempCanvas);
+                    tempCanvas = canvas.Clone();
                 }
             }
             else if (isDrawing && e.Button == MouseButtons.Right) {
@@ -130,6 +123,8 @@ namespace Paint {
                 startpoint.X = System.Windows.Forms.Cursor.Position.X;
                 startpoint.Y = System.Windows.Forms.Cursor.Position.Y;
             }
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
             return;
         }
 
@@ -169,7 +164,7 @@ namespace Paint {
                     pictureBox1.Image.Dispose();
                     pictureBox1.Image = null;
                 }
-                pictureBox1.Image = ConvertCV32FC2ToBitmap(tempCanvas);
+                pictureBox1.Image = ConvertCV32FC2ToBitmap(tempCanvas, false);
             }
             GC.Collect(0);
             GC.WaitForPendingFinalizers();
@@ -221,10 +216,10 @@ namespace Paint {
         private void UpdateCanvas(){
             if (canvas.Type() == MatType.CV_32FC2){
                 if (pictureBox1.Image != null){
-                    pictureBox1.Image.Dispose(); // 释放旧的 Bitmap 资源
-                    pictureBox1.Image = null;    // 清空引用，防止内存泄漏
+                    pictureBox1.Image.Dispose(); 
+                    pictureBox1.Image = null;    
                 }
-                pictureBox1.Image = ConvertCV32FC2ToBitmap(canvas);
+                pictureBox1.Image = ConvertCV32FC2ToBitmap(canvas,false);
                 return;
             }
                     
@@ -241,8 +236,8 @@ namespace Paint {
     
             if (pictureBox1.Image != null)
             {
-                pictureBox1.Image.Dispose(); // 释放旧的 Bitmap 资源
-                pictureBox1.Image = null;    // 清空引用，防止内存泄漏
+                pictureBox1.Image.Dispose(); 
+                pictureBox1.Image = null;    
             }
 
             pictureBox1.Image = BitmapConverter.ToBitmap(resizedImage);
@@ -301,6 +296,8 @@ namespace Paint {
             Redo.Clear();
             UpdateCanvas();
             canvas.CopyTo(tempCanvas);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
         private void ToolStripMenuItem_Click(object sender, EventArgs e) {
             ToolStripMenuItem temp = (ToolStripMenuItem)sender;
@@ -310,7 +307,7 @@ namespace Paint {
 
         private void 儲存檔案ToolStripMenuItem_Click(object sender, EventArgs e) {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif|Png Image|*.png";
+            saveFileDialog.Filter = "Bitmap Image|*.bmp|JPeg Image|*.jpg|Gif Image|*.gif|Png Image|*.png";
             saveFileDialog.Title = "Save an Image File";
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK) {
@@ -323,7 +320,7 @@ namespace Paint {
                 saveFileDialog.Dispose();
         }
         private void 開啟ToolStripMenuItem_Click(object sender, EventArgs e) {
-            openFileDialog.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif|Png Image|*.png";
+            openFileDialog.Filter = "Bitmap Image|*.bmp|JPeg Image|*.jpg|Gif Image|*.gif|Png Image|*.png";
             openFileDialog.Title = "打開圖片";
             if (openFileDialog.ShowDialog() == DialogResult.OK) {
                 canvas = Cv2.ImRead(openFileDialog.FileName);
@@ -792,6 +789,7 @@ namespace Paint {
                 realcols = canvas.Cols;
                 canvas = ComplexArrayToMat(fftResult);
                 ShiftDFT(canvas);
+                //canvas = ConvertFFTToMaskable(canvas);
                 AdjustmentCanvas();
                 paddedImage.Dispose();
                 paddedImage = null;
@@ -1002,7 +1000,8 @@ namespace Paint {
                 Cv2.CvtColor(canvas, tempMat, ColorConversionCodes.RGBA2BGR);
                 canvas = tempMat;
             }
-            UpdateCanvas();
+            AdjustmentCanvas();
+            //UpdateCanvas();
         }
 
         private void 型態click(object sender, EventArgs e) {
@@ -1059,10 +1058,6 @@ namespace Paint {
 
         private void cLAHEToolStripMenuItem_Click(object sender, EventArgs e) {
             CLAHE cLAHE = new CLAHE(this);
-            if (canvas.Channels() != 1) {
-                MessageBox.Show("Image must be grey.");
-                return;
-            }
             if (cLAHE.ShowDialog() == DialogResult.OK)
                 AdjustmentCanvas();
             cLAHE.Dispose();
@@ -1092,7 +1087,7 @@ namespace Paint {
             AdjustmentCanvas();
         }
 
-        public Bitmap ConvertCV32FC2ToBitmap(OpenCvSharp.Mat image) {
+        public Bitmap ConvertCV32FC2ToBitmap(OpenCvSharp.Mat image,bool store8U) {
             if (image.Type() != MatType.CV_32FC2)
                 throw new ArgumentException("Input Mat must be of type CV_32FC2.");
 
@@ -1128,6 +1123,25 @@ namespace Paint {
             normalizedMagnitude.Dispose();
             normalizedMagnitude = null;
             return bitmap;
+        }
+
+        public Mat ConvertFFTToMaskable(Mat fftImage) {
+            Mat[] planes = new Mat[2];
+            Cv2.Split(fftImage, out planes);
+
+            Mat magnitude = new Mat();
+            Cv2.Magnitude(planes[0], planes[1], magnitude);
+
+            Cv2.Log(magnitude + 1, magnitude);
+
+            Cv2.Normalize(magnitude, magnitude, 0, 255, NormTypes.MinMax);
+            magnitude.ConvertTo(magnitude, MatType.CV_8UC1);
+
+            planes[0].Dispose();
+            planes[0] = null;
+            planes[1].Dispose();
+            planes[1] = null;
+            return magnitude;
         }
     }
 

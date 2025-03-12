@@ -54,6 +54,7 @@
             this.遮罩效果ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.臨界處理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.型態變化ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.閾值遮罩ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.調整ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.強度轉換ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.亮度對比度ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -283,7 +284,8 @@
             // 
             this.遮罩效果ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.臨界處理ToolStripMenuItem,
-            this.型態變化ToolStripMenuItem});
+            this.型態變化ToolStripMenuItem,
+            this.閾值遮罩ToolStripMenuItem});
             this.遮罩效果ToolStripMenuItem.Name = "遮罩效果ToolStripMenuItem";
             this.遮罩效果ToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
             this.遮罩效果ToolStripMenuItem.Text = "遮罩/效果";
@@ -291,16 +293,22 @@
             // 臨界處理ToolStripMenuItem
             // 
             this.臨界處理ToolStripMenuItem.Name = "臨界處理ToolStripMenuItem";
-            this.臨界處理ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.臨界處理ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.臨界處理ToolStripMenuItem.Text = "臨界處理";
             this.臨界處理ToolStripMenuItem.Click += new System.EventHandler(this.二值化click);
             // 
             // 型態變化ToolStripMenuItem
             // 
             this.型態變化ToolStripMenuItem.Name = "型態變化ToolStripMenuItem";
-            this.型態變化ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.型態變化ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.型態變化ToolStripMenuItem.Text = "型態變化";
             this.型態變化ToolStripMenuItem.Click += new System.EventHandler(this.型態click);
+            // 
+            // 閾值遮罩ToolStripMenuItem
+            // 
+            this.閾值遮罩ToolStripMenuItem.Name = "閾值遮罩ToolStripMenuItem";
+            this.閾值遮罩ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.閾值遮罩ToolStripMenuItem.Text = "閾值遮罩";
             // 
             // 調整ToolStripMenuItem
             // 
@@ -699,6 +707,7 @@
         private System.Windows.Forms.ToolStripMenuItem cLAHEToolStripMenuItem;
         private System.Windows.Forms.TrackBar thicknessBar;
         private System.Windows.Forms.Label thicknessLabel;
+        private System.Windows.Forms.ToolStripMenuItem 閾值遮罩ToolStripMenuItem;
     }
 }
 
