@@ -106,5 +106,9 @@ namespace PaintApp
         private void ignore_cross(object sender, EventArgs e) {
             check = !check;
         }
+        private void ApplyThreshold()
+        {
+            Cv2.Threshold(__mainform.canvas, __mainform.canvas, thresholdVal, 255, type);
+        }
     }
 }
