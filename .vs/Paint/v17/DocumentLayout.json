@@ -1,161 +1,97 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\USER\\source\\repos\\Paint\\",
+  "WorkspaceRootPath": "C:\\Users\\samlu\\source\\repos\\Paint\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|c:\\users\\user\\source\\repos\\paint\\binarization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:binarization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|c:\\users\\user\\source\\repos\\paint\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\rgb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:rgb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|c:\\users\\user\\source\\repos\\paint\\rgb.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:rgb.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|c:\\users\\user\\source\\repos\\paint\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\low_pass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:low_pass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|c:\\users\\user\\source\\repos\\paint\\high_pass.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:high_pass.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\lightness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:lightness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|c:\\users\\user\\source\\repos\\paint\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\gauss.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:gauss.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\findcontour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:findcontour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\high_pass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:high_pass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|c:\\users\\user\\source\\repos\\paint\\low_pass.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:low_pass.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\lightness.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:lightness.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|c:\\users\\user\\source\\repos\\paint\\clahe.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:clahe.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|c:\\users\\user\\source\\repos\\paint\\gauss.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:gauss.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|c:\\users\\user\\source\\repos\\paint\\clahe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|c:\\users\\samlu\\source\\repos\\paint\\clahe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:clahe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|c:\\users\\user\\source\\repos\\paint\\binarization.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:binarization.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|c:\\users\\user\\source\\repos\\paint\\log.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\binarization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:binarization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\rgb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:rgb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\low_pass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:low_pass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\lightness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:lightness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\gauss.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:gauss.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\findcontour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:findcontour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\high_pass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:high_pass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\log.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:log.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|c:\\users\\user\\source\\repos\\paint\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|c:\\users\\user\\source\\repos\\paint\\contour.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:contour.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|c:\\users\\user\\source\\repos\\paint\\gamma.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:gamma.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|c:\\users\\user\\source\\repos\\paint\\log.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\log.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:log.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|c:\\users\\user\\source\\repos\\paint\\morphology.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:morphology.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|c:\\users\\user\\source\\repos\\paint\\properties\\resources.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:properties\\resources.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|c:\\users\\user\\source\\repos\\paint\\properties\\settings.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:properties\\settings.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\picturehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\picturehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:picturehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\properties\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:properties\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|c:\\users\\user\\source\\repos\\paint\\lightness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\lightness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:lightness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|c:\\users\\user\\source\\repos\\paint\\low_pass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\low_pass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:low_pass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\findcontour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\findcontour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:findcontour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\contour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\contour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:contour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\rgb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\rgb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:rgb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\gamma.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\gamma.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:gamma.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\binarization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\binarization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:binarization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\morphology.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\morphology.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:morphology.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\USER\\source\\repos\\Paint\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\log.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\samlu\\source\\repos\\Paint\\log.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:log.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
@@ -166,21 +102,24 @@
       "DocumentGroups": [
         {
           "DockedHeight": 267,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 13,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Form1.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Form1.cs",
+              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Form1.cs",
+              "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAAKwBAAAAAAAAAADgv7sBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAALsBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-27T09:12:45.334Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Bookmark",
@@ -195,493 +134,260 @@
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 7,
               "Title": "Gauss.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Gauss.cs",
+              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\Gauss.cs",
               "RelativeDocumentMoniker": "Gauss.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Gauss.cs",
+              "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\Gauss.cs",
               "RelativeToolTip": "Gauss.cs",
               "ViewState": "AgIAABYAAAAAAAAAAAAQwB4AAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-29T14:02:20.665Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "RGB.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\RGB.cs",
-              "RelativeDocumentMoniker": "RGB.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\RGB.cs",
-              "RelativeToolTip": "RGB.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAUwBwAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-11T18:42:14.684Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "High_pass.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\High_pass.Designer.cs",
-              "RelativeDocumentMoniker": "High_pass.Designer.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\High_pass.Designer.cs",
-              "RelativeToolTip": "High_pass.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T02:52:41.315Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-29T14:02:20.665Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "RGB.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\RGB.Designer.cs",
-              "RelativeDocumentMoniker": "RGB.Designer.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\RGB.Designer.cs",
-              "RelativeToolTip": "RGB.Designer.cs",
-              "ViewState": "AgIAAGgAAAAAAAAAAAAowJ4AAAAcAAAAAAAAAA==",
+              "Title": "RGB.cs",
+              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\RGB.cs",
+              "RelativeDocumentMoniker": "RGB.cs",
+              "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\RGB.cs",
+              "RelativeToolTip": "RGB.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAUwBwAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T02:54:01.215Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-11T18:42:14.684Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "binarization.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\binarization.cs",
+              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\binarization.cs",
               "RelativeDocumentMoniker": "binarization.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\binarization.cs",
+              "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\binarization.cs",
               "RelativeToolTip": "binarization.cs",
-              "ViewState": "AgIAAGUAAAAAAAAAAAAcwGsAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T02:01:02.83Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-12T02:01:02.83Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "Form1.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Form1.Designer.cs",
-              "RelativeDocumentMoniker": "Form1.Designer.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Form1.Designer.cs",
-              "RelativeToolTip": "Form1.Designer.cs",
-              "ViewState": "AgIAAAICAAAAAAAAAAAEwA8CAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T16:04:41.873Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
               "Title": "Low_pass.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Low_pass.cs",
+              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\Low_pass.cs",
               "RelativeDocumentMoniker": "Low_pass.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Low_pass.cs",
+              "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\Low_pass.cs",
               "RelativeToolTip": "Low_pass.cs",
               "ViewState": "AgIAAAoAAAAAAAAAAAAAABwAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-11T19:43:38.902Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "FindContour.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\FindContour.cs",
-              "RelativeDocumentMoniker": "FindContour.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\FindContour.cs",
-              "RelativeToolTip": "FindContour.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAIwBIAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-17T13:05:30.767Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-11T19:43:38.902Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
+              "Title": "FindContour.cs",
+              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\FindContour.cs",
+              "RelativeDocumentMoniker": "FindContour.cs",
+              "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\FindContour.cs",
+              "RelativeToolTip": "FindContour.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAIwBIAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-17T13:05:30.767Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Program.cs",
+              "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\Program.cs",
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T02:56:48.213Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-12T02:56:48.213Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 5,
               "Title": "lightness.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\lightness.cs",
+              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\lightness.cs",
               "RelativeDocumentMoniker": "lightness.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\lightness.cs",
+              "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\lightness.cs",
               "RelativeToolTip": "lightness.cs",
               "ViewState": "AgIAACEAAAAAAAAAAAAYwAgAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-29T10:27:29.833Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-29T10:27:29.833Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 9,
               "Title": "High_pass.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\High_pass.cs",
+              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\High_pass.cs",
               "RelativeDocumentMoniker": "High_pass.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\High_pass.cs",
+              "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\High_pass.cs",
               "RelativeToolTip": "High_pass.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-27T09:34:41.598Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-27T09:34:41.598Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Low_pass.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Low_pass.Designer.cs",
-              "RelativeDocumentMoniker": "Low_pass.Designer.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Low_pass.Designer.cs",
-              "RelativeToolTip": "Low_pass.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T02:53:32.096Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "lightness.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\lightness.Designer.cs",
-              "RelativeDocumentMoniker": "lightness.Designer.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\lightness.Designer.cs",
-              "RelativeToolTip": "lightness.Designer.cs",
-              "ViewState": "AgIAAIwAAAAAAAAAAAAUwJgAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-29T10:37:29.992Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "CLAHE.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\CLAHE.Designer.cs",
-              "RelativeDocumentMoniker": "CLAHE.Designer.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\CLAHE.Designer.cs",
-              "RelativeToolTip": "CLAHE.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T02:48:58.408Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Gauss.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Gauss.Designer.cs",
-              "RelativeDocumentMoniker": "Gauss.Designer.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Gauss.Designer.cs",
-              "RelativeToolTip": "Gauss.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T02:52:18.274Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": ".Designer.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\.Designer.cs",
-              "RelativeDocumentMoniker": ".Designer.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\.Designer.cs",
-              "RelativeToolTip": ".Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-17T13:04:52.692Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 0,
               "Title": "CLAHE.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\CLAHE.cs",
+              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\CLAHE.cs",
               "RelativeDocumentMoniker": "CLAHE.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\CLAHE.cs",
+              "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\CLAHE.cs",
               "RelativeToolTip": "CLAHE.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAE4AAABVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-12T02:47:58.244Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "binarization.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\binarization.Designer.cs",
-              "RelativeDocumentMoniker": "binarization.Designer.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\binarization.Designer.cs",
-              "RelativeToolTip": "binarization.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAeAAAAAAAAAA==",
+              "DocumentIndex": 10,
+              "Title": "log.cs",
+              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\log.cs",
+              "RelativeDocumentMoniker": "log.cs",
+              "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\log.cs",
+              "RelativeToolTip": "log.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAApwBQAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T02:49:32.777Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-12T02:54:46.249Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\Class1.cs",
+              "RelativeDocumentMoniker": "Class1.cs",
+              "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\Class1.cs",
+              "RelativeToolTip": "Class1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-12T02:55:41.418Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "log.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\log.Designer.cs",
+              "RelativeDocumentMoniker": "log.Designer.cs",
+              "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\log.Designer.cs",
+              "RelativeToolTip": "log.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-12T02:56:30.072Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "lightness.cs [\u8A2D\u8A08]",
+              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\lightness.cs",
+              "RelativeDocumentMoniker": "lightness.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\lightness.cs [\u8A2D\u8A08]",
+              "RelativeToolTip": "..\\..\\..\\..\\USER\\source\\repos\\Paint\\lightness.cs [\u8A2D\u8A08]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-12T02:53:00.079Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "PictureHelper.cs",
+              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\PictureHelper.cs",
+              "RelativeDocumentMoniker": "PictureHelper.cs",
+              "ToolTip": "C:\\Users\\samlu\\source\\repos\\Paint\\PictureHelper.cs",
+              "RelativeToolTip": "PictureHelper.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAAAA0AAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-28T13:47:31.226Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Low_pass.cs [\u8A2D\u8A08]",
+              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\Low_pass.cs",
+              "RelativeDocumentMoniker": "Low_pass.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Low_pass.cs [\u8A2D\u8A08]",
+              "RelativeToolTip": "..\\..\\..\\..\\USER\\source\\repos\\Paint\\Low_pass.cs [\u8A2D\u8A08]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-12T02:53:29.237Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "FindContour.cs [\u8A2D\u8A08]",
+              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\FindContour.cs",
+              "RelativeDocumentMoniker": "FindContour.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\FindContour.cs [\u8A2D\u8A08]",
+              "RelativeToolTip": "..\\..\\..\\..\\USER\\source\\repos\\Paint\\FindContour.cs [\u8A2D\u8A08]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-17T13:05:23.269Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "contour.cs [\u8A2D\u8A08]",
+              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\contour.cs",
+              "RelativeDocumentMoniker": "contour.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\contour.cs [\u8A2D\u8A08]",
+              "RelativeToolTip": "..\\..\\..\\..\\USER\\source\\repos\\Paint\\contour.cs [\u8A2D\u8A08]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-11T10:37:48.219Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "RGB.cs [\u8A2D\u8A08]",
+              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\RGB.cs",
+              "RelativeDocumentMoniker": "RGB.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\RGB.cs [\u8A2D\u8A08]",
+              "RelativeToolTip": "..\\..\\..\\..\\USER\\source\\repos\\Paint\\RGB.cs [\u8A2D\u8A08]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-11T18:41:00.447Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 19,
-              "Title": "log.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\log.cs",
-              "RelativeDocumentMoniker": "log.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\log.cs",
-              "RelativeToolTip": "log.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAApwBQAAAAYAAAAAAAAAA==",
+              "Title": "Gamma.cs [\u8A2D\u8A08]",
+              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\Gamma.cs",
+              "RelativeDocumentMoniker": "Gamma.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Gamma.cs [\u8A2D\u8A08]",
+              "RelativeToolTip": "..\\..\\..\\..\\USER\\source\\repos\\Paint\\Gamma.cs [\u8A2D\u8A08]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T02:54:46.249Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-11T18:41:27.427Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 20,
-              "Title": "Class1.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Class1.cs",
-              "RelativeDocumentMoniker": "Class1.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Class1.cs",
-              "RelativeToolTip": "Class1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAASAAAAAAAAAA==",
+              "Title": "binarization.cs [\u8A2D\u8A08]",
+              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\binarization.cs",
+              "RelativeDocumentMoniker": "binarization.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\binarization.cs [\u8A2D\u8A08]",
+              "RelativeToolTip": "..\\..\\..\\..\\USER\\source\\repos\\Paint\\binarization.cs [\u8A2D\u8A08]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T02:55:41.418Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-11T18:41:24.161Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 21,
-              "Title": "contour.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\contour.Designer.cs",
-              "RelativeDocumentMoniker": "contour.Designer.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\contour.Designer.cs",
-              "RelativeToolTip": "contour.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAASAAAAAAAAAA==",
+              "Title": "morphology.cs [\u8A2D\u8A08]",
+              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\morphology.cs",
+              "RelativeDocumentMoniker": "morphology.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\morphology.cs [\u8A2D\u8A08]",
+              "RelativeToolTip": "..\\..\\..\\..\\USER\\source\\repos\\Paint\\morphology.cs [\u8A2D\u8A08]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T02:55:52.173Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-11T10:37:56.966Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 22,
-              "Title": "Gamma.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Gamma.Designer.cs",
-              "RelativeDocumentMoniker": "Gamma.Designer.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Gamma.Designer.cs",
-              "RelativeToolTip": "Gamma.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T02:56:06.994Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "log.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\log.Designer.cs",
-              "RelativeDocumentMoniker": "log.Designer.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\log.Designer.cs",
-              "RelativeToolTip": "log.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T02:56:30.072Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "morphology.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\morphology.Designer.cs",
-              "RelativeDocumentMoniker": "morphology.Designer.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\morphology.Designer.cs",
-              "RelativeToolTip": "morphology.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T02:56:37.414Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "Resources.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Properties\\Resources.Designer.cs",
-              "RelativeDocumentMoniker": "Properties\\Resources.Designer.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Properties\\Resources.Designer.cs",
-              "RelativeToolTip": "Properties\\Resources.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T02:57:01.398Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "Settings.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Properties\\Settings.Designer.cs",
-              "RelativeDocumentMoniker": "Properties\\Settings.Designer.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Properties\\Settings.Designer.cs",
-              "RelativeToolTip": "Properties\\Settings.Designer.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAAAAoAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T02:57:08.829Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 29,
-              "Title": "lightness.cs [\u8A2D\u8A08]",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\lightness.cs",
-              "RelativeDocumentMoniker": "lightness.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\lightness.cs [\u8A2D\u8A08]",
-              "RelativeToolTip": "lightness.cs [\u8A2D\u8A08]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T02:53:00.079Z",
-              "EditorCaption": " [\u8A2D\u8A08]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "AssemblyInfo.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Properties\\AssemblyInfo.cs",
-              "RelativeDocumentMoniker": "Properties\\AssemblyInfo.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Properties\\AssemblyInfo.cs",
-              "RelativeToolTip": "Properties\\AssemblyInfo.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAAAAsAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-11T10:22:54.501Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "PictureHelper.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\PictureHelper.cs",
-              "RelativeDocumentMoniker": "PictureHelper.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\PictureHelper.cs",
-              "RelativeToolTip": "PictureHelper.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAAAA0AAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-28T13:47:31.226Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 30,
-              "Title": "Low_pass.cs [\u8A2D\u8A08]",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Low_pass.cs",
-              "RelativeDocumentMoniker": "Low_pass.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Low_pass.cs [\u8A2D\u8A08]",
-              "RelativeToolTip": "Low_pass.cs [\u8A2D\u8A08]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T02:53:29.237Z",
-              "EditorCaption": " [\u8A2D\u8A08]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "FindContour.cs [\u8A2D\u8A08]",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\FindContour.cs",
-              "RelativeDocumentMoniker": "FindContour.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\FindContour.cs [\u8A2D\u8A08]",
-              "RelativeToolTip": "FindContour.cs [\u8A2D\u8A08]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-17T13:05:23.269Z",
-              "EditorCaption": " [\u8A2D\u8A08]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 32,
-              "Title": "contour.cs [\u8A2D\u8A08]",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\contour.cs",
-              "RelativeDocumentMoniker": "contour.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\contour.cs [\u8A2D\u8A08]",
-              "RelativeToolTip": "contour.cs [\u8A2D\u8A08]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-11T10:37:48.219Z",
-              "EditorCaption": " [\u8A2D\u8A08]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 33,
-              "Title": "RGB.cs [\u8A2D\u8A08]",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\RGB.cs",
-              "RelativeDocumentMoniker": "RGB.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\RGB.cs [\u8A2D\u8A08]",
-              "RelativeToolTip": "RGB.cs [\u8A2D\u8A08]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-11T18:41:00.447Z",
-              "EditorCaption": " [\u8A2D\u8A08]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 34,
-              "Title": "Gamma.cs [\u8A2D\u8A08]",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Gamma.cs",
-              "RelativeDocumentMoniker": "Gamma.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Gamma.cs [\u8A2D\u8A08]",
-              "RelativeToolTip": "Gamma.cs [\u8A2D\u8A08]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-11T18:41:27.427Z",
-              "EditorCaption": " [\u8A2D\u8A08]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 35,
-              "Title": "binarization.cs [\u8A2D\u8A08]",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\binarization.cs",
-              "RelativeDocumentMoniker": "binarization.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\binarization.cs [\u8A2D\u8A08]",
-              "RelativeToolTip": "binarization.cs [\u8A2D\u8A08]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-11T18:41:24.161Z",
-              "EditorCaption": " [\u8A2D\u8A08]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 36,
-              "Title": "morphology.cs [\u8A2D\u8A08]",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\morphology.cs",
-              "RelativeDocumentMoniker": "morphology.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\morphology.cs [\u8A2D\u8A08]",
-              "RelativeToolTip": "morphology.cs [\u8A2D\u8A08]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-11T10:37:56.966Z",
-              "EditorCaption": " [\u8A2D\u8A08]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 37,
-              "Title": ".gitignore",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\.gitignore",
-              "RelativeDocumentMoniker": ".gitignore",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\.gitignore",
-              "RelativeToolTip": ".gitignore",
-              "ViewState": "AgIAADQBAAAAAAAAAIBpwEMBAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-11-18T10:20:04.132Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 38,
               "Title": "log.cs [\u8A2D\u8A08]",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\log.cs",
+              "DocumentMoniker": "C:\\Users\\samlu\\source\\repos\\Paint\\log.cs",
               "RelativeDocumentMoniker": "log.cs",
               "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\log.cs [\u8A2D\u8A08]",
-              "RelativeToolTip": "log.cs [\u8A2D\u8A08]",
+              "RelativeToolTip": "..\\..\\..\\..\\USER\\source\\repos\\Paint\\log.cs [\u8A2D\u8A08]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-29T10:26:42.411Z",
-              "EditorCaption": " [\u8A2D\u8A08]"
+              "WhenOpened": "2024-10-29T10:26:42.411Z"
             }
           ]
         }
