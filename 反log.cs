@@ -12,7 +12,7 @@ using System.Windows.Forms;
 using EmguCVMat = Emgu.CV.Mat;
 using OpenCvSharpMat = OpenCvSharp.Mat;
 using Size = OpenCvSharp.Size;
-namespace Paint
+namespace PaintApp
 {
     public partial class 反log : Form
     {

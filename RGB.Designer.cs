@@ -1,4 +1,7 @@
-﻿namespace Paint
+﻿namespace PaintApp
+
+
+
 {
     partial class RGBtrans
     {

@@ -11,7 +11,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenCvSharpMat = OpenCvSharp.Mat;
-namespace Paint
+namespace PaintApp
+
+
+
 {
     public partial class RGBtrans : Form
     {
@@ -26,6 +29,29 @@ namespace Paint
             tempCanvas = mainform.canvas.Clone();
             Preview_box.BringToFront();
             UpdatePictureBox(tempCanvas);
+        }
+        public static void OpenAndSetRGBTransform(Paint mainform, double ra, double rb, double ga, double gb, double ba, double bb)
+        {
+            // 創建 `RGBtrans` 視窗實例
+            RGBtrans rgbForm = new RGBtrans(mainform);
+
+            // 設定 RGB 變換參數
+            rgbForm.ra = ra;
+            rgbForm.rb = rb;
+            rgbForm.ga = ga;
+            rgbForm.gb = gb;
+            rgbForm.ba = ba;
+            rgbForm.bb = bb;
+
+            // 直接應用變換
+            OpenCvSharpMat temp = rgbForm.trans(mainform.canvas);
+            mainform.canvas = temp;
+
+            // 更新畫布顯示
+            mainform.AdjustmentCanvas();
+
+            // 清理資源
+            rgbForm.Dispose();
         }
 
 

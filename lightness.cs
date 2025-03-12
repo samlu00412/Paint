@@ -8,12 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using Paint;
+using PaintApp;
 using OpenCvSharp;
 using OpenCvSharp.Extensions;
 using EmguCVMat = Emgu.CV.Mat;
 using OpenCvSharpMat = OpenCvSharp.Mat;
-namespace Paint {
+namespace PaintApp
+{
     public partial class lightness : Form {
         Paint mainform;
         Mat show;

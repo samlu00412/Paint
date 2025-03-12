@@ -10,7 +10,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Paint {
+namespace PaintApp
+
+
+
+{
     public partial class High_pass : Form{
         private int Ksize = 3; //default
         private Paint __mainform;

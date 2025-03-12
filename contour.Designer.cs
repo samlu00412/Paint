@@ -1,4 +1,4 @@
-﻿namespace Paint {
+﻿namespace PaintApp   {
     partial class contour {
         /// <summary>
         /// Required designer variable.

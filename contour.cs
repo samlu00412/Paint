@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using OpenCvSharp;
 using OpenCvSharp.Extensions;
 
-namespace Paint {
+namespace PaintApp {
     public partial class contour : Form {
         private Paint _mainForm;
         private Mat originalImage, previewImage;

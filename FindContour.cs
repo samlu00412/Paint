@@ -13,7 +13,7 @@ using System.Windows.Forms;
 using OpenCvSharp.Internal.Vectors;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Web.Mail;
-namespace Paint
+namespace PaintApp
 {
     public partial class FindContour : Form
     {

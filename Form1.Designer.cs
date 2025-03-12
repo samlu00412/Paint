@@ -1,4 +1,4 @@
-﻿namespace Paint
+﻿namespace PaintApp
 {
     partial class Paint
     {
@@ -607,7 +607,8 @@
             this.thicknessLabel.TabIndex = 4;
             this.thicknessLabel.Text = "2";
             // 
-            // Paint
+            //
+            // 
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

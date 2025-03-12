@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Paint {
+namespace PaintApp{
     public partial class CLAHE : Form {
         private double limit_val = 2.0;
         private Paint __mainform;

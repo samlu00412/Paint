@@ -11,7 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Paint {
+namespace PaintApp
+{
     public partial class binarization : Form {
 
         private const double magnitudeScalar = 100.0;
@@ -34,8 +35,30 @@ namespace Paint {
             select_mode_Box.TextChanged += new EventHandler(change_mode);
             UpdatePictureBox(tempCanvas);
         }
-        
+        public static void OpenAndSetThresholdMode(Paint mainform, string modeName, double thresholdValue)
+        {
+            binarization binarizationForm = new binarization(mainform);
+            binarizationForm.SetThresholdMode(modeName, thresholdValue);
 
+            // ✅ 直接套用二值化，不顯示視窗
+            binarizationForm.ApplyThreshold();
+            mainform.AdjustmentCanvas();
+
+            // ✅ 釋放記憶體
+            binarizationForm.Dispose();
+        }
+
+        public void SetThresholdMode(string modeName, double thresholdValue)
+        {
+            if (mode.ContainsKey(modeName))
+            {
+                type = mode[modeName];
+            }
+            thresholdVal = thresholdValue;
+            threBar.Value = (int)(thresholdVal * magnitudeScalar);
+            threLabel.Text = $"{thresholdVal}";
+            UpdatePreviewAsync(thresholdVal).ConfigureAwait(false);
+        }
         private async void BarScroll(object sender, EventArgs e) {
             thresholdVal = threBar.Value / magnitudeScalar;
             threLabel.Text = $"{thresholdVal}";
@@ -60,12 +83,18 @@ namespace Paint {
             Close();
         }
 
-        private void confirm_click(object sender, EventArgs e) {
+        private void confirm_click(object sender, EventArgs e)
+        {
             DialogResult = DialogResult.OK;
-            Cv2.Threshold(__mainform.canvas,__mainform.canvas,thresholdVal,255,type);
+            ApplyThreshold();
             Close();
         }
 
-        
+        private void ApplyThreshold()
+        {
+            Cv2.Threshold(__mainform.canvas, __mainform.canvas, thresholdVal, 255, type);
+        }
+
+
     }
 }
