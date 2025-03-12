@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Paint {
+namespace PaintApp {
     public partial class morphology : Form {
 
         private int iteration = 1;

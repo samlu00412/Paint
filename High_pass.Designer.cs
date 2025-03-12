@@ -1,4 +1,8 @@
-﻿namespace Paint {
+﻿namespace PaintApp
+
+
+
+{
     partial class High_pass {
         /// <summary>
         /// Required designer variable.

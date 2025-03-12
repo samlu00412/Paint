@@ -1,7 +1,5 @@
-﻿namespace Paint
-{
-    partial class Paint
-    {
+﻿namespace PaintApp {
+    partial class Paint {
         /// <summary>
         /// 設計工具所需的變數。
         /// </summary>
@@ -11,10 +9,8 @@
         /// 清除任何使用中的資源。
         /// </summary>
         /// <param name="disposing">如果應該處置受控資源則為 true，否則為 false。</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -26,8 +22,7 @@
         /// 此為設計工具支援所需的方法 - 請勿使用程式碼編輯器修改
         /// 這個方法的內容。
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Paint));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.檔案ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -615,7 +610,8 @@
             this.thicknessLabel.TabIndex = 4;
             this.thicknessLabel.Text = "2";
             // 
-            // Paint
+            //
+            // 
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

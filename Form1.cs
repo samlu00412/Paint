@@ -8,19 +8,27 @@ using OpenCvSize = OpenCvSharp.Size;
 using Pen;
 using System.Windows.Forms.DataVisualization.Charting;
 using OpenCvSharpMat = OpenCvSharp.Mat;
+using PaintApp;
+using System.Threading.Tasks;
 using System.Numerics;
-
-
-namespace Paint {
+using System.Windows.Forms.VisualStyles;
+using System.Security.Cryptography;
+using System.Linq;
+using Microsoft.CodeAnalysis.CSharp.Scripting;
+using Microsoft.CodeAnalysis.Scripting;
+using Microsoft.CodeAnalysis;
+using System.Dynamic;
+namespace PaintApp {
 
     public partial class Paint : Form {
+        private const int MAX_STACK_SIZE = 20;
         public OpenCvSharpMat canvas;
         public OpenCvSharpMat tempCanvas = new OpenCvSharpMat();
         private OpenCvSharpMat chart = new OpenCvSharpMat();
         private OpenCvSharp.Point startpoint;
         private OpenCvSharp.Point prevPoint;
         private OpenCvSharp.Point currentPoint;
-
+        public static Paint Instance { get; private set; }
         private Bitmap canvasBitmap;
         private bool isDrawing = false, isGrey = false;
         private string drawMode = "Free";
@@ -41,8 +49,76 @@ namespace Paint {
             this.KeyPreview = true; // 允許表單偵測按鍵
             this.KeyDown += new KeyEventHandler(Form1_KeyDown);
             this.MouseWheel += new MouseEventHandler(Form1_MouseWheel);
-
+            Instance = this; // 記錄當前的 Paint 視窗
+            AddEvalWindow();
         }
+
+        // ✅ **建立 ScriptGlobals，讓 Eval 能夠存取 `Paint`**
+        public class ScriptGlobals
+        {
+            public Paint PaintForm { get; set; }
+        }
+
+        private void AddEvalWindow()
+        {
+            Form evalWindow = new Form
+            {
+                Text = "Code Evaluator",
+                Size = new System.Drawing.Size(600, 400)
+            };
+
+            TextBox codeInput = new TextBox
+            {
+                Multiline = true,
+                Dock = DockStyle.Top,
+                Height = 200
+            };
+
+            Button runButton = new Button
+            {
+                Text = "Run",
+                Dock = DockStyle.Bottom
+            };
+
+            TextBox outputBox = new TextBox
+            {
+                Multiline = true,
+                Dock = DockStyle.Fill,
+                ReadOnly = true
+            };
+
+            runButton.Click += async (sender, e) =>
+            {
+                try
+                {
+                    var scriptOptions = ScriptOptions.Default
+                        .WithReferences(AppDomain.CurrentDomain.GetAssemblies()
+                            .Where(a => !a.IsDynamic && !string.IsNullOrEmpty(a.Location))
+                            .Select(a => MetadataReference.CreateFromFile(a.Location)))
+                        .WithImports("System", "System.Linq", "System.Collections.Generic", "System.Windows.Forms", "PaintApp");
+
+                    // ✅ **使用 `ScriptGlobals` 來傳遞 Paint 的 `this`**
+                    var globals = new ScriptGlobals { PaintForm = this };
+
+                    var result = await CSharpScript.EvaluateAsync<object>(
+                        codeInput.Text, scriptOptions, globals: globals
+                    );
+
+                    outputBox.Text = result?.ToString() ?? "null";
+                }
+                catch (Exception ex)
+                {
+                    outputBox.Text = "Error: " + ex.Message;
+                }
+            };
+
+            evalWindow.Controls.Add(outputBox);
+            evalWindow.Controls.Add(runButton);
+            evalWindow.Controls.Add(codeInput);
+
+            evalWindow.Show();
+        }
+
 
         private void Form1_Load(object sender, EventArgs e) {
             thicknessLabel.Text = $"Pen thickness: {penThickness}";
@@ -289,9 +365,15 @@ namespace Paint {
             {"矩形","Rectangle"},{"三角形","Triangle"}
         };
         private void SaveCurrentState() {
+            if (Undo.Count >= MAX_STACK_SIZE)
+            {
+                Undo = new Stack<Storage>(new Stack<Storage>(Undo).Skip(1)); // 移除最舊的狀態
+            }
             Undo.Push(new Storage(canvas.Clone()));
+            Redo.Clear();
         }
-        private void AdjustmentCanvas() {
+        public void AdjustmentCanvas() {
+
             SaveCurrentState();
             Redo.Clear();
             UpdateCanvas();
@@ -353,7 +435,7 @@ namespace Paint {
             UpdateCanvas();
         }
 
-        private void 轉換成灰階ToolStripMenuItem_Click(object sender, EventArgs e) {
+        public void 轉換成灰階ToolStripMenuItem_Click(object sender, EventArgs e) {
             if (canvas.Channels() != 1)
                 Cv2.CvtColor(canvas, canvas, ColorConversionCodes.BGR2GRAY);
             isGrey = true;

@@ -12,7 +12,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Paint {
+namespace PaintApp
+{
     
     public partial class Low_pass : Form {
         private int Ksize = 3;
@@ -48,6 +49,27 @@ namespace Paint {
                 Kersize.Text = $"{Kernal_bar.Value*2 - 3}";
                 Ksize = Int32.Parse(Kersize.Text);
                 await UpdatePreviewAsync(Ksize);
+        }
+        public static void OpenAndSetLowPassMode(Paint mainform, int kernelSize)
+        {
+            // 確保 kernelSize 是奇數，且最小為 3
+            if (kernelSize < 3) kernelSize = 3;
+            if (kernelSize % 2 == 0) kernelSize++;
+
+            // 創建 `Low_pass` 視窗實例
+            Low_pass lowPassForm = new Low_pass(mainform);
+
+            // 設定 Kernal Size
+            lowPassForm.Ksize = kernelSize;
+
+            // 直接應用濾波
+            Cv2.MedianBlur(mainform.canvas, mainform.canvas, lowPassForm.Ksize);
+
+            // 更新畫布顯示
+            mainform.AdjustmentCanvas();
+
+            // 清理資源
+            lowPassForm.Dispose();
         }
 
         private void Change_Ksize(object sender, EventArgs e) {

@@ -15,7 +15,8 @@ using OpenCvSharp.Extensions;
 using Size = OpenCvSharp.Size;
 
 
-namespace Paint {
+namespace PaintApp
+{
     public partial class Gauss : Form {
         public Size Kernal = new Size(1, 1);
         public double Sigma = 1.0;
@@ -23,7 +24,7 @@ namespace Paint {
         private Paint __mainform;
         private Mat tempCanvas;
         private const int previewScale = 2;
-        public Gauss(OpenCvSharp.Size initKernal, double initSigma, Paint mainform) {
+        public Gauss(OpenCvSharp.Size initKernal, double initSigma,Paint mainform) {
             InitializeComponent();
             __mainform = mainform;
             tempCanvas = mainform.canvas.Clone();

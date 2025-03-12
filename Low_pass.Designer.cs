@@ -1,5 +1,7 @@
-﻿namespace Paint {
-    partial class Low_pass {
+﻿namespace PaintApp
+{
+    partial class Low_pass
+    {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -9,8 +11,10 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing) {
-            if (disposing && (components != null)) {
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -22,7 +26,8 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() {
+        private void InitializeComponent()
+        {
             this.Preview_box = new System.Windows.Forms.PictureBox();
             this.Cancel_btn = new System.Windows.Forms.Button();
             this.Confirm_btn = new System.Windows.Forms.Button();

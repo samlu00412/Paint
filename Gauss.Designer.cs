@@ -1,4 +1,8 @@
-﻿namespace Paint {
+﻿namespace PaintApp
+
+
+
+{
     partial class Gauss {
         /// <summary>
         /// Required designer variable.

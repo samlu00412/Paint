@@ -11,7 +11,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 using System.Runtime.ConstrainedExecution;
 using OpenCvSharp.Dnn;
 
-namespace Paint
+namespace PaintApp
 {
     internal class PictureHelper
     {

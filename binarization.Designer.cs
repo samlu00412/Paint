@@ -1,4 +1,5 @@
-﻿namespace Paint {
+﻿namespace PaintApp
+{
     partial class binarization {
         /// <summary>
         /// Required designer variable.

@@ -1,4 +1,8 @@
-﻿namespace Paint {
+﻿namespace PaintApp
+
+
+
+{
     partial class CLAHE {
         /// <summary>
         /// Required designer variable.

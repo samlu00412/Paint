@@ -1,4 +1,5 @@
-﻿namespace Paint {
+﻿namespace PaintApp
+{
     partial class morphology {
         /// <summary>
         /// Required designer variable.
