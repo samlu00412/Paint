@@ -42,11 +42,8 @@ namespace PaintApp
             binarization binarizationForm = new binarization(mainform);
             binarizationForm.SetThresholdMode(modeName, thresholdValue);
 
-            // ✅ 直接套用二值化，不顯示視窗
             binarizationForm.ApplyThreshold();
             mainform.AdjustmentCanvas();
-
-            // ✅ 釋放記憶體
             binarizationForm.Dispose();
         }
 
@@ -61,46 +58,79 @@ namespace PaintApp
             threLabel.Text = $"{thresholdVal}";
             UpdatePreviewAsync(thresholdVal).ConfigureAwait(false);
         }
-        private async void BarScroll(object sender, EventArgs e) {
+        private void BarScroll(object sender, EventArgs e) {
             thresholdVal = threBar.Value / magnitudeScalar;
             threLabel.Text = $"{thresholdVal}";
-            await UpdatePreviewAsync(thresholdVal);
         }
         private async void change_mode(object sender, EventArgs e) {
             type = mode[select_mode_Box.Text];
             await UpdatePreviewAsync(thresholdVal);
         }
         private async Task UpdatePreviewAsync(double thre) {
-            await Task.Run(() => Cv2.Threshold(__mainform.canvas,tempCanvas,thre,255,type));
-            UpdatePictureBox(tempCanvas);
+            Mat previewResult = new Mat();
+
+            await Task.Run(() =>
+            {
+                if (__mainform.canvas.Type() == MatType.CV_32FC2) {
+                    ConvertFFTtoVisible(previewResult);
+                }
+                else if (__mainform.canvas.Type() == MatType.CV_8UC1) {
+                    Cv2.Threshold(__mainform.canvas, previewResult, thre, 255, type);
+                }
+            });
+
+            UpdatePictureBox(previewResult);
+            clear(previewResult);
         }
+
         private void UpdatePictureBox(Mat image) {
             if (previewBox.Image != null) {
                 previewBox.Image.Dispose();
                 previewBox.Image = null;
             }
-            if(image.Type() == MatType.CV_32FC2) {
 
+            if (image.Type() == MatType.CV_32FC2) {
+                // 轉換 FFT 影像為預覽圖
+                Mat[] fftPlanes = new Mat[2];
+                Cv2.Split(image, out fftPlanes);
+                Mat magnitude = new Mat();
+                Cv2.Magnitude(fftPlanes[0], fftPlanes[1], magnitude);
+
+                Cv2.Log(magnitude + 1, magnitude);
+                Cv2.Normalize(magnitude, magnitude, 0, 255, NormTypes.MinMax);
+                magnitude.ConvertTo(magnitude, MatType.CV_8UC1);
+                previewBox.Image = BitmapConverter.ToBitmap(magnitude);
+                clear(fftPlanes[0]);
+                clear(fftPlanes[1]);
+                clear(magnitude);
             }
             else {
-            previewBox.Image = BitmapConverter.ToBitmap(image);
+                previewBox.Image = BitmapConverter.ToBitmap(image);
             }
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
         }
-        
+
 
         private void cancel_click(object sender, EventArgs e) {
             DialogResult = DialogResult.Cancel;
             Close();
         }
 
-        private void confirm_click(object sender, EventArgs e)
-        {
+        private void confirm_click(object sender, EventArgs e) {
             DialogResult = DialogResult.OK;
-            
-            Cv2.Threshold(__mainform.canvas,__mainform.canvas,thresholdVal,255,type);
+
+            if (__mainform.canvas.Type() == MatType.CV_32FC2) {
+                ConvertFFTtoVisible(__mainform.canvas);
+            }
+            else if (__mainform.canvas.Type() == MatType.CV_8UC1) {
+                Cv2.Threshold(__mainform.canvas, __mainform.canvas, thresholdVal, 255, type);
+            }
+
             Close();
+        }
+
+        private void clear(Mat img) {
+            img.Dispose();
+            img = null;
         }
 
         private void ignore_cross(object sender, EventArgs e) {
@@ -109,6 +139,62 @@ namespace PaintApp
         private void ApplyThreshold()
         {
             Cv2.Threshold(__mainform.canvas, __mainform.canvas, thresholdVal, 255, type);
+        }
+
+        private void ConvertFFTtoVisible(Mat targetCanvas) {
+            Mat[] fftPlanes = new Mat[2];
+            Cv2.Split(__mainform.canvas, out fftPlanes);
+
+            Mat magnitude = new Mat();
+            Cv2.Magnitude(fftPlanes[0], fftPlanes[1], magnitude);
+
+            // 確保 threshold 在正確範圍內
+            Cv2.Log(magnitude + 1, magnitude);
+            Cv2.Normalize(magnitude, magnitude, 0, 1, NormTypes.MinMax);
+
+            Mat mask = new Mat();
+            Cv2.Threshold(magnitude, mask, thresholdVal / 255.0, 1, type);
+
+            // 確保 mask 轉換為浮點數，以便乘法運算
+            Mat maskFloat = new Mat();
+            mask.ConvertTo(maskFloat, MatType.CV_32FC1);
+            int cx = mask.Cols / 2;
+            int cy = mask.Rows / 2;
+            int lineWidth = 15; // 紅線寬度範圍
+
+            for (int i = Math.Max(0, cy - lineWidth); i < Math.Min(mask.Rows, cy + lineWidth); i++) {
+                maskFloat.Row(i).SetTo(1);
+            }
+            for (int j = Math.Max(0, cx - lineWidth); j < Math.Min(mask.Cols, cx + lineWidth); j++) {
+                maskFloat.Col(j).SetTo(1);
+            }
+
+            // 將遮罩應用到 FFT 影像
+            Mat maskedRe = new Mat();
+            Mat maskedIm = new Mat();
+            Cv2.Multiply(fftPlanes[0], maskFloat, maskedRe);
+            Cv2.Multiply(fftPlanes[1], maskFloat, maskedIm);
+            Mat resultFFT = new Mat();
+            Cv2.Merge(new Mat[] { maskedRe, maskedIm }, resultFFT);
+
+            // 更新 canvas
+            resultFFT.CopyTo(targetCanvas);
+
+            // 清理資源
+            clear(fftPlanes[0]);
+            clear(fftPlanes[1]);
+            clear(magnitude);
+            clear(mask);
+            clear(maskFloat);
+            clear(maskedRe);
+            clear(maskedIm);
+            clear(resultFFT);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+        }
+
+        private async void modify_value(object sender, MouseEventArgs e) {
+            await UpdatePreviewAsync(thresholdVal);
         }
     }
 }

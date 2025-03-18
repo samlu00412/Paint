@@ -76,6 +76,7 @@
             this.threBar.Size = new System.Drawing.Size(364, 45);
             this.threBar.TabIndex = 8;
             this.threBar.Scroll += new System.EventHandler(this.BarScroll);
+            this.threBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.modify_value);
             // 
             // threLabel
             // 
