@@ -39,12 +39,12 @@
             // Kernal_bar
             // 
             this.Kernal_bar.BackColor = System.Drawing.SystemColors.Control;
-            this.Kernal_bar.Location = new System.Drawing.Point(17, 16);
-            this.Kernal_bar.Margin = new System.Windows.Forms.Padding(4);
+            this.Kernal_bar.Location = new System.Drawing.Point(8, 8);
+            this.Kernal_bar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Kernal_bar.Maximum = 14;
             this.Kernal_bar.Minimum = 3;
             this.Kernal_bar.Name = "Kernal_bar";
-            this.Kernal_bar.Size = new System.Drawing.Size(790, 90);
+            this.Kernal_bar.Size = new System.Drawing.Size(365, 69);
             this.Kernal_bar.SmallChange = 2;
             this.Kernal_bar.TabIndex = 9;
             this.Kernal_bar.Value = 3;
@@ -52,20 +52,20 @@
             // 
             // Preview_box
             // 
-            this.Preview_box.Location = new System.Drawing.Point(17, 71);
-            this.Preview_box.Margin = new System.Windows.Forms.Padding(4);
+            this.Preview_box.Location = new System.Drawing.Point(8, 36);
+            this.Preview_box.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Preview_box.Name = "Preview_box";
-            this.Preview_box.Size = new System.Drawing.Size(887, 513);
+            this.Preview_box.Size = new System.Drawing.Size(409, 256);
             this.Preview_box.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.Preview_box.TabIndex = 10;
             this.Preview_box.TabStop = false;
             // 
             // Confirm_btn
             // 
-            this.Confirm_btn.Location = new System.Drawing.Point(1028, 539);
-            this.Confirm_btn.Margin = new System.Windows.Forms.Padding(4);
+            this.Confirm_btn.Location = new System.Drawing.Point(474, 270);
+            this.Confirm_btn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Confirm_btn.Name = "Confirm_btn";
-            this.Confirm_btn.Size = new System.Drawing.Size(108, 45);
+            this.Confirm_btn.Size = new System.Drawing.Size(50, 22);
             this.Confirm_btn.TabIndex = 12;
             this.Confirm_btn.Text = "確定";
             this.Confirm_btn.UseVisualStyleBackColor = true;
@@ -73,10 +73,10 @@
             // 
             // Cancel_btn
             // 
-            this.Cancel_btn.Location = new System.Drawing.Point(912, 539);
-            this.Cancel_btn.Margin = new System.Windows.Forms.Padding(4);
+            this.Cancel_btn.Location = new System.Drawing.Point(421, 270);
+            this.Cancel_btn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Cancel_btn.Name = "Cancel_btn";
-            this.Cancel_btn.Size = new System.Drawing.Size(108, 45);
+            this.Cancel_btn.Size = new System.Drawing.Size(50, 22);
             this.Cancel_btn.TabIndex = 11;
             this.Cancel_btn.Text = "取消";
             this.Cancel_btn.UseVisualStyleBackColor = true;
@@ -85,23 +85,24 @@
             // Kersize
             // 
             this.Kersize.AutoSize = true;
-            this.Kersize.Location = new System.Drawing.Point(848, 28);
-            this.Kersize.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Kersize.Location = new System.Drawing.Point(391, 14);
+            this.Kersize.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Kersize.Name = "Kersize";
-            this.Kersize.Size = new System.Drawing.Size(21, 24);
+            this.Kersize.Size = new System.Drawing.Size(11, 12);
             this.Kersize.TabIndex = 13;
             this.Kersize.Text = "3";
             // 
             // High_pass
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1156, 600);
+            this.ClientSize = new System.Drawing.Size(534, 300);
             this.Controls.Add(this.Kersize);
             this.Controls.Add(this.Confirm_btn);
             this.Controls.Add(this.Cancel_btn);
             this.Controls.Add(this.Preview_box);
             this.Controls.Add(this.Kernal_bar);
+            this.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.Name = "High_pass";
             this.Text = "High_pass";
             this.Load += new System.EventHandler(this.High_pass_Load);

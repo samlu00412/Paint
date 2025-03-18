@@ -289,34 +289,40 @@ namespace PaintApp {
             Redo.Clear();
         }
 
-        private void UpdateCanvas(){
-            if (canvas.Type() == MatType.CV_32FC2){
-                if (pictureBox1.Image != null){
-                    pictureBox1.Image.Dispose(); 
-                    pictureBox1.Image = null;    
+        private void UpdateCanvas(Mat image = null){
+            // 如果沒有傳入參數，則使用 canvas
+            Mat displayImage = image ?? canvas;
+
+            if (displayImage.Type() == MatType.CV_32FC2) {
+                // 如果是複數矩陣，轉換為幅度圖顯示
+                if (pictureBox1.Image != null) {
+                    pictureBox1.Image.Dispose();
+                    pictureBox1.Image = null;
                 }
-                pictureBox1.Image = ConvertCV32FC2ToBitmap(canvas,false);
+                pictureBox1.Image = ConvertCV32FC2ToBitmap(displayImage, false);
                 return;
             }
-                    
-            double ratioX = (double)pictureBox1.Width / canvas.Width;
-            double ratioY = (double)pictureBox1.Height / canvas.Height;
+
+            // 計算縮放比例
+            double ratioX = (double)pictureBox1.Width / displayImage.Width;
+            double ratioY = (double)pictureBox1.Height / displayImage.Height;
             double scale = Math.Min(ratioX, ratioY);
 
-            int newWidth = (int)(canvas.Width * scale);
-            int newHeight = (int)(canvas.Height * scale);
+            int newWidth = (int)(displayImage.Width * scale);
+            int newHeight = (int)(displayImage.Height * scale);
 
-            OpenCvSharpMat resizedImage = new Mat();
-            Cv2.Resize(canvas, resizedImage, new OpenCvSharp.Size(newWidth, newHeight), 0, 0, InterpolationFlags.Nearest);
+            // 縮放圖像
+            Mat resizedImage = new Mat();
+            Cv2.Resize(displayImage, resizedImage, new OpenCvSharp.Size(newWidth, newHeight), 0, 0, InterpolationFlags.Nearest);
 
-    
-            if (pictureBox1.Image != null)
-            {
-                pictureBox1.Image.Dispose(); 
-                pictureBox1.Image = null;    
+            // 更新 pictureBox1
+            if (pictureBox1.Image != null) {
+                pictureBox1.Image.Dispose();
+                pictureBox1.Image = null;
             }
-
             pictureBox1.Image = BitmapConverter.ToBitmap(resizedImage);
+
+            // 釋放資源
             resizedImage.Dispose();
             GC.Collect();
             GC.WaitForPendingFinalizers();
@@ -365,8 +371,7 @@ namespace PaintApp {
             {"矩形","Rectangle"},{"三角形","Triangle"}
         };
         private void SaveCurrentState() {
-            if (Undo.Count >= MAX_STACK_SIZE)
-            {
+            if (Undo.Count >= MAX_STACK_SIZE){
                 Undo = new Stack<Storage>(new Stack<Storage>(Undo).Skip(1)); // 移除最舊的狀態
             }
             Undo.Push(new Storage(canvas.Clone()));
@@ -394,9 +399,10 @@ namespace PaintApp {
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK) {
                 string filePath = saveFileDialog.FileName;//System.IO.Path.GetExtension(saveFileDialog.FileName).ToLower();
-                //if (canvas.Channels() == 2)
-                //    Cv2.ImWrite(filePath, ConvertCV32FC2ToBitmap(canvas));
-                Cv2.ImWrite(filePath, canvas);
+                if (canvas.Channels() == 2)
+                    Cv2.ImWrite(filePath, BitmapConverter.ToMat(ConvertCV32FC2ToBitmap(canvas, false)));
+                else
+                    Cv2.ImWrite(filePath, canvas);
             }
             if (saveFileDialog != null)
                 saveFileDialog.Dispose();
@@ -865,16 +871,28 @@ namespace PaintApp {
                     Cv2.CvtColor(canvas, canvas, ColorConversionCodes.BGR2GRAY);
 
                 OpenCvSharpMat paddedImage = PadToPowerOfTwo(canvas);
-                Complex[,] fftResult = Compute2DFFT(paddedImage);
+                Mat complexImage = new Mat(paddedImage.Size(), MatType.CV_32FC2);
+                Mat floatImage = new Mat();
+                paddedImage.ConvertTo(floatImage, MatType.CV_32FC1); // ✅ 正確使用 ConvertTo()
 
-                realrows = canvas.Rows;
-                realcols = canvas.Cols;
-                canvas = ComplexArrayToMat(fftResult);
-                ShiftDFT(canvas);
-                //canvas = ConvertFFTToMaskable(canvas);
+                // Step 4: 建立兩個通道
+                Mat[] planes = { floatImage, Mat.Zeros(paddedImage.Size(), MatType.CV_32FC1) };
+                Cv2.Merge(planes, complexImage); // 合併為 CV_32FC2
+                // Step 5: 計算 DFT
+                Cv2.Dft(complexImage, complexImage, DftFlags.ComplexOutput);
+                ShiftDFT(complexImage);
+
+                // Step 6: 更新 canvas
+                canvas = complexImage;
                 AdjustmentCanvas();
                 paddedImage.Dispose();
                 paddedImage = null;
+                floatImage.Dispose();
+                floatImage = null;
+                planes[0].Dispose();
+                planes[0] = null;
+                planes[1].Dispose();
+                planes[1] = null;
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
                 return;
@@ -1138,6 +1156,20 @@ namespace PaintApp {
             findContour.Dispose();
         }
 
+        private void lUTToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LUT lut = new LUT(this);
+            if (lut.ShowDialog() == DialogResult.OK)
+                AdjustmentCanvas();
+            lut.Dispose();
+        }
+        private void normalizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Normalize normalize = new Normalize(this);
+            if (normalize.ShowDialog() == DialogResult.OK)
+                AdjustmentCanvas();
+            normalize.Dispose();
+        }
         private void cLAHEToolStripMenuItem_Click(object sender, EventArgs e) {
             CLAHE cLAHE = new CLAHE(this);
             if (cLAHE.ShowDialog() == DialogResult.OK)
@@ -1152,22 +1184,32 @@ namespace PaintApp {
 
         private void iFFTToolStripMenuItem_Click(object sender, EventArgs e) {
             ShiftDFT(canvas);
-            
-            Complex[,] fftResult = MatToComplexArray(canvas);
-            // Step 5: 逆 FFT
 
-            Complex[,] ifftResult = IFFT2D(fftResult);
+            Mat inverseTransform = new Mat();
+            Cv2.Idft(canvas, inverseTransform, DftFlags.Scale | DftFlags.RealOutput);
 
-            // Step 6: 重建image
-            OpenCvSharpMat restoredImage = ReconstructImageFromFFT2(ifftResult, canvas.Rows, canvas.Cols);
+            // Step 3: 取得實部（因為 IFFT 會輸出 CV_32FC2）
+            Mat[] planes = new Mat[2];
+            Cv2.Split(inverseTransform, out planes);
+            Mat restoredImage = planes[0]; // 取實部
+
+            // Step 4: 轉換回 8-bit 影像（可顯示）
+            Mat displayImage = new Mat();
+            Cv2.Normalize(restoredImage, displayImage, 0, 255, NormTypes.MinMax);
+            displayImage.ConvertTo(displayImage, MatType.CV_8UC1);
             
             // 使用比例缩放顯示還原image
-            ShowImageWithProportionalScaling("Restored Image", restoredImage, 800, 800);
+            ShowImageWithProportionalScaling("Restored Image", displayImage, 800, 800);
 
             // 更新 canvas
-            canvas = restoredImage;
+            canvas = displayImage.Clone();
+            planes[0].Dispose();
+            inverseTransform.Dispose();
+            restoredImage.Dispose();
+            displayImage.Dispose();
             AdjustmentCanvas();
         }
+
 
         public Bitmap ConvertCV32FC2ToBitmap(OpenCvSharp.Mat image,bool store8U) {
             if (image.Type() != MatType.CV_32FC2)

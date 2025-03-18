@@ -166,6 +166,18 @@
       <DependentUpon>FindContour.cs</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Normalize.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Normalize.Designer.cs">
+      <DependentUpon>Normalize.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LUT.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LUT.Designer.cs">
+      <DependentUpon>LUT.cs</DependentUpon>
+    </Compile>
     <Compile Include="RGB.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -232,6 +244,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="binarization.resx">
       <DependentUpon>binarization.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="CLAHE.resx">
       <DependentUpon>CLAHE.cs</DependentUpon>
@@ -244,6 +257,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LUT.resx">
+      <DependentUpon>LUT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Normalize.resx">
+      <DependentUpon>Normalize.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RGB.resx">
       <DependentUpon>RGB.cs</DependentUpon>
