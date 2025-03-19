@@ -27,30 +27,34 @@
             this.previewBox = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.threBar = new System.Windows.Forms.TrackBar();
             this.threLabel = new System.Windows.Forms.Label();
             this.select_mode_Box = new System.Windows.Forms.ComboBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.threBar = new System.Windows.Forms.TrackBar();
+            this.blockSizeBar = new System.Windows.Forms.TrackBar();
+            this.cValueBar = new System.Windows.Forms.TrackBar();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.previewBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.threBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.blockSizeBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cValueBar)).BeginInit();
             this.SuspendLayout();
             // 
             // previewBox
             // 
-            this.previewBox.Location = new System.Drawing.Point(8, 35);
-            this.previewBox.Margin = new System.Windows.Forms.Padding(2);
+            this.previewBox.Location = new System.Drawing.Point(12, 225);
             this.previewBox.Name = "previewBox";
-            this.previewBox.Size = new System.Drawing.Size(410, 257);
+            this.previewBox.Size = new System.Drawing.Size(615, 386);
             this.previewBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.previewBox.TabIndex = 5;
             this.previewBox.TabStop = false;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(422, 270);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Location = new System.Drawing.Point(633, 405);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(50, 22);
+            this.button1.Size = new System.Drawing.Size(75, 33);
             this.button1.TabIndex = 6;
             this.button1.Text = "取消";
             this.button1.UseVisualStyleBackColor = true;
@@ -58,33 +62,20 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(476, 270);
-            this.button2.Margin = new System.Windows.Forms.Padding(2);
+            this.button2.Location = new System.Drawing.Point(714, 405);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(50, 22);
+            this.button2.Size = new System.Drawing.Size(75, 33);
             this.button2.TabIndex = 7;
             this.button2.Text = "確定";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.confirm_click);
             // 
-            // threBar
-            // 
-            this.threBar.Location = new System.Drawing.Point(8, 9);
-            this.threBar.Margin = new System.Windows.Forms.Padding(2);
-            this.threBar.Maximum = 25500;
-            this.threBar.Name = "threBar";
-            this.threBar.Size = new System.Drawing.Size(364, 45);
-            this.threBar.TabIndex = 8;
-            this.threBar.Scroll += new System.EventHandler(this.BarScroll);
-            this.threBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.modify_value);
-            // 
             // threLabel
             // 
             this.threLabel.AutoSize = true;
-            this.threLabel.Location = new System.Drawing.Point(392, 14);
-            this.threLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.threLabel.Location = new System.Drawing.Point(588, 21);
             this.threLabel.Name = "threLabel";
-            this.threLabel.Size = new System.Drawing.Size(20, 12);
+            this.threLabel.Size = new System.Drawing.Size(28, 18);
             this.threLabel.TabIndex = 9;
             this.threLabel.Text = "0.0";
             // 
@@ -98,11 +89,12 @@
             "Tozero",
             "Tozero_inverse",
             "Trunc",
-            "Otsu"});
-            this.select_mode_Box.Location = new System.Drawing.Point(425, 38);
-            this.select_mode_Box.Margin = new System.Windows.Forms.Padding(2);
+            "Otsu",
+            "Adaptive_Mean",
+            "Adaptive_Gaussian"});
+            this.select_mode_Box.Location = new System.Drawing.Point(638, 57);
             this.select_mode_Box.Name = "select_mode_Box";
-            this.select_mode_Box.Size = new System.Drawing.Size(100, 26);
+            this.select_mode_Box.Size = new System.Drawing.Size(148, 36);
             this.select_mode_Box.TabIndex = 10;
             this.select_mode_Box.Text = "Binary";
             this.select_mode_Box.TextChanged += new System.EventHandler(this.change_mode);
@@ -110,19 +102,76 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(425, 81);
+            this.checkBox1.Location = new System.Drawing.Point(638, 122);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(96, 16);
+            this.checkBox1.Size = new System.Drawing.Size(142, 22);
             this.checkBox1.TabIndex = 11;
             this.checkBox1.Text = "去除中央十字";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.ignore_cross);
             // 
+            // threBar
+            // 
+            this.threBar.Location = new System.Drawing.Point(12, 14);
+            this.threBar.Maximum = 25500;
+            this.threBar.Name = "threBar";
+            this.threBar.Size = new System.Drawing.Size(546, 69);
+            this.threBar.TabIndex = 8;
+            this.threBar.Scroll += new System.EventHandler(this.BarScroll);
+            this.threBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.modify_value);
+            // 
+            // blockSizeBar
+            // 
+            this.blockSizeBar.Location = new System.Drawing.Point(12, 75);
+            this.blockSizeBar.Maximum = 51;
+            this.blockSizeBar.Minimum = 3;
+            this.blockSizeBar.Name = "blockSizeBar";
+            this.blockSizeBar.Size = new System.Drawing.Size(546, 69);
+            this.blockSizeBar.SmallChange = 2;
+            this.blockSizeBar.TabIndex = 12;
+            this.blockSizeBar.TickFrequency = 2;
+            this.blockSizeBar.Value = 3;
+            this.blockSizeBar.Scroll += new System.EventHandler(this.blockSizeBar_Scroll);
+            // 
+            // cValueBar
+            // 
+            this.cValueBar.Location = new System.Drawing.Point(12, 150);
+            this.cValueBar.Maximum = 30;
+            this.cValueBar.Minimum = -30;
+            this.cValueBar.Name = "cValueBar";
+            this.cValueBar.Size = new System.Drawing.Size(546, 69);
+            this.cValueBar.TabIndex = 13;
+            this.cValueBar.Value = 2;
+            this.cValueBar.Scroll += new System.EventHandler(this.cValueBar_Scroll);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(588, 75);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(16, 18);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "3";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(588, 150);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(16, 18);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "2";
+            // 
             // binarization
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(533, 300);
+            this.ClientSize = new System.Drawing.Size(800, 634);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.cValueBar);
+            this.Controls.Add(this.blockSizeBar);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.select_mode_Box);
             this.Controls.Add(this.threLabel);
@@ -131,11 +180,12 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.threBar);
             this.Location = new System.Drawing.Point(10, 10);
-            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "binarization";
             this.Text = "binarization";
             ((System.ComponentModel.ISupportInitialize)(this.previewBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.threBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.blockSizeBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cValueBar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -146,9 +196,13 @@
         private System.Windows.Forms.PictureBox previewBox;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        public System.Windows.Forms.TrackBar threBar;
         private System.Windows.Forms.Label threLabel;
         private System.Windows.Forms.ComboBox select_mode_Box;
         private System.Windows.Forms.CheckBox checkBox1;
+        public System.Windows.Forms.TrackBar threBar;
+        public System.Windows.Forms.TrackBar blockSizeBar;
+        public System.Windows.Forms.TrackBar cValueBar;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }

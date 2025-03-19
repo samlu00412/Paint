@@ -80,6 +80,8 @@
             this.rGBAToBGRToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rGBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.正規化ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.normalizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.equalizeHistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -90,8 +92,6 @@
             this.directoryEntry1 = new System.DirectoryServices.DirectoryEntry();
             this.thicknessBar = new System.Windows.Forms.TrackBar();
             this.thicknessLabel = new System.Windows.Forms.Label();
-            this.normalizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.equalizeHistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -112,8 +112,8 @@
             this.正規化ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(3, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(711, 32);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 3, 0, 3);
+            this.menuStrip1.Size = new System.Drawing.Size(1066, 34);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -195,42 +195,42 @@
             // 自由ToolStripMenuItem
             // 
             this.自由ToolStripMenuItem.Name = "自由ToolStripMenuItem";
-            this.自由ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.自由ToolStripMenuItem.Size = new System.Drawing.Size(164, 34);
             this.自由ToolStripMenuItem.Text = "自由";
             this.自由ToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
             // 
             // 直線ToolStripMenuItem
             // 
             this.直線ToolStripMenuItem.Name = "直線ToolStripMenuItem";
-            this.直線ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.直線ToolStripMenuItem.Size = new System.Drawing.Size(164, 34);
             this.直線ToolStripMenuItem.Text = "直線";
             this.直線ToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
             // 
             // 矩形ToolStripMenuItem
             // 
             this.矩形ToolStripMenuItem.Name = "矩形ToolStripMenuItem";
-            this.矩形ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.矩形ToolStripMenuItem.Size = new System.Drawing.Size(164, 34);
             this.矩形ToolStripMenuItem.Text = "矩形";
             this.矩形ToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
             // 
             // 圓ToolStripMenuItem
             // 
             this.圓ToolStripMenuItem.Name = "圓ToolStripMenuItem";
-            this.圓ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.圓ToolStripMenuItem.Size = new System.Drawing.Size(164, 34);
             this.圓ToolStripMenuItem.Text = "圓";
             this.圓ToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
             // 
             // 橢圓ToolStripMenuItem
             // 
             this.橢圓ToolStripMenuItem.Name = "橢圓ToolStripMenuItem";
-            this.橢圓ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.橢圓ToolStripMenuItem.Size = new System.Drawing.Size(164, 34);
             this.橢圓ToolStripMenuItem.Text = "橢圓";
             this.橢圓ToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
             // 
             // 三角形ToolStripMenuItem
             // 
             this.三角形ToolStripMenuItem.Name = "三角形ToolStripMenuItem";
-            this.三角形ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.三角形ToolStripMenuItem.Size = new System.Drawing.Size(164, 34);
             this.三角形ToolStripMenuItem.Text = "三角形";
             this.三角形ToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
             // 
@@ -249,35 +249,35 @@
             // 復原UndoToolStripMenuItem
             // 
             this.復原UndoToolStripMenuItem.Name = "復原UndoToolStripMenuItem";
-            this.復原UndoToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.復原UndoToolStripMenuItem.Size = new System.Drawing.Size(236, 34);
             this.復原UndoToolStripMenuItem.Text = "復原(Undo)";
             this.復原UndoToolStripMenuItem.Click += new System.EventHandler(this.復原UndoToolStripMenuItem_Click);
             // 
             // 重做RedoToolStripMenuItem
             // 
             this.重做RedoToolStripMenuItem.Name = "重做RedoToolStripMenuItem";
-            this.重做RedoToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.重做RedoToolStripMenuItem.Size = new System.Drawing.Size(236, 34);
             this.重做RedoToolStripMenuItem.Text = "重做(Redo)";
             this.重做RedoToolStripMenuItem.Click += new System.EventHandler(this.重做RedoToolStripMenuItem_Click);
             // 
             // 繪製亮度直方圖ToolStripMenuItem
             // 
             this.繪製亮度直方圖ToolStripMenuItem.Name = "繪製亮度直方圖ToolStripMenuItem";
-            this.繪製亮度直方圖ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.繪製亮度直方圖ToolStripMenuItem.Size = new System.Drawing.Size(236, 34);
             this.繪製亮度直方圖ToolStripMenuItem.Text = "繪製亮度直方圖";
             this.繪製亮度直方圖ToolStripMenuItem.Click += new System.EventHandler(this.btnShowHistogram_Click);
             // 
             // 描繪輪廓ToolStripMenuItem
             // 
             this.描繪輪廓ToolStripMenuItem.Name = "描繪輪廓ToolStripMenuItem";
-            this.描繪輪廓ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.描繪輪廓ToolStripMenuItem.Size = new System.Drawing.Size(236, 34);
             this.描繪輪廓ToolStripMenuItem.Text = "描繪輪廓";
             this.描繪輪廓ToolStripMenuItem.Click += new System.EventHandler(this.draw_contour_click);
             // 
             // findContoursToolStripMenuItem
             // 
             this.findContoursToolStripMenuItem.Name = "findContoursToolStripMenuItem";
-            this.findContoursToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.findContoursToolStripMenuItem.Size = new System.Drawing.Size(236, 34);
             this.findContoursToolStripMenuItem.Text = "FindContours";
             this.findContoursToolStripMenuItem.Click += new System.EventHandler(this.findContoursToolStripMenuItem_Click);
             // 
@@ -295,27 +295,27 @@
             // 臨界處理ToolStripMenuItem
             // 
             this.臨界處理ToolStripMenuItem.Name = "臨界處理ToolStripMenuItem";
-            this.臨界處理ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.臨界處理ToolStripMenuItem.Size = new System.Drawing.Size(182, 34);
             this.臨界處理ToolStripMenuItem.Text = "臨界處理";
             this.臨界處理ToolStripMenuItem.Click += new System.EventHandler(this.二值化click);
             // 
             // 型態變化ToolStripMenuItem
             // 
             this.型態變化ToolStripMenuItem.Name = "型態變化ToolStripMenuItem";
-            this.型態變化ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.型態變化ToolStripMenuItem.Size = new System.Drawing.Size(182, 34);
             this.型態變化ToolStripMenuItem.Text = "型態變化";
             this.型態變化ToolStripMenuItem.Click += new System.EventHandler(this.型態click);
             // 
             // 閾值遮罩ToolStripMenuItem
             // 
             this.閾值遮罩ToolStripMenuItem.Name = "閾值遮罩ToolStripMenuItem";
-            this.閾值遮罩ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.閾值遮罩ToolStripMenuItem.Size = new System.Drawing.Size(182, 34);
             this.閾值遮罩ToolStripMenuItem.Text = "閾值遮罩";
             // 
             // lUTToolStripMenuItem
             // 
             this.lUTToolStripMenuItem.Name = "lUTToolStripMenuItem";
-            this.lUTToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.lUTToolStripMenuItem.Size = new System.Drawing.Size(182, 34);
             this.lUTToolStripMenuItem.Text = "LUT";
             this.lUTToolStripMenuItem.Click += new System.EventHandler(this.lUTToolStripMenuItem_Click);
             // 
@@ -348,35 +348,35 @@
             // 亮度對比度ToolStripMenuItem
             // 
             this.亮度對比度ToolStripMenuItem.Name = "亮度對比度ToolStripMenuItem";
-            this.亮度對比度ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.亮度對比度ToolStripMenuItem.Size = new System.Drawing.Size(208, 34);
             this.亮度對比度ToolStripMenuItem.Text = "亮度/對比度";
             this.亮度對比度ToolStripMenuItem.Click += new System.EventHandler(this.亮度對比度ToolStripMenuItem_Click);
             // 
             // 伽瑪ToolStripMenuItem
             // 
             this.伽瑪ToolStripMenuItem.Name = "伽瑪ToolStripMenuItem";
-            this.伽瑪ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.伽瑪ToolStripMenuItem.Size = new System.Drawing.Size(208, 34);
             this.伽瑪ToolStripMenuItem.Text = "伽瑪";
             this.伽瑪ToolStripMenuItem.Click += new System.EventHandler(this.伽瑪ToolStripMenuItem_Click);
             // 
             // log變換ToolStripMenuItem
             // 
             this.log變換ToolStripMenuItem.Name = "log變換ToolStripMenuItem";
-            this.log變換ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.log變換ToolStripMenuItem.Size = new System.Drawing.Size(208, 34);
             this.log變換ToolStripMenuItem.Text = "log變換";
             this.log變換ToolStripMenuItem.Click += new System.EventHandler(this.log變換ToolStripMenuItem_Click);
             // 
             // 反logToolStripMenuItem
             // 
             this.反logToolStripMenuItem.Name = "反logToolStripMenuItem";
-            this.反logToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.反logToolStripMenuItem.Size = new System.Drawing.Size(208, 34);
             this.反logToolStripMenuItem.Text = "反log";
             this.反logToolStripMenuItem.Click += new System.EventHandler(this.反logToolStripMenuItem_Click);
             // 
             // cLAHEToolStripMenuItem
             // 
             this.cLAHEToolStripMenuItem.Name = "cLAHEToolStripMenuItem";
-            this.cLAHEToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.cLAHEToolStripMenuItem.Size = new System.Drawing.Size(208, 34);
             this.cLAHEToolStripMenuItem.Text = "CLAHE";
             this.cLAHEToolStripMenuItem.Click += new System.EventHandler(this.cLAHEToolStripMenuItem_Click);
             // 
@@ -551,12 +551,26 @@
             this.正規化ToolStripMenuItem.Size = new System.Drawing.Size(80, 28);
             this.正規化ToolStripMenuItem.Text = "正規化";
             // 
+            // normalizeToolStripMenuItem
+            // 
+            this.normalizeToolStripMenuItem.Name = "normalizeToolStripMenuItem";
+            this.normalizeToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.normalizeToolStripMenuItem.Text = "Normalize";
+            this.normalizeToolStripMenuItem.Click += new System.EventHandler(this.normalizeToolStripMenuItem_Click);
+            // 
+            // equalizeHistToolStripMenuItem
+            // 
+            this.equalizeHistToolStripMenuItem.Name = "equalizeHistToolStripMenuItem";
+            this.equalizeHistToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.equalizeHistToolStripMenuItem.Text = "equalizeHist";
+            this.equalizeHistToolStripMenuItem.Click += new System.EventHandler(this.equalizeHistToolStripMenuItem_Click);
+            // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(0, 42);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.pictureBox1.Location = new System.Drawing.Point(0, 63);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(711, 368);
+            this.pictureBox1.Size = new System.Drawing.Size(1066, 552);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
@@ -576,9 +590,10 @@
             this.toolStripButton1,
             this.toolStripButton2,
             this.toolStripButton3});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 32);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 34);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(711, 41);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.toolStrip1.Size = new System.Drawing.Size(1066, 41);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -614,11 +629,12 @@
             // 
             // thicknessBar
             // 
-            this.thicknessBar.Location = new System.Drawing.Point(126, 24);
+            this.thicknessBar.Location = new System.Drawing.Point(189, 36);
+            this.thicknessBar.Margin = new System.Windows.Forms.Padding(4);
             this.thicknessBar.Maximum = 30;
             this.thicknessBar.Minimum = 1;
             this.thicknessBar.Name = "thicknessBar";
-            this.thicknessBar.Size = new System.Drawing.Size(375, 69);
+            this.thicknessBar.Size = new System.Drawing.Size(562, 69);
             this.thicknessBar.TabIndex = 3;
             this.thicknessBar.Value = 2;
             this.thicknessBar.Scroll += new System.EventHandler(this.change_thickness);
@@ -626,37 +642,25 @@
             // thicknessLabel
             // 
             this.thicknessLabel.AutoSize = true;
-            this.thicknessLabel.Location = new System.Drawing.Point(513, 30);
+            this.thicknessLabel.Location = new System.Drawing.Point(770, 45);
+            this.thicknessLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.thicknessLabel.Name = "thicknessLabel";
-            this.thicknessLabel.Size = new System.Drawing.Size(11, 12);
+            this.thicknessLabel.Size = new System.Drawing.Size(16, 18);
             this.thicknessLabel.TabIndex = 4;
             this.thicknessLabel.Text = "2";
             // 
-            // normalizeToolStripMenuItem
-            // 
-            this.normalizeToolStripMenuItem.Name = "normalizeToolStripMenuItem";
-            this.normalizeToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.normalizeToolStripMenuItem.Text = "Normalize";
-            this.normalizeToolStripMenuItem.Click += new System.EventHandler(this.normalizeToolStripMenuItem_Click);
-            // 
-            // equalizeHistToolStripMenuItem
-            // 
-            this.equalizeHistToolStripMenuItem.Name = "equalizeHistToolStripMenuItem";
-            this.equalizeHistToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.equalizeHistToolStripMenuItem.Text = "equalizeHist";
-            // 
             // Paint
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(711, 410);
+            this.ClientSize = new System.Drawing.Size(1066, 615);
             this.Controls.Add(this.thicknessLabel);
             this.Controls.Add(this.thicknessBar);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.pictureBox1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "Paint";
             this.Text = "Paint";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

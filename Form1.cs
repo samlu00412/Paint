@@ -1170,6 +1170,14 @@ namespace PaintApp {
                 AdjustmentCanvas();
             normalize.Dispose();
         }
+        private void equalizeHistToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            equalizeHist equalizehist = new equalizeHist(this);
+            if (equalizehist.ShowDialog() == DialogResult.OK)
+                AdjustmentCanvas();
+            equalizehist.Dispose();
+        }
+
         private void cLAHEToolStripMenuItem_Click(object sender, EventArgs e) {
             CLAHE cLAHE = new CLAHE(this);
             if (cLAHE.ShowDialog() == DialogResult.OK)
@@ -1209,7 +1217,6 @@ namespace PaintApp {
             displayImage.Dispose();
             AdjustmentCanvas();
         }
-
 
         public Bitmap ConvertCV32FC2ToBitmap(OpenCvSharp.Mat image,bool store8U) {
             if (image.Type() != MatType.CV_32FC2)

@@ -18,16 +18,24 @@ namespace PaintApp
 
         private const double magnitudeScalar = 100.0;
         private double thresholdVal = 0.0;
+        private bool adaptiveModeSelected = false;
         private Paint __mainform;
         private Mat tempCanvas;
         private bool check = false;
         private const int previewScale = 2;
+        private AdaptiveThresholdTypes adaptiveType;
         private ThresholdTypes type = ThresholdTypes.Binary;
         private readonly Dictionary<string, ThresholdTypes> mode = new Dictionary<string, ThresholdTypes> {
-            {"Binary",ThresholdTypes.Binary }, {"Binary_inverse",ThresholdTypes.BinaryInv},
-            {"Tozero",ThresholdTypes.Tozero }, {"Tozero_inverse",ThresholdTypes.TozeroInv},
+            {"Binary", ThresholdTypes.Binary }, {"Binary_inverse", ThresholdTypes.BinaryInv},
+            {"Tozero", ThresholdTypes.Tozero }, {"Tozero_inverse", ThresholdTypes.TozeroInv},
             {"Trunc", ThresholdTypes.Trunc}, {"Otsu", ThresholdTypes.Otsu}
         };
+
+        private readonly Dictionary<string, AdaptiveThresholdTypes> adaptiveMode = new Dictionary<string, AdaptiveThresholdTypes> {
+            {"Adaptive_Mean", AdaptiveThresholdTypes.MeanC},
+            {"Adaptive_Gaussian", AdaptiveThresholdTypes.GaussianC}
+        };
+
         public binarization(Paint mainform) {
             InitializeComponent();
             __mainform = mainform;
@@ -43,6 +51,7 @@ namespace PaintApp
             binarizationForm.SetThresholdMode(modeName, thresholdValue);
 
             binarizationForm.ApplyThreshold();
+
             mainform.AdjustmentCanvas();
             binarizationForm.Dispose();
         }
@@ -63,7 +72,17 @@ namespace PaintApp
             threLabel.Text = $"{thresholdVal}";
         }
         private async void change_mode(object sender, EventArgs e) {
-            type = mode[select_mode_Box.Text];
+            if (mode.ContainsKey(select_mode_Box.Text))
+            {
+                type = mode[select_mode_Box.Text];
+                adaptiveModeSelected = false;
+            }
+            else if (adaptiveMode.ContainsKey(select_mode_Box.Text))
+            {
+                adaptiveType = adaptiveMode[select_mode_Box.Text];
+                adaptiveModeSelected = true;
+            }
+
             await UpdatePreviewAsync(thresholdVal);
         }
         private async Task UpdatePreviewAsync(double thre) {
@@ -74,7 +93,31 @@ namespace PaintApp
                 if (__mainform.canvas.Type() == MatType.CV_32FC2) {
                     ConvertFFTtoVisible(previewResult);
                 }
-                else if (__mainform.canvas.Type() == MatType.CV_8UC1) {
+                else if (adaptiveModeSelected)
+                {
+                    int blockSize = 11; // 預設值
+                    blockSizeBar.Invoke(new Action(() =>
+                    {
+                        blockSize = blockSizeBar.Value;  // ✅ 確保這段程式碼在 UI 執行緒上執行
+                    }));
+                    if (blockSize % 2 == 0) blockSize++; // 確保 blockSize 為奇數
+                    int C = 2;
+                    blockSizeBar.Invoke(new Action(() =>
+                    {
+                        C = cValueBar.Value;  // ✅ 確保這段程式碼在 UI 執行緒上執行
+                    }));
+                    // 使用自適應二值化
+                    Cv2.AdaptiveThreshold(
+                        __mainform.canvas, previewResult,
+                        255,
+                        adaptiveType,
+                        ThresholdTypes.Binary,
+                        blockSize, C
+                    );
+                }
+                else
+                {
+                    // 使用標準二值化
                     Cv2.Threshold(__mainform.canvas, previewResult, thre, 255, type);
                 }
             });
@@ -138,7 +181,30 @@ namespace PaintApp
         }
         private void ApplyThreshold()
         {
-            Cv2.Threshold(__mainform.canvas, __mainform.canvas, thresholdVal, 255, type);
+            if (__mainform.canvas.Type() == MatType.CV_8UC1)
+            {
+                Mat result = new Mat();
+
+                if (adaptiveModeSelected)
+                {
+                    int blockSize = blockSizeBar.Value;
+                    if (blockSize % 2 == 0) blockSize++; // 確保 blockSize 為奇數
+                    int C = cValueBar.Value;
+
+                    Cv2.AdaptiveThreshold(__mainform.canvas, result, 255, adaptiveType, ThresholdTypes.Binary, blockSize, C);
+                }
+                else
+                {
+                    Cv2.Threshold(__mainform.canvas, result, thresholdVal, 255, type);
+                }
+
+                // 更新 `mainform.canvas`
+                __mainform.canvas = result.Clone();
+                UpdatePictureBox(result);
+
+                // 清理記憶體
+                result.Dispose();
+            }
         }
 
         private void ConvertFFTtoVisible(Mat targetCanvas) {
@@ -195,6 +261,18 @@ namespace PaintApp
 
         private async void modify_value(object sender, MouseEventArgs e) {
             await UpdatePreviewAsync(thresholdVal);
+        }
+
+        private void blockSizeBar_Scroll(object sender, EventArgs e)
+        {
+            label1.Text = $"{blockSizeBar.Value}";
+            UpdatePreviewAsync(thresholdVal);
+        }
+
+        private void cValueBar_Scroll(object sender, EventArgs e)
+        {
+            label2.Text = $"{cValueBar.Value}";
+            UpdatePreviewAsync(thresholdVal);
         }
     }
 }

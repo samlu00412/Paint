@@ -166,6 +166,12 @@
       <DependentUpon>FindContour.cs</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="equalizeHist.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="equalizeHist.Designer.cs">
+      <DependentUpon>equalizeHist.cs</DependentUpon>
+    </Compile>
     <Compile Include="Normalize.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -251,6 +257,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="contour.resx">
       <DependentUpon>contour.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="equalizeHist.resx">
+      <DependentUpon>equalizeHist.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FindContour.resx">
       <DependentUpon>FindContour.cs</DependentUpon>
