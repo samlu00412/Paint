@@ -179,6 +179,65 @@ namespace PaintApp
         private void ignore_cross(object sender, EventArgs e) {
             check = !check;
         }
+        private Mat GetCenterRegionMask(Mat magnitude, OpenCvSharp.Point seedPoint, double regionThreshold)
+        {
+            // 初始化遮罩：與 magnitude 同樣大小，初始值為 0
+            Mat mask = Mat.Zeros(magnitude.Size(), MatType.CV_8UC1);
+
+            // 建立 BFS 隊列
+            Queue<OpenCvSharp.Point> queue = new Queue<OpenCvSharp.Point>();
+            queue.Enqueue(seedPoint);
+
+            // 取得種子點像素值（基準灰度）
+            byte seedValue = magnitude.At<byte>(seedPoint.Y, seedPoint.X);
+
+            // 記錄是否拜訪過
+            bool[,] visited = new bool[magnitude.Rows, magnitude.Cols];
+
+            while (queue.Count > 0)
+            {
+                var pt = queue.Dequeue();
+
+                if (pt.X < 0 || pt.X >= magnitude.Cols || pt.Y < 0 || pt.Y >= magnitude.Rows)
+                {
+                    Console.WriteLine(pt.X+" "+pt.Y);
+                    continue;
+                }
+
+                if (visited[pt.Y, pt.X])
+                    continue;
+
+                visited[pt.Y, pt.X] = true;
+
+                byte currentValue = magnitude.At<byte>(pt.Y, pt.X);
+                if (Math.Abs(currentValue - seedValue) <= regionThreshold)
+                {
+                    mask.Set<byte>(pt.Y, pt.X, 255);
+
+                    // 加入 4 向鄰點
+                    queue.Enqueue(new OpenCvSharp.Point(pt.X + 1, pt.Y));
+                    queue.Enqueue(new OpenCvSharp.Point(pt.X - 1, pt.Y));
+                    queue.Enqueue(new OpenCvSharp.Point(pt.X, pt.Y + 1));
+                    queue.Enqueue(new OpenCvSharp.Point(pt.X, pt.Y - 1));
+
+                    //
+                    queue.Enqueue(new OpenCvSharp.Point(pt.X + 1, pt.Y+1));
+                    queue.Enqueue(new OpenCvSharp.Point(pt.X + 1, pt.Y-1));
+                    queue.Enqueue(new OpenCvSharp.Point(pt.X - 1, pt.Y+1));
+                    queue.Enqueue(new OpenCvSharp.Point(pt.X - 1, pt.Y-1));
+
+                    //
+                    queue.Enqueue(new OpenCvSharp.Point(pt.X + 2, pt.Y));
+                    queue.Enqueue(new OpenCvSharp.Point(pt.X - 2, pt.Y));
+                    queue.Enqueue(new OpenCvSharp.Point(pt.X, pt.Y + 2));
+                    queue.Enqueue(new OpenCvSharp.Point(pt.X, pt.Y - 2));
+
+                }
+            }
+
+            return mask;
+        }
+
         private void ApplyThreshold()
         {
             if (__mainform.canvas.Type() == MatType.CV_8UC1)
@@ -188,6 +247,7 @@ namespace PaintApp
                 if (adaptiveModeSelected)
                 {
                     int blockSize = blockSizeBar.Value;
+
                     if (blockSize % 2 == 0) blockSize++; // 確保 blockSize 為奇數
                     int C = cValueBar.Value;
 
@@ -207,57 +267,62 @@ namespace PaintApp
             }
         }
 
-        private void ConvertFFTtoVisible(Mat targetCanvas) {
+        private void ConvertFFTtoVisible(Mat targetCanvas)
+        {
+            // 將 FFT 拆成實部與虛部
             Mat[] fftPlanes = new Mat[2];
-            Cv2.Split(__mainform.canvas, out fftPlanes);
+            Cv2.Split(__mainform.canvas, out fftPlanes); // CV_32FC2 -> 2 x CV_32FC1
 
+            // 計算 Magnitude，做 log 與 normalize，變成灰階圖可視化
             Mat magnitude = new Mat();
             Cv2.Magnitude(fftPlanes[0], fftPlanes[1], magnitude);
-
-            // 確保 threshold 在正確範圍內
             Cv2.Log(magnitude + 1, magnitude);
-            Cv2.Normalize(magnitude, magnitude, 0, 1, NormTypes.MinMax);
+            Cv2.Normalize(magnitude, magnitude, 0, 255, NormTypes.MinMax);
+            magnitude.ConvertTo(magnitude, MatType.CV_8UC1);
 
-            Mat mask = new Mat();
-            Cv2.Threshold(magnitude, mask, thresholdVal / 255.0, 1, type);
+            // 對 magnitude 做 threshold
+            Mat thresholdedFFT = new Mat();
+            Cv2.Threshold(magnitude, thresholdedFFT, thresholdVal, 255, type);
 
-            // 確保 mask 轉換為浮點數，以便乘法運算
+            // 區域生長遮罩（以 magnitude 中心點）
+            OpenCvSharp.Point centerSeed = new OpenCvSharp.Point(magnitude.Cols / 2, magnitude.Rows / 2);
+            Mat centerMask = GetCenterRegionMask(magnitude, centerSeed, 100);
+
+            // 合併 threshold 結果與中心遮罩
+            Cv2.BitwiseOr(thresholdedFFT, centerMask, thresholdedFFT); // thresholdedFFT 是 mask
+
+            // 🔁 將 single-channel mask 轉為 float，用來套用到 fftPlanes
             Mat maskFloat = new Mat();
-            mask.ConvertTo(maskFloat, MatType.CV_32FC1);
-            int cx = mask.Cols / 2;
-            int cy = mask.Rows / 2;
-            int lineWidth = 15; // 紅線寬度範圍
+            thresholdedFFT.ConvertTo(maskFloat, MatType.CV_32FC1, 1.0 / 255.0); // 0 或 1 的浮點遮罩
 
-            for (int i = Math.Max(0, cy - lineWidth); i < Math.Min(mask.Rows, cy + lineWidth); i++) {
-                maskFloat.Row(i).SetTo(1);
-            }
-            for (int j = Math.Max(0, cx - lineWidth); j < Math.Min(mask.Cols, cx + lineWidth); j++) {
-                maskFloat.Col(j).SetTo(1);
-            }
-
-            // 將遮罩應用到 FFT 影像
+            // 套用 mask 到實部與虛部
             Mat maskedRe = new Mat();
             Mat maskedIm = new Mat();
             Cv2.Multiply(fftPlanes[0], maskFloat, maskedRe);
             Cv2.Multiply(fftPlanes[1], maskFloat, maskedIm);
-            Mat resultFFT = new Mat();
-            Cv2.Merge(new Mat[] { maskedRe, maskedIm }, resultFFT);
 
-            // 更新 canvas
-            resultFFT.CopyTo(targetCanvas);
+            // 合併回雙通道 FFT 結果
+            Mat maskedFFT = new Mat();
+            Cv2.Merge(new Mat[] { maskedRe, maskedIm }, maskedFFT);
 
-            // 清理資源
+            // ✅ 更新 targetCanvas，保持 CV_32FC2
+            maskedFFT.CopyTo(targetCanvas);
+
+            // ✅ 顯示 preview 圖（單通道）
+            previewBox.Image = BitmapConverter.ToBitmap(thresholdedFFT);
+
+            // 清除暫存
             clear(fftPlanes[0]);
             clear(fftPlanes[1]);
             clear(magnitude);
-            clear(mask);
+            clear(thresholdedFFT);
+            clear(centerMask);
             clear(maskFloat);
             clear(maskedRe);
             clear(maskedIm);
-            clear(resultFFT);
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+            clear(maskedFFT);
         }
+
 
         private async void modify_value(object sender, MouseEventArgs e) {
             await UpdatePreviewAsync(thresholdVal);

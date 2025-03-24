@@ -863,13 +863,15 @@ namespace PaintApp {
 
             return croppedResult;
         }
-
+        int ow, oh;
         private void 放棄toolStripMenuItem_Click(object sender, EventArgs e) {
             try {
+
                 //// Step 1: 确保 canvas 是灰阶图像
                 if (canvas.Channels() != 1)
                     Cv2.CvtColor(canvas, canvas, ColorConversionCodes.BGR2GRAY);
-
+                ow = canvas.Width;
+                oh = canvas.Height;
                 OpenCvSharpMat paddedImage = PadToPowerOfTwo(canvas);
                 Mat complexImage = new Mat(paddedImage.Size(), MatType.CV_32FC2);
                 Mat floatImage = new Mat();
@@ -1192,7 +1194,7 @@ namespace PaintApp {
 
         private void iFFTToolStripMenuItem_Click(object sender, EventArgs e) {
             ShiftDFT(canvas);
-
+            
             Mat inverseTransform = new Mat();
             Cv2.Idft(canvas, inverseTransform, DftFlags.Scale | DftFlags.RealOutput);
 
@@ -1201,11 +1203,14 @@ namespace PaintApp {
             Cv2.Split(inverseTransform, out planes);
             Mat restoredImage = planes[0]; // 取實部
 
+            Rect roi = new Rect(0, 0, ow, oh);
+            Mat cropped = new Mat(restoredImage, roi);
+
             // Step 4: 轉換回 8-bit 影像（可顯示）
             Mat displayImage = new Mat();
-            Cv2.Normalize(restoredImage, displayImage, 0, 255, NormTypes.MinMax);
+            Cv2.Normalize(cropped, displayImage, 0, 255, NormTypes.MinMax);
             displayImage.ConvertTo(displayImage, MatType.CV_8UC1);
-            
+
             // 使用比例缩放顯示還原image
             ShowImageWithProportionalScaling("Restored Image", displayImage, 800, 800);
 
