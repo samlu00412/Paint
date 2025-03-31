@@ -34,6 +34,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBoxPreview = new System.Windows.Forms.PictureBox();
+            this.modeBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.beblack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bewhite)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
@@ -44,7 +45,7 @@
             this.beblack.Location = new System.Drawing.Point(44, 39);
             this.beblack.Maximum = 255;
             this.beblack.Name = "beblack";
-            this.beblack.Size = new System.Drawing.Size(550, 69);
+            this.beblack.Size = new System.Drawing.Size(550, 45);
             this.beblack.TabIndex = 0;
             this.beblack.Scroll += new System.EventHandler(this.beblack_Scroll);
             // 
@@ -53,7 +54,7 @@
             this.bewhite.Location = new System.Drawing.Point(44, 127);
             this.bewhite.Maximum = 255;
             this.bewhite.Name = "bewhite";
-            this.bewhite.Size = new System.Drawing.Size(550, 69);
+            this.bewhite.Size = new System.Drawing.Size(550, 45);
             this.bewhite.TabIndex = 1;
             this.bewhite.Scroll += new System.EventHandler(this.bewhite_Scroll);
             // 
@@ -94,11 +95,27 @@
             this.pictureBoxPreview.TabIndex = 5;
             this.pictureBoxPreview.TabStop = false;
             // 
+            // modeBox
+            // 
+            this.modeBox.FormattingEnabled = true;
+            this.modeBox.Items.AddRange(new object[] {
+            "Normal",
+            "Gamma",
+            "Sigmoid",
+            "Piecewise"});
+            this.modeBox.Location = new System.Drawing.Point(612, 214);
+            this.modeBox.Name = "modeBox";
+            this.modeBox.Size = new System.Drawing.Size(126, 20);
+            this.modeBox.TabIndex = 6;
+            this.modeBox.Text = "Normal";
+            this.modeBox.TextChanged += new System.EventHandler(this.change_mode);
+            // 
             // LUT
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 555);
+            this.Controls.Add(this.modeBox);
             this.Controls.Add(this.pictureBoxPreview);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -123,5 +140,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBoxPreview;
+        private System.Windows.Forms.ComboBox modeBox;
     }
 }

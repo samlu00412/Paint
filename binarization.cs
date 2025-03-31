@@ -286,7 +286,7 @@ namespace PaintApp
 
             // 區域生長遮罩（以 magnitude 中心點）
             OpenCvSharp.Point centerSeed = new OpenCvSharp.Point(magnitude.Cols / 2, magnitude.Rows / 2);
-            Mat centerMask = GetCenterRegionMask(magnitude, centerSeed, 100);
+            Mat centerMask = GetCenterRegionMask(magnitude, centerSeed, 110);
 
             // 合併 threshold 結果與中心遮罩
             Cv2.BitwiseOr(thresholdedFFT, centerMask, thresholdedFFT); // thresholdedFFT 是 mask

@@ -329,24 +329,29 @@ namespace PaintApp {
         }
         private Rectangle GetImageRectangleInPictureBox() {
             // 計算圖像縮放後在 PictureBox 中的實際顯示範圍
-            double imageAspect = (double)canvas.Width / canvas.Height;
-            double boxAspect = (double)pictureBox1.Width / pictureBox1.Height;
+            try {
+                double imageAspect = (double)canvas.Width / canvas.Height;
+                double boxAspect = (double)pictureBox1.Width / pictureBox1.Height;
 
-            int width, height;
-            if (imageAspect > boxAspect) {
-                // 圖像更寬，以寬為基準
-                width = pictureBox1.Width;
-                height = (int)(pictureBox1.Width / imageAspect);
+                int width, height;
+                if (imageAspect > boxAspect) {
+                    // 圖像更寬，以寬為基準
+                    width = pictureBox1.Width;
+                    height = (int)(pictureBox1.Width / imageAspect);
+                }
+                else {
+                    // 圖像更高，以高為基準
+                    height = pictureBox1.Height;
+                    width = (int)(pictureBox1.Height * imageAspect);
+                }
+                int x = (pictureBox1.Width - width) / 2;
+                int y = (pictureBox1.Height - height) / 2;
+                return new Rectangle(x, y, width, height);
             }
-            else {
-                // 圖像更高，以高為基準
-                height = pictureBox1.Height;
-                width = (int)(pictureBox1.Height * imageAspect);
+            catch(Exception ex) {
+                MessageBox.Show($"{ex.Message}");
+                return new Rectangle();
             }
-            int x = (pictureBox1.Width - width) / 2;
-            int y = (pictureBox1.Height - height) / 2;
-
-            return new Rectangle(x, y, width, height);
         }
 
         private OpenCvSharp.Point ConvertToImageCoordinates(System.Drawing.Point mouseLocation) {
@@ -1102,6 +1107,16 @@ namespace PaintApp {
                 Cv2.CvtColor(canvas, tempMat, ColorConversionCodes.RGBA2BGR);
                 canvas = tempMat;
             }
+            else if(menuText == "BGR to XYZ") {
+                Mat tempMat = new Mat();
+                Cv2.CvtColor(canvas, tempMat, ColorConversionCodes.BGR2XYZ);
+                canvas = tempMat;
+            }
+            else if (menuText == "XYZ to BGR") {
+                Mat tempMat = new Mat();
+                Cv2.CvtColor(canvas, tempMat, ColorConversionCodes.XYZ2BGR);
+                canvas = tempMat;
+            }
             AdjustmentCanvas();
             //UpdateCanvas();
         }
@@ -1190,6 +1205,11 @@ namespace PaintApp {
         private void change_thickness(object sender, EventArgs e) {
             penThickness = thicknessBar.Value;
             thicknessLabel.Text = $"Pen thickness: {penThickness}";
+        }
+
+        private void negative_image(object sender, EventArgs e) {
+            Cv2.BitwiseNot(canvas, canvas);
+            AdjustmentCanvas();
         }
 
         private void iFFTToolStripMenuItem_Click(object sender, EventArgs e) {
