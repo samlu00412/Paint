@@ -861,9 +861,10 @@ namespace PaintApp {
                 for (int j = 0; j < originalCols; j++)
                     croppedResult[i, j] = paddedInput[i, j];
 
+
             return croppedResult;
         }
-        int ow, oh;
+        public int ow, oh;
         private void 放棄toolStripMenuItem_Click(object sender, EventArgs e) {
             try {
 
