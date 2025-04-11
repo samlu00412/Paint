@@ -234,7 +234,7 @@ namespace PaintApp
 
                 }
             }
-
+            
             return mask;
         }
 

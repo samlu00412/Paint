@@ -78,7 +78,10 @@
             this.rGBToBGRToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bGRToRGBAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rGBAToBGRToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bGRToYCRCBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.yCRCBToBGRToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rGBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.負片處理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.正規化ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.normalizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.equalizeHistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -92,9 +95,7 @@
             this.directoryEntry1 = new System.DirectoryServices.DirectoryEntry();
             this.thicknessBar = new System.Windows.Forms.TrackBar();
             this.thicknessLabel = new System.Windows.Forms.Label();
-            this.bGRToYCRCBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.yCRCBToBGRToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.負片處理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.框選瑕疵ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -133,28 +134,28 @@
             // 開啟ToolStripMenuItem
             // 
             this.開啟ToolStripMenuItem.Name = "開啟ToolStripMenuItem";
-            this.開啟ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.開啟ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.開啟ToolStripMenuItem.Text = "開啟圖檔";
             this.開啟ToolStripMenuItem.Click += new System.EventHandler(this.開啟ToolStripMenuItem_Click);
             // 
             // 新增ToolStripMenuItem
             // 
             this.新增ToolStripMenuItem.Name = "新增ToolStripMenuItem";
-            this.新增ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.新增ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.新增ToolStripMenuItem.Text = "新增畫布";
             this.新增ToolStripMenuItem.Click += new System.EventHandler(this.New_canva_click);
             // 
             // 儲存檔案ToolStripMenuItem
             // 
             this.儲存檔案ToolStripMenuItem.Name = "儲存檔案ToolStripMenuItem";
-            this.儲存檔案ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.儲存檔案ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.儲存檔案ToolStripMenuItem.Text = "儲存檔案";
             this.儲存檔案ToolStripMenuItem.Click += new System.EventHandler(this.儲存檔案ToolStripMenuItem_Click);
             // 
             // 結束ToolStripMenuItem
             // 
             this.結束ToolStripMenuItem.Name = "結束ToolStripMenuItem";
-            this.結束ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.結束ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.結束ToolStripMenuItem.Text = "結束";
             this.結束ToolStripMenuItem.Click += new System.EventHandler(this.結束ToolStripMenuItem_Click);
             // 
@@ -243,7 +244,8 @@
             this.重做RedoToolStripMenuItem,
             this.繪製亮度直方圖ToolStripMenuItem,
             this.描繪輪廓ToolStripMenuItem,
-            this.findContoursToolStripMenuItem});
+            this.findContoursToolStripMenuItem,
+            this.框選瑕疵ToolStripMenuItem});
             this.操作ToolStripMenuItem.Name = "操作ToolStripMenuItem";
             this.操作ToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.操作ToolStripMenuItem.Text = "操作";
@@ -251,35 +253,35 @@
             // 復原UndoToolStripMenuItem
             // 
             this.復原UndoToolStripMenuItem.Name = "復原UndoToolStripMenuItem";
-            this.復原UndoToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.復原UndoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.復原UndoToolStripMenuItem.Text = "復原(Undo)";
             this.復原UndoToolStripMenuItem.Click += new System.EventHandler(this.復原UndoToolStripMenuItem_Click);
             // 
             // 重做RedoToolStripMenuItem
             // 
             this.重做RedoToolStripMenuItem.Name = "重做RedoToolStripMenuItem";
-            this.重做RedoToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.重做RedoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.重做RedoToolStripMenuItem.Text = "重做(Redo)";
             this.重做RedoToolStripMenuItem.Click += new System.EventHandler(this.重做RedoToolStripMenuItem_Click);
             // 
             // 繪製亮度直方圖ToolStripMenuItem
             // 
             this.繪製亮度直方圖ToolStripMenuItem.Name = "繪製亮度直方圖ToolStripMenuItem";
-            this.繪製亮度直方圖ToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.繪製亮度直方圖ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.繪製亮度直方圖ToolStripMenuItem.Text = "繪製亮度直方圖";
             this.繪製亮度直方圖ToolStripMenuItem.Click += new System.EventHandler(this.btnShowHistogram_Click);
             // 
             // 描繪輪廓ToolStripMenuItem
             // 
             this.描繪輪廓ToolStripMenuItem.Name = "描繪輪廓ToolStripMenuItem";
-            this.描繪輪廓ToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.描繪輪廓ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.描繪輪廓ToolStripMenuItem.Text = "描繪輪廓";
             this.描繪輪廓ToolStripMenuItem.Click += new System.EventHandler(this.draw_contour_click);
             // 
             // findContoursToolStripMenuItem
             // 
             this.findContoursToolStripMenuItem.Name = "findContoursToolStripMenuItem";
-            this.findContoursToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.findContoursToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.findContoursToolStripMenuItem.Text = "FindContours";
             this.findContoursToolStripMenuItem.Click += new System.EventHandler(this.findContoursToolStripMenuItem_Click);
             // 
@@ -297,27 +299,27 @@
             // 臨界處理ToolStripMenuItem
             // 
             this.臨界處理ToolStripMenuItem.Name = "臨界處理ToolStripMenuItem";
-            this.臨界處理ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.臨界處理ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.臨界處理ToolStripMenuItem.Text = "臨界處理";
             this.臨界處理ToolStripMenuItem.Click += new System.EventHandler(this.二值化click);
             // 
             // 型態變化ToolStripMenuItem
             // 
             this.型態變化ToolStripMenuItem.Name = "型態變化ToolStripMenuItem";
-            this.型態變化ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.型態變化ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.型態變化ToolStripMenuItem.Text = "型態變化";
             this.型態變化ToolStripMenuItem.Click += new System.EventHandler(this.型態click);
             // 
             // 閾值遮罩ToolStripMenuItem
             // 
             this.閾值遮罩ToolStripMenuItem.Name = "閾值遮罩ToolStripMenuItem";
-            this.閾值遮罩ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.閾值遮罩ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.閾值遮罩ToolStripMenuItem.Text = "閾值遮罩";
             // 
             // lUTToolStripMenuItem
             // 
             this.lUTToolStripMenuItem.Name = "lUTToolStripMenuItem";
-            this.lUTToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.lUTToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.lUTToolStripMenuItem.Text = "LUT";
             this.lUTToolStripMenuItem.Click += new System.EventHandler(this.lUTToolStripMenuItem_Click);
             // 
@@ -345,7 +347,7 @@
             this.反logToolStripMenuItem,
             this.cLAHEToolStripMenuItem});
             this.強度轉換ToolStripMenuItem.Name = "強度轉換ToolStripMenuItem";
-            this.強度轉換ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.強度轉換ToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.強度轉換ToolStripMenuItem.Text = "強度轉換";
             // 
             // 亮度對比度ToolStripMenuItem
@@ -390,7 +392,7 @@
             this.低通濾波ToolStripMenuItem,
             this.高通濾波ToolStripMenuItem});
             this.空間濾波ToolStripMenuItem.Name = "空間濾波ToolStripMenuItem";
-            this.空間濾波ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.空間濾波ToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.空間濾波ToolStripMenuItem.Text = "空間濾波";
             // 
             // 高斯模糊ToolStripMenuItem
@@ -417,21 +419,21 @@
             // 轉換成灰階ToolStripMenuItem
             // 
             this.轉換成灰階ToolStripMenuItem.Name = "轉換成灰階ToolStripMenuItem";
-            this.轉換成灰階ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.轉換成灰階ToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.轉換成灰階ToolStripMenuItem.Text = "轉換成灰階";
             this.轉換成灰階ToolStripMenuItem.Click += new System.EventHandler(this.轉換成灰階ToolStripMenuItem_Click);
             // 
             // 放棄ToolStripMenuItem
             // 
             this.放棄ToolStripMenuItem.Name = "放棄ToolStripMenuItem";
-            this.放棄ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.放棄ToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.放棄ToolStripMenuItem.Text = "使用FFT";
             this.放棄ToolStripMenuItem.Click += new System.EventHandler(this.放棄toolStripMenuItem_Click);
             // 
             // iFFTToolStripMenuItem
             // 
             this.iFFTToolStripMenuItem.Name = "iFFTToolStripMenuItem";
-            this.iFFTToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.iFFTToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.iFFTToolStripMenuItem.Text = "IFFT";
             this.iFFTToolStripMenuItem.Click += new System.EventHandler(this.iFFTToolStripMenuItem_Click);
             // 
@@ -453,99 +455,120 @@
             this.bGRToYCRCBToolStripMenuItem,
             this.yCRCBToBGRToolStripMenuItem});
             this.色彩空間ToolStripMenuItem.Name = "色彩空間ToolStripMenuItem";
-            this.色彩空間ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.色彩空間ToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.色彩空間ToolStripMenuItem.Text = "色彩空間";
             // 
             // bGRToGrayscaleToolStripMenuItem
             // 
             this.bGRToGrayscaleToolStripMenuItem.Name = "bGRToGrayscaleToolStripMenuItem";
-            this.bGRToGrayscaleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bGRToGrayscaleToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.bGRToGrayscaleToolStripMenuItem.Text = "BGR to Grayscale";
             this.bGRToGrayscaleToolStripMenuItem.Click += new System.EventHandler(this.colortransformToolStripMenuItem_Click);
             // 
             // grayscaleToBGRToolStripMenuItem
             // 
             this.grayscaleToBGRToolStripMenuItem.Name = "grayscaleToBGRToolStripMenuItem";
-            this.grayscaleToBGRToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.grayscaleToBGRToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.grayscaleToBGRToolStripMenuItem.Text = "Grayscale to BGR";
             this.grayscaleToBGRToolStripMenuItem.Click += new System.EventHandler(this.colortransformToolStripMenuItem_Click);
             // 
             // bGRToHSVToolStripMenuItem
             // 
             this.bGRToHSVToolStripMenuItem.Name = "bGRToHSVToolStripMenuItem";
-            this.bGRToHSVToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bGRToHSVToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.bGRToHSVToolStripMenuItem.Text = "BGR to HSV";
             this.bGRToHSVToolStripMenuItem.Click += new System.EventHandler(this.colortransformToolStripMenuItem_Click);
             // 
             // hSVToBGRToolStripMenuItem
             // 
             this.hSVToBGRToolStripMenuItem.Name = "hSVToBGRToolStripMenuItem";
-            this.hSVToBGRToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.hSVToBGRToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.hSVToBGRToolStripMenuItem.Text = "HSV to BGR";
             this.hSVToBGRToolStripMenuItem.Click += new System.EventHandler(this.colortransformToolStripMenuItem_Click);
             // 
             // bGRToLabToolStripMenuItem
             // 
             this.bGRToLabToolStripMenuItem.Name = "bGRToLabToolStripMenuItem";
-            this.bGRToLabToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bGRToLabToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.bGRToLabToolStripMenuItem.Text = "BGR to Lab";
             this.bGRToLabToolStripMenuItem.Click += new System.EventHandler(this.colortransformToolStripMenuItem_Click);
             // 
             // labToBGRToolStripMenuItem
             // 
             this.labToBGRToolStripMenuItem.Name = "labToBGRToolStripMenuItem";
-            this.labToBGRToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.labToBGRToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.labToBGRToolStripMenuItem.Text = "Lab to BGR";
             this.labToBGRToolStripMenuItem.Click += new System.EventHandler(this.colortransformToolStripMenuItem_Click);
             // 
             // bGRToYUVToolStripMenuItem
             // 
             this.bGRToYUVToolStripMenuItem.Name = "bGRToYUVToolStripMenuItem";
-            this.bGRToYUVToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bGRToYUVToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.bGRToYUVToolStripMenuItem.Text = "BGR to YUV";
             this.bGRToYUVToolStripMenuItem.Click += new System.EventHandler(this.colortransformToolStripMenuItem_Click);
             // 
             // yUVToBGRToolStripMenuItem
             // 
             this.yUVToBGRToolStripMenuItem.Name = "yUVToBGRToolStripMenuItem";
-            this.yUVToBGRToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.yUVToBGRToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.yUVToBGRToolStripMenuItem.Text = "YUV to BGR";
             this.yUVToBGRToolStripMenuItem.Click += new System.EventHandler(this.colortransformToolStripMenuItem_Click);
             // 
             // bGRToRGBToolStripMenuItem
             // 
             this.bGRToRGBToolStripMenuItem.Name = "bGRToRGBToolStripMenuItem";
-            this.bGRToRGBToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bGRToRGBToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.bGRToRGBToolStripMenuItem.Text = "BGR to RGB";
             this.bGRToRGBToolStripMenuItem.Click += new System.EventHandler(this.colortransformToolStripMenuItem_Click);
             // 
             // rGBToBGRToolStripMenuItem
             // 
             this.rGBToBGRToolStripMenuItem.Name = "rGBToBGRToolStripMenuItem";
-            this.rGBToBGRToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.rGBToBGRToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.rGBToBGRToolStripMenuItem.Text = "RGB to BGR";
             this.rGBToBGRToolStripMenuItem.Click += new System.EventHandler(this.colortransformToolStripMenuItem_Click);
             // 
             // bGRToRGBAToolStripMenuItem
             // 
             this.bGRToRGBAToolStripMenuItem.Name = "bGRToRGBAToolStripMenuItem";
-            this.bGRToRGBAToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bGRToRGBAToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.bGRToRGBAToolStripMenuItem.Text = "BGR to RGBA";
             this.bGRToRGBAToolStripMenuItem.Click += new System.EventHandler(this.colortransformToolStripMenuItem_Click);
             // 
             // rGBAToBGRToolStripMenuItem
             // 
             this.rGBAToBGRToolStripMenuItem.Name = "rGBAToBGRToolStripMenuItem";
-            this.rGBAToBGRToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.rGBAToBGRToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.rGBAToBGRToolStripMenuItem.Text = "RGBA to BGR";
             this.rGBAToBGRToolStripMenuItem.Click += new System.EventHandler(this.colortransformToolStripMenuItem_Click);
+            // 
+            // bGRToYCRCBToolStripMenuItem
+            // 
+            this.bGRToYCRCBToolStripMenuItem.Name = "bGRToYCRCBToolStripMenuItem";
+            this.bGRToYCRCBToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.bGRToYCRCBToolStripMenuItem.Text = "BGR to XYZ";
+            this.bGRToYCRCBToolStripMenuItem.Click += new System.EventHandler(this.colortransformToolStripMenuItem_Click);
+            // 
+            // yCRCBToBGRToolStripMenuItem
+            // 
+            this.yCRCBToBGRToolStripMenuItem.Name = "yCRCBToBGRToolStripMenuItem";
+            this.yCRCBToBGRToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.yCRCBToBGRToolStripMenuItem.Text = "XYZ to BGR";
+            this.yCRCBToBGRToolStripMenuItem.Click += new System.EventHandler(this.colortransformToolStripMenuItem_Click);
             // 
             // rGBToolStripMenuItem
             // 
             this.rGBToolStripMenuItem.Name = "rGBToolStripMenuItem";
-            this.rGBToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.rGBToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.rGBToolStripMenuItem.Text = "RGB調整";
             this.rGBToolStripMenuItem.Click += new System.EventHandler(this.rGBToolStripMenuItem_Click);
+            // 
+            // 負片處理ToolStripMenuItem
+            // 
+            this.負片處理ToolStripMenuItem.Name = "負片處理ToolStripMenuItem";
+            this.負片處理ToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.負片處理ToolStripMenuItem.Text = "負片處理";
+            this.負片處理ToolStripMenuItem.Click += new System.EventHandler(this.negative_image);
             // 
             // 正規化ToolStripMenuItem
             // 
@@ -652,26 +675,12 @@
             this.thicknessLabel.TabIndex = 4;
             this.thicknessLabel.Text = "2";
             // 
-            // bGRToYCRCBToolStripMenuItem
+            // 框選瑕疵ToolStripMenuItem
             // 
-            this.bGRToYCRCBToolStripMenuItem.Name = "bGRToYCRCBToolStripMenuItem";
-            this.bGRToYCRCBToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.bGRToYCRCBToolStripMenuItem.Text = "BGR to XYZ";
-            this.bGRToYCRCBToolStripMenuItem.Click += new System.EventHandler(this.colortransformToolStripMenuItem_Click);
-            // 
-            // yCRCBToBGRToolStripMenuItem
-            // 
-            this.yCRCBToBGRToolStripMenuItem.Name = "yCRCBToBGRToolStripMenuItem";
-            this.yCRCBToBGRToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.yCRCBToBGRToolStripMenuItem.Text = "XYZ to BGR";
-            this.yCRCBToBGRToolStripMenuItem.Click += new System.EventHandler(this.colortransformToolStripMenuItem_Click);
-            // 
-            // 負片處理ToolStripMenuItem
-            // 
-            this.負片處理ToolStripMenuItem.Name = "負片處理ToolStripMenuItem";
-            this.負片處理ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.負片處理ToolStripMenuItem.Text = "負片處理";
-            this.負片處理ToolStripMenuItem.Click += new System.EventHandler(this.negative_image);
+            this.框選瑕疵ToolStripMenuItem.Name = "框選瑕疵ToolStripMenuItem";
+            this.框選瑕疵ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.框選瑕疵ToolStripMenuItem.Text = "框選瑕疵";
+            this.框選瑕疵ToolStripMenuItem.Click += new System.EventHandler(this.find_defect);
             // 
             // Paint
             // 
@@ -773,6 +782,7 @@
         private System.Windows.Forms.ToolStripMenuItem bGRToYCRCBToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem yCRCBToBGRToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 負片處理ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 框選瑕疵ToolStripMenuItem;
     }
 }
 

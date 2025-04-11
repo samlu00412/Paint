@@ -159,6 +159,12 @@
     <Compile Include="contour.Designer.cs">
       <DependentUpon>contour.cs</DependentUpon>
     </Compile>
+    <Compile Include="Defect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Defect.Designer.cs">
+      <DependentUpon>Defect.cs</DependentUpon>
+    </Compile>
     <Compile Include="FindContour.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -257,6 +263,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="contour.resx">
       <DependentUpon>contour.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Defect.resx">
+      <DependentUpon>Defect.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="equalizeHist.resx">
       <DependentUpon>equalizeHist.cs</DependentUpon>
