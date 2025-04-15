@@ -31,8 +31,7 @@ namespace PaintApp
         private void Confirm_click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
-            Bitmap bitmap = new Bitmap(pictureBoxPreview.Image);
-            __mainform.canvas = OpenCvSharp.Extensions.BitmapConverter.ToMat(bitmap);
+            Cv2.Normalize(__mainform.canvas, __mainform.canvas, 0, normalmax.Value, NormTypes.MinMax);
             Close();
         }
         private void UpdatePreview()

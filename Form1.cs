@@ -18,6 +18,7 @@ using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.CodeAnalysis;
 using System.Dynamic;
+using Emgu.CV.Structure;
 namespace PaintApp {
 
     public partial class Paint : Form {
@@ -329,24 +330,29 @@ namespace PaintApp {
         }
         private Rectangle GetImageRectangleInPictureBox() {
             // 計算圖像縮放後在 PictureBox 中的實際顯示範圍
-            double imageAspect = (double)canvas.Width / canvas.Height;
-            double boxAspect = (double)pictureBox1.Width / pictureBox1.Height;
+            try {
+                double imageAspect = (double)canvas.Width / canvas.Height;
+                double boxAspect = (double)pictureBox1.Width / pictureBox1.Height;
 
-            int width, height;
-            if (imageAspect > boxAspect) {
-                // 圖像更寬，以寬為基準
-                width = pictureBox1.Width;
-                height = (int)(pictureBox1.Width / imageAspect);
+                int width, height;
+                if (imageAspect > boxAspect) {
+                    // 圖像更寬，以寬為基準
+                    width = pictureBox1.Width;
+                    height = (int)(pictureBox1.Width / imageAspect);
+                }
+                else {
+                    // 圖像更高，以高為基準
+                    height = pictureBox1.Height;
+                    width = (int)(pictureBox1.Height * imageAspect);
+                }
+                int x = (pictureBox1.Width - width) / 2;
+                int y = (pictureBox1.Height - height) / 2;
+                return new Rectangle(x, y, width, height);
             }
-            else {
-                // 圖像更高，以高為基準
-                height = pictureBox1.Height;
-                width = (int)(pictureBox1.Height * imageAspect);
+            catch(Exception ex) {
+                MessageBox.Show($"{ex.Message}");
+                return new Rectangle();
             }
-            int x = (pictureBox1.Width - width) / 2;
-            int y = (pictureBox1.Height - height) / 2;
-
-            return new Rectangle(x, y, width, height);
         }
 
         private OpenCvSharp.Point ConvertToImageCoordinates(System.Drawing.Point mouseLocation) {
@@ -1103,6 +1109,16 @@ namespace PaintApp {
                 Cv2.CvtColor(canvas, tempMat, ColorConversionCodes.RGBA2BGR);
                 canvas = tempMat;
             }
+            else if(menuText == "BGR to XYZ") {
+                Mat tempMat = new Mat();
+                Cv2.CvtColor(canvas, tempMat, ColorConversionCodes.BGR2XYZ);
+                canvas = tempMat;
+            }
+            else if (menuText == "XYZ to BGR") {
+                Mat tempMat = new Mat();
+                Cv2.CvtColor(canvas, tempMat, ColorConversionCodes.XYZ2BGR);
+                canvas = tempMat;
+            }
             AdjustmentCanvas();
             //UpdateCanvas();
         }
@@ -1191,6 +1207,38 @@ namespace PaintApp {
         private void change_thickness(object sender, EventArgs e) {
             penThickness = thicknessBar.Value;
             thicknessLabel.Text = $"Pen thickness: {penThickness}";
+        }
+
+        private void negative_image(object sender, EventArgs e) {
+            Cv2.BitwiseNot(canvas, canvas);
+            AdjustmentCanvas();
+        }
+
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void 邊緣ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // 轉 HSV 色彩空間
+            Mat hsv = new Mat();
+            Cv2.CvtColor(canvas, hsv, ColorConversionCodes.BGR2HSV);
+
+            // 定義橘色 HSV 範圍（你可以根據實際調整）
+            Scalar lowerOrange = new Scalar(5, 100, 100);   // H, S, V
+            Scalar upperOrange = new Scalar(25, 255, 255);
+
+            // 建立遮罩
+            Mat mask = new Mat();
+            Cv2.InRange(hsv, lowerOrange, upperOrange, mask);
+
+            // 套用遮罩保留橘色區域
+            Mat result = new Mat();
+            Cv2.BitwiseAnd(canvas, canvas, result, mask);
+            canvas.Dispose();
+            canvas = result;
+            AdjustmentCanvas();
         }
 
         private void iFFTToolStripMenuItem_Click(object sender, EventArgs e) {
