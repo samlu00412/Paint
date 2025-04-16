@@ -89,11 +89,11 @@ namespace PaintApp
                 case 3:
                     for (int i = 0; i < 256; i++) {
                         if (i < Bthres)
-                            lutData[i] = (byte)(i * 0.5);  // 暗部壓縮
+                            lutData[i] = (byte)255;  // 暗部增強
                         else if (i < Wthres)
-                            lutData[i] = (byte)Math.Min(255, i * 1.2); // 中間區域增強
+                            lutData[i] = (byte)(i * 0.5); // 中間區域減弱
                         else
-                            lutData[i] = (byte)Math.Min(255, i * 0.8); // 亮部減弱
+                            lutData[i] = (byte)255; // 亮部增強
                     }
                     break;
             }

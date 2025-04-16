@@ -17,13 +17,13 @@ using System.Linq;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.CodeAnalysis;
-using System.Dynamic;
-using Emgu.CV.Structure;
+using Paint;
 namespace PaintApp {
 
     public partial class Paint : Form {
         private const int MAX_STACK_SIZE = 20;
         public OpenCvSharpMat canvas;
+        public OpenCvSharpMat origin_picture;
         public OpenCvSharpMat tempCanvas = new OpenCvSharpMat();
         private OpenCvSharpMat chart = new OpenCvSharpMat();
         private OpenCvSharp.Point startpoint;
@@ -418,6 +418,7 @@ namespace PaintApp {
             openFileDialog.Title = "打開圖片";
             if (openFileDialog.ShowDialog() == DialogResult.OK) {
                 canvas = Cv2.ImRead(openFileDialog.FileName);
+                origin_picture = Cv2.ImRead(openFileDialog.FileName);
                 UpdateCanvas();
                 tempCanvas = canvas.Clone();
                 SaveCurrentState();
@@ -1212,6 +1213,13 @@ namespace PaintApp {
         private void negative_image(object sender, EventArgs e) {
             Cv2.BitwiseNot(canvas, canvas);
             AdjustmentCanvas();
+        }
+
+        private void find_defect(object sender, EventArgs e) {
+            Defect defect = new Defect(this);
+            if (defect.ShowDialog() == DialogResult.OK)
+                AdjustmentCanvas();
+            defect.Dispose();
         }
 
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)

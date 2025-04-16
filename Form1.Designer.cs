@@ -1,4 +1,7 @@
-﻿namespace PaintApp {
+﻿using System;
+using System.Windows.Forms;
+
+namespace PaintApp {
     partial class Paint {
         /// <summary>
         /// 設計工具所需的變數。
@@ -46,6 +49,7 @@
             this.繪製亮度直方圖ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.描繪輪廓ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.findContoursToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.框選瑕疵ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.遮罩效果ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.臨界處理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.型態變化ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -129,7 +133,7 @@
             this.儲存檔案ToolStripMenuItem,
             this.結束ToolStripMenuItem});
             this.檔案ToolStripMenuItem.Name = "檔案ToolStripMenuItem";
-            this.檔案ToolStripMenuItem.Size = new System.Drawing.Size(62, 27);
+            this.檔案ToolStripMenuItem.Size = new System.Drawing.Size(62, 28);
             this.檔案ToolStripMenuItem.Text = "檔案";
             // 
             // 開啟ToolStripMenuItem
@@ -166,7 +170,7 @@
             this.放大ToolStripMenuItem,
             this.縮小ToolStripMenuItem});
             this.檢視ToolStripMenuItem.Name = "檢視ToolStripMenuItem";
-            this.檢視ToolStripMenuItem.Size = new System.Drawing.Size(62, 27);
+            this.檢視ToolStripMenuItem.Size = new System.Drawing.Size(62, 28);
             this.檢視ToolStripMenuItem.Text = "檢視";
             // 
             // 放大ToolStripMenuItem
@@ -193,7 +197,7 @@
             this.橢圓ToolStripMenuItem,
             this.三角形ToolStripMenuItem});
             this.畫筆ToolStripMenuItem.Name = "畫筆ToolStripMenuItem";
-            this.畫筆ToolStripMenuItem.Size = new System.Drawing.Size(62, 27);
+            this.畫筆ToolStripMenuItem.Size = new System.Drawing.Size(62, 28);
             this.畫筆ToolStripMenuItem.Text = "畫筆";
             // 
             // 自由ToolStripMenuItem
@@ -245,45 +249,54 @@
             this.重做RedoToolStripMenuItem,
             this.繪製亮度直方圖ToolStripMenuItem,
             this.描繪輪廓ToolStripMenuItem,
-            this.findContoursToolStripMenuItem});
+            this.findContoursToolStripMenuItem,
+            this.框選瑕疵ToolStripMenuItem,
+            this.邊緣ToolStripMenuItem});
             this.操作ToolStripMenuItem.Name = "操作ToolStripMenuItem";
-            this.操作ToolStripMenuItem.Size = new System.Drawing.Size(62, 27);
+            this.操作ToolStripMenuItem.Size = new System.Drawing.Size(62, 28);
             this.操作ToolStripMenuItem.Text = "操作";
             // 
             // 復原UndoToolStripMenuItem
             // 
             this.復原UndoToolStripMenuItem.Name = "復原UndoToolStripMenuItem";
-            this.復原UndoToolStripMenuItem.Size = new System.Drawing.Size(236, 34);
+            this.復原UndoToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.復原UndoToolStripMenuItem.Text = "復原(Undo)";
             this.復原UndoToolStripMenuItem.Click += new System.EventHandler(this.復原UndoToolStripMenuItem_Click);
             // 
             // 重做RedoToolStripMenuItem
             // 
             this.重做RedoToolStripMenuItem.Name = "重做RedoToolStripMenuItem";
-            this.重做RedoToolStripMenuItem.Size = new System.Drawing.Size(236, 34);
+            this.重做RedoToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.重做RedoToolStripMenuItem.Text = "重做(Redo)";
             this.重做RedoToolStripMenuItem.Click += new System.EventHandler(this.重做RedoToolStripMenuItem_Click);
             // 
             // 繪製亮度直方圖ToolStripMenuItem
             // 
             this.繪製亮度直方圖ToolStripMenuItem.Name = "繪製亮度直方圖ToolStripMenuItem";
-            this.繪製亮度直方圖ToolStripMenuItem.Size = new System.Drawing.Size(236, 34);
+            this.繪製亮度直方圖ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.繪製亮度直方圖ToolStripMenuItem.Text = "繪製亮度直方圖";
             this.繪製亮度直方圖ToolStripMenuItem.Click += new System.EventHandler(this.btnShowHistogram_Click);
             // 
             // 描繪輪廓ToolStripMenuItem
             // 
             this.描繪輪廓ToolStripMenuItem.Name = "描繪輪廓ToolStripMenuItem";
-            this.描繪輪廓ToolStripMenuItem.Size = new System.Drawing.Size(236, 34);
+            this.描繪輪廓ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.描繪輪廓ToolStripMenuItem.Text = "描繪輪廓";
             this.描繪輪廓ToolStripMenuItem.Click += new System.EventHandler(this.draw_contour_click);
             // 
             // findContoursToolStripMenuItem
             // 
             this.findContoursToolStripMenuItem.Name = "findContoursToolStripMenuItem";
-            this.findContoursToolStripMenuItem.Size = new System.Drawing.Size(236, 34);
+            this.findContoursToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.findContoursToolStripMenuItem.Text = "FindContours";
             this.findContoursToolStripMenuItem.Click += new System.EventHandler(this.findContoursToolStripMenuItem_Click);
+            // 
+            // 框選瑕疵ToolStripMenuItem
+            // 
+            this.框選瑕疵ToolStripMenuItem.Name = "框選瑕疵ToolStripMenuItem";
+            this.框選瑕疵ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.框選瑕疵ToolStripMenuItem.Text = "框選瑕疵";
+            this.框選瑕疵ToolStripMenuItem.Click += new System.EventHandler(this.find_defect);
             // 
             // 遮罩效果ToolStripMenuItem
             // 
@@ -293,7 +306,7 @@
             this.閾值遮罩ToolStripMenuItem,
             this.lUTToolStripMenuItem});
             this.遮罩效果ToolStripMenuItem.Name = "遮罩效果ToolStripMenuItem";
-            this.遮罩效果ToolStripMenuItem.Size = new System.Drawing.Size(106, 27);
+            this.遮罩效果ToolStripMenuItem.Size = new System.Drawing.Size(106, 28);
             this.遮罩效果ToolStripMenuItem.Text = "遮罩/效果";
             // 
             // 臨界處理ToolStripMenuItem
@@ -333,8 +346,7 @@
             this.iFFTToolStripMenuItem,
             this.色彩空間ToolStripMenuItem,
             this.rGBToolStripMenuItem,
-            this.負片處理ToolStripMenuItem,
-            this.邊緣ToolStripMenuItem});
+            this.負片處理ToolStripMenuItem});
             this.調整ToolStripMenuItem.Name = "調整ToolStripMenuItem";
             this.調整ToolStripMenuItem.Size = new System.Drawing.Size(62, 28);
             this.調整ToolStripMenuItem.Text = "調整";
@@ -577,7 +589,7 @@
             this.normalizeToolStripMenuItem,
             this.equalizeHistToolStripMenuItem});
             this.正規化ToolStripMenuItem.Name = "正規化ToolStripMenuItem";
-            this.正規化ToolStripMenuItem.Size = new System.Drawing.Size(80, 27);
+            this.正規化ToolStripMenuItem.Size = new System.Drawing.Size(80, 28);
             this.正規化ToolStripMenuItem.Text = "正規化";
             // 
             // normalizeToolStripMenuItem
@@ -625,7 +637,6 @@
             this.toolStrip1.Size = new System.Drawing.Size(1066, 41);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
-            this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
             // 
             // toolStripButton1
             // 
@@ -660,7 +671,7 @@
             // thicknessBar
             // 
             this.thicknessBar.Location = new System.Drawing.Point(189, 36);
-            this.thicknessBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.thicknessBar.Margin = new System.Windows.Forms.Padding(4);
             this.thicknessBar.Maximum = 30;
             this.thicknessBar.Minimum = 1;
             this.thicknessBar.Name = "thicknessBar";
@@ -712,6 +723,7 @@
             this.PerformLayout();
 
         }
+
 
         #endregion
 
@@ -786,7 +798,8 @@
         private System.Windows.Forms.ToolStripMenuItem bGRToYCRCBToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem yCRCBToBGRToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 負片處理ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 邊緣ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 框選瑕疵ToolStripMenuItem;
+        private ToolStripMenuItem 邊緣ToolStripMenuItem;
     }
 }
 
