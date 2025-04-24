@@ -117,5 +117,32 @@ namespace PaintApp
             }
             return newImage;
         }
+        public static void OpenAndSetLightnessMode(Paint mainform, double alpha = 1.0, int beta = 0)
+        {
+            var lightForm = new lightness(mainform)
+            {
+                ShowInTaskbar = false,
+                FormBorderStyle = FormBorderStyle.FixedToolWindow,
+                StartPosition = FormStartPosition.Manual,
+                Location = new System.Drawing.Point(-2000, -2000) // 隱藏執行
+            };
+
+            lightForm.Show();
+            Application.DoEvents();
+
+            // 設定 trackBar 值（注意倍數縮放）
+            int alphaBarVal = (int)(alpha * 100);
+            lightForm.trackBar1.Value = Math.Max(lightForm.trackBar1.Minimum, Math.Min(alphaBarVal, lightForm.trackBar1.Maximum));
+            lightForm.trackBar2.Value = Math.Max(lightForm.trackBar2.Minimum, Math.Min(beta, lightForm.trackBar2.Maximum));
+
+            lightForm.TrackBarValue1 = alpha;
+            lightForm.TrackBarValue2 = beta;
+
+            // 更新預覽畫面
+            lightForm.trackBar1_Scroll(null, EventArgs.Empty);
+
+            // 套用結果
+            lightForm.button1_Click(null, EventArgs.Empty);
+        }
     }
 }

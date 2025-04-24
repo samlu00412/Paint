@@ -107,7 +107,32 @@ namespace Paint {
             skipped_size = size_bar.Value;
             await UpdatePreviewAsync();
         }
+        public static void OpenAndSetDefectMode(PaintApp.Paint mainform, int skipSize = 1)
+        {
+            var defectForm = new Defect(mainform)
+            {
+                ShowInTaskbar = false,
+                FormBorderStyle = FormBorderStyle.FixedToolWindow,
+                StartPosition = FormStartPosition.Manual,
+                Location = new System.Drawing.Point(-2000, -2000) // 背景執行不顯示
+            };
 
+            defectForm.Show();
+            Application.DoEvents();
+
+            // 設定跳過小區塊面積閾值
+            skipSize = Math.Max(defectForm.size_bar.Minimum, Math.Min(skipSize, defectForm.size_bar.Maximum));
+            defectForm.size_bar.Value = skipSize;
+            defectForm.size_label.Text = skipSize.ToString();
+
+            // 更新預覽圖
+            defectForm.modify_size(null, EventArgs.Empty); // 或手動 await defectForm.UpdatePreviewAsync()
+
+            // 直接執行套用邏輯
+            defectForm.confirm_click(null, EventArgs.Empty);
+
+            defectForm.Close();
+        }
         private void UpdatePictureBox(Mat image) {
             // 更新 PictureBox，避免資源洩漏
             if (preview_box.Image != null) {

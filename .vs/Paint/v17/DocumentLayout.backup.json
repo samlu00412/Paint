@@ -3,16 +3,70 @@
   "WorkspaceRootPath": "C:\\Users\\USER\\source\\repos\\Paint\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|c:\\users\\user\\source\\repos\\paint\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|c:\\users\\user\\source\\repos\\paint\\binarization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\defect.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:defect.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\binarization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:binarization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\equalizehist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:equalizehist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\defect.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:defect.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\clahe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:clahe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\gauss.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:gauss.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\gauss.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:gauss.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\lightness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:lightness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\lightness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:lightness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\clahe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:clahe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\USER\\Downloads\\436AD4531738F22CC68D74E81D5B0AB6CF4083CC_AOIInterface\\AOIInterface\\AOIInterface\\Class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\USER\\AppData\\Local\\SourceServer\\42cbc5dc8648a3fe5bbfffc116b2ceff148c38a8d28bdfd3e6716d067f9c9f80\\src\\OpenCvSharp\\Cv2\\Cv2_imgproc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\rgb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:rgb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\low_pass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:low_pass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\binarization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:binarization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\rgb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:rgb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\USER\\AppData\\Local\\Temp\\.vsdbgsrc\\fb1539b0cc1c0f97fff74aa4d2d0d6b6e4c8bb8ad3ff8317c360e4198443ae85\\NativeMethods.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -25,20 +79,19 @@
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\USER\\AppData\\Local\\Temp\\.vsdbgsrc\\760aa807f37f8556911f34a05778eaffb2ff5225538adbdee27ab23625297b51\\Delegate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\USER\\AppData\\Local\\SourceServer\\881e0aaeb588f2ff33dfb177f4ef5b6a51194ec60e570d1319cf3f52bab187ce\\src\\OpenCvSharp.Extensions\\BitmapConverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\equalizehist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:equalizehist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\normalize.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:normalize.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\equalizehist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:equalizehist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\binarization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:binarization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\USER\\AppData\\Local\\Temp\\.vsdbgsrc\\af38c334dcfab387ddc299a5f3973dd82604661db9d636f5056444fe42d70aa7\\Paint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -50,21 +103,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\normalize.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:normalize.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\low_pass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:low_pass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\defect.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:defect.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\USER\\AppData\\Local\\SourceServer\\881e0aaeb588f2ff33dfb177f4ef5b6a51194ec60e570d1319cf3f52bab187ce\\src\\OpenCvSharp.Extensions\\BitmapConverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|C:\\Users\\USER\\source\\repos\\Paint\\defect.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{2322D27E-8988-4B5D-91A7-EEBFE9F6E540}|Paint.csproj|solutionrelative:defect.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\USER\\AppData\\Local\\SourceServer\\08fa367920cc54ce96226ce446c86007f883a6648f954b9296d82c97e8a6df33\\src\\OpenCvSharp\\Internal\\PInvoke\\NativeMethods\\NativeMethods.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -128,17 +166,16 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "binarization.cs",
               "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\binarization.cs",
               "RelativeDocumentMoniker": "binarization.cs",
               "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\binarization.cs",
               "RelativeToolTip": "binarization.cs",
-              "ViewState": "AgIAAFcAAAAAAAAAAAASwGUAAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAAGEAAAAAAAAAAAAUwHkAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-24T09:36:24.083Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -148,7 +185,7 @@
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAAD4BAAAAAAAAAAAowEMBAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAAIUAAAAAAAAAAAAIwI4AAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-22T18:28:43.066Z",
               "IsPinned": true,
@@ -156,66 +193,75 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "equalizeHist.cs [\u8A2D\u8A08]",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\equalizeHist.cs",
-              "RelativeDocumentMoniker": "equalizeHist.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\equalizeHist.cs [\u8A2D\u8A08]",
-              "RelativeToolTip": "equalizeHist.cs [\u8A2D\u8A08]",
+              "DocumentIndex": 9,
+              "Title": "lightness.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\lightness.cs",
+              "RelativeDocumentMoniker": "lightness.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\lightness.cs",
+              "RelativeToolTip": "lightness.cs",
+              "ViewState": "AgIAAIgAAAAAAAAAAADwv18AAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T18:17:20.25Z",
-              "EditorCaption": " [\u8A2D\u8A08]"
+              "WhenOpened": "2025-04-24T13:24:45.647Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "lightness.cs [\u8A2D\u8A08]",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\lightness.cs",
+              "RelativeDocumentMoniker": "lightness.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\lightness.cs [\u8A2D\u8A08]",
+              "RelativeToolTip": "lightness.cs [\u8A2D\u8A08]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T13:24:38.79Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Gauss.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Gauss.cs",
+              "RelativeDocumentMoniker": "Gauss.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Gauss.cs",
+              "RelativeToolTip": "Gauss.cs",
+              "ViewState": "AgIAAIUAAAAAAAAAAAAIwIkAAABlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T13:16:49.528Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "Normalize.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Normalize.cs",
-              "RelativeDocumentMoniker": "Normalize.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Normalize.cs",
-              "RelativeToolTip": "Normalize.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Title": "Gauss.cs [\u8A2D\u8A08]",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Gauss.cs",
+              "RelativeDocumentMoniker": "Gauss.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Gauss.cs [\u8A2D\u8A08]",
+              "RelativeToolTip": "Gauss.cs [\u8A2D\u8A08]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T18:16:06.472Z"
+              "WhenOpened": "2025-04-24T13:16:44.305Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CLAHE.cs [\u8A2D\u8A08]",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\CLAHE.cs",
+              "RelativeDocumentMoniker": "CLAHE.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\CLAHE.cs [\u8A2D\u8A08]",
+              "RelativeToolTip": "CLAHE.cs [\u8A2D\u8A08]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T13:04:46.553Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "Low_pass.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Low_pass.cs",
-              "RelativeDocumentMoniker": "Low_pass.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Low_pass.cs",
-              "RelativeToolTip": "Low_pass.cs",
-              "ViewState": "AgIAACgAAAAAAAAAAADwvzYAAAAnAAAAAAAAAA==",
+              "Title": "Form1.cs [\u8A2D\u8A08]",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Form1.cs [\u8A2D\u8A08]",
+              "RelativeToolTip": "Form1.cs [\u8A2D\u8A08]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T17:22:53.945Z"
+              "WhenOpened": "2025-03-18T15:29:29.529Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "Low_pass.cs [\u8A2D\u8A08]",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Low_pass.cs",
-              "RelativeDocumentMoniker": "Low_pass.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Low_pass.cs [\u8A2D\u8A08]",
-              "RelativeToolTip": "Low_pass.cs [\u8A2D\u8A08]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T17:22:51.078Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Defect.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Defect.cs",
-              "RelativeDocumentMoniker": "Defect.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Defect.cs",
-              "RelativeToolTip": "Defect.cs",
-              "ViewState": "AgIAACcAAAAAAAAAAAAIwBcAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-15T16:45:55.995Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 3,
               "Title": "Defect.cs [\u8A2D\u8A08]",
               "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Defect.cs",
               "RelativeDocumentMoniker": "Defect.cs",
@@ -226,7 +272,78 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
+              "Title": "Defect.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Defect.cs",
+              "RelativeDocumentMoniker": "Defect.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Defect.cs",
+              "RelativeToolTip": "Defect.cs",
+              "ViewState": "AgIAAGgAAAAAAAAAAAAzwIYAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-15T16:45:55.995Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Cv2_imgproc.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\AppData\\Local\\SourceServer\\42cbc5dc8648a3fe5bbfffc116b2ceff148c38a8d28bdfd3e6716d067f9c9f80\\src\\OpenCvSharp\\Cv2\\Cv2_imgproc.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\SourceServer\\42cbc5dc8648a3fe5bbfffc116b2ceff148c38a8d28bdfd3e6716d067f9c9f80\\src\\OpenCvSharp\\Cv2\\Cv2_imgproc.cs",
+              "ToolTip": "C:\\Users\\USER\\AppData\\Local\\SourceServer\\42cbc5dc8648a3fe5bbfffc116b2ceff148c38a8d28bdfd3e6716d067f9c9f80\\src\\OpenCvSharp\\Cv2\\Cv2_imgproc.cs [\u552F\u8B80]",
+              "RelativeToolTip": "..\\..\\..\\AppData\\Local\\SourceServer\\42cbc5dc8648a3fe5bbfffc116b2ceff148c38a8d28bdfd3e6716d067f9c9f80\\src\\OpenCvSharp\\Cv2\\Cv2_imgproc.cs [\u552F\u8B80]",
+              "ViewState": "AgIAAGgJAAAAAAAAAAAswHgJAAAMAAAAAQAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T12:13:13.85Z",
+              "EditorCaption": " [\u552F\u8B80]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\Downloads\\436AD4531738F22CC68D74E81D5B0AB6CF4083CC_AOIInterface\\AOIInterface\\AOIInterface\\Class1.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Downloads\\436AD4531738F22CC68D74E81D5B0AB6CF4083CC_AOIInterface\\AOIInterface\\AOIInterface\\Class1.cs",
+              "ToolTip": "C:\\Users\\USER\\Downloads\\436AD4531738F22CC68D74E81D5B0AB6CF4083CC_AOIInterface\\AOIInterface\\AOIInterface\\Class1.cs",
+              "RelativeToolTip": "..\\..\\..\\Downloads\\436AD4531738F22CC68D74E81D5B0AB6CF4083CC_AOIInterface\\AOIInterface\\AOIInterface\\Class1.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAswDAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T12:43:49.539Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "CLAHE.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\CLAHE.cs",
+              "RelativeDocumentMoniker": "CLAHE.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\CLAHE.cs",
+              "RelativeToolTip": "CLAHE.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAAwCUAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T13:04:49.135Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "RGB.cs [\u8A2D\u8A08]",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\RGB.cs",
+              "RelativeDocumentMoniker": "RGB.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\RGB.cs [\u8A2D\u8A08]",
+              "RelativeToolTip": "RGB.cs [\u8A2D\u8A08]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T11:59:06.123Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Low_pass.cs [\u8A2D\u8A08]",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Low_pass.cs",
+              "RelativeDocumentMoniker": "Low_pass.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Low_pass.cs [\u8A2D\u8A08]",
+              "RelativeToolTip": "Low_pass.cs [\u8A2D\u8A08]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T17:22:51.078Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
               "Title": "NativeMethods.cs",
               "DocumentMoniker": "C:\\Users\\USER\\AppData\\Local\\Temp\\.vsdbgsrc\\fb1539b0cc1c0f97fff74aa4d2d0d6b6e4c8bb8ad3ff8317c360e4198443ae85\\NativeMethods.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\fb1539b0cc1c0f97fff74aa4d2d0d6b6e4c8bb8ad3ff8317c360e4198443ae85\\NativeMethods.cs",
@@ -238,19 +355,90 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 16,
+              "Title": "RGB.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\RGB.cs",
+              "RelativeDocumentMoniker": "RGB.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\RGB.cs",
+              "RelativeToolTip": "RGB.cs",
+              "ViewState": "AgIAAHwAAAAAAAAAAAAgwCsAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T11:59:15.907Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "binarization.cs [\u8A2D\u8A08]",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\binarization.cs",
+              "RelativeDocumentMoniker": "binarization.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\binarization.cs [\u8A2D\u8A08]",
+              "RelativeToolTip": "binarization.cs [\u8A2D\u8A08]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-18T16:32:59.534Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "BitmapConverter.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\AppData\\Local\\SourceServer\\881e0aaeb588f2ff33dfb177f4ef5b6a51194ec60e570d1319cf3f52bab187ce\\src\\OpenCvSharp.Extensions\\BitmapConverter.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\SourceServer\\881e0aaeb588f2ff33dfb177f4ef5b6a51194ec60e570d1319cf3f52bab187ce\\src\\OpenCvSharp.Extensions\\BitmapConverter.cs",
+              "ToolTip": "C:\\Users\\USER\\AppData\\Local\\SourceServer\\881e0aaeb588f2ff33dfb177f4ef5b6a51194ec60e570d1319cf3f52bab187ce\\src\\OpenCvSharp.Extensions\\BitmapConverter.cs [\u552F\u8B80]",
+              "RelativeToolTip": "..\\..\\..\\AppData\\Local\\SourceServer\\881e0aaeb588f2ff33dfb177f4ef5b6a51194ec60e570d1319cf3f52bab187ce\\src\\OpenCvSharp.Extensions\\BitmapConverter.cs [\u552F\u8B80]",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAFABAAAUAAAAAQAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-24T09:09:02.271Z",
+              "EditorCaption": " [\u552F\u8B80]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
               "Title": "Delegate.cs",
               "DocumentMoniker": "C:\\Users\\USER\\AppData\\Local\\Temp\\.vsdbgsrc\\760aa807f37f8556911f34a05778eaffb2ff5225538adbdee27ab23625297b51\\Delegate.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\760aa807f37f8556911f34a05778eaffb2ff5225538adbdee27ab23625297b51\\Delegate.cs",
               "ToolTip": "C:\\Users\\USER\\AppData\\Local\\Temp\\.vsdbgsrc\\760aa807f37f8556911f34a05778eaffb2ff5225538adbdee27ab23625297b51\\Delegate.cs",
               "RelativeToolTip": "..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\760aa807f37f8556911f34a05778eaffb2ff5225538adbdee27ab23625297b51\\Delegate.cs",
-              "ViewState": "AgIAAFwAAAAAAAAAAAAowGUAAAACAAAAAQAAAA==",
+              "ViewState": "AgIAAFsAAAAAAAAAAAAqwGUAAAACAAAAAQAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-09T02:57:56.618Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 18,
+              "Title": "Low_pass.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Low_pass.cs",
+              "RelativeDocumentMoniker": "Low_pass.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Low_pass.cs",
+              "RelativeToolTip": "Low_pass.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAADwvzYAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T17:22:53.945Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Normalize.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Normalize.cs",
+              "RelativeDocumentMoniker": "Normalize.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Normalize.cs",
+              "RelativeToolTip": "Normalize.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T18:16:06.472Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "equalizeHist.cs [\u8A2D\u8A08]",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\equalizeHist.cs",
+              "RelativeDocumentMoniker": "equalizeHist.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\equalizeHist.cs [\u8A2D\u8A08]",
+              "RelativeToolTip": "equalizeHist.cs [\u8A2D\u8A08]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T18:17:20.25Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
               "Title": "equalizeHist.cs",
               "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\equalizeHist.cs",
               "RelativeDocumentMoniker": "equalizeHist.cs",
@@ -258,12 +446,11 @@
               "RelativeToolTip": "equalizeHist.cs",
               "ViewState": "AgIAAB0AAAAAAAAAAAAwwB0AAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T18:17:22.049Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-22T18:17:22.049Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 28,
               "Title": "Normalize.Designer.cs",
               "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Normalize.Designer.cs",
               "RelativeDocumentMoniker": "Normalize.Designer.cs",
@@ -275,43 +462,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "BitmapConverter.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\AppData\\Local\\SourceServer\\881e0aaeb588f2ff33dfb177f4ef5b6a51194ec60e570d1319cf3f52bab187ce\\src\\OpenCvSharp.Extensions\\BitmapConverter.cs",
-              "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\SourceServer\\881e0aaeb588f2ff33dfb177f4ef5b6a51194ec60e570d1319cf3f52bab187ce\\src\\OpenCvSharp.Extensions\\BitmapConverter.cs",
-              "ToolTip": "C:\\Users\\USER\\AppData\\Local\\SourceServer\\881e0aaeb588f2ff33dfb177f4ef5b6a51194ec60e570d1319cf3f52bab187ce\\src\\OpenCvSharp.Extensions\\BitmapConverter.cs [\u552F\u8B80]",
-              "RelativeToolTip": "..\\..\\..\\AppData\\Local\\SourceServer\\881e0aaeb588f2ff33dfb177f4ef5b6a51194ec60e570d1319cf3f52bab187ce\\src\\OpenCvSharp.Extensions\\BitmapConverter.cs [\u552F\u8B80]",
-              "ViewState": "AgIAADoBAAAAAAAAAAAkwFABAAAUAAAAAQAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-24T09:09:02.271Z",
-              "EditorCaption": " [\u552F\u8B80]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Form1.cs [\u8A2D\u8A08]",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Form1.cs",
-              "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\Form1.cs [\u8A2D\u8A08]",
-              "RelativeToolTip": "Form1.cs [\u8A2D\u8A08]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-18T15:29:29.529Z",
-              "EditorCaption": " [\u8A2D\u8A08]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "binarization.cs [\u8A2D\u8A08]",
-              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\binarization.cs",
-              "RelativeDocumentMoniker": "binarization.cs",
-              "ToolTip": "C:\\Users\\USER\\source\\repos\\Paint\\binarization.cs [\u8A2D\u8A08]",
-              "RelativeToolTip": "binarization.cs [\u8A2D\u8A08]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-18T16:32:59.534Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 25,
               "Title": "Form1.Designer.cs",
               "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Form1.Designer.cs",
               "RelativeDocumentMoniker": "Form1.Designer.cs",
@@ -319,12 +470,11 @@
               "RelativeToolTip": "Form1.Designer.cs",
               "ViewState": "AgIAAK8BAAAAAAAAAAAjwLoBAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-15T16:11:11.75Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-15T16:11:11.75Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 27,
               "Title": "NativeMethods.cs",
               "DocumentMoniker": "C:\\Users\\USER\\AppData\\Local\\SourceServer\\08fa367920cc54ce96226ce446c86007f883a6648f954b9296d82c97e8a6df33\\src\\OpenCvSharp\\Internal\\PInvoke\\NativeMethods\\NativeMethods.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\SourceServer\\08fa367920cc54ce96226ce446c86007f883a6648f954b9296d82c97e8a6df33\\src\\OpenCvSharp\\Internal\\PInvoke\\NativeMethods\\NativeMethods.cs",
@@ -337,7 +487,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 24,
               "Title": "Paint.cs",
               "DocumentMoniker": "C:\\Users\\USER\\AppData\\Local\\Temp\\.vsdbgsrc\\af38c334dcfab387ddc299a5f3973dd82604661db9d636f5056444fe42d70aa7\\Paint.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\af38c334dcfab387ddc299a5f3973dd82604661db9d636f5056444fe42d70aa7\\Paint.cs",
@@ -349,7 +499,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 29,
               "Title": "ToolStripItemCollection.cs",
               "DocumentMoniker": "C:\\Users\\USER\\AppData\\Local\\Temp\\.vsdbgsrc\\3d9ed8d889cef0cf9fe5a7d1562b150607354996000186e37827b6ffeeb9aa70\\ToolStripItemCollection.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\3d9ed8d889cef0cf9fe5a7d1562b150607354996000186e37827b6ffeeb9aa70\\ToolStripItemCollection.cs",
@@ -361,7 +511,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 30,
               "Title": "binarization.resx",
               "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\binarization.resx",
               "RelativeDocumentMoniker": "binarization.resx",
@@ -373,7 +523,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 31,
               "Title": "Control.cs",
               "DocumentMoniker": "C:\\Users\\USER\\AppData\\Local\\Temp\\.vsdbgsrc\\5c875f6d84c4640fc8d51737a00b128a90f08ee2156a2d5caacbccb5ce670073\\Control.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\5c875f6d84c4640fc8d51737a00b128a90f08ee2156a2d5caacbccb5ce670073\\Control.cs",
@@ -385,7 +535,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 26,
               "Title": "Normalize.cs [\u8A2D\u8A08]",
               "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\Normalize.cs",
               "RelativeDocumentMoniker": "Normalize.cs",
@@ -396,7 +546,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 32,
               "Title": "BitmapConverter.cs",
               "DocumentMoniker": "C:\\Users\\USER\\AppData\\Local\\Temp\\.vsdbgsrc\\cfb619048e12d2f6cccff738db7e5884c07ea818273dabe71fcc6bdad3aeb264\\BitmapConverter.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\cfb619048e12d2f6cccff738db7e5884c07ea818273dabe71fcc6bdad3aeb264\\BitmapConverter.cs",
@@ -408,7 +558,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 33,
               "Title": "FindContour.cs [\u8A2D\u8A08]",
               "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\Paint\\FindContour.cs",
               "RelativeDocumentMoniker": "FindContour.cs",

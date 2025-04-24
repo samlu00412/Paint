@@ -45,16 +45,30 @@ namespace PaintApp {
         private double init_sigma = 1.0;
         private int realrows,realcols;
         private OpenCvSharp.Point convertPoint = new OpenCvSharp.Point(0, 0);
-
+        public EvalWindow eval;
         public Paint() {
             InitializeComponent();
             this.KeyPreview = true; // 允許表單偵測按鍵
             this.KeyDown += new KeyEventHandler(Form1_KeyDown);
             this.MouseWheel += new MouseEventHandler(Form1_MouseWheel);
             Instance = this; // 記錄當前的 Paint 視窗
-            AddEvalWindow();
-        }
+            eval = new EvalWindow(this);
+            eval.SetCode("Grayscale(); Threshold(\"Binary\", 0.3);");
+            eval.Show();
 
+        }
+        public void DetectAndFind(Bitmap bitmap)
+        {
+            canvas = BitmapConverter.ToMat(bitmap);
+            origin_picture = canvas.Clone();
+            UpdateCanvas();
+            tempCanvas = canvas.Clone();
+            SaveCurrentState();
+
+            eval.SetCode("");
+            //return ???
+            
+        }
         // ✅ **建立 ScriptGlobals，讓 Eval 能夠存取 `Paint`**
         public class ScriptGlobals
         {
@@ -78,73 +92,127 @@ namespace PaintApp {
             }
             public void Threshold(string modeName, double value, int blockSize = 11, int cValue = 2, int fftSeed = 10)
             {
-                //Threshold("Binary_inverse",150,11,2,2);
                 binarization.OpenAndSetThresholdMode(PaintForm, modeName, value, blockSize, cValue, fftSeed);
-                Cv2.ImShow("owo", PaintForm.canvas);
                 PaintForm.AdjustmentCanvas();
             }
+            public void IFFT()
+            {
+                PaintForm.iFFTToolStripMenuItem_Click(null, EventArgs.Empty);
 
-
+            }
+            public void ColorTransform(string mode)
+            {
+                var menuItem = new ToolStripMenuItem { Text = mode };
+                PaintForm.colortransformToolStripMenuItem_Click(menuItem, EventArgs.Empty);
+            }
+            public void RGBmotify(int a,int b,int c,int d=666,int e=666,int f=666)
+            {
+                if (d == 666)
+                    RGBtrans.OpenAndSetRGBTransform(PaintForm, a, 0, b, 0, c, 0);
+                else
+                    RGBtrans.OpenAndSetRGBTransform(PaintForm, a, b, c, d, e, f);
+            }
+            
+            public void Clahe(double a)
+            {
+                CLAHE.OpenAndSetCLAHEMode(PaintForm,a);
+                PaintForm.AdjustmentCanvas();
+            }
+            public void GAUSS(int kernelSize , double sigma)
+            {
+                Gauss.OpenAndSetGaussMode(PaintForm, kernelSize, sigma);
+                PaintForm.AdjustmentCanvas();
+            }
+            public void C_B(double a, int b)
+            {
+                bool isNegative = (a < 0); // 檢查是否需要負片效果
+                if (!isNegative)
+                    PaintForm.canvas = PaintForm.AdjustContrastAndBrightness(PaintForm.canvas, a, b);
+                else
+                    PaintForm.canvas = PaintForm.AdjustNegativeContrast(PaintForm.canvas, a, b);
+                PaintForm.AdjustmentCanvas();
+            }
+            public void Detect(int a)
+            {
+                Defect.OpenAndSetDefectMode(PaintForm, a);
+                PaintForm.AdjustmentCanvas();
+            }
+            public void Reset()
+            {
+                PaintForm.canvas=PaintForm.origin_picture.Clone();
+                PaintForm.AdjustmentCanvas();
+            }
         }
-        private void AddEvalWindow()
+        public class EvalWindow : Form
         {
-            Form evalWindow = new Form
-            {
-                Text = "Code Evaluator",
-                Size = new System.Drawing.Size(600, 400)
-            };
+            private TextBox codeInput;
+            private TextBox outputBox;
 
-            TextBox codeInput = new TextBox
+            public EvalWindow(Paint mainForm)
             {
-                Multiline = true,
-                Dock = DockStyle.Top,
-                Height = 200
-            };
+                Text = "Code Evaluator";
+                Size = new System.Drawing.Size(600, 400);
 
-            Button runButton = new Button
-            {
-                Text = "Run",
-                Dock = DockStyle.Bottom
-            };
-
-            TextBox outputBox = new TextBox
-            {
-                Multiline = true,
-                Dock = DockStyle.Fill,
-                ReadOnly = true
-            };
-
-            runButton.Click += async (sender, e) =>
-            {
-                try
+                codeInput = new TextBox
                 {
-                    var scriptOptions = ScriptOptions.Default
-                        .WithReferences(AppDomain.CurrentDomain.GetAssemblies()
-                            .Where(a => !a.IsDynamic && !string.IsNullOrEmpty(a.Location))
-                            .Select(a => MetadataReference.CreateFromFile(a.Location)))
-                        .WithImports("System", "System.Linq", "System.Collections.Generic", "System.Windows.Forms", "PaintApp");
+                    Multiline = true,
+                    Dock = DockStyle.Top,
+                    Height = 200
+                };
 
-                    // ✅ **使用 `ScriptGlobals` 來傳遞 Paint 的 `this`**
-                    var globals = new ScriptGlobals { PaintForm = this };
-
-                    var result = await CSharpScript.EvaluateAsync<object>(
-                        codeInput.Text, scriptOptions, globals: globals
-                    );
-
-                    outputBox.Text = result?.ToString() ?? "null";
-                }
-                catch (Exception ex)
+                Button runButton = new Button
                 {
-                    outputBox.Text = "Error: " + ex.Message;
-                }
-            };
+                    Text = "Run",
+                    Dock = DockStyle.Bottom
+                };
 
-            evalWindow.Controls.Add(outputBox);
-            evalWindow.Controls.Add(runButton);
-            evalWindow.Controls.Add(codeInput);
+                outputBox = new TextBox
+                {
+                    Multiline = true,
+                    Dock = DockStyle.Fill,
+                    ReadOnly = true
+                };
 
-            evalWindow.Show();
+                runButton.Click += async (sender, e) =>
+                {
+                    try
+                    {
+                        var scriptOptions = ScriptOptions.Default
+                            .WithReferences(AppDomain.CurrentDomain.GetAssemblies()
+                                .Where(a => !a.IsDynamic && !string.IsNullOrEmpty(a.Location))
+                                .Select(a => MetadataReference.CreateFromFile(a.Location)))
+                            .WithImports("System", "System.Linq", "System.Collections.Generic", "System.Windows.Forms", "PaintApp");
+
+                        var globals = new ScriptGlobals { PaintForm = mainForm };
+
+                        var result = await CSharpScript.EvaluateAsync<object>(
+                            codeInput.Text, scriptOptions, globals: globals
+                        );
+
+                        outputBox.Text = result?.ToString() ?? "null";
+                    }
+                    catch (Exception ex)
+                    {
+                        outputBox.Text = "Error: " + ex.Message;
+                    }
+                };
+
+                Controls.Add(codeInput);
+                Controls.Add(runButton);
+                Controls.Add(outputBox);
+            }
+
+            public void SetCode(string code)
+            {
+                codeInput.Text = code;
+            }
+
+            public void SetOutput(string output)
+            {
+                outputBox.Text = output;
+            }
         }
+
 
 
         private void Form1_Load(object sender, EventArgs e) {

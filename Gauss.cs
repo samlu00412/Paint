@@ -135,5 +135,44 @@ namespace PaintApp
 
             return result;
         }
+        public static void OpenAndSetGaussMode(Paint mainform, int kernelSize = 3, double sigma = 1.0)
+        {
+            // 確保 kernelSize 是奇數且 >= 3
+            if (kernelSize % 2 == 0) kernelSize++;
+            if (kernelSize < 3) kernelSize = 3;
+
+            var kernel = new Size(kernelSize, kernelSize);
+
+            var gaussForm = new Gauss(kernel, sigma, mainform)
+            {
+                ShowInTaskbar = false,
+                FormBorderStyle = FormBorderStyle.FixedToolWindow,
+                StartPosition = FormStartPosition.Manual,
+                Location = new System.Drawing.Point(-2000, -2000)
+            };
+
+            gaussForm.Show();
+            Application.DoEvents();
+
+            // 設定 Kernel 和 Sigma
+            int barValue = (kernelSize + 3) / 2;
+            gaussForm.Kernal_bar.Value = Math.Max(1, Math.Min(barValue, gaussForm.Kernal_bar.Maximum));
+            gaussForm.Sigma_bar.Value = Math.Max(1, Math.Min((int)(sigma * 100), gaussForm.Sigma_bar.Maximum));
+
+            gaussForm.Kernal.Width = kernelSize;
+            gaussForm.Kernal.Height = kernelSize;
+            gaussForm.Sigma = sigma;
+            gaussForm.Kernal_value.Text = kernelSize.ToString();
+            gaussForm.Sigma_value.Text = sigma.ToString("0.00");
+
+            // 更新預覽
+            gaussForm.UpdatePreviewAsync(kernel, sigma).ConfigureAwait(false);
+
+            // 直接套用高斯模糊
+            gaussForm.Confirm_Click(null, EventArgs.Empty);
+
+            // 關閉
+            gaussForm.Close();
+        }
     }
 }

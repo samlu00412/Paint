@@ -72,7 +72,7 @@ namespace PaintApp
             int defaultBlockSize = 11;
             int defaultCValue = 2;
             int defaultSeed = 10;
-
+           
             var binarizationForm = new PaintApp.binarization(mainform)
             {
                 ShowInTaskbar = false,
@@ -83,9 +83,8 @@ namespace PaintApp
 
             binarizationForm.Show();
             Application.DoEvents();
-
             binarizationForm.thresholdVal = thresholdValue;
-            binarizationForm.threBar.Value = (int)(thresholdValue * 100.0);
+            //binarizationForm.threBar.Value = (int)(thresholdValue * 100.0);
 
             Console.WriteLine("hi i am fine");
             //binarizationForm.select_mode_Box.Text = modeName;
@@ -98,13 +97,29 @@ namespace PaintApp
             Console.WriteLine("hi i am fine");
             binarizationForm.seed.Value = fftSeed ?? defaultSeed;
 
-            binarizationForm.ConvertFFTtoVisible(mainform.canvas);
-            Cv2.ImShow("owo",mainform.canvas);
-            Cv2.WaitKey();
+            var type = mainform.canvas.Type();
+
+            if (type == MatType.CV_32FC2)
+            {
+                binarizationForm.ConvertFFTtoVisible(mainform.canvas);
+            }
+            else if (type == MatType.CV_8UC1)
+            {
+                binarizationForm.ApplyThreshold();
+            }
+            else
+            {
+                // 自動轉為灰階
+                Mat gray = new Mat();
+                Cv2.CvtColor(mainform.canvas, gray, ColorConversionCodes.BGR2GRAY);
+                mainform.canvas = gray;
+                binarizationForm.ApplyThreshold();
+            }
             binarizationForm.Close();
 
 
         }
+        
         public void SetThresholdMode(string modeName, double thresholdValue)
         {
             if (mode.ContainsKey(modeName))
@@ -112,7 +127,7 @@ namespace PaintApp
                 type = mode[modeName];
             }
             thresholdVal = thresholdValue;
-            threBar.Value = (int)(thresholdVal * magnitudeScalar);
+            threBar.Value = (int)(thresholdVal / magnitudeScalar);
             threLabel.Text = $"{thresholdVal}";
             UpdatePreviewAsync(thresholdVal).ConfigureAwait(false);
         }
@@ -375,12 +390,11 @@ namespace PaintApp
                 // 清理記憶體
             }
         }
-
-        private void ConvertFFTtoVisible(Mat targetCanvas)
+        Mat displayPreview = new Mat();
+        public void ConvertFFTtoVisible(Mat targetCanvas)
         {
-            // 將 FFT 拆成實部與虛部
             Mat[] fftPlanes = new Mat[2];
-            Cv2.Split(targetCanvas, out fftPlanes); // CV_32FC2 -> 2 x CV_32FC1
+            Cv2.Split(__mainform.canvas, out fftPlanes); // CV_32FC2 -> 2 x CV_32FC1
 
             // 計算 Magnitude，做 log 與 normalize，變成灰階圖可視化
             Mat magnitude = new Mat();
@@ -391,13 +405,8 @@ namespace PaintApp
 
             // 對 magnitude 做 threshold
             Mat thresholdedFFT = new Mat();
-            Console.WriteLine("i am try");
-            Console.WriteLine(thresholdVal);
-            Console.WriteLine(type.ToString());
             Cv2.Threshold(magnitude, thresholdedFFT, thresholdVal, 255, type);
-            Cv2.ImShow("Window Name", thresholdedFFT);
-            Cv2.WaitKey();
-            Console.WriteLine("finnnnn");
+
             // 區域生長遮罩（以 magnitude 中心點）
             OpenCvSharp.Point centerSeed = new OpenCvSharp.Point(magnitude.Cols / 2, magnitude.Rows / 2);
             int seedVal = 0;
@@ -406,14 +415,14 @@ namespace PaintApp
             }));
 
             Mat centerMask = GetCenterRegionMask(magnitude, centerSeed, seedVal);
+
             // 合併 threshold 結果與中心遮罩
             Cv2.BitwiseOr(thresholdedFFT, centerMask, thresholdedFFT); // thresholdedFFT 是 mask
 
             // 🔁 將 single-channel mask 轉為 float，用來套用到 fftPlanes
             Mat maskFloat = new Mat();
             thresholdedFFT.ConvertTo(maskFloat, MatType.CV_32FC1, 1.0 / 255.0); // 0 或 1 的浮點遮罩
-            Cv2.ImShow("Window Name", maskFloat);
-            Cv2.WaitKey();
+
             // 套用 mask 到實部與虛部
             Mat maskedRe = new Mat();
             Mat maskedIm = new Mat();
@@ -425,7 +434,65 @@ namespace PaintApp
             Cv2.Merge(new Mat[] { maskedRe, maskedIm }, maskedFFT);
 
             // ✅ 更新 targetCanvas，保持 CV_32FC2
-            targetCanvas=maskedFFT.Clone();
+            maskedFFT.CopyTo(targetCanvas);
+
+            // ✅ 顯示 preview 圖（單通道）
+            previewBox.Image = BitmapConverter.ToBitmap(thresholdedFFT);
+
+            // 清除暫存
+            clear(fftPlanes[0]);
+            clear(fftPlanes[1]);
+            clear(magnitude);
+            clear(centerMask);
+            clear(maskFloat);
+            clear(maskedRe);
+            clear(maskedIm);
+            clear(maskedFFT);
+        }
+        private void ConvertFFTowo(Mat targetCanvas)
+        {
+            Mat[] fftPlanes = new Mat[2];
+            Cv2.Split(__mainform.canvas, out fftPlanes); // CV_32FC2 -> 2 x CV_32FC1
+
+            // 計算 Magnitude，做 log 與 normalize，變成灰階圖可視化
+            Mat magnitude = new Mat();
+            Cv2.Magnitude(fftPlanes[0], fftPlanes[1], magnitude);
+            Cv2.Log(magnitude + 1, magnitude);
+            Cv2.Normalize(magnitude, magnitude, 0, 255, NormTypes.MinMax);
+            magnitude.ConvertTo(magnitude, MatType.CV_8UC1);
+
+            // 對 magnitude 做 threshold
+            Mat thresholdedFFT = new Mat();
+            Cv2.Threshold(magnitude, thresholdedFFT, thresholdVal, 255, type);
+
+            // 區域生長遮罩（以 magnitude 中心點）
+            OpenCvSharp.Point centerSeed = new OpenCvSharp.Point(magnitude.Cols / 2, magnitude.Rows / 2);
+            int seedVal = 0;
+            seed.Invoke(new Action(() => {
+                seedVal = seed.Value;
+            }));
+
+            Mat centerMask = GetCenterRegionMask(magnitude, centerSeed, seedVal);
+
+            // 合併 threshold 結果與中心遮罩
+            Cv2.BitwiseOr(thresholdedFFT, centerMask, thresholdedFFT); // thresholdedFFT 是 mask
+
+            // 🔁 將 single-channel mask 轉為 float，用來套用到 fftPlanes
+            Mat maskFloat = new Mat();
+            thresholdedFFT.ConvertTo(maskFloat, MatType.CV_32FC1, 1.0 / 255.0); // 0 或 1 的浮點遮罩
+
+            // 套用 mask 到實部與虛部
+            Mat maskedRe = new Mat();
+            Mat maskedIm = new Mat();
+            Cv2.Multiply(fftPlanes[0], maskFloat, maskedRe);
+            Cv2.Multiply(fftPlanes[1], maskFloat, maskedIm);
+
+            // 合併回雙通道 FFT 結果
+            Mat maskedFFT = new Mat();
+            Cv2.Merge(new Mat[] { maskedRe, maskedIm }, maskedFFT);
+
+            // ✅ 更新 targetCanvas，保持 CV_32FC2
+            maskedFFT.CopyTo(targetCanvas);
 
             // ✅ 顯示 preview 圖（單通道）
             previewBox.Image = BitmapConverter.ToBitmap(thresholdedFFT);
