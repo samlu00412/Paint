@@ -35,10 +35,15 @@
             this.cValueBar = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.seed = new System.Windows.Forms.TrackBar();
+            this.seedlabel = new System.Windows.Forms.Label();
+            this.ifftimage = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.previewBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.threBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.blockSizeBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cValueBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.seed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ifftimage)).BeginInit();
             this.SuspendLayout();
             // 
             // previewBox
@@ -103,7 +108,7 @@
             // 
             this.checkBox1.AutoSize = true;
             this.checkBox1.Location = new System.Drawing.Point(638, 122);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(142, 22);
             this.checkBox1.TabIndex = 11;
@@ -163,11 +168,42 @@
             this.label2.TabIndex = 15;
             this.label2.Text = "2";
             // 
+            // seed
+            // 
+            this.seed.Location = new System.Drawing.Point(849, 14);
+            this.seed.Maximum = 150;
+            this.seed.Name = "seed";
+            this.seed.Size = new System.Drawing.Size(546, 69);
+            this.seed.TabIndex = 16;
+            this.seed.Value = 2;
+            this.seed.Scroll += new System.EventHandler(this.seed_Scroll);
+            // 
+            // seedlabel
+            // 
+            this.seedlabel.AutoSize = true;
+            this.seedlabel.Location = new System.Drawing.Point(1430, 21);
+            this.seedlabel.Name = "seedlabel";
+            this.seedlabel.Size = new System.Drawing.Size(16, 18);
+            this.seedlabel.TabIndex = 17;
+            this.seedlabel.Text = "2";
+            // 
+            // ifftimage
+            // 
+            this.ifftimage.Location = new System.Drawing.Point(849, 225);
+            this.ifftimage.Name = "ifftimage";
+            this.ifftimage.Size = new System.Drawing.Size(615, 386);
+            this.ifftimage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ifftimage.TabIndex = 18;
+            this.ifftimage.TabStop = false;
+            // 
             // binarization
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 634);
+            this.ClientSize = new System.Drawing.Size(1636, 634);
+            this.Controls.Add(this.ifftimage);
+            this.Controls.Add(this.seedlabel);
+            this.Controls.Add(this.seed);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cValueBar);
@@ -182,10 +218,13 @@
             this.Location = new System.Drawing.Point(10, 10);
             this.Name = "binarization";
             this.Text = "binarization";
+            this.Load += new System.EventHandler(this.binarization_Load);
             ((System.ComponentModel.ISupportInitialize)(this.previewBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.threBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.blockSizeBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cValueBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.seed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ifftimage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -204,5 +243,8 @@
         public System.Windows.Forms.TrackBar cValueBar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        public System.Windows.Forms.TrackBar seed;
+        private System.Windows.Forms.Label seedlabel;
+        private System.Windows.Forms.PictureBox ifftimage;
     }
 }

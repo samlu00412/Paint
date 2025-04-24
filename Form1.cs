@@ -17,7 +17,6 @@ using System.Linq;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.CodeAnalysis;
-using System.Dynamic;
 using Paint;
 namespace PaintApp {
 
@@ -869,9 +868,10 @@ namespace PaintApp {
                 for (int j = 0; j < originalCols; j++)
                     croppedResult[i, j] = paddedInput[i, j];
 
+
             return croppedResult;
         }
-        int ow, oh;
+        public int ow, oh;
         private void 放棄toolStripMenuItem_Click(object sender, EventArgs e) {
             try {
 
@@ -1220,6 +1220,33 @@ namespace PaintApp {
             if (defect.ShowDialog() == DialogResult.OK)
                 AdjustmentCanvas();
             defect.Dispose();
+        }
+
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void 邊緣ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // 轉 HSV 色彩空間
+            Mat hsv = new Mat();
+            Cv2.CvtColor(canvas, hsv, ColorConversionCodes.BGR2HSV);
+
+            // 定義橘色 HSV 範圍（你可以根據實際調整）
+            Scalar lowerOrange = new Scalar(5, 100, 100);   // H, S, V
+            Scalar upperOrange = new Scalar(25, 255, 255);
+
+            // 建立遮罩
+            Mat mask = new Mat();
+            Cv2.InRange(hsv, lowerOrange, upperOrange, mask);
+
+            // 套用遮罩保留橘色區域
+            Mat result = new Mat();
+            Cv2.BitwiseAnd(canvas, canvas, result, mask);
+            canvas.Dispose();
+            canvas = result;
+            AdjustmentCanvas();
         }
 
         private void iFFTToolStripMenuItem_Click(object sender, EventArgs e) {
