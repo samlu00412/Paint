@@ -52,5 +52,21 @@ namespace PaintApp
             Cv2.EqualizeHist(input, output); // 直方圖均衡化
             return output;
         }
+        public static void OpenAndSetEqualizeHistMode(Paint mainform)
+        {
+            // 建立 equalizeHist form（雖然我們不會實際 Show 它）
+            var form = new PaintApp.equalizeHist(mainform);
+
+            // 直接處理畫布影像
+            Mat output = new Mat();
+            Cv2.EqualizeHist(mainform.canvas, output);
+            mainform.canvas = output;
+
+            // 更新畫布顯示
+            mainform.AdjustmentCanvas();
+
+            // 清除視窗資源（實際沒 Show 但可清理）
+            form.Dispose();
+        }
     }
 }

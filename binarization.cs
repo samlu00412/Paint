@@ -35,7 +35,24 @@ namespace PaintApp
             {"Adaptive_Mean", AdaptiveThresholdTypes.MeanC},
             {"Adaptive_Gaussian", AdaptiveThresholdTypes.GaussianC}
         };
+        private bool TrySetThresholdMode(string modeName)
+        {
+            if (mode.TryGetValue(modeName, out var normalType))
+            {
+                type = normalType;
+                adaptiveModeSelected = false;
+                return true;
+            }
+            else if (adaptiveMode.TryGetValue(modeName, out var adpType))
+            {
+                adaptiveType = adpType;
+                adaptiveModeSelected = true;
+                return true;
+            }
 
+            Console.WriteLine($"[錯誤] 模式名稱無效: {modeName}");
+            return false;
+        }
         public binarization(Paint mainform) {
             InitializeComponent();
             __mainform = mainform;
@@ -50,17 +67,44 @@ namespace PaintApp
             select_mode_Box.TextChanged += new EventHandler(change_mode);
             UpdatePictureBox(tempCanvas);
         }
-        public static void OpenAndSetThresholdMode(Paint mainform, string modeName, double thresholdValue)
+        public static void OpenAndSetThresholdMode(Paint mainform, string modeName, double thresholdValue, int? blockSize = null, int? cValue = null, int? fftSeed = null)
         {
-            binarization binarizationForm = new binarization(mainform);
-            binarizationForm.SetThresholdMode(modeName, thresholdValue);
+            int defaultBlockSize = 11;
+            int defaultCValue = 2;
+            int defaultSeed = 10;
 
-            binarizationForm.ApplyThreshold();
+            var binarizationForm = new PaintApp.binarization(mainform)
+            {
+                ShowInTaskbar = false,
+                FormBorderStyle = FormBorderStyle.FixedToolWindow,
+                StartPosition = FormStartPosition.Manual,
+                Location = new System.Drawing.Point(-2000, -2000)
+            };
 
-            mainform.AdjustmentCanvas();
-            binarizationForm.Dispose();
+            binarizationForm.Show();
+            Application.DoEvents();
+
+            binarizationForm.thresholdVal = thresholdValue;
+            binarizationForm.threBar.Value = (int)(thresholdValue * 100.0);
+
+            Console.WriteLine("hi i am fine");
+            //binarizationForm.select_mode_Box.Text = modeName;
+            //binarizationForm.change_mode(binarizationForm.select_mode_Box, EventArgs.Empty);
+            binarizationForm.TrySetThresholdMode(modeName);
+            Console.WriteLine("hi i am fine");
+            binarizationForm.blockSizeBar.Value = blockSize ?? defaultBlockSize;
+
+            binarizationForm.cValueBar.Value = cValue ?? defaultCValue;
+            Console.WriteLine("hi i am fine");
+            binarizationForm.seed.Value = fftSeed ?? defaultSeed;
+
+            binarizationForm.ConvertFFTtoVisible(mainform.canvas);
+            Cv2.ImShow("owo",mainform.canvas);
+            Cv2.WaitKey();
+            binarizationForm.Close();
+
+
         }
-
         public void SetThresholdMode(string modeName, double thresholdValue)
         {
             if (mode.ContainsKey(modeName))
@@ -92,7 +136,8 @@ namespace PaintApp
         }
         private async Task UpdatePreviewAsync(double thre) {
             Mat previewResult = new Mat();
-
+            int localBlockSize = blockSizeBar.Value;
+            int localC = cValueBar.Value;
             await Task.Run(() =>
             {
                 if (__mainform.canvas.Type() == MatType.CV_32FC2) {
@@ -100,24 +145,15 @@ namespace PaintApp
                 }
                 else if (adaptiveModeSelected)
                 {
-                    int blockSize = 11; // 預設值
-                    blockSizeBar.Invoke(new Action(() =>
-                    {
-                        blockSize = blockSizeBar.Value;  // ✅ 確保這段程式碼在 UI 執行緒上執行
-                    }));
-                    if (blockSize % 2 == 0) blockSize++; // 確保 blockSize 為奇數
-                    int C = 2;
-                    blockSizeBar.Invoke(new Action(() =>
-                    {
-                        C = cValueBar.Value;  // ✅ 確保這段程式碼在 UI 執行緒上執行
-                    }));
+                    if (localBlockSize % 2 == 0) localBlockSize++; // 確保 blockSize 為奇數
+                    int C = localC;
                     // 使用自適應二值化
                     Cv2.AdaptiveThreshold(
                         __mainform.canvas, previewResult,
                         255,
                         adaptiveType,
                         ThresholdTypes.Binary,
-                        blockSize, C
+                        localBlockSize, C
                     );
                 }
                 else
@@ -133,7 +169,6 @@ namespace PaintApp
 
         private void UpdatePictureBox(Mat image) {
             if (previewBox.Image != null) {
-                previewBox.Image.Dispose();
                 previewBox.Image = null;
             }
 
@@ -188,7 +223,7 @@ namespace PaintApp
         }
 
         private void clear(Mat img) {
-            img.Dispose();
+            //img.Dispose();
             img = null;
         }
         private void ShiftDFT(Mat magImage)
@@ -338,7 +373,6 @@ namespace PaintApp
                 UpdatePictureBox(result);
 
                 // 清理記憶體
-                result.Dispose();
             }
         }
 
@@ -346,7 +380,7 @@ namespace PaintApp
         {
             // 將 FFT 拆成實部與虛部
             Mat[] fftPlanes = new Mat[2];
-            Cv2.Split(__mainform.canvas, out fftPlanes); // CV_32FC2 -> 2 x CV_32FC1
+            Cv2.Split(targetCanvas, out fftPlanes); // CV_32FC2 -> 2 x CV_32FC1
 
             // 計算 Magnitude，做 log 與 normalize，變成灰階圖可視化
             Mat magnitude = new Mat();
@@ -357,8 +391,13 @@ namespace PaintApp
 
             // 對 magnitude 做 threshold
             Mat thresholdedFFT = new Mat();
+            Console.WriteLine("i am try");
+            Console.WriteLine(thresholdVal);
+            Console.WriteLine(type.ToString());
             Cv2.Threshold(magnitude, thresholdedFFT, thresholdVal, 255, type);
-
+            Cv2.ImShow("Window Name", thresholdedFFT);
+            Cv2.WaitKey();
+            Console.WriteLine("finnnnn");
             // 區域生長遮罩（以 magnitude 中心點）
             OpenCvSharp.Point centerSeed = new OpenCvSharp.Point(magnitude.Cols / 2, magnitude.Rows / 2);
             int seedVal = 0;
@@ -367,14 +406,14 @@ namespace PaintApp
             }));
 
             Mat centerMask = GetCenterRegionMask(magnitude, centerSeed, seedVal);
-
             // 合併 threshold 結果與中心遮罩
             Cv2.BitwiseOr(thresholdedFFT, centerMask, thresholdedFFT); // thresholdedFFT 是 mask
 
             // 🔁 將 single-channel mask 轉為 float，用來套用到 fftPlanes
             Mat maskFloat = new Mat();
             thresholdedFFT.ConvertTo(maskFloat, MatType.CV_32FC1, 1.0 / 255.0); // 0 或 1 的浮點遮罩
-
+            Cv2.ImShow("Window Name", maskFloat);
+            Cv2.WaitKey();
             // 套用 mask 到實部與虛部
             Mat maskedRe = new Mat();
             Mat maskedIm = new Mat();
@@ -386,7 +425,7 @@ namespace PaintApp
             Cv2.Merge(new Mat[] { maskedRe, maskedIm }, maskedFFT);
 
             // ✅ 更新 targetCanvas，保持 CV_32FC2
-            maskedFFT.CopyTo(targetCanvas);
+            targetCanvas=maskedFFT.Clone();
 
             // ✅ 顯示 preview 圖（單通道）
             previewBox.Image = BitmapConverter.ToBitmap(thresholdedFFT);

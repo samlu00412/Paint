@@ -18,10 +18,11 @@ using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.CodeAnalysis;
 using Paint;
+using System.Net.NetworkInformation;
 namespace PaintApp {
 
     public partial class Paint : Form {
-        private const int MAX_STACK_SIZE = 20;
+        public int MAX_STACK_SIZE = 20;
         public OpenCvSharpMat canvas;
         public OpenCvSharpMat origin_picture;
         public OpenCvSharpMat tempCanvas = new OpenCvSharpMat();
@@ -58,8 +59,33 @@ namespace PaintApp {
         public class ScriptGlobals
         {
             public Paint PaintForm { get; set; }
-        }
+            public void LowPass(int ksize)
+            {
+                Low_pass.OpenAndSetLowPassMode(PaintForm, ksize);
+            }
+            public void EqualizeHist()
+            {
+                equalizeHist.OpenAndSetEqualizeHistMode(PaintForm);
+            }
+            public void Grayscale()
+            {
+                PaintForm.轉換成灰階ToolStripMenuItem_Click(null, EventArgs.Empty);
+            }
+            public void FFT()
+            {
+                PaintForm.放棄toolStripMenuItem_Click(null, EventArgs.Empty);
+                
+            }
+            public void Threshold(string modeName, double value, int blockSize = 11, int cValue = 2, int fftSeed = 10)
+            {
+                //Threshold("Binary_inverse",150,11,2,2);
+                binarization.OpenAndSetThresholdMode(PaintForm, modeName, value, blockSize, cValue, fftSeed);
+                Cv2.ImShow("owo", PaintForm.canvas);
+                PaintForm.AdjustmentCanvas();
+            }
 
+
+        }
         private void AddEvalWindow()
         {
             Form evalWindow = new Form
@@ -295,6 +321,7 @@ namespace PaintApp {
             Mat displayImage = image ?? canvas;
 
             if (displayImage.Type() == MatType.CV_32FC2) {
+                Console.WriteLine("owo owo owo");
                 // 如果是複數矩陣，轉換為幅度圖顯示
                 if (pictureBox1.Image != null) {
                     pictureBox1.Image.Dispose();
