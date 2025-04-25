@@ -1,0 +1,14 @@
+﻿ColorTransform("BGR to HSV");
+RGBmotify(0,1,0);
+Grayscale();
+Threshold("Binary_inverse",98.37);
+Detect(1);
+Reset();
+Grayscale();
+EqualizeHist();
+FFT();
+Threshold("Binary_inverse",150);
+IFFT();
+Threshold("Binary_inverse",150);
+LowPass(5);
+Detect(1);

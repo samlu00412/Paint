@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -19,6 +20,7 @@ using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.CodeAnalysis;
 using Paint;
 using System.Net.NetworkInformation;
+using static PaintApp.Paint;
 namespace PaintApp {
 
     public partial class Paint : Form {
@@ -30,6 +32,7 @@ namespace PaintApp {
         private OpenCvSharp.Point startpoint;
         private OpenCvSharp.Point prevPoint;
         private OpenCvSharp.Point currentPoint;
+        public bool finddefect = false;
         public static Paint Instance { get; private set; }
         private Bitmap canvasBitmap;
         private bool isDrawing = false, isGrey = false;
@@ -57,18 +60,37 @@ namespace PaintApp {
             eval.Show();
 
         }
-        public void DetectAndFind(Bitmap bitmap)
+        public async Task<AOIInterface.AOIInterface> DetectAndFindAsync(Bitmap bitmap)
         {
+            finddefect = false;
             canvas = BitmapConverter.ToMat(bitmap);
             origin_picture = canvas.Clone();
             UpdateCanvas();
             tempCanvas = canvas.Clone();
             SaveCurrentState();
 
-            eval.SetCode("");
-            //return ???
-            
+            try
+            {
+                string codeText = File.ReadAllText("TextFile1.txt");
+                eval.SetCode(codeText);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("讀取腳本失敗: " + ex.Message);
+                eval.SetCode("// 無法讀取腳本");
+            }
+
+            await eval.RunCode();
+
+            AOIInterface.AOIInterface result = new AOIInterface.AOIInterface
+            {
+                Bitmap = BitmapConverter.ToBitmap(canvas),
+                Result = finddefect
+            };
+
+            return result;
         }
+
         // ✅ **建立 ScriptGlobals，讓 Eval 能夠存取 `Paint`**
         public class ScriptGlobals
         {
@@ -147,9 +169,12 @@ namespace PaintApp {
         {
             private TextBox codeInput;
             private TextBox outputBox;
+            private Paint mainForm;
 
             public EvalWindow(Paint mainForm)
             {
+                this.mainForm = mainForm;
+
                 Text = "Code Evaluator";
                 Size = new System.Drawing.Size(600, 400);
 
@@ -210,6 +235,29 @@ namespace PaintApp {
             public void SetOutput(string output)
             {
                 outputBox.Text = output;
+            }
+            public async Task RunCode()
+            {
+                try
+                {
+                    var scriptOptions = ScriptOptions.Default
+                        .WithReferences(AppDomain.CurrentDomain.GetAssemblies()
+                            .Where(a => !a.IsDynamic && !string.IsNullOrEmpty(a.Location))
+                            .Select(a => MetadataReference.CreateFromFile(a.Location)))
+                        .WithImports("System", "System.Linq", "System.Collections.Generic", "System.Windows.Forms", "PaintApp");
+
+                    var globals = new ScriptGlobals { PaintForm = mainForm };
+
+                    var result = await CSharpScript.EvaluateAsync<object>(
+                        codeInput.Text, scriptOptions, globals: globals
+                    );
+
+                    outputBox.Text = result?.ToString() ?? "null";
+                }
+                catch (Exception ex)
+                {
+                    outputBox.Text = "Error: " + ex.Message;
+                }
             }
         }
 
