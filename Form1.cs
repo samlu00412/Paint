@@ -29,6 +29,9 @@ namespace PaintApp {
         public OpenCvSharpMat origin_picture;
         public OpenCvSharpMat tempCanvas = new OpenCvSharpMat();
         private OpenCvSharpMat chart = new OpenCvSharpMat();
+        private OpenCvSharpMat black_defect = new OpenCvSharpMat();
+        private OpenCvSharpMat white_defect = new OpenCvSharpMat();
+        private OpenCvSharpMat final_defect = new OpenCvSharpMat();
         private OpenCvSharp.Point startpoint;
         private OpenCvSharp.Point prevPoint;
         private OpenCvSharp.Point currentPoint;
@@ -162,6 +165,15 @@ namespace PaintApp {
             public void Reset()
             {
                 PaintForm.canvas=PaintForm.origin_picture.Clone();
+                PaintForm.AdjustmentCanvas();
+            }
+            public void CaptureDefect(Mat defect) {
+                PaintForm.capture_defect(PaintForm.canvas,defect);
+                Cv2.ImShow("white", PaintForm.white_defect);
+                PaintForm.AdjustmentCanvas();
+            }
+            public void CombineDefect() {
+                PaintForm.combine_defect(PaintForm.canvas);
                 PaintForm.AdjustmentCanvas();
             }
         }
@@ -541,6 +553,13 @@ namespace PaintApp {
             drawMode = TypeToMode[temp.Text];
         }
 
+        private void capture_defect(Mat img, Mat defect) {
+            img.CopyTo(defect);
+        }
+
+        private void combine_defect(Mat img) {
+            Cv2.BitwiseOr(black_defect, white_defect,img);
+        }
         private void 儲存檔案ToolStripMenuItem_Click(object sender, EventArgs e) {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Bitmap Image|*.bmp|JPeg Image|*.jpg|Gif Image|*.gif|Png Image|*.png";

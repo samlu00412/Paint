@@ -2,6 +2,7 @@
 RGBmotify(0,1,0);
 Grayscale();
 Threshold("Binary_inverse",98.37);
+CaptureDefect(white_defect);
 Detect(1);
 Reset();
 Grayscale();
@@ -11,4 +12,6 @@ Threshold("Binary_inverse",150);
 IFFT();
 Threshold("Binary_inverse",150);
 LowPass(5);
+CaptureDefect(black_defect);
+CombineDefect();
 Detect(1);
