@@ -177,6 +177,7 @@
             this.seed.TabIndex = 16;
             this.seed.Value = 2;
             this.seed.Scroll += new System.EventHandler(this.seed_Scroll);
+            this.seed.MouseUp += new System.Windows.Forms.MouseEventHandler(this.modify_value);
             // 
             // seedlabel
             // 

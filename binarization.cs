@@ -324,7 +324,6 @@ namespace PaintApp
 
                 if (pt.X < 0 || pt.X >= magnitude.Cols || pt.Y < 0 || pt.Y >= magnitude.Rows)
                 {
-                    Console.WriteLine(pt.X+" "+pt.Y);
                     continue;
                 }
 
@@ -576,19 +575,16 @@ namespace PaintApp
         private void blockSizeBar_Scroll(object sender, EventArgs e)
         {
             label1.Text = $"{blockSizeBar.Value}";
-            UpdatePreviewAsync(thresholdVal);
         }
 
         private void cValueBar_Scroll(object sender, EventArgs e)
         {
             label2.Text = $"{cValueBar.Value}";
-            UpdatePreviewAsync(thresholdVal);
         }
 
         private void seed_Scroll(object sender, EventArgs e)
         {
             seedlabel.Text= $"{seed.Value}";
-            UpdatePreviewAsync(thresholdVal);
         }
 
     }
