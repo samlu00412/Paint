@@ -21,6 +21,7 @@ using Microsoft.CodeAnalysis;
 using Paint;
 using System.Net.NetworkInformation;
 using static PaintApp.Paint;
+using static System.Windows.Forms.AxHost;
 namespace PaintApp {
 
     public partial class Paint : Form {
@@ -29,6 +30,9 @@ namespace PaintApp {
         public OpenCvSharpMat origin_picture;
         public OpenCvSharpMat tempCanvas = new OpenCvSharpMat();
         private OpenCvSharpMat chart = new OpenCvSharpMat();
+        private OpenCvSharpMat black_defect = new OpenCvSharpMat();
+        private OpenCvSharpMat white_defect = new OpenCvSharpMat();
+        private OpenCvSharpMat final_defect = new OpenCvSharpMat();
         private OpenCvSharp.Point startpoint;
         private OpenCvSharp.Point prevPoint;
         private OpenCvSharp.Point currentPoint;
@@ -164,6 +168,17 @@ namespace PaintApp {
                 PaintForm.canvas=PaintForm.origin_picture.Clone();
                 PaintForm.AdjustmentCanvas();
             }
+            public void CaptureDefect(Mat defect) {
+                //PaintForm.capture_defect(PaintForm.canvas,defect);
+                Cv2.ImShow("white", PaintForm.white_defect);
+                PaintForm.AdjustmentCanvas();
+            }
+
+            //CaptureDefect(white_defect);
+            public void CombineDefect() {
+                PaintForm.combine_defect(PaintForm.canvas);
+                PaintForm.AdjustmentCanvas();
+            }
         }
         public class EvalWindow : Form
         {
@@ -209,6 +224,19 @@ namespace PaintApp {
                             .WithImports("System", "System.Linq", "System.Collections.Generic", "System.Windows.Forms", "PaintApp");
 
                         var globals = new ScriptGlobals { PaintForm = mainForm };
+                        var script = CSharpScript.Create(codeInput.Text, scriptOptions, typeof(ScriptGlobals));
+
+                        // ✅ 手動編譯並檢查編譯錯誤
+                        var diagnostics = script.Compile();
+                        if (diagnostics.Any(d => d.Severity == DiagnosticSeverity.Error))
+                        {
+                            outputBox.Text = "⚠️ 編譯錯誤:\r\n" + string.Join("\r\n", diagnostics);
+                            return;
+                        }
+                        if (string.IsNullOrWhiteSpace(codeInput.Text) || codeInput.Text.Trim().All(char.IsLetter))
+                        {
+                            MessageBox.Show("⚠️ 你的腳本可能沒有執行內容，請檢查語法是否正確。");
+                        }
 
                         var result = await CSharpScript.EvaluateAsync<object>(
                             codeInput.Text, scriptOptions, globals: globals
@@ -216,9 +244,13 @@ namespace PaintApp {
 
                         outputBox.Text = result?.ToString() ?? "null";
                     }
+                    catch (CompilationErrorException cex)
+                    {
+                        outputBox.Text = "⚠️ 編譯錯誤:\r\n" + string.Join("\r\n", cex.Diagnostics);
+                    }
                     catch (Exception ex)
                     {
-                        outputBox.Text = "Error: " + ex.Message;
+                        outputBox.Text = "❌ 執行錯誤:\r\n" + ex.ToString();
                     }
                 };
 
@@ -244,7 +276,11 @@ namespace PaintApp {
                         .WithReferences(AppDomain.CurrentDomain.GetAssemblies()
                             .Where(a => !a.IsDynamic && !string.IsNullOrEmpty(a.Location))
                             .Select(a => MetadataReference.CreateFromFile(a.Location)))
-                        .WithImports("System", "System.Linq", "System.Collections.Generic", "System.Windows.Forms", "PaintApp");
+                        .WithImports(
+                "System", "System.IO", "System.Linq", "System.Collections.Generic", "System.Drawing",
+                "System.Windows.Forms", "System.Text", "System.Threading.Tasks", "System.Numerics",
+                "System.Net.NetworkInformation", "OpenCvSharp", "OpenCvSharp.Extensions",
+                "PaintApp", "AOIInterface");
 
                     var globals = new ScriptGlobals { PaintForm = mainForm };
 
@@ -541,6 +577,13 @@ namespace PaintApp {
             drawMode = TypeToMode[temp.Text];
         }
 
+        private void capture_defect(Mat img, Mat defect) {
+            img.CopyTo(defect);
+        }
+
+        private void combine_defect(Mat img) {
+            Cv2.BitwiseOr(black_defect, white_defect,img);
+        }
         private void 儲存檔案ToolStripMenuItem_Click(object sender, EventArgs e) {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Bitmap Image|*.bmp|JPeg Image|*.jpg|Gif Image|*.gif|Png Image|*.png";

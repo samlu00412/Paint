@@ -138,6 +138,7 @@
             this.blockSizeBar.TickFrequency = 2;
             this.blockSizeBar.Value = 3;
             this.blockSizeBar.Scroll += new System.EventHandler(this.blockSizeBar_Scroll);
+            this.blockSizeBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.modify_value);
             // 
             // cValueBar
             // 
@@ -149,6 +150,7 @@
             this.cValueBar.TabIndex = 13;
             this.cValueBar.Value = 2;
             this.cValueBar.Scroll += new System.EventHandler(this.cValueBar_Scroll);
+            this.cValueBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.modify_value);
             // 
             // label1
             // 
