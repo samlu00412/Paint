@@ -58,5 +58,20 @@ namespace PaintApp
             label1.Text=normalmax.Value.ToString();
             UpdatePreview();
         }
+        public static void OpenAndSetNormalize(Paint mainform, int val) {
+            // 建立 equalizeHist form（雖然我們不會實際 Show 它）
+            var form = new PaintApp.equalizeHist(mainform);
+
+            // 直接處理畫布影像
+            Mat output = new Mat();
+            Cv2.Normalize(mainform.canvas, output, 0, val, NormTypes.MinMax);
+            mainform.canvas = output;
+
+            // 更新畫布顯示
+            mainform.AdjustmentCanvas();
+
+            // 清除視窗資源（實際沒 Show 但可清理）
+            form.Dispose();
+        }
     }
 }
