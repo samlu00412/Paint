@@ -157,6 +157,10 @@ namespace PaintApp {
                     PaintForm.canvas = PaintForm.AdjustNegativeContrast(PaintForm.canvas, a, b);
                 PaintForm.AdjustmentCanvas();
             }
+            public void Normalized(int thres){
+                Normalize.OpenAndSetNormalize(PaintForm, thres);
+                PaintForm.AdjustmentCanvas();
+            }
             public void Detect(int a)
             {
                 Defect.OpenAndSetDefectMode(PaintForm, a);
