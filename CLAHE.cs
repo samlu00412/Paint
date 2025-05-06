@@ -20,29 +20,27 @@ namespace PaintApp {
         private Mat lchannel = new Mat();
         private Mat lclahe = new Mat();
         private const int previewScale = 2;
-        public static void OpenAndSetCLAHEMode(Paint mainform, double clipLimit = 2.0)
+        public static async Task OpenAndSetCLAHEMode(Paint mainform, double clipLimit = 2.0)
         {
             var claheForm = new CLAHE(mainform)
             {
                 ShowInTaskbar = false,
                 FormBorderStyle = FormBorderStyle.FixedToolWindow,
                 StartPosition = FormStartPosition.Manual,
-                Location = new System.Drawing.Point(-2000, -2000) // 隱藏視窗
+                Location = new System.Drawing.Point(-2000, -2000)
             };
-            Console.WriteLine(clipLimit);
             claheForm.Show();
             Application.DoEvents();
 
-            // 設定 limit（轉為 bar 值）
             int barValue = (int)(clipLimit * 10);
-            claheForm.Limit_bar.Value = Math.Max(1, Math.Min(barValue, claheForm.Limit_bar.Maximum)); // clamp 在 bar 範圍內
+            claheForm.Limit_bar.Value = Math.Max(1, Math.Min(barValue, claheForm.Limit_bar.Maximum));
             claheForm.limit_val = clipLimit;
             claheForm.limit_label.Text = $"{clipLimit}";
 
-            // 更新預覽
-            claheForm.UpdatePreviewAsync(clipLimit).ConfigureAwait(false);
+            // ✅ 等待 preview 處理完
+            await claheForm.UpdatePreviewAsync(clipLimit);
 
-            claheForm.Confirm_btn_Click(null, EventArgs.Empty); // 直接套用 CLAHE 效果
+            claheForm.Confirm_btn_Click(null, EventArgs.Empty);
             claheForm.Close();
         }
         public CLAHE(Paint mainform) {

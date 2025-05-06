@@ -13,11 +13,6 @@ using System.Windows.Forms;
 
 namespace PaintApp {
     public partial class morphology : Form {
-
-        private int iteration = 1;
-        private Paint __mainform;
-        private Mat tempCanvas;
-        private const int previewScale = 2;
         private MorphTypes operation = MorphTypes.Erode;
         private readonly Dictionary<string, MorphTypes> mode = new Dictionary<string, MorphTypes> {
             {"侵蝕",MorphTypes.Erode }, {"膨脹",MorphTypes.Dilate},
@@ -25,12 +20,44 @@ namespace PaintApp {
             {"形態學梯度", MorphTypes.Gradient}, {"頂帽", MorphTypes.TopHat},
             {"黑帽", MorphTypes.BlackHat}
         };
+        public static void OpenAndSetMorphologyMode(Paint mainform, string operationName = "侵蝕", int iteration = 1)
+        {
+            using (var morphForm = new morphology(mainform)
+            {
+                ShowInTaskbar = false,
+                FormBorderStyle = FormBorderStyle.FixedToolWindow,
+                StartPosition = FormStartPosition.Manual,
+                Location = new System.Drawing.Point(-2000, -2000) // 隱藏視窗
+            })
+            {
+                
+                morphForm.Show();
+                Application.DoEvents();
+                morphForm.__mainform = mainform;
+                morphForm.tempCanvas = mainform.canvas.Clone();
+                morphForm.operation = morphForm.mode[operationName];
+                morphForm.iteration = iteration;
+                // 設定疊代次數
+                morphForm.iterBar.Value = Math.Max(1, Math.Min(iteration, morphForm.iterBar.Maximum));
+                morphForm.iterLabel.Text = $"{morphForm.iterBar.Value}";
+                
+                // 更新預覽
+                morphForm.UpdatePreviewAsync(morphForm.iterBar.Value).ConfigureAwait(false);
+
+                // 直接套用並關閉（模擬按下確認）
+                morphForm.confirm_click(null, EventArgs.Empty);
+            }
+        }
+        private int iteration = 1;
+        private Paint __mainform;
+        private Mat tempCanvas;
+        private const int previewScale = 2;
+        
+        
         public morphology(Paint mainform) {
             InitializeComponent();
             __mainform = mainform;
             tempCanvas = mainform.canvas.Clone();
-            tempCanvas = tempCanvas.Resize(new OpenCvSharp.Size(tempCanvas.Width / previewScale, tempCanvas.Height / previewScale));
-            
             UpdatePictureBox(tempCanvas);
         }
 
@@ -47,7 +74,7 @@ namespace PaintApp {
 
         private void confirm_click(object sender, EventArgs e) {
             DialogResult = DialogResult.OK;
-            Cv2.MorphologyEx(tempCanvas, __mainform.canvas, operation, new Mat(), iterations: iteration);
+            Cv2.MorphologyEx(__mainform.canvas, __mainform.canvas, operation, new Mat(), iterations: iteration);
             Close();
         }
 

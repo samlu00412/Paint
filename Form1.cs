@@ -168,15 +168,22 @@ namespace PaintApp {
                 PaintForm.canvas=PaintForm.origin_picture.Clone();
                 PaintForm.AdjustmentCanvas();
             }
-            public void CaptureDefect(Mat defect) {
-                //PaintForm.capture_defect(PaintForm.canvas,defect);
-                Cv2.ImShow("white", PaintForm.white_defect);
+            public void CaptureDefect_white() {
+                PaintForm.capture_defect(PaintForm.canvas,PaintForm.white_defect);
                 PaintForm.AdjustmentCanvas();
             }
-
+            public void CaptureDefect_black()
+            {
+                PaintForm.capture_defect(PaintForm.canvas, PaintForm.black_defect);
+                PaintForm.AdjustmentCanvas();
+            }
             //CaptureDefect(white_defect);
             public void CombineDefect() {
                 PaintForm.combine_defect(PaintForm.canvas);
+                PaintForm.AdjustmentCanvas();
+            }
+            public void Morphology(string a,int b) {
+                morphology.OpenAndSetMorphologyMode(PaintForm,a,b);
                 PaintForm.AdjustmentCanvas();
             }
         }

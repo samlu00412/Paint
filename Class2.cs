@@ -37,7 +37,8 @@ namespace AOIInterface
 
         }
 
-        public bool startDetect(Bitmap bitmap)
+        public bool start
+            (Bitmap bitmap)
         {
             bool result = false;
             //todo detection
