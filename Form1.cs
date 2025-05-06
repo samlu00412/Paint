@@ -161,6 +161,9 @@ namespace PaintApp {
                 Normalize.OpenAndSetNormalize(PaintForm, thres);
                 PaintForm.AdjustmentCanvas();
             }
+            public void LookUpTable(int lt, int ht) {
+                LUT.ApplyLUT(PaintForm, lt, ht);
+            }
             public void Detect(int a)
             {
                 Defect.OpenAndSetDefectMode(PaintForm, a);

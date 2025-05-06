@@ -17,7 +17,7 @@ namespace PaintApp
             {"Normal", 0 }, {"Gamma", 1},
             {"Sigmoid", 2 }, {"Piecewise", 3}
         };
-        private int type = 0;
+        private static int type = 0;
         private Paint __mainform;
         public LUT(Paint mainform)
         {
@@ -61,7 +61,7 @@ namespace PaintApp
             label2.Text = bewhite.Value.ToString();
             UpdatePreviewAsync(beblack.Value, bewhite.Value);
         }
-        private Mat buildLUT(int Bthres,int Wthres) { //Bthres for gamma in gamma mode. Bthres and Wthres are for contrast and intersection respectively.
+        private static Mat buildLUT(int Bthres,int Wthres) { //Bthres for gamma in gamma mode. Bthres and Wthres are for contrast and intersection respectively.
             Mat lut = new Mat(1, 256, MatType.CV_8UC1);
             byte[] lutData = new byte[256];
             switch (type) {
@@ -100,7 +100,7 @@ namespace PaintApp
             lut.SetArray(lutData);
             return lut;
         }
-        private double Clamp(double val, int min, int max) {
+        private static double Clamp(double val, int min, int max) {
             if (val < min)
                 return min;
             if (val > max) return max;
@@ -140,6 +140,14 @@ namespace PaintApp
         private void clear(Mat img) {
             img.Dispose();
             img = null;
+        }
+        public static void ApplyLUT(PaintApp.Paint mainform, int low_thres, int high_thres) {
+            var form = new PaintApp.equalizeHist(mainform);
+            Mat output = new Mat();
+            Cv2.LUT(mainform.canvas, buildLUT(low_thres, high_thres), output);
+            mainform.canvas = output;
+            mainform.AdjustmentCanvas();
+            form.Dispose();
         }
         private void change_mode(object sender, EventArgs e) {
             if (mode.ContainsKey(modeBox.Text)) {

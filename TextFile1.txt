@@ -15,3 +15,9 @@ LowPass(5);
 CaptureDefect(black_defect);
 CombineDefect();
 Detect(1);
+
+Grayscale();
+Normalized(225);
+LookUpTable(0, 40);
+Threshold("Binary",151.34);
+Detect(7);
