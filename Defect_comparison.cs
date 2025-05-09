@@ -13,7 +13,7 @@ public class DefectComparer {
     private readonly string predFolder;
     private readonly double iouThreshold;
 
-    public DefectComparer(string groundTruthFolder, string predictionFolder, double iouThreshold = 0.3) {
+    public DefectComparer(string groundTruthFolder, string predictionFolder, double iouThreshold = 0.5) {
         this.gtFolder = groundTruthFolder;
         this.predFolder = predictionFolder;
         this.iouThreshold = iouThreshold;
@@ -89,7 +89,7 @@ public class DefectComparer {
         int y1 = Math.Max(a.Top, b.Top);
         int x2 = Math.Min(a.Right, b.Right);
         int y2 = Math.Min(a.Bottom, b.Bottom);
-
+        if (x1 == b.Left && x2 == b.Right && y1 == b.Top && y2 == b.Bottom) return 1;// b is subspace of a 
         int interArea = Math.Max(0, x2 - x1) * Math.Max(0, y2 - y1);
         int unionArea = a.Width * a.Height + b.Width * b.Height - interArea;
 
