@@ -1,5 +1,19 @@
 ﻿Grayscale();
 Normalized(225);
-LookUpTable(0, 40);
+LookUpTable(0, 57);
 Threshold("Binary",151.34);
+Detect(7);
+
+CaptureDefect_white();
+Reset();
+Grayscale();
+C_B(3,0);
+Normalized(225);
+FFT();
+Threshold("Binary_inverse", 141.5,11,2,114);
+IFFT();
+Threshold("Binary_inverse", 64.32);
+LookUpTable(58, 255);
+CaptureDefect_black();
+CombineDefect();
 Detect(7);

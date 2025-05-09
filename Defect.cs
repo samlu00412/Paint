@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using PaintApp;
 using OpenCvSharp;
 using OpenCvSharp.Extensions;
+using System.IO;
+using System.Xml;
 
 
 namespace Paint {
@@ -34,13 +36,16 @@ namespace Paint {
         
         private void confirm_click(object sender, EventArgs e) {
             List<Rect> rectList = GetDefectBoundingBoxes(binary, _mainForm.origin_picture.Width, _mainForm.origin_picture.Height);
-            List<Rect> mergedRects = MergeOverlappingRects(rectList);
+            List<Rect> mergedRects = MergeOverlappingRects(rectList);// all rects are here
             if (_mainForm.canvas != null)
                 clear(_mainForm.canvas);
             _mainForm.canvas = _mainForm.origin_picture.Clone();
             foreach (var rect in mergedRects) 
                 Cv2.Rectangle(_mainForm.canvas, rect, new Scalar(0, 255, 0), 2);
-            
+
+            string bmpPath = _mainForm.currentImagePath;
+            string saveXmlFolder = @"C:\project_xmls";
+            SaveToVocXml(bmpPath, mergedRects, saveXmlFolder);
             DialogResult = DialogResult.OK;
             Close();
         }
@@ -179,6 +184,56 @@ namespace Paint {
                 preview_box.Image = null;
             }
             preview_box.Image = BitmapConverter.ToBitmap(image);
+        }
+        public static void SaveToVocXml(string imagePath, List<Rect> boxes, string outputFolder) {
+            var fileName = Path.GetFileNameWithoutExtension(imagePath);
+            var image = new Mat(imagePath);
+            int width = image.Width;
+            int height = image.Height;
+
+            string xmlPath = Path.Combine(outputFolder, fileName + ".xml");
+
+            XmlDocument doc = new XmlDocument();
+            XmlElement annotation = doc.CreateElement("annotation");
+            doc.AppendChild(annotation);
+
+            void AddTextElement(XmlElement parent, string name, string value) {
+                var el = doc.CreateElement(name);
+                el.InnerText = value;
+                parent.AppendChild(el);
+            }
+
+            AddTextElement(annotation, "folder", Path.GetFileName(Path.GetDirectoryName(imagePath)));
+            AddTextElement(annotation, "filename", Path.GetFileName(imagePath));
+            AddTextElement(annotation, "path", imagePath);
+
+            XmlElement size = doc.CreateElement("size");
+            AddTextElement(size, "width", width.ToString());
+            AddTextElement(size, "height", height.ToString());
+            AddTextElement(size, "depth", image.Channels().ToString());
+            annotation.AppendChild(size);
+
+            AddTextElement(annotation, "segmented", "0");
+
+            foreach (var rect in boxes) {
+                XmlElement obj = doc.CreateElement("object");
+                AddTextElement(obj, "name", "defect");
+                AddTextElement(obj, "pose", "Unspecified");
+                AddTextElement(obj, "truncated", "0");
+                AddTextElement(obj, "difficult", "0");
+
+                XmlElement bndbox = doc.CreateElement("bndbox");
+                AddTextElement(bndbox, "xmin", rect.Left.ToString());
+                AddTextElement(bndbox, "ymin", rect.Top.ToString());
+                AddTextElement(bndbox, "xmax", (rect.Right).ToString());
+                AddTextElement(bndbox, "ymax", (rect.Bottom).ToString());
+
+                obj.AppendChild(bndbox);
+                annotation.AppendChild(obj);
+            }
+
+            Directory.CreateDirectory(outputFolder);
+            doc.Save(xmlPath);
         }
     }
 }
