@@ -193,6 +193,14 @@ namespace PaintApp {
                 morphology.OpenAndSetMorphologyMode(PaintForm,a,b);
                 PaintForm.AdjustmentCanvas();
             }
+            public void Save(string a)
+            {
+                PaintForm.SaveImage(a);
+            }
+            public void Open(string a)
+            {
+                PaintForm.OpenImage(a);
+            }
         }
         public class EvalWindow : Form
         {
@@ -612,6 +620,56 @@ namespace PaintApp {
             }
             if (saveFileDialog != null)
                 saveFileDialog.Dispose();
+        }
+        public void OpenImage(string filename)
+        {
+            if (!File.Exists(filename))
+            {
+                MessageBox.Show("找不到檔案：" + filename, "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                canvas = Cv2.ImRead(filename);
+                origin_picture = canvas.Clone();
+                tempCanvas = canvas.Clone();
+
+                UpdateCanvas();     // 顯示圖片
+                SaveCurrentState(); // 儲存當前狀態以支援 Undo/Redo
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("讀取圖片失敗：" + ex.Message, "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        public void SaveImage(string filename)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(filename)) return;
+
+                if (canvas == null)
+                {
+                    MessageBox.Show("目前沒有可儲存的圖片。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                // 特殊處理 2-channel 圖片
+                if (canvas.Channels() == 2)
+                {
+                    Mat converted = BitmapConverter.ToMat(ConvertCV32FC2ToBitmap(canvas, false));
+                    Cv2.ImWrite(filename, converted);
+                }
+                else
+                {
+                    Cv2.ImWrite(filename, canvas);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("儲存圖片失敗：" + ex.Message, "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void 開啟ToolStripMenuItem_Click(object sender, EventArgs e) {
             openFileDialog.Filter = "Bitmap Image|*.bmp|JPeg Image|*.jpg|Gif Image|*.gif|Png Image|*.png";
