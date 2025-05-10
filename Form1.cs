@@ -22,6 +22,7 @@ using Paint;
 using System.Net.NetworkInformation;
 using static PaintApp.Paint;
 using static System.Windows.Forms.AxHost;
+using System.Xml;
 namespace PaintApp {
 
     public partial class Paint : Form {
@@ -53,6 +54,12 @@ namespace PaintApp {
         private int realrows,realcols;
         private OpenCvSharp.Point convertPoint = new OpenCvSharp.Point(0, 0);
         public EvalWindow eval;
+
+        private string bmpFolder, xmlFolder, outputFolder;
+        private string[] bmpFiles;
+        private int currentIndex = 0;
+
+        public string currentImagePath = string.Empty;
         public Paint() {
             InitializeComponent();
             this.KeyPreview = true; // 允許表單偵測按鍵
@@ -110,6 +117,9 @@ namespace PaintApp {
             public void Grayscale()
             {
                 PaintForm.轉換成灰階ToolStripMenuItem_Click(null, EventArgs.Empty);
+            }
+            public void inverse_image() {
+                PaintForm.negative_image(null,EventArgs.Empty);
             }
             public void FFT()
             {
@@ -207,7 +217,7 @@ namespace PaintApp {
             private TextBox codeInput;
             private TextBox outputBox;
             private Paint mainForm;
-
+            public Button runButton;
             public EvalWindow(Paint mainForm)
             {
                 this.mainForm = mainForm;
@@ -221,8 +231,8 @@ namespace PaintApp {
                     Dock = DockStyle.Top,
                     Height = 200
                 };
-
-                Button runButton = new Button
+                
+                runButton = new Button
                 {
                     Text = "Run",
                     Dock = DockStyle.Bottom
@@ -675,6 +685,7 @@ namespace PaintApp {
             openFileDialog.Filter = "Bitmap Image|*.bmp|JPeg Image|*.jpg|Gif Image|*.gif|Png Image|*.png";
             openFileDialog.Title = "打開圖片";
             if (openFileDialog.ShowDialog() == DialogResult.OK) {
+                currentImagePath = openFileDialog.FileName;
                 canvas = Cv2.ImRead(openFileDialog.FileName);
                 origin_picture = Cv2.ImRead(openFileDialog.FileName);
                 UpdateCanvas();
@@ -1480,10 +1491,157 @@ namespace PaintApp {
             defect.Dispose();
         }
 
-        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void 製作GroundTruthToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (!SelectFolders()) return;
+
+            bmpFiles = Directory.GetFiles(bmpFolder, "*.bmp");
+            currentIndex = 0;
+            ProcessNextImage();
+        }
+        private bool SelectFolders() {
+            using (var fbd = new FolderBrowserDialog()) {
+                MessageBox.Show("選擇 BMP 資料夾");
+                if (fbd.ShowDialog() != DialogResult.OK) return false;
+                bmpFolder = fbd.SelectedPath;
+
+                MessageBox.Show("選擇對應的 Pascal VOC XML 資料夾");
+                if (fbd.ShowDialog() != DialogResult.OK) return false;
+                xmlFolder = fbd.SelectedPath;
+
+                MessageBox.Show("選擇輸出資料夾");
+                if (fbd.ShowDialog() != DialogResult.OK) return false;
+                outputFolder = fbd.SelectedPath;
+            }
+            return true;
+        }
+        private void ProcessNextImage() {
+            if (currentIndex >= bmpFiles.Length) {
+                MessageBox.Show("處理完成！");
+                return;
+            }
+
+            string bmpPath = bmpFiles[currentIndex];
+            string fileName = Path.GetFileNameWithoutExtension(bmpPath);
+            string xmlPath = Path.Combine(xmlFolder, fileName + ".xml");
+
+            if (!File.Exists(xmlPath)) {
+                currentIndex++;
+                ProcessNextImage();
+                return;
+            }
+
+            using (var src = new Mat(bmpPath, ImreadModes.Color)) {
+                List<OpenCvSharp.Rect> rects = ParsePascalVOC(xmlPath);
+                foreach (var rect in rects)
+                    Cv2.Rectangle(src, rect, new Scalar(0, 255, 0), 2);
+
+                pictureBox1.Image?.Dispose();
+                pictureBox1.Image = BitmapConverter.ToBitmap(src);
+
+                string outPath = Path.Combine(outputFolder, fileName + "_finished_ground_truth.bmp");
+                Cv2.ImWrite(outPath, src);
+            }
+
+            currentIndex++;
+            GC.Collect(); // 保守的釋放記憶體
+            ProcessNextImage();
+        }
+
+        private List<OpenCvSharp.Rect> ParsePascalVOC(string xmlPath) {
+            List<OpenCvSharp.Rect> rects = new List<OpenCvSharp.Rect>();
+            XmlDocument doc = new XmlDocument();
+            doc.Load(xmlPath);
+
+            XmlNodeList objects = doc.GetElementsByTagName("object");
+            foreach (XmlNode obj in objects) {
+                XmlNode bndbox = obj.SelectSingleNode("bndbox");
+                if (bndbox == null) continue;
+
+                double xmin = double.Parse(bndbox["xmin"].InnerText);
+                double ymin = double.Parse(bndbox["ymin"].InnerText);
+                double xmax = double.Parse(bndbox["xmax"].InnerText);
+                double ymax = double.Parse(bndbox["ymax"].InnerText);
+
+                double width = xmax - xmin;
+                double height = ymax - ymin;
+
+                rects.Add(new OpenCvSharp.Rect((int)xmin, (int)ymin, (int)width, (int)height));
+            }
+
+            return rects;
+        }
+
+        private void 統計ToolStripMenuItem_Click(object sender, EventArgs e) {
+            string gtFolderPath = string.Empty;
+            string predFolderPath = string.Empty;
+
+            using (var gtDialog = new FolderBrowserDialog()) {
+                gtDialog.Description = "選擇 Ground Truth 資料夾";
+                if (gtDialog.ShowDialog() == DialogResult.OK)
+                    gtFolderPath = gtDialog.SelectedPath;
+                else
+                    return;
+            }
+
+            using (var predDialog = new FolderBrowserDialog()) {
+                predDialog.Description = "選擇 預測結果資料夾";
+                if (predDialog.ShowDialog() == DialogResult.OK)
+                    predFolderPath = predDialog.SelectedPath;
+                else
+                    return;
+            }
+
+            try {
+                var comparer = new DefectComparer(gtFolderPath, predFolderPath);
+                comparer.Compare();
+            }
+            catch (Exception ex) {
+                MessageBox.Show("發生錯誤：" + ex.Message);
+            }
+        }
+        string evalfrom_FolderPath = string.Empty;
+        string evalend_FolderPath = string.Empty;
+        private void eval_connector(object sender, EventArgs e)
         {
 
+            using (var gtDialog = new FolderBrowserDialog())
+            {
+                gtDialog.Description = "選擇來源資料夾";
+                if (gtDialog.ShowDialog() == DialogResult.OK)
+                    evalfrom_FolderPath = gtDialog.SelectedPath;
+                else
+                    return;
+            }
+
+            using (var predDialog = new FolderBrowserDialog())
+            {
+                predDialog.Description = "選擇結果資料夾";
+                if (predDialog.ShowDialog() == DialogResult.OK)
+                    evalend_FolderPath = predDialog.SelectedPath;
+                else
+                    return;
+            }
         }
+
+        private void evalProcessToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (var bmpPath in Directory.GetFiles(evalfrom_FolderPath, "*.bmp"))
+            {
+                try
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(bmpPath);
+                    OpenImage(evalfrom_FolderPath+"\\"+fileName+".bmp");
+                    eval.runButton.PerformClick();
+                    SaveImage(evalend_FolderPath+"\\"+fileName+" result.bmp");
+                    
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"處理 {bmpPath} 時錯誤：{ex.Message}");
+                }
+            }
+        }
+
 
         private void 邊緣ToolStripMenuItem_Click(object sender, EventArgs e)
         {

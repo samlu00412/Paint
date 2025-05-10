@@ -1,4 +1,5 @@
 ﻿Grayscale();
+<<<<<<< HEAD
 EqualizeHist();
 Clahe(10.0);
 FFT();
@@ -22,3 +23,23 @@ LowPass(21);
 CaptureDefect_black();
 CombineDefect();
 Detect(1);
+=======
+Normalized(225);
+LookUpTable(0, 57);
+Threshold("Binary",151.34);
+Detect(7);
+
+CaptureDefect_white();
+Reset();
+Grayscale();
+C_B(3,0);
+Normalized(225);
+FFT();
+Threshold("Binary_inverse", 141.5,11,2,114);
+IFFT();
+Threshold("Binary_inverse", 64.32);
+LookUpTable(58, 255);
+CaptureDefect_black();
+CombineDefect();
+Detect(7);
+>>>>>>> a228e8a740825bbc72b24ecf9d50b567a689df43

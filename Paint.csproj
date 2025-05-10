@@ -166,6 +166,7 @@
     <Compile Include="Defect.Designer.cs">
       <DependentUpon>Defect.cs</DependentUpon>
     </Compile>
+    <Compile Include="Defect_comparison.cs" />
     <Compile Include="FindContour.cs">
       <SubType>Form</SubType>
     </Compile>
