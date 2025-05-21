@@ -641,6 +641,7 @@ namespace PaintApp {
 
             try
             {
+                currentImagePath = filename;
                 canvas = Cv2.ImRead(filename);
                 origin_picture = canvas.Clone();
                 tempCanvas = canvas.Clone();
